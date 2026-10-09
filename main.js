@@ -41,7 +41,6 @@ setIndex(document.querySelectorAll(".menu a"));
 
 const hero = document.querySelector(".hero");
 const heroImg = hero.querySelector(".hero__bg img");
-const heroBg = hero.querySelector(".hero__bg");
 const canvas = hero.querySelector(".hero__gl");
 const rolesEl = document.querySelector(".roles");
 const manifesto = document.querySelector(".manifesto");
@@ -82,7 +81,6 @@ uniform sampler2D uTex;
 uniform vec2 uRes;      // canvas size (px)
 uniform vec2 uImg;      // image size (px)
 uniform vec2 uFocus;    // object-position equivalent
-uniform vec2 uShift;    // parallax, -1..1
 uniform float uReveal;
 uniform float uTime;
 uniform float uAmp;     // overall motion strength
@@ -101,16 +99,9 @@ float hash(vec2 p) {
 }
 
 void main() {
-  // intro dolly + parallax
+  // intro dolly; the image never follows the pointer
   float zoom = mix(1.035 + 0.125 * uAmp, 1.035, uReveal);
-  vec2 uv = (vUv - 0.5) / zoom + 0.5 - uShift * vec2(0.010, -0.008);
-
-  // slow ambient flow so the image breathes
-  float t = uTime * 0.18;
-  uv += vec2(
-    sin(vUv.y * 5.0 + t) + sin(vUv.y * 11.0 - t * 1.3),
-    cos(vUv.x * 4.0 - t * 0.8) + cos(vUv.x * 9.0 + t * 1.1)
-  ) * 0.0012 * uAmp;
+  vec2 uv = (vUv - 0.5) / zoom + 0.5;
 
   vec2 tuv = cover(uv);
   if (uFlip > 0.5) tuv.x = 1.0 - tuv.x;
@@ -166,7 +157,7 @@ function createGL() {
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 
   const u = {};
-  for (const name of ["uTex", "uRes", "uImg", "uFocus", "uShift", "uReveal", "uTime", "uAmp", "uFlip"]) {
+  for (const name of ["uTex", "uRes", "uImg", "uFocus", "uReveal", "uTime", "uAmp", "uFlip"]) {
     u[name] = gl.getUniformLocation(prog, name);
   }
   gl.uniform1i(u.uTex, 0);
@@ -190,7 +181,6 @@ function createGL() {
 
   return {
     draw(s) {
-      gl.uniform2f(u.uShift, s.px, s.py);
       gl.uniform1f(u.uReveal, s.reveal);
       gl.uniform1f(u.uTime, s.time);
       gl.uniform1f(u.uFlip, i18n.dir === "rtl" ? 1 : 0);
@@ -374,32 +364,6 @@ document.querySelectorAll("[data-count]").forEach((el) => {
   el.textContent = String(0).padStart(Number(el.dataset.pad || 0), "0");
 });
 
-// 3D tilt toward the pointer, on springs
-const cards = stats.map((el) => ({
-  el,
-  rx: spring(0, 120, 14),
-  ry: spring(0, 120, 14),
-  glow: spring(0, 90, 18),
-}));
-
-cards.forEach((c) => {
-  c.el.addEventListener("pointermove", (e) => {
-    const b = c.el.getBoundingClientRect();
-    const x = (e.clientX - b.left) / b.width;
-    const y = (e.clientY - b.top) / b.height;
-    c.ry.target = (x - 0.5) * 10 * AMP;
-    c.rx.target = (0.5 - y) * 10 * AMP;
-    c.glow.target = 1;
-    c.el.style.setProperty("--mx", `${(x * 100).toFixed(1)}%`);
-    c.el.style.setProperty("--my", `${(y * 100).toFixed(1)}%`);
-  });
-  c.el.addEventListener("pointerleave", () => {
-    c.rx.target = 0;
-    c.ry.target = 0;
-    c.glow.target = 0;
-  });
-});
-
 /* ---------- Main loop ---------- */
 
 const reveal = { value: 0, start: 0, duration: reduceMotion ? 1200 : 2800 };
@@ -427,7 +391,6 @@ function frame(now) {
   const px = par.x.x * AMP, py = par.y.x * AMP;
   rolesEl.style.transform = `translate3d(${px * 8}px, ${py * 5}px, 0)`;
   manifesto.style.transform = `translate3d(${px * 5}px, ${py * 3}px, 0)`;
-  if (!glView) heroBg.style.transform = `translate3d(${px * -12}px, ${py * -8}px, 0)`;
 
   for (const r of roles) {
     r.el.style.transform = `translate3d(${r.x.x.toFixed(2)}px, ${r.y.x.toFixed(2)}px, 0)`;
@@ -438,11 +401,6 @@ function frame(now) {
   for (const m of magnets) {
     m.el.style.transform = `translate3d(${m.x.x.toFixed(2)}px, ${m.y.x.toFixed(2)}px, 0)`;
     if (m.inner) m.inner.style.transform = `translate3d(${(m.x.x * 0.35).toFixed(2)}px, ${(m.y.x * 0.35).toFixed(2)}px, 0)`;
-  }
-
-  for (const c of cards) {
-    c.el.style.transform = `rotateX(${c.rx.x.toFixed(3)}deg) rotateY(${c.ry.x.toFixed(3)}deg)`;
-    c.el.style.setProperty("--glow", Math.max(0, Math.min(1, c.glow.x)).toFixed(3));
   }
 
   if (cursor.dx) {
@@ -456,7 +414,6 @@ function frame(now) {
 
   if (glView && heroVisible && !document.hidden) {
     glView.draw({
-      px, py,
       reveal: reveal.value,
       time: now / 1000,
     });
