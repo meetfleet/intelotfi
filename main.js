@@ -54,17 +54,13 @@ if (isMobile() && heroImg.dataset.mobileSrc) heroImg.src = heroImg.dataset.mobil
 
 /* ---------- Pointer ---------- */
 
-const pointer = { x: innerWidth / 2, y: innerHeight / 2, inHero: false, moved: false };
+const pointer = { x: innerWidth / 2, y: innerHeight / 2, moved: false };
 
 addEventListener("pointermove", (e) => {
   pointer.x = e.clientX;
   pointer.y = e.clientY;
   pointer.moved = true;
-  const r = hero.getBoundingClientRect();
-  pointer.inHero = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
 }, { passive: true });
-
-document.documentElement.addEventListener("pointerleave", () => { pointer.inHero = false; });
 
 /* ---------- Parallax (soft, slightly underdamped) ---------- */
 
@@ -86,13 +82,11 @@ uniform sampler2D uTex;
 uniform vec2 uRes;      // canvas size (px)
 uniform vec2 uImg;      // image size (px)
 uniform vec2 uFocus;    // object-position equivalent
-uniform vec2 uMouse;    // spring-smoothed pointer, uv space
-uniform vec2 uVel;      // pointer spring velocity, uv/s
 uniform vec2 uShift;    // parallax, -1..1
-uniform float uHover;
 uniform float uReveal;
 uniform float uTime;
 uniform float uAmp;     // overall motion strength
+uniform float uFlip;    // 1 = mirrored for right-to-left languages
 varying vec2 vUv;
 
 vec2 cover(vec2 uv) {
@@ -107,38 +101,20 @@ float hash(vec2 p) {
 }
 
 void main() {
-  vec2 aspect = vec2(uRes.x / uRes.y, 1.0);
-
   // intro dolly + parallax
   float zoom = mix(1.035 + 0.125 * uAmp, 1.035, uReveal);
   vec2 uv = (vUv - 0.5) / zoom + 0.5 - uShift * vec2(0.010, -0.008);
 
-  // liquid drag around the pointer, driven by spring velocity
-  vec2 d = (vUv - uMouse) * aspect;
-  float dist = length(d);
-  float fall = smoothstep(0.42, 0.0, dist) * uHover;
-  vec2 vel = uVel;
-  float speed = length(vel);
-  if (speed > 2.5) vel *= 2.5 / speed;
-  uv -= vel * fall * 0.03 * uAmp;
-
-  // slow ambient flow so the image breathes even when the pointer is still
+  // slow ambient flow so the image breathes
   float t = uTime * 0.18;
   uv += vec2(
     sin(vUv.y * 5.0 + t) + sin(vUv.y * 11.0 - t * 1.3),
     cos(vUv.x * 4.0 - t * 0.8) + cos(vUv.x * 9.0 + t * 1.1)
   ) * 0.0012 * uAmp;
 
-  // gentle lens swell under the pointer
-  uv -= (d / aspect) * fall * fall * 0.045 * uAmp;
-
   vec2 tuv = cover(uv);
-  float ca = (min(speed, 2.5) * fall * 0.004 + 0.0004) * uAmp;
-  vec2 dir = speed > 0.001 ? vel / speed : vec2(1.0, 0.0);
-  vec3 col;
-  col.r = texture2D(uTex, tuv + dir * ca).r;
-  col.g = texture2D(uTex, tuv).g;
-  col.b = texture2D(uTex, tuv - dir * ca).b;
+  if (uFlip > 0.5) tuv.x = 1.0 - tuv.x;
+  vec3 col = texture2D(uTex, tuv).rgb;
 
   // slow breathing on the moon's highlights
   float lum = dot(col, vec3(0.299, 0.587, 0.114));
@@ -190,7 +166,7 @@ function createGL() {
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 
   const u = {};
-  for (const name of ["uTex", "uRes", "uImg", "uFocus", "uMouse", "uVel", "uShift", "uHover", "uReveal", "uTime", "uAmp"]) {
+  for (const name of ["uTex", "uRes", "uImg", "uFocus", "uShift", "uReveal", "uTime", "uAmp", "uFlip"]) {
     u[name] = gl.getUniformLocation(prog, name);
   }
   gl.uniform1i(u.uTex, 0);
@@ -214,19 +190,15 @@ function createGL() {
 
   return {
     draw(s) {
-      gl.uniform2f(u.uMouse, s.mx, s.my);
-      gl.uniform2f(u.uVel, s.vx, s.vy);
       gl.uniform2f(u.uShift, s.px, s.py);
-      gl.uniform1f(u.uHover, s.hover);
       gl.uniform1f(u.uReveal, s.reveal);
       gl.uniform1f(u.uTime, s.time);
+      gl.uniform1f(u.uFlip, i18n.dir === "rtl" ? 1 : 0);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     },
   };
 }
 
-// pointer in hero-uv space, deliberately loose so it trails and settles
-const gm = { x: spring(0.5, 55, 13), y: spring(0.5, 55, 13), hover: spring(0, 40, 13) };
 let glView = null;
 let heroVisible = true;
 new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; }).observe(hero);
@@ -257,7 +229,9 @@ function updateRoleTargets() {
       const b = r.el.getBoundingClientRect();
       const cx = b.left + b.width / 2 - r.x.x;
       const cy = b.top + b.height / 2 - r.y.x;
-      r.x.target = -18 + (pointer.x - cx) * 0.06;
+      // shift toward the page centre: left in LTR, right in RTL
+      const inward = i18n.dir === "rtl" ? 1 : -1;
+      r.x.target = inward * 18 + (pointer.x - cx) * 0.06;
       r.y.target = Math.max(-8, Math.min(8, (pointer.y - cy) * 0.35));
     } else {
       r.x.target = 0;
@@ -349,6 +323,83 @@ function updateCursorTargets() {
   cursor.alpha.target = pointer.moved ? 1 : 0;
 }
 
+/* ---------- About: word split, reveals, counters, card tilt ---------- */
+
+function splitWords(el) {
+  const text = el.textContent.trim();
+  el.setAttribute("aria-label", text);
+  el.innerHTML = text
+    .split(/\s+/)
+    .map((w, i) => `<span class="word" aria-hidden="true"><span style="--w:${i}">${w.replace(/[&<>]/g, (c) => `&#${c.charCodeAt(0)};`)}</span></span>`)
+    .join(" ");
+}
+
+const splitEls = [...document.querySelectorAll("[data-split]")];
+splitEls.forEach(splitWords);
+i18n.onChange(() => splitEls.forEach(splitWords));
+
+const stats = [...document.querySelectorAll(".stat")];
+stats.forEach((el, i) => el.style.setProperty("--i", i));
+
+function countUp(el) {
+  const to = Number(el.dataset.count);
+  const pad = Number(el.dataset.pad || 0);
+  const fmt = (n) => String(n).padStart(pad, "0");
+  if (reduceMotion) { el.textContent = fmt(to); return; }
+  const start = performance.now();
+  const duration = 1800 + to * 12;
+  const tick = (now) => {
+    const t = Math.min((now - start) / duration, 1);
+    el.textContent = fmt(Math.round(to * (1 - Math.pow(2, -10 * t))));
+    if (t < 1) requestAnimationFrame(tick);
+  };
+  el.textContent = fmt(0);
+  requestAnimationFrame(tick);
+}
+
+const revealObserver = new IntersectionObserver((entries) => {
+  for (const entry of entries) {
+    if (!entry.isIntersecting) continue;
+    const el = entry.target;
+    el.classList.add("is-visible");
+    revealObserver.unobserve(el);
+    const counter = el.querySelector("[data-count]");
+    if (counter) setTimeout(() => countUp(counter), 250 + Number(el.style.getPropertyValue("--i") || 0) * 120);
+  }
+}, { threshold: 0.2, rootMargin: "0px 0px -8% 0px" });
+
+document.querySelectorAll("[data-reveal]").forEach((el) => revealObserver.observe(el));
+// counters start at zero so the count-up never flashes the final number first
+document.querySelectorAll("[data-count]").forEach((el) => {
+  el.textContent = String(0).padStart(Number(el.dataset.pad || 0), "0");
+});
+
+// 3D tilt toward the pointer, on springs
+const cards = stats.map((el) => ({
+  el,
+  rx: spring(0, 120, 14),
+  ry: spring(0, 120, 14),
+  glow: spring(0, 90, 18),
+}));
+
+cards.forEach((c) => {
+  c.el.addEventListener("pointermove", (e) => {
+    const b = c.el.getBoundingClientRect();
+    const x = (e.clientX - b.left) / b.width;
+    const y = (e.clientY - b.top) / b.height;
+    c.ry.target = (x - 0.5) * 10 * AMP;
+    c.rx.target = (0.5 - y) * 10 * AMP;
+    c.glow.target = 1;
+    c.el.style.setProperty("--mx", `${(x * 100).toFixed(1)}%`);
+    c.el.style.setProperty("--my", `${(y * 100).toFixed(1)}%`);
+  });
+  c.el.addEventListener("pointerleave", () => {
+    c.rx.target = 0;
+    c.ry.target = 0;
+    c.glow.target = 0;
+  });
+});
+
 /* ---------- Main loop ---------- */
 
 const reveal = { value: 0, start: 0, duration: reduceMotion ? 1200 : 2800 };
@@ -362,11 +413,6 @@ function frame(now) {
   // targets
   par.x.target = (pointer.x / innerWidth) * 2 - 1;
   par.y.target = (pointer.y / innerHeight) * 2 - 1;
-
-  const hr = hero.getBoundingClientRect();
-  gm.x.target = (pointer.x - hr.left) / hr.width;
-  gm.y.target = 1 - (pointer.y - hr.top) / hr.height;
-  gm.hover.target = pointer.inHero ? 1 : 0;
 
   updateRoleTargets();
   updateMagnets();
@@ -394,6 +440,11 @@ function frame(now) {
     if (m.inner) m.inner.style.transform = `translate3d(${(m.x.x * 0.35).toFixed(2)}px, ${(m.y.x * 0.35).toFixed(2)}px, 0)`;
   }
 
+  for (const c of cards) {
+    c.el.style.transform = `rotateX(${c.rx.x.toFixed(3)}deg) rotateY(${c.ry.x.toFixed(3)}deg)`;
+    c.el.style.setProperty("--glow", Math.max(0, Math.min(1, c.glow.x)).toFixed(3));
+  }
+
   if (cursor.dx) {
     const s = cursor.scale.x;
     cursor.dot.style.transform = `translate3d(${cursor.dx.x}px, ${cursor.dy.x}px, 0)`;
@@ -405,10 +456,7 @@ function frame(now) {
 
   if (glView && heroVisible && !document.hidden) {
     glView.draw({
-      mx: gm.x.x, my: gm.y.x,
-      vx: gm.x.v, vy: gm.y.v,
       px, py,
-      hover: Math.max(0, gm.hover.x),
       reveal: reveal.value,
       time: now / 1000,
     });
@@ -425,7 +473,7 @@ const imgReady = heroImg.complete && heroImg.naturalWidth
       heroImg.addEventListener("load", r, { once: true });
       heroImg.addEventListener("error", r, { once: true });
     });
-const timeout = new Promise((r) => setTimeout(r, 3000));
+const timeout = new Promise((r) => setTimeout(r, 2000));
 
 Promise.race([Promise.all([imgReady, document.fonts.ready]), timeout]).then(() => {
   if (heroImg.naturalWidth) {
@@ -457,11 +505,13 @@ function setMenu(open) {
   }
   body.classList.toggle("menu-open", open);
   burger.setAttribute("aria-expanded", String(open));
-  burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  burger.setAttribute("aria-label", i18n.t(open ? "nav.close" : "nav.open"));
   menu.setAttribute("aria-hidden", String(!open));
   menu.inert = !open;
 }
 
 burger.addEventListener("click", () => setMenu(!body.classList.contains("menu-open")));
 menu.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
+burger.setAttribute("aria-label", i18n.t("nav.open"));
+i18n.onChange(() => setMenu(body.classList.contains("menu-open")));
 addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });

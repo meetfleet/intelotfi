@@ -34,7 +34,7 @@
 body {
   background: var(--paper);
   color: var(--ink);
-  font-family: "Alliance No.2", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Alliance No.2", "IBM Plex Sans Arabic", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -92,6 +92,11 @@ ul { list-style: none; }
 
 .hero__gl { opacity: 0; }
 
+/* RTL mirrors the whole composition, photo included, so text stays on the
+   same side of the moon/figure as in the original design */
+[dir="rtl"] .hero__bg img { transform: scale(-1.03, 1.03); }
+[dir="rtl"] .is-loading .hero__bg img { transform: scale(-1.12, 1.12); }
+
 /* once WebGL is running, the canvas replaces the <img> */
 .has-gl .hero__gl { opacity: 1; }
 .has-gl .hero__bg img { visibility: hidden; }
@@ -103,6 +108,12 @@ ul { list-style: none; }
   pointer-events: none;
   background:
     radial-gradient(120% 80% at 0% 100%, rgba(0, 0, 0, 0.5), transparent 55%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.22), transparent 18%);
+}
+
+[dir="rtl"] .hero__vignette {
+  background:
+    radial-gradient(120% 80% at 100% 100%, rgba(0, 0, 0, 0.5), transparent 55%),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.22), transparent 18%);
 }
 
@@ -122,6 +133,7 @@ ul { list-style: none; }
 .topbar > * { pointer-events: auto; }
 
 .logo {
+  direction: ltr; /* the wordmark is Latin in every language */
   display: inline-flex;
   align-items: baseline;
   font-size: clamp(22px, 1.55vw, 34px);
@@ -135,7 +147,7 @@ ul { list-style: none; }
   display: inline-block;
   width: 0.42em;
   height: 0.1em;
-  margin-left: 0.12em;
+  margin-inline-start: 0.12em;
   background: var(--red);
   transform: translateY(0.06em);
   animation: breathe 2.4s ease-in-out infinite;
@@ -171,7 +183,7 @@ ul { list-style: none; }
 
 .burger__lines span {
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   height: 2px;
   border-radius: 2px;
   background: var(--line);
@@ -201,12 +213,12 @@ ul { list-style: none; }
 
 .roles {
   position: absolute;
-  right: var(--gutter);
+  inset-inline-end: var(--gutter);
   top: clamp(130px, 18.5vh, 260px);
   display: grid;
   justify-items: end;
   row-gap: 0.12em;
-  text-align: right;
+  text-align: end;
   font-size: clamp(22px, 2vw, 44px);
   letter-spacing: -0.015em;
   line-height: 1.15;
@@ -219,8 +231,10 @@ ul { list-style: none; }
   grid-column: 1;
   overflow: hidden;
   /* room inside the mask for the hover shift (left) and red dash (right) */
-  padding: 0.12em 1.3em 0.12em 1.2em;
-  margin: -0.12em -1.3em -0.12em -1.2em;
+  padding-block: 0.12em;
+  padding-inline: 1.2em 1.3em;
+  margin-block: -0.12em;
+  margin-inline: -1.2em -1.3em;
   pointer-events: none;
 }
 .roles li:nth-child(odd)  { grid-row: 1; }
@@ -259,7 +273,7 @@ ul { list-style: none; }
   content: "";
   position: absolute;
   top: 50%;
-  right: -0.9em;
+  inset-inline-end: -0.9em;
   width: 0.5em;
   height: 2px;
   background: var(--red);
@@ -267,11 +281,13 @@ ul { list-style: none; }
   transform: scaleX(var(--dash, 0));
 }
 
+[dir="rtl"] .role::after { transform-origin: left; }
+
 /* ---------- Manifesto ---------- */
 
 .manifesto {
   position: absolute;
-  left: var(--gutter);
+  inset-inline-start: var(--gutter);
   bottom: clamp(56px, 10.5vh, 140px);
   max-width: 72vw;
   font-size: clamp(14px, 1.05vw, 22px);
@@ -370,6 +386,266 @@ ul { list-style: none; }
 .menu ul:hover a { color: #4d4d4d; }
 .menu ul a:hover { color: var(--white); }
 
+/* language switcher */
+.lang {
+  position: absolute;
+  inset-inline-start: var(--gutter);
+  bottom: clamp(32px, 7vh, 80px);
+  display: flex;
+  gap: 1.4em;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  opacity: 0;
+  transition: opacity 0.4s var(--expo-out);
+}
+
+.menu-open .lang {
+  opacity: 1;
+  transition: opacity 1.2s var(--expo-out) 0.8s;
+}
+
+.lang button {
+  position: relative;
+  padding: 0.4em 0;
+  font: inherit;
+  letter-spacing: inherit;
+  color: #6b6b6b;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transition: color 0.5s var(--expo-out);
+}
+
+.lang button:hover,
+.lang button[aria-pressed="true"] { color: var(--white); }
+
+.lang button::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--red);
+  transform: scaleX(0);
+  transition: transform 1s var(--spring);
+}
+
+.lang button[aria-pressed="true"]::after { transform: scaleX(1); }
+
+/* ---------- Arabic typography ---------- */
+
+/* Arabic letters join, so tracking must stay at zero; the script also needs
+   more vertical room than Latin */
+:root[lang="ar"] .roles,
+:root[lang="ar"] .manifesto,
+:root[lang="ar"] .menu a { letter-spacing: 0; }
+:root[lang="ar"] .roles { line-height: 1.45; }
+:root[lang="ar"] .manifesto { line-height: 1.75; }
+:root[lang="ar"] .menu a { font-weight: 400; line-height: 1.35; }
+
+/* ---------- About ---------- */
+
+.about {
+  --card: #e7e6eb;
+  --navy: #1d2142;
+  --body: #5f6272;
+  --line: #a6a7b4;
+  --accent: #ec3325;
+  padding: clamp(16px, 3.6vw, 72px) clamp(0px, 2.8vw, 54px);
+}
+
+.about__card {
+  background: var(--card);
+  border-radius: clamp(20px, 2.2vw, 40px);
+  padding: clamp(32px, 5.5vw, 108px) clamp(22px, 5.5vw, 108px) clamp(36px, 5.6vw, 110px);
+}
+
+.about__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  grid-template-areas:
+    "spark ."
+    "title lede";
+  column-gap: clamp(32px, 8vw, 180px);
+  align-items: start;
+}
+
+.spark {
+  grid-area: spark;
+  width: clamp(64px, 5.2vw, 100px);
+  height: auto;
+  margin-bottom: clamp(28px, 3.4vw, 60px);
+  overflow: visible;
+  fill: #ff494c;
+}
+
+.spark path { transform-box: view-box; }
+.spark__spine { transform-origin: 79.5px 60px; }
+.spark__wing  { transform-origin: 79.5px 60px; }
+
+.about__title {
+  grid-area: title;
+  font-size: clamp(36px, 3.9vw, 80px);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+}
+
+.about__lede {
+  grid-area: lede;
+  max-width: 40em;
+  padding-top: 0.6em;
+  font-size: clamp(14px, 0.95vw, 18px);
+  line-height: 1.68;
+  letter-spacing: 0.005em;
+  color: var(--body);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(14px, 1.2vw, 24px);
+  margin-top: clamp(48px, 5.2vw, 100px);
+  perspective: 1200px;
+}
+
+.stat {
+  --mx: 50%;
+  --my: 50%;
+  --glow: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: clamp(240px, 18vw, 340px);
+  padding: clamp(22px, 2vw, 38px) clamp(22px, 1.6vw, 30px) clamp(24px, 1.9vw, 36px);
+  border: 1.5px solid var(--line);
+  border-radius: clamp(20px, 1.6vw, 30px);
+  overflow: hidden;
+  isolation: isolate;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: border-color 0.8s var(--expo-out);
+}
+
+/* soft light that follows the pointer (position + strength driven from main.js) */
+.stat::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(420px circle at var(--mx) var(--my), rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 60%);
+  opacity: var(--glow);
+  pointer-events: none;
+}
+
+.stat:hover { border-color: #7d7f8f; }
+
+.stat__label {
+  font-size: clamp(15px, 1.1vw, 21px);
+  font-weight: 400;
+  color: #0e0e12;
+  padding-inline: 0.45em;
+}
+
+.stat__value {
+  margin-top: 0.08em;
+  font-size: clamp(72px, 7.6vw, 150px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #0b0b0b;
+  padding-inline: 0.04em;
+}
+
+.stat--accent .stat__value { color: var(--accent); letter-spacing: -0.04em; }
+
+.stat__desc {
+  margin-top: auto;
+  padding-top: 1.4em;
+  max-width: 19em;
+  font-size: clamp(14px, 1.05vw, 20px);
+  line-height: 1.55;
+  color: var(--body);
+}
+
+/* ---------- Scroll reveals ---------- */
+
+[data-reveal] {
+  transition:
+    opacity 1.6s var(--expo-out),
+    transform 1.6s var(--spring-soft),
+    filter 1.6s var(--expo-out);
+  transition-delay: var(--delay, 0s);
+}
+
+[data-reveal]:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(40px);
+  filter: blur(8px);
+}
+
+/* the headline reveals word by word instead of as a block */
+.about__title[data-reveal]:not(.is-visible) { opacity: 1; transform: none; filter: none; }
+
+.word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+
+.word > span {
+  display: inline-block;
+  transition: transform 1.4s var(--spring-soft), opacity 1.2s var(--expo-out);
+  transition-delay: calc(var(--delay, 0s) + var(--w, 0) * 55ms);
+}
+
+.about__title:not(.is-visible) .word > span {
+  transform: translateY(105%) rotate(4deg);
+  opacity: 0;
+}
+
+/* cards: the 3D tilt lives on transform (JS), so the reveal uses translate */
+.stat[data-reveal] { transition-property: opacity, translate, filter, border-color; }
+.stat[data-reveal]:not(.is-visible) { transform: none; translate: 0 70px; }
+.stat[data-reveal] { transition-delay: calc(var(--i, 0) * 120ms), calc(var(--i, 0) * 120ms), calc(var(--i, 0) * 120ms), 0s; }
+
+/* spark: spine grows, then the wings unfold from the centre */
+.spark[data-reveal]:not(.is-visible) { transform: none; filter: none; }
+.spark path { transition: transform 1.6s var(--spring); }
+.spark__wing { transition-delay: 0.25s; }
+.spark:not(.is-visible) .spark__spine { transform: scaleY(0); }
+.spark:not(.is-visible) .spark__wing { transform: scaleX(0); }
+
+.spark.is-visible .spark__wing {
+  animation: wing-breathe 5s ease-in-out 2.2s infinite;
+}
+
+@keyframes wing-breathe {
+  0%, 100% { transform: scaleX(1); }
+  50% { transform: scaleX(0.86); }
+}
+
+:root[lang="ar"] .about__title { letter-spacing: 0; line-height: 1.35; }
+:root[lang="ar"] .about__lede { letter-spacing: 0; line-height: 1.9; }
+
+@media (max-width: 1100px) {
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 768px) {
+  .about { padding-inline: 0; }
+  .about__intro {
+    grid-template-columns: 1fr;
+    grid-template-areas: "spark" "title" "lede";
+    row-gap: 20px;
+  }
+  .stats { grid-template-columns: 1fr; }
+  .stat { min-height: 0; }
+  .stat__desc { padding-top: 1em; }
+}
+
 /* ---------- Spring cursor (fine pointers only, enabled from JS) ---------- */
 
 .cursor { display: none; }
@@ -422,7 +698,7 @@ ul { list-style: none; }
 
   .manifesto {
     max-width: none;
-    right: var(--gutter);
+    inset-inline-end: var(--gutter);
     bottom: 40px;
     font-size: 14px;
   }
