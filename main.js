@@ -1,5 +1,7 @@
 const body = document.body;
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+// Reduced motion softens the effects instead of removing them.
+const AMP = reduceMotion ? 0.35 : 1;
 const finePointer = matchMedia("(pointer: fine)").matches;
 const isMobile = () => matchMedia("(max-width: 768px)").matches;
 
@@ -32,7 +34,6 @@ const spring = (...args) => {
 /* ---------- Stagger indices ---------- */
 
 const setIndex = (els) => els.forEach((el, i) => el.style.setProperty("--i", i));
-setIndex(document.querySelectorAll(".roles li"));
 setIndex(document.querySelectorAll(".manifesto .line > span"));
 setIndex(document.querySelectorAll(".menu a"));
 
@@ -91,6 +92,7 @@ uniform vec2 uShift;    // parallax, -1..1
 uniform float uHover;
 uniform float uReveal;
 uniform float uTime;
+uniform float uAmp;     // overall motion strength
 varying vec2 vUv;
 
 vec2 cover(vec2 uv) {
@@ -108,7 +110,7 @@ void main() {
   vec2 aspect = vec2(uRes.x / uRes.y, 1.0);
 
   // intro dolly + parallax
-  float zoom = mix(1.16, 1.035, uReveal);
+  float zoom = mix(1.035 + 0.125 * uAmp, 1.035, uReveal);
   vec2 uv = (vUv - 0.5) / zoom + 0.5 - uShift * vec2(0.010, -0.008);
 
   // liquid drag around the pointer, driven by spring velocity
@@ -118,13 +120,20 @@ void main() {
   vec2 vel = uVel;
   float speed = length(vel);
   if (speed > 2.5) vel *= 2.5 / speed;
-  uv -= vel * fall * 0.022;
+  uv -= vel * fall * 0.03 * uAmp;
+
+  // slow ambient flow so the image breathes even when the pointer is still
+  float t = uTime * 0.18;
+  uv += vec2(
+    sin(vUv.y * 5.0 + t) + sin(vUv.y * 11.0 - t * 1.3),
+    cos(vUv.x * 4.0 - t * 0.8) + cos(vUv.x * 9.0 + t * 1.1)
+  ) * 0.0012 * uAmp;
 
   // gentle lens swell under the pointer
-  uv -= (d / aspect) * fall * fall * 0.035;
+  uv -= (d / aspect) * fall * fall * 0.045 * uAmp;
 
   vec2 tuv = cover(uv);
-  float ca = min(speed, 2.5) * fall * 0.0035 + 0.0004;
+  float ca = (min(speed, 2.5) * fall * 0.004 + 0.0004) * uAmp;
   vec2 dir = speed > 0.001 ? vel / speed : vec2(1.0, 0.0);
   vec3 col;
   col.r = texture2D(uTex, tuv + dir * ca).r;
@@ -181,10 +190,11 @@ function createGL() {
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 
   const u = {};
-  for (const name of ["uTex", "uRes", "uImg", "uFocus", "uMouse", "uVel", "uShift", "uHover", "uReveal", "uTime"]) {
+  for (const name of ["uTex", "uRes", "uImg", "uFocus", "uMouse", "uVel", "uShift", "uHover", "uReveal", "uTime", "uAmp"]) {
     u[name] = gl.getUniformLocation(prog, name);
   }
   gl.uniform1i(u.uTex, 0);
+  gl.uniform1f(u.uAmp, AMP);
   gl.uniform2f(u.uImg, heroImg.naturalWidth, heroImg.naturalHeight);
 
   const resize = () => {
@@ -256,6 +266,39 @@ function updateRoleTargets() {
   });
 }
 
+/* ---------- Roles cycle: two at a time, looping ---------- */
+
+const roleItems = [...rolesEl.children];
+const pairs = [];
+for (let i = 0; i < roleItems.length; i += 2) pairs.push(roleItems.slice(i, i + 2));
+pairs.forEach((pair) => pair.forEach((li, j) => li.style.setProperty("--pair-i", j)));
+
+const HOLD = 3400;    // time a pair stays on screen
+const EXIT = 1300;    // exit transition + stagger
+let pairIndex = -1;
+let cycleTimer = 0;
+
+function showPair(next) {
+  const prev = pairs[pairIndex];
+  if (prev) {
+    prev.forEach((li) => { li.classList.remove("is-in"); li.classList.add("is-out"); });
+    // once it has left, drop it back under the mask without animating
+    setTimeout(() => prev.forEach((li) => li.classList.remove("is-out")), EXIT);
+  }
+  pairIndex = next;
+  pairs[pairIndex].forEach((li) => li.classList.add("is-in"));
+}
+
+function scheduleCycle(delay = HOLD) {
+  clearTimeout(cycleTimer);
+  cycleTimer = setTimeout(() => {
+    const paused = hoveredRole !== -1 || body.classList.contains("menu-open") || document.hidden;
+    if (paused) return scheduleCycle(600);
+    showPair((pairIndex + 1) % pairs.length);
+    scheduleCycle();
+  }, delay);
+}
+
 /* ---------- Magnetic logo + burger ---------- */
 
 const magnets = [
@@ -279,7 +322,7 @@ function updateMagnets() {
 /* ---------- Spring cursor ---------- */
 
 const cursor = { el: document.querySelector(".cursor") };
-if (finePointer && !reduceMotion) {
+if (finePointer) {
   body.classList.add("has-cursor");
   cursor.dot = cursor.el.querySelector(".cursor__dot");
   cursor.ring = cursor.el.querySelector(".cursor__ring");
@@ -308,7 +351,7 @@ function updateCursorTargets() {
 
 /* ---------- Main loop ---------- */
 
-const reveal = { value: 0, start: 0, duration: 2800 };
+const reveal = { value: 0, start: 0, duration: reduceMotion ? 1200 : 2800 };
 const expoOut = (t) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
 let last = performance.now();
 
@@ -335,9 +378,10 @@ function frame(now) {
   for (let i = 0; i < steps; i++) for (const s of springs) s.step(h);
 
   // apply
-  rolesEl.style.transform = `translate3d(${par.x.x * 8}px, ${par.y.x * 5}px, 0)`;
-  manifesto.style.transform = `translate3d(${par.x.x * 5}px, ${par.y.x * 3}px, 0)`;
-  if (!glView) heroBg.style.transform = `translate3d(${par.x.x * -12}px, ${par.y.x * -8}px, 0)`;
+  const px = par.x.x * AMP, py = par.y.x * AMP;
+  rolesEl.style.transform = `translate3d(${px * 8}px, ${py * 5}px, 0)`;
+  manifesto.style.transform = `translate3d(${px * 5}px, ${py * 3}px, 0)`;
+  if (!glView) heroBg.style.transform = `translate3d(${px * -12}px, ${py * -8}px, 0)`;
 
   for (const r of roles) {
     r.el.style.transform = `translate3d(${r.x.x.toFixed(2)}px, ${r.y.x.toFixed(2)}px, 0)`;
@@ -363,7 +407,7 @@ function frame(now) {
     glView.draw({
       mx: gm.x.x, my: gm.y.x,
       vx: gm.x.v, vy: gm.y.v,
-      px: par.x.x, py: par.y.x,
+      px, py,
       hover: Math.max(0, gm.hover.x),
       reveal: reveal.value,
       time: now / 1000,
@@ -384,7 +428,7 @@ const imgReady = heroImg.complete && heroImg.naturalWidth
 const timeout = new Promise((r) => setTimeout(r, 3000));
 
 Promise.race([Promise.all([imgReady, document.fonts.ready]), timeout]).then(() => {
-  if (!reduceMotion && heroImg.naturalWidth) {
+  if (heroImg.naturalWidth) {
     try {
       glView = createGL();
       if (glView) body.classList.add("has-gl");
@@ -396,11 +440,11 @@ Promise.race([Promise.all([imgReady, document.fonts.ready]), timeout]).then(() =
 
   requestAnimationFrame(() => {
     body.classList.remove("is-loading");
+    setTimeout(() => { showPair(0); scheduleCycle(); }, reduceMotion ? 200 : 1200);
     reveal.start = performance.now();
-    if (reduceMotion) reveal.value = 1;
   });
 
-  if (!reduceMotion) requestAnimationFrame(frame);
+  requestAnimationFrame(frame);
 });
 
 /* ---------- Menu ---------- */
