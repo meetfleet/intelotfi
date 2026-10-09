@@ -330,6 +330,7 @@ i18n.onChange(() => splitEls.forEach(splitWords));
 
 const stats = [...document.querySelectorAll(".stat")];
 stats.forEach((el, i) => el.style.setProperty("--i", i));
+document.querySelectorAll(".post").forEach((el, i) => el.style.setProperty("--i", i));
 
 function countUp(el) {
   const to = Number(el.dataset.count);
