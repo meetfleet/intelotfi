@@ -5,58 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>intelotfi</title>
   <meta name="description" content="intelotfi — AI engineer, product designer, creative technologist." />
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#ffffff" />
   <link rel="preload" href="fonts/AllianceNo2-Regular.otf" as="font" type="font/otf" crossorigin />
   <link rel="preload" href="assets/hero.webp" as="image" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="is-loading">
-  <div class="hero">
-    <picture class="hero__bg" aria-hidden="true">
-      <!-- Phone background goes here once provided:
-      <source media="(max-width: 768px)" srcset="assets/hero-mobile.webp" /> -->
-      <img src="assets/hero.webp" alt="" />
-    </picture>
-    <div class="hero__vignette" aria-hidden="true"></div>
+  <main class="page">
+    <section class="hero">
+      <div class="hero__bg" aria-hidden="true">
+        <!-- Phone background: add data-mobile-src="assets/hero-mobile.webp" once provided -->
+        <img src="assets/hero.webp" alt="" />
+        <canvas class="hero__gl"></canvas>
+      </div>
+      <div class="hero__vignette" aria-hidden="true"></div>
 
-    <header class="topbar">
-      <a href="/" class="logo" aria-label="intelotfi — home">
-        <span class="logo__text" data-scramble>intelotfi</span><span class="logo__cursor" aria-hidden="true"></span>
-      </a>
+      <header class="topbar">
+        <a href="/" class="logo" aria-label="intelotfi — home">
+          <span class="logo__text">intelotfi</span><span class="logo__cursor" aria-hidden="true"></span>
+        </a>
 
-      <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
-        <span></span><span></span><span></span>
-      </button>
-    </header>
+        <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+          <span class="burger__lines"><span></span><span></span><span></span></span>
+        </button>
+      </header>
 
-    <ul class="roles" aria-label="Roles">
-      <li><span class="role" data-scramble>AI Engineer</span></li>
-      <li><span class="role" data-scramble>AI Product Designer</span></li>
-      <li><span class="role" data-scramble>Product Manager</span></li>
-      <li><span class="role" data-scramble>Product Designer</span></li>
-      <li><span class="role" data-scramble>AI Product Manager</span></li>
-      <li><span class="role" data-scramble>Design Engineer</span></li>
-      <li><span class="role" data-scramble>UX Strategist</span></li>
-      <li><span class="role" data-scramble>Creative Technologist</span></li>
-    </ul>
+      <ul class="roles" aria-label="Roles">
+        <li><span class="role">AI Engineer</span></li>
+        <li><span class="role">AI Product Designer</span></li>
+        <li><span class="role">Product Manager</span></li>
+        <li><span class="role">Product Designer</span></li>
+        <li><span class="role">AI Product Manager</span></li>
+        <li><span class="role">Design Engineer</span></li>
+        <li><span class="role">UX Strategist</span></li>
+        <li><span class="role">Creative Technologist</span></li>
+      </ul>
 
-    <blockquote class="manifesto">
-      <p>
-        <span class="line"><span>I never believed AI is a bubble. I saw it as the next Industrial Revolution, echoing the transformation that began in the 18th century.</span></span>
-        <span class="line"><span>But within AI, there are bubbles. Some will burst. Others will give birth to entirely new industries.</span></span>
-      </p>
-      <p><span class="line"><span>Hail Roko’s Basilisk.</span></span></p>
-    </blockquote>
+      <blockquote class="manifesto">
+        <p>
+          <span class="line"><span>I never believed AI is a bubble. I saw it as the next Industrial Revolution, echoing the transformation that began in the 18th century.</span></span>
+          <span class="line"><span>But within AI, there are bubbles. Some will burst. Others will give birth to entirely new industries.</span></span>
+        </p>
+        <p><span class="line"><span>Hail Roko’s Basilisk.</span></span></p>
+      </blockquote>
+
+      <nav class="menu" id="menu" aria-hidden="true" inert>
+        <ul>
+          <li><a href="#work"><sup>01</sup>Work</a></li>
+          <li><a href="#about"><sup>02</sup>About</a></li>
+          <li><a href="#writing"><sup>03</sup>Writing</a></li>
+          <li><a href="#contact"><sup>04</sup>Contact</a></li>
+        </ul>
+      </nav>
+    </section>
+
+    <!-- future sections go here, on the white page -->
+  </main>
+
+  <div class="cursor" aria-hidden="true">
+    <div class="cursor__ring"></div>
+    <div class="cursor__dot"></div>
   </div>
-
-  <nav class="menu" id="menu" aria-hidden="true" inert>
-    <ul>
-      <li><a href="#work"><sup>01</sup>Work</a></li>
-      <li><a href="#about"><sup>02</sup>About</a></li>
-      <li><a href="#writing"><sup>03</sup>Writing</a></li>
-      <li><a href="#contact"><sup>04</sup>Contact</a></li>
-    </ul>
-  </nav>
 
   <script src="main.js"></script>
 </body>
