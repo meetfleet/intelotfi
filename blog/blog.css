@@ -441,7 +441,7 @@ ol, ul { list-style: none; }
 /* figures: images from the design, never rebuilt in code; they run the full article width, no frame */
 .fig { margin: clamp(28px, 3vw, 44px) 0; }
 
-.fig img { width: 100%; border-radius: clamp(14px, 1.4vw, 22px); }
+.fig img { width: 100%; }
 
 /* ---------- Devices gallery ---------- */
 
@@ -461,7 +461,6 @@ ol, ul { list-style: none; }
   padding: 0;
   border: 0;
   background: #0b0b0e;
-  border-radius: clamp(16px, 1.6vw, 26px);
   overflow: hidden;
   cursor: zoom-in;
   -webkit-tap-highlight-color: transparent;
@@ -587,7 +586,6 @@ ol, ul { list-style: none; }
   padding: 0;
   border: 0;
   background: none;
-  border-radius: clamp(14px, 1.4vw, 22px);
   overflow: hidden;
   cursor: zoom-in;
   -webkit-tap-highlight-color: transparent;

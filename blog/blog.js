@@ -207,7 +207,7 @@ const zoom = (() => {
     const speed = Math.abs(rw.v) / Math.max(innerWidth, innerHeight);
     gl.uniform1f(u.uBlur, Math.min(1, speed * 1.4));
     gl.uniform1f(u.uDim, Math.max(0, Math.min(1, dim.x)));
-    gl.uniform1f(u.uRadius, rw.x * s * 0.028);
+    gl.uniform1f(u.uRadius, 0.0);
     gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
