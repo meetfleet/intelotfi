@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>AI can draft. People decide. — intelotfi</title>
+  <meta name="description" content="The difference between helping someone make a plan and making the decision for them. Consent belongs in the architecture." />
+  <meta name="theme-color" content="#f2f4f6" />
+  <link rel="icon" href="../assets/icon.svg" type="image/svg+xml" />
+  <link rel="preload" href="../fonts/AllianceNo2-Regular.otf" as="font" type="font/otf" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&amp;family=Lora:ital@0;1&amp;display=swap" />
+  <link rel="stylesheet" href="essays.css" />
+</head>
+<body>
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <header class="bar">
+    <a class="bar__logo" href="../index.html" aria-label="intelotfi — home">intelotfi<span class="bar__cursor" aria-hidden="true"></span></a>
+    <a class="bar__back" href="../index.html#writing">← All essays</a>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div class="intro__context">
+        <p class="mono">Human–AI interaction</p>
+        <p class="mono">Making the thinking legible / 03 / 03 · <span data-read>—</span> min</p>
+      </div>
+      <h1 class="intro__title">AI can draft. People decide.</h1>
+      <div class="intro__open">
+        <p class="intro__deck">The difference between helping someone make a plan and making the decision for them. Consent belongs in the architecture.</p>
+        <div class="motif"><div class="motif-decide" aria-hidden="true"><span class="motif-decide__q">?</span><span class="motif-decide__line"></span><span class="motif-decide__node">✓</span></div></div>
+      </div>
+    </section>
+
+    <div class="read">
+      <aside class="guide" aria-label="In this essay">
+        <p class="mono">In this essay</p>
+        <ol class="guide__list">
+          <li><a href="#s1"><span>01</span>Help is not authorization</a></li>
+          <li><a href="#s2"><span>02</span>A plan someone can inspect</a></li>
+          <li><a href="#s3"><span>03</span>Confirmation must name the action</a></li>
+          <li><a href="#s4"><span>04</span>Put the boundary in the system</a></li>
+          <li><a href="#s5"><span>05</span>Consent can be withdrawn</a></li>
+          <li><a href="#s6"><span>06</span>Make agency the default</a></li>
+        </ol>
+        <p class="guide__note">The interfaces in this essay are static, illustrative proposals. They describe a design principle, not a claim about a deployed system.</p>
+      </aside>
+
+      <article class="body" id="essay">
+        <section class="es" id="s1">
+          <p class="es__n">01 /</p>
+          <h2>Help is not authorization</h2>
+          <p>An assistant can turn an open-ended wish into a concrete proposal: a time, a place, a message, a few alternatives. That is useful work. It reduces the effort of starting and gives someone something to react to. But the moment a proposal becomes a booking, a shared message or a commitment, the assistant has crossed a different boundary.</p>
+          <p>“Help me make a plan” is not the same instruction as “make this commitment for me.” A fluent response can blur that distinction. If the system treats conversational momentum, silence or a vague “looks good” as permission to act, the person may discover the decision only after it has consequences.</p>
+          <p>The design goal is not to make the AI less helpful. It is to give its help the right shape: reviewable drafts that preserve a person’s ability to choose. The assistant contributes options and explanations. The person decides which consequential action, if any, to authorize.</p>
+        </section>
+        <section class="es" id="s2">
+          <p class="es__n">02 /</p>
+          <h2>A plan someone can inspect</h2>
+          <p>Consider an illustrative request: “Help me organize a walk this weekend.” A useful draft might suggest Saturday morning, a meeting point and two selected contacts. It should distinguish suggestions from established facts. A suggested location is not a verified accessible route, and a proposed time is not confirmed availability.</p>
+          <p>The review should expose the details that would change the person’s decision: the exact recipients, timing, destination, data to be shared and action to be taken. Keep editing and declining available alongside proceeding. The draft remains useful even if the person saves it, changes it or decides not to act.</p>
+          <figure class="fig-panel">
+            <figcaption class="fig-label">Fig. 01 / Illustrative review screen · static</figcaption>
+            <div class="review">
+              <div class="review__status"><span>Draft / not sent</span><span>Edit proposal ↗</span></div>
+              <p class="review__title">A Saturday morning walk</p>
+              <dl class="review__list">
+                <div><dt>When</dt><dd>Saturday, 10:00–11:00 · your local time</dd></div>
+                <div><dt>Where</dt><dd>Riverside meeting point · suggested location</dd></div>
+                <div><dt>Recipients</dt><dd>2 contacts you selected · review before sending</dd></div>
+                <div><dt>Action</dt><dd>Create one calendar event and send 2 invitations</dd></div>
+                <div><dt>Shared details</dt><dd>Event title, time and meeting point with those recipients</dd></div>
+              </dl>
+              <p class="review__note">Nothing has been sent. Confirming authorizes this event and these invitations only. Changes to the time, location or recipients require a fresh review.</p>
+              <div class="review__actions"><span class="review__confirm">Create event &amp; send 2 invitations</span><span class="review__keep">Keep as draft</span></div>
+            </div>
+            <p class="fig-note">A conceptual illustration, not an active product. In a real review, the exact date, time zone, destination and recipient identities must be shown before confirmation.</p>
+          </figure>
+        </section>
+        <section class="es" id="s3">
+          <p class="es__n">03 /</p>
+          <h2>Confirmation must name the action</h2>
+          <p>A button labelled “Continue” can hide a commitment. A confirmation that says “Create event and send 2 invitations” names one. Before that confirmation, the person should understand the scope, recipients and foreseeable consequences, including any cost or disclosure. A permission request is not informed merely because it exists on screen.</p>
+          <p>Authorization should attach to the proposal actually reviewed. If the assistant later changes the location, adds recipients or introduces a payment, the previous confirmation does not cover the new action. Material changes should return the proposal to review. Permission to send one invitation is not permission to send every future invitation.</p>
+          <p>Avoid making acceptance feel inevitable. Do not preselect consent, hide refusal behind extra work or treat inactivity as approval. Clear language, accessible presentation and a genuine opportunity to inspect the proposal are part of the decision boundary, not decoration around it.</p>
+        </section>
+        <section class="es" id="s4">
+          <p class="es__n">04 /</p>
+          <h2>Put the boundary in the system</h2>
+          <p>Consent cannot live only in a reassuring sentence from the model. The layer that performs consequential actions should enforce it. A draft has no authority to execute. An approved proposal has a limited authority tied to the reviewed action, parameters and scope. If that authority is missing, stale or withdrawn, the action should not proceed.</p>
+          <p>This separation also clarifies responsibility. The model may generate a plausible plan and still misunderstand a preference or invent a detail. Keeping proposal generation apart from execution creates a place for validation and human correction before those mistakes become commitments. Confidence in the wording is not a substitute for permission.</p>
+          <figure class="fig-dark">
+            <figcaption class="fig-label">Fig. 02 / Consent is an execution boundary</figcaption>
+            <ol class="stages">
+              <li><p class="stages__t">Draft</p><p class="stages__d">AI proposes</p></li>
+              <li><p class="stages__t">Review</p><p class="stages__d">Person inspects</p></li>
+              <li class="is-key"><p class="stages__t">Confirm</p><p class="stages__d">Person authorizes</p></li>
+              <li><p class="stages__t">Execute</p><p class="stages__d">Scoped action</p></li>
+            </ol>
+            <p class="stages__rule">No confirmation → no consequential action.</p>
+            <p class="fig-note">If the proposal changes, return to review. If authorization is withdrawn before execution, stop the pending action.</p>
+          </figure>
+        </section>
+        <section class="es" id="s5">
+          <p class="es__n">05 /</p>
+          <h2>Consent can be withdrawn</h2>
+          <p>Revocable consent means the person can withdraw authority for pending or future actions. If invitations have not yet been sent, withdrawal should stop the send. If an ongoing permission exists, the person should be able to see its scope and revoke it without navigating a maze. Revocation should not depend on persuading the assistant in a conversation.</p>
+          <p>But withdrawal is not time travel. An invitation already delivered cannot be made unread; shared information cannot be guaranteed to disappear. Where cancellation or correction is possible, offer it and explain what it does. Where an effect cannot be reversed, say so before the original confirmation. “Undo” should not promise more than the system can accomplish.</p>
+          <p>After execution, show what actually happened. Distinguish a completed action from a queued one, a failed one or a partial result. If one invitation was sent and another failed, do not collapse that into “Done.” A retry should not silently broaden the authorization or duplicate an already completed commitment.</p>
+        </section>
+        <section class="es" id="s6">
+          <p class="es__n">06 /</p>
+          <h2>Make agency the default</h2>
+          <p>There is a real trade-off: review adds a step. Repeating it for every harmless edit can exhaust attention and make important confirmations easier to miss. Put the boundary at consequential actions—spending, sharing, booking or committing—not at every sentence the assistant drafts. Make the review concise without stripping out what matters.</p>
+          <p>The most capable assistant is not always the one that acts fastest. Sometimes it is the one that gets a person to a clear decision with less effort, while leaving room to say no. A useful proposal makes choices easier to understand. A hidden commitment makes choices disappear.</p>
+          <p>That is why consent belongs in the architecture. Drafts should be easy to generate, inspect and revise. Decisions should be explicit, scoped and attributable to the person who authorizes them. The AI can make the next step legible without taking ownership of someone else’s life.</p>
+        </section>
+        <aside class="take">
+          <p class="mono">Take this with you</p>
+          <p class="take__title">A proposal is not permission.</p>
+          <ul class="take__list">
+          <li>Keep drafts reviewable and separate from consequential execution.</li>
+          <li>Ask for explicit, informed confirmation of the actual action and its scope.</li>
+          <li>Make consent revocable; explain what can stop, what can be undone and what cannot.</li>
+          </ul>
+        </aside>
+
+        <nav class="pager" aria-label="More essays">
+          <a class="pager__item pager__item--prev" href="one-appearance.html"><span class="pager__k">← Previous · 02 / 03</span><span class="pager__t">One appearance is not a perfect record</span></a>
+          <span class="pager__item is-empty"></span>
+        </nav>
+      </article>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <a href="../index.html#writing">← All essays</a>
+    <p class="mono">© 2026 intelotfi</p>
+  </footer>
+
+  <script src="essays.js"></script>
+</body>
+</html>

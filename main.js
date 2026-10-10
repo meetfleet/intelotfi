@@ -339,7 +339,7 @@ i18n.onChange(() => splitEls.forEach(splitWords));
 const stats = [...document.querySelectorAll(".stat")];
 stats.forEach((el, i) => el.style.setProperty("--i", i));
 document.querySelectorAll(".post").forEach((el, i) => el.style.setProperty("--i", i));
-[".result", ".index__row", ".channels > li"].forEach((sel) => setIndex(document.querySelectorAll(sel)));
+[".result", ".index__row", ".channels > li", ".essay"].forEach((sel) => setIndex(document.querySelectorAll(sel)));
 
 const fmtCount = (el, n) => {
   const pad = Number(el.dataset.pad || 0);

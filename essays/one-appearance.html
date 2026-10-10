@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>One appearance is not a perfect record — intelotfi</title>
+  <meta name="description" content="How a Wilson lower bound keeps thin show-up evidence from becoming an overconfident trust signal." />
+  <meta name="theme-color" content="#f2f4f6" />
+  <link rel="icon" href="../assets/icon.svg" type="image/svg+xml" />
+  <link rel="preload" href="../fonts/AllianceNo2-Regular.otf" as="font" type="font/otf" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&amp;family=Lora:ital@0;1&amp;display=swap" />
+  <link rel="stylesheet" href="essays.css" />
+</head>
+<body>
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <header class="bar">
+    <a class="bar__logo" href="../index.html" aria-label="intelotfi — home">intelotfi<span class="bar__cursor" aria-hidden="true"></span></a>
+    <a class="bar__back" href="../index.html#writing">← All essays</a>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div class="intro__context">
+        <p class="mono">Trust &amp; uncertainty</p>
+        <p class="mono">Making the thinking legible / 02 / 03 · <span data-read>—</span> min</p>
+      </div>
+      <h1 class="intro__title">One appearance is not a perfect record</h1>
+      <div class="intro__open">
+        <p class="intro__deck">How a Wilson lower bound keeps thin show-up evidence from becoming an overconfident trust signal.</p>
+        <div class="motif"><div class="motif-ranges" aria-hidden="true"><span style="--w:170px"></span><span style="--w:100px"></span><span style="--w:50px"></span></div></div>
+      </div>
+    </section>
+
+    <div class="read">
+      <aside class="guide" aria-label="In this essay">
+        <p class="mono">In this essay</p>
+        <ol class="guide__list">
+          <li><a href="#s1"><span>01</span>A rate without its denominator</a></li>
+          <li><a href="#s2"><span>02</span>A lower bound, not a verdict</a></li>
+          <li><a href="#s3"><span>03</span>One success versus ten</a></li>
+          <li><a href="#s4"><span>04</span>What counts as an observation?</a></li>
+          <li><a href="#s5"><span>05</span>Where the model can mislead</a></li>
+          <li><a href="#s6"><span>06</span>Show the evidence, not a label</a></li>
+        </ol>
+        <p class="guide__note">Convention used throughout: the lower endpoint of a 95% two-sided Wilson interval, with z = 1.96. All counts are illustrative.</p>
+      </aside>
+
+      <article class="body" id="essay">
+        <section class="es" id="s1">
+          <p class="es__n">01 /</p>
+          <h2>A rate without its denominator</h2>
+          <p>Someone appears at the one event for which you have a recorded outcome. Their observed show-up rate is 100%. Another person appears at ten out of ten. Their observed rate is also 100%. The fractions are equal; the amount of evidence is not. A display that treats both as equally established hides the most important difference.</p>
+          <p>The problem is not that the first person has done anything wrong. It is that one observation cannot support the same confidence as a longer, comparable record. “Perfect so far” describes the data. “Perfectly reliable” makes a much larger claim about the future.</p>
+          <p>A Wilson lower confidence bound offers one way to keep that gap visible. Rather than rewarding a thin record with a maximum signal, it combines the observed proportion with sample size. The result is a cautious statistical summary of a defined behavior, not a moral measure of the person behind it.</p>
+        </section>
+        <section class="es" id="s2">
+          <p class="es__n">02 /</p>
+          <h2>A lower bound, not a verdict</h2>
+          <p>Start with a Bernoulli outcome: a recorded eligible event is classified as a show-up or a non-show-up. Let s be the show-ups and n the total recorded outcomes. The observed proportion is p̂ = s/n. Under the binomial model, the Wilson interval estimates a range for the underlying show-up probability while accounting for sampling uncertainty.</p>
+          <p>Here the chosen signal is the lower endpoint of the 95% two-sided Wilson interval, using z = 1.96. This is not the same convention as a 95% one-sided lower bound. Naming the convention matters because a different confidence level changes the number. For no recorded outcomes, n = 0, this formula is undefined; the honest state is “not enough evidence,” not a fabricated zero.</p>
+          <figure class="fig-dark">
+            <figcaption class="fig-label">The lower endpoint / n &gt; 0</figcaption>
+            <div class="frac" role="math" aria-label="Wilson lower bound: p-hat plus z squared over 2n, minus z times the square root of p-hat times one minus p-hat over n plus z squared over 4 n squared, all divided by one plus z squared over n">
+              <p class="frac__num">p̂ + z²/(2n) − z √[p̂(1 − p̂)/n + z²/(4n²)]</p>
+              <p class="frac__den">1 + z²/n</p>
+            </div>
+            <p class="fig-note">p̂ = s/n · s = observed show-ups · n = recorded eligible outcomes<br />z = 1.96 for the chosen 95% two-sided convention</p>
+          </figure>
+        </section>
+        <section class="es" id="s3">
+          <p class="es__n">03 /</p>
+          <h2>One success versus ten</h2>
+          <p>When all observed outcomes are successes, p̂ = 1 and the lower endpoint simplifies to n/(n + z²). With z = 1.96, z² = 3.8416. For one show-up in one recorded event, the lower endpoint is 1/4.8416 ≈ 0.207. For ten out of ten, it is 10/13.8416 ≈ 0.722. For fifty out of fifty, it is approximately 0.929.</p>
+          <p>Nothing about the observed rate changed: it is still 100% in every example. What changes is how much the evidence narrows the interval. A low lower endpoint after one observation does not mean that the person is predicted to appear only 20.7% of the time. It means that the interval procedure remains appropriately broad with so little data.</p>
+          <figure class="fig-panel">
+            <figcaption class="fig-label">Fig. 01 / Same observed rate, different evidence</figcaption>
+            <div class="iv" role="img" aria-label="Wilson lower endpoints for 1 of 1, 10 of 10 and 50 of 50: 0.207, 0.722 and 0.929">
+              <div class="iv__row iv__row--head"><span class="iv__lab">Show-ups / n</span><span class="iv__plot iv__plot--label">95% two-sided Wilson interval</span><span class="iv__val">Lower</span></div>
+              <div class="iv__row"><span class="iv__lab">1 / 1</span><span class="iv__plot" aria-hidden="true"><span class="iv__band" style="left:20.7%"></span><span class="iv__dot" style="left:20.7%"></span><span class="iv__tick"></span></span><span class="iv__val">0.207</span></div>
+              <div class="iv__row"><span class="iv__lab">10 / 10</span><span class="iv__plot" aria-hidden="true"><span class="iv__band" style="left:72.2%"></span><span class="iv__dot" style="left:72.2%"></span><span class="iv__tick"></span></span><span class="iv__val">0.722</span></div>
+              <div class="iv__row"><span class="iv__lab">50 / 50</span><span class="iv__plot" aria-hidden="true"><span class="iv__band" style="left:92.9%"></span><span class="iv__dot" style="left:92.9%"></span><span class="iv__tick"></span></span><span class="iv__val">0.929</span></div>
+              <div class="iv__row iv__row--axis"><span class="iv__lab"></span><span class="iv__plot iv__plot--axis"><span>0</span><span>0.5</span><span>1</span></span><span class="iv__val"></span></div>
+            </div>
+            <p class="fig-note">Illustrative counts; all have a 100% observed show-up rate. Dots mark lower endpoints, not observed rates. Endpoints rounded to three decimals; z = 1.96.</p>
+          </figure>
+        </section>
+        <section class="es" id="s4">
+          <p class="es__n">04 /</p>
+          <h2>What counts as an observation?</h2>
+          <p>Before choosing a bound, define the denominator. A missing check-in is not automatically a failure to appear. The person may have attended without being recorded, cancelled before the commitment, or encountered a measurement problem. Those situations should not be silently folded into the same binary outcome.</p>
+          <p>An illustrative evidence summary might say: “10 show-ups across 10 recorded eligible events; 2 additional events have unknown outcomes and are excluded.” That makes the calculation inspectable. It also reveals a limit: excluding unknowns does not remove bias if missing observations are systematically related to whether someone appeared.</p>
+          <p>The context belongs beside the count. Which types of event were included? What qualified as a commitment? How was attendance verified, and over what observation window? A summary across very different commitments can look tidy while answering no coherent question. Clear definitions and a route to correct erroneous records are more valuable than extra decimal places.</p>
+        </section>
+        <section class="es" id="s5">
+          <p class="es__n">05 /</p>
+          <h2>Where the model can mislead</h2>
+          <p>The binomial interpretation assumes comparable trials with a common probability and independent outcomes. A real show-up history does not guarantee either condition. Several events may share a transport disruption, a host, or the same recording error. Circumstances and behavior can change over time. A larger n is not a cure for a mismatched model.</p>
+          <p>The 95% confidence convention describes the long-run coverage of an interval procedure under its assumptions, with coverage approximate because outcomes are discrete. It does not mean there is a 95% probability that this particular person’s future behavior lies in the displayed interval. Nor does the lower endpoint guarantee the next outcome.</p>
+          <p>There is also a product trade-off: a cautious bound favors established records over new ones, even when both have only successes. That may be useful for expressing evidence strength, but harmful if used as a blanket access gate. Keep low evidence distinct from negative evidence, and examine how the surrounding decision treats newcomers.</p>
+        </section>
+        <section class="es" id="s6">
+          <p class="es__n">06 /</p>
+          <h2>Show the evidence, not a label</h2>
+          <p>Instead of a badge that says “trusted,” show a limited claim: the recorded outcomes, their context, and an uncertainty summary. Let someone understand why ten successes support a stronger signal than one, without implying that either record captures character, intent or every future situation.</p>
+          <p>A Wilson bound is most useful when it restrains the interface’s confidence. It cannot repair poor observations, unfair consequences or an ambiguous definition of attendance. The point is not to make a human judgment look scientific. It is to say, precisely, how much evidence the calculation has—and how much remains unknown.</p>
+        </section>
+        <aside class="take">
+          <p class="mono">Take this with you</p>
+          <p class="take__title">The denominator is part of the story.</p>
+          <ul class="take__list">
+          <li>Show counts and the chosen confidence convention, not just a percentage.</li>
+          <li>Separate unknown observations from recorded failures; expose the evidence context.</li>
+          <li>Treat the bound as uncertainty about a defined behavior, never a verdict on a person.</li>
+          </ul>
+        </aside>
+
+        <nav class="pager" aria-label="More essays">
+          <a class="pager__item pager__item--prev" href="weak-factor.html"><span class="pager__k">← Previous · 01 / 03</span><span class="pager__t">Why a weak factor should stay visible</span></a>
+          <a class="pager__item pager__item--next" href="ai-can-draft.html"><span class="pager__k">Next → · 03 / 03</span><span class="pager__t">AI can draft. People decide.</span></a>
+        </nav>
+      </article>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <a href="../index.html#writing">← All essays</a>
+    <p class="mono">© 2026 intelotfi</p>
+  </footer>
+
+  <script src="essays.js"></script>
+</body>
+</html>

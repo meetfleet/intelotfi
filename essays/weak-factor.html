@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Why a weak factor should stay visible — intelotfi</title>
+  <meta name="description" content="A product of factors tells a different story from an average. What that means for vibe, intent, friction and safety." />
+  <meta name="theme-color" content="#f2f4f6" />
+  <link rel="icon" href="../assets/icon.svg" type="image/svg+xml" />
+  <link rel="preload" href="../fonts/AllianceNo2-Regular.otf" as="font" type="font/otf" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&amp;family=Lora:ital@0;1&amp;display=swap" />
+  <link rel="stylesheet" href="essays.css" />
+</head>
+<body>
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <header class="bar">
+    <a class="bar__logo" href="../index.html" aria-label="intelotfi — home">intelotfi<span class="bar__cursor" aria-hidden="true"></span></a>
+    <a class="bar__back" href="../index.html#writing">← All essays</a>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div class="intro__context">
+        <p class="mono">Decision design</p>
+        <p class="mono">Making the thinking legible / 01 / 03 · <span data-read>—</span> min</p>
+      </div>
+      <h1 class="intro__title">Why a weak factor should stay visible</h1>
+      <div class="intro__open">
+        <p class="intro__deck">A product of factors tells a different story from an average. What that means for vibe, intent, friction and safety.</p>
+        <div class="motif"><p class="motif-math">a × b × c</p></div>
+      </div>
+    </section>
+
+    <div class="read">
+      <aside class="guide" aria-label="In this essay">
+        <p class="mono">In this essay</p>
+        <ol class="guide__list">
+          <li><a href="#s1"><span>01</span>What an average allows</a></li>
+          <li><a href="#s2"><span>02</span>Two plans, one weak factor</a></li>
+          <li><a href="#s3"><span>03</span>Give friction the right direction</a></li>
+          <li><a href="#s4"><span>04</span>The assumptions inside the scale</a></li>
+          <li><a href="#s5"><span>05</span>Safety is a gate</a></li>
+          <li><a href="#s6"><span>06</span>Keep the explanation visible</a></li>
+        </ol>
+        <p class="guide__note">A design argument, not a universal scoring recipe. Every number in the worked example is illustrative.</p>
+      </aside>
+
+      <article class="body" id="essay">
+        <section class="es" id="s1">
+          <p class="es__n">01 /</p>
+          <h2>What an average allows</h2>
+          <p>Imagine a plan that feels exciting and matches what someone wants to do, but is difficult to carry out. An average can make it look balanced: two strong signals lift the weak one. The arithmetic is correct. The decision story may not be.</p>
+          <p>A mean asks how much strength there is across the factors, allowing one factor to compensate for another. A product asks a different question: how well do these conditions hold together? When a plan needs several things to work at once, a weak factor is not a small footnote. It can be the reason the plan fails to become a real possibility.</p>
+          <p>Neither operation is neutral. Choosing an average says that trade-offs are acceptable on the chosen scales. Choosing multiplication says that weakness should remain consequential. The first task is therefore not to pick a formula. It is to decide which kind of trade-off the decision should permit.</p>
+        </section>
+        <section class="es" id="s2">
+          <p class="es__n">02 /</p>
+          <h2>Two plans, one weak factor</h2>
+          <p>Take three positively oriented factors between 0 and 1: vibe, intent alignment and ease. Higher means more favorable in each case. In the illustrative comparison below, Plan A has two very strong factors and one weak one. Plan B is moderately strong throughout.</p>
+          <p>For A, the mean is (0.90 + 0.90 + 0.20) / 3 = 0.6667, while the product is 0.90 × 0.90 × 0.20 = 0.162. For B, the mean is 0.65 and the product is 0.65³ = 0.274625. The rankings reverse. The product preserves the cost of A’s weak ease score instead of averaging it away.</p>
+          <figure class="fig-panel">
+            <figcaption class="fig-label">Fig. 01 / Same factors, different story</figcaption>
+            <div class="cmp" role="table" aria-label="Average versus product for two plans">
+              <div class="cmp__row cmp__row--head" role="row"><span role="columnheader">Plan</span><span role="columnheader">Vibe</span><span role="columnheader">Intent</span><span role="columnheader">Ease</span><span role="columnheader">Average</span><span role="columnheader">Product</span></div>
+              <div class="cmp__row" role="row"><span role="cell">Plan A</span><span role="cell">0.90</span><span role="cell">0.90</span><span role="cell" class="hi">0.20</span><span role="cell">0.667</span><span role="cell" class="hi">0.162</span></div>
+              <div class="cmp__row" role="row"><span role="cell">Plan B</span><span role="cell">0.65</span><span role="cell">0.65</span><span role="cell">0.65</span><span role="cell">0.650</span><span role="cell" class="hi">0.275</span></div>
+            </div>
+            <p class="fig-note">Illustrative normalized inputs. The average prefers A; the product prefers B. Values rounded to three decimals.</p>
+          </figure>
+        </section>
+        <section class="es" id="s3">
+          <p class="es__n">03 /</p>
+          <h2>Give friction the right direction</h2>
+          <p>“Friction” is easy to misread in a formula. If a raw friction score rises when a plan becomes harder, multiplying by it would reward difficulty. A product of favorable factors needs an ease or low-friction score instead: a value that rises when the plan becomes easier.</p>
+          <p>If friction f has a justified linear scale from 0 (none) to 1 (maximum), one possible transformation is ease = 1 − f. Friction of 0.80 then becomes ease of 0.20, as in Plan A. That conversion is illustrative, not automatic. A travel-time measure, a cost estimate and an accessibility barrier do not become equivalent merely because each is mapped into the same range.</p>
+          <p>Make the direction explicit in both the model and the interface. “Ease: 0.20” should come with an explanation such as “the journey is difficult,” not a mysterious label that forces someone to guess whether a larger number is better.</p>
+        </section>
+        <section class="es" id="s4">
+          <p class="es__n">04 /</p>
+          <h2>The assumptions inside the scale</h2>
+          <p>Normalization gives the factors a common range, not a common meaning. Multiplication assumes that ratios and changes on these scales are meaningful enough for this use. Changing the mapping from travel time to ease can change the ranking even when the underlying journey stays identical. Calibration is a design choice, not housekeeping.</p>
+          <p>For factors in [0, 1], the product cannot exceed the smallest factor. A zero makes the whole product zero. That is useful only if zero really means a condition is absent, rather than “we have not measured it.” Missing evidence needs its own state; treating unknown as zero silently turns uncertainty into rejection.</p>
+          <p>The product also tends to shrink as more factors are added. Scores from models with different numbers of factors are not directly comparable. Correlated factors can count the same difficulty twice. And a product of subjective scores is not a probability of success unless a separate probabilistic model justifies that interpretation. Keep the formula modest about what it knows.</p>
+        </section>
+        <section class="es" id="s5">
+          <p class="es__n">05 /</p>
+          <h2>Safety is a gate, not a bargaining chip</h2>
+          <p>Some conditions should not be traded away at all. If an option fails a necessary safety requirement, a high vibe score should not rescue it. Even multiplying a “safety score” into the preference calculation can obscure that distinction: a nonzero value still lets the option compete.</p>
+          <p>A clearer architecture separates eligibility from preference. First apply the relevant hard constraints. Stop, revise or seek appropriate review when they are not met. Only then compare the eligible options on factors such as vibe, intent and ease. A low product may guide a conversation, but passing a scoring rule is never proof of safety.</p>
+          <figure class="fig-dark">
+            <figcaption class="fig-label">Fig. 02 / Constraint before preference</figcaption>
+            <div class="gate">
+              <div class="gate__box"><p class="gate__t">Safety requirements</p><p class="gate__d">Not met → stop or revise</p></div>
+              <span class="gate__arrow" aria-hidden="true">→</span>
+              <div class="gate__box gate__box--fill"><p class="gate__t">Compare eligible options</p><p class="gate__math">vibe × intent × ease</p></div>
+            </div>
+            <p class="fig-note">A preference score cannot grant permission to bypass a safety constraint.</p>
+          </figure>
+        </section>
+        <section class="es" id="s6">
+          <p class="es__n">06 /</p>
+          <h2>Keep the explanation visible</h2>
+          <p>A single score is a compression. The interface should let people reopen it. Show the factors, their definitions and the reason a weak one matters. In Plan A, the useful explanation is not “bad match.” It is “strong interest and alignment, but the journey may make this plan impractical.” That tells someone what they could change.</p>
+          <p>A product is valuable when the decision genuinely depends on conditions working together. It is less appropriate when strengths are meant to compensate, when scales are poorly defined or when the result pretends to be more precise than the evidence. The formula should make the reasoning legible, not lend mathematical authority to an unexplained judgment.</p>
+        </section>
+        <aside class="take">
+          <p class="mono">Take this with you</p>
+          <p class="take__title">A weak factor is information.</p>
+          <ul class="take__list">
+          <li>Choose the aggregation rule for the trade-offs you mean to allow.</li>
+          <li>Multiply favorable, clearly defined factors; keep unknowns distinct from zeros.</li>
+          <li>Apply safety constraints separately, then show the factors behind the recommendation.</li>
+          </ul>
+        </aside>
+
+        <nav class="pager" aria-label="More essays">
+          <span class="pager__item is-empty"></span>
+          <a class="pager__item pager__item--next" href="one-appearance.html"><span class="pager__k">Next → · 02 / 03</span><span class="pager__t">One appearance is not a perfect record</span></a>
+        </nav>
+      </article>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <a href="../index.html#writing">← All essays</a>
+    <p class="mono">© 2026 intelotfi</p>
+  </footer>
+
+  <script src="essays.js"></script>
+</body>
+</html>
