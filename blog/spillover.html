@@ -88,12 +88,15 @@
             <h2>Meetfleet</h2>
             <p class="lead">Meetfleet is hyper-local coordination for the spontaneous era, a social OS connecting you instantly with real-time activities around you, from golf foursomes and romantic dates to group shopping, skiing, riding, and beach sessions.</p>
 
-            <figure class="fig fig--dark" data-reveal>
-              <img src="../assets/blog/devices-1.webp" width="1747" height="574" loading="lazy" alt="Meetfleet on a phone, a tablet and a watch: creating a plan, the latest plans feed, and a watch invite from Leila" />
-            </figure>
-            <figure class="fig fig--dark" data-reveal>
-              <img src="../assets/blog/devices-2.webp" width="1745" height="574" loading="lazy" alt="Meetfleet on a laptop, a living-room TV showing a 3D route map, and a mixed-reality headset" />
-            </figure>
+            <!-- one plan, six surfaces: click any device to zoom (WebGL lightbox in blog.js) -->
+            <ul class="devices" aria-label="Meetfleet across devices">
+              <li class="device" data-reveal><button type="button" class="device__btn" data-zoom aria-label="Zoom: Meetfleet on a phone"><img src="../assets/blog/device-phone.webp" width="1600" height="1600" loading="lazy" alt="Meetfleet on a phone: Create Your Plan, with activity types to pick from" /></button><span class="device__label"><span>01</span>Phone</span></li>
+              <li class="device" data-reveal><button type="button" class="device__btn" data-zoom aria-label="Zoom: Meetfleet on a watch"><img src="../assets/blog/device-watch.webp" width="1600" height="1600" loading="lazy" alt="Meetfleet on a watch: Leila wants to go out with you, with accept and decline buttons" /></button><span class="device__label"><span>02</span>Watch</span></li>
+              <li class="device" data-reveal><button type="button" class="device__btn" data-zoom aria-label="Zoom: Meetfleet on a tablet"><img src="../assets/blog/device-tablet.webp" width="1600" height="1600" loading="lazy" alt="Meetfleet on a tablet: the home screen with the weather, latest plans and daily rhythm" /></button><span class="device__label"><span>03</span>Tablet</span></li>
+              <li class="device" data-reveal><button type="button" class="device__btn" data-zoom aria-label="Zoom: Meetfleet on a laptop"><img src="../assets/blog/device-laptop.webp" width="1600" height="1600" loading="lazy" alt="Meetfleet on a laptop: Create Your Plan with a grid of activity types" /></button><span class="device__label"><span>04</span>Laptop</span></li>
+              <li class="device" data-reveal><button type="button" class="device__btn" data-zoom aria-label="Zoom: Meetfleet on a TV"><img src="../assets/blog/device-tv.webp" width="1600" height="1600" loading="lazy" alt="Meetfleet on a living-room TV: a 3D street map with route steps and a profile card" /></button><span class="device__label"><span>05</span>TV</span></li>
+              <li class="device" data-reveal><button type="button" class="device__btn" data-zoom aria-label="Zoom: Meetfleet in a headset"><img src="../assets/blog/device-headset.webp" width="1600" height="1600" loading="lazy" alt="Meetfleet in a mixed-reality headset: a floating Create Your Plan panel in a living room" /></button><span class="device__label"><span>06</span>Headset</span></li>
+            </ul>
           </section>
 
           <section id="sas" class="sec">
@@ -213,6 +216,13 @@
       </nav>
       <p class="foot__copy">© 2026 intelotfi</p>
     </footer>
+  </div>
+
+  <div class="zoom" id="zoom" aria-hidden="true" inert>
+    <canvas class="zoom__gl"></canvas>
+    <img class="zoom__fallback" alt="" />
+    <button type="button" class="zoom__close" aria-label="Close"><span></span><span></span></button>
+    <p class="zoom__caption"><span class="zoom__index"></span><span class="zoom__name"></span><span class="zoom__hint">scroll to zoom · drag to pan · double-click to toggle</span></p>
   </div>
 
   <script src="blog.js"></script>

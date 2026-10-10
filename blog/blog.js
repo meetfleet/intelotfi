@@ -72,3 +72,269 @@ const spy = new IntersectionObserver((entries) => {
 }, { rootMargin: "-20% 0px -65% 0px", threshold: 0 });
 
 sections.forEach((s) => spy.observe(s));
+
+/* ---------- Devices: WebGL zoom ---------- */
+
+document.querySelectorAll(".device").forEach((el, i) => el.style.setProperty("--i", i));
+
+// damped spring; interrupting it keeps its velocity, which is what makes the
+// fly-out feel physical
+class Spring {
+  constructor(v, k, c) { this.x = v; this.target = v; this.v = 0; this.k = k; this.c = c; }
+  step(dt) { const a = -this.k * (this.x - this.target) - this.c * this.v; this.v += a * dt; this.x += this.v * dt; }
+  get settled() { return Math.abs(this.x - this.target) < 0.05 && Math.abs(this.v) < 0.5; }
+}
+
+const zoom = (() => {
+  const root = document.getElementById("zoom");
+  if (!root) return null;
+  const canvas = root.querySelector(".zoom__gl");
+  const fallback = root.querySelector(".zoom__fallback");
+  const nameEl = root.querySelector(".zoom__name");
+  const indexEl = root.querySelector(".zoom__index");
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const VERT = `attribute vec2 aPos; void main(){ gl_Position = vec4(aPos, 0.0, 1.0); }`;
+  const FRAG = `
+    precision highp float;
+    uniform sampler2D uTex;
+    uniform vec2 uRes;      // canvas px
+    uniform vec4 uRect;     // image rect in canvas px: x, y (from top), w, h
+    uniform float uBlur;    // zoom-blur strength, 0..1
+    uniform float uDim;     // backdrop alpha
+    uniform float uRadius;  // corner radius in px
+
+    float roundedBox(vec2 p, vec2 b, float r) {
+      vec2 q = abs(p) - b + r;
+      return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - r;
+    }
+
+    void main() {
+      vec2 frag = vec2(gl_FragCoord.x, uRes.y - gl_FragCoord.y);
+      vec2 uv = (frag - uRect.xy) / uRect.zw;
+      vec3 bg = vec3(0.03, 0.03, 0.04);
+
+      // rounded-corner mask, anti-aliased
+      vec2 p = frag - (uRect.xy + uRect.zw * 0.5);
+      float d = roundedBox(p, uRect.zw * 0.5, uRadius);
+      float mask = 1.0 - smoothstep(-1.0, 1.0, d);
+
+      // zoom blur: samples streak toward the image centre while it flies
+      vec4 col;
+      if (uBlur < 0.002) {
+        // at rest: a single tap, so panning and zooming stay cheap
+        col = texture2D(uTex, clamp(uv, 0.0, 1.0));
+      } else {
+        vec2 dir = (uv - 0.5) * uBlur * 0.18;
+        col = vec4(0.0);
+        const int N = 12;
+        for (int i = 0; i < N; i++) {
+          float t = float(i) / float(N - 1);
+          col += texture2D(uTex, clamp(uv - dir * t, 0.0, 1.0));
+        }
+        col /= float(N);
+      }
+
+      float a = col.a * mask;
+      vec3 rgb = mix(bg * uDim + (1.0 - uDim) * vec3(1.0), col.rgb, a);
+      float alpha = max(uDim, a);
+      gl_FragColor = vec4(rgb, alpha);
+    }`;
+
+  let gl, prog, u = {}, tex;
+  function initGL() {
+    gl = canvas.getContext("webgl", { alpha: true, premultipliedAlpha: false, antialias: false });
+    if (!gl) return false;
+    const sh = (t, src) => { const s = gl.createShader(t); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; };
+    prog = gl.createProgram();
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, VERT));
+    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FRAG));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
+    gl.useProgram(prog);
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    const aPos = gl.getAttribLocation(prog, "aPos");
+    gl.enableVertexAttribArray(aPos);
+    gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+    for (const n of ["uTex", "uRes", "uRect", "uBlur", "uDim", "uRadius"]) u[n] = gl.getUniformLocation(prog, n);
+    tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.uniform1i(u.uTex, 0);
+    return true;
+  }
+
+  let hasGL = false;
+  try { hasGL = !reduceMotion && initGL(); } catch (e) { console.warn("zoom: WebGL disabled", e); }
+  if (!hasGL) root.classList.add("no-gl");
+
+  const dpr = () => Math.min(devicePixelRatio || 1, 2);
+  function resize() {
+    const w = Math.round(innerWidth * dpr()), h = Math.round(innerHeight * dpr());
+    if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; gl && gl.viewport(0, 0, w, h); }
+  }
+
+  // state: the image rect, in CSS px, on springs
+  const K = reduceMotion ? 900 : 150, C = reduceMotion ? 60 : 20;
+  const rx = new Spring(0, K, C), ry = new Spring(0, K, C), rw = new Spring(0, K, C), rh = new Spring(0, K, C);
+  const dim = new Spring(0, 90, 18);
+  let open = false, closing = false, raf = 0, current = null, scale = 1, dragging = null, last = performance.now();
+
+  const fitRect = (s = 1) => {
+    const m = Math.min(innerWidth, innerHeight) * 0.06;
+    const size = Math.min(innerWidth, innerHeight) - m * 2;   // the device images are square
+    return { x: (innerWidth - size * s) / 2, y: (innerHeight - size * s) / 2, w: size * s, h: size * s };
+  };
+  const thumbRect = () => { const b = current.img.getBoundingClientRect(); return { x: b.left, y: b.top, w: b.width, h: b.height }; };
+  const setTarget = (r) => { rx.target = r.x; ry.target = r.y; rw.target = r.w; rh.target = r.h; };
+  const jumpTo = (r) => { rx.x = r.x; ry.x = r.y; rw.x = r.w; rh.x = r.h; rx.v = ry.v = rw.v = rh.v = 0; };
+
+  function draw() {
+    if (!gl) return;
+    resize();
+    const s = dpr();
+    gl.uniform2f(u.uRes, canvas.width, canvas.height);
+    gl.uniform4f(u.uRect, rx.x * s, ry.x * s, rw.x * s, rh.x * s);
+    // blur follows how fast the rect is growing or shrinking
+    const speed = Math.abs(rw.v) / Math.max(innerWidth, innerHeight);
+    gl.uniform1f(u.uBlur, Math.min(1, speed * 1.4));
+    gl.uniform1f(u.uDim, Math.max(0, Math.min(1, dim.x)));
+    gl.uniform1f(u.uRadius, rw.x * s * 0.028);
+    gl.clearColor(0, 0, 0, 0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  }
+
+  function frame(now) {
+    const dt = Math.min((now - last) / 1000, 1 / 30); last = now;
+    const steps = Math.ceil(dt / (1 / 240)), h = dt / steps;
+    for (let i = 0; i < steps; i++) for (const sp of [rx, ry, rw, rh, dim]) sp.step(h);
+    draw();
+    const settled = [rx, ry, rw, rh].every((sp) => sp.settled) && Math.abs(dim.x - dim.target) < 0.01;
+    if (closing && settled) { finishClose(); return; }
+    raf = requestAnimationFrame(frame);
+  }
+
+  function show(btn, index) {
+    const img = btn.querySelector("img");
+    current = { btn, img, index };
+    nameEl.textContent = btn.closest(".device").querySelector(".device__label").lastChild.textContent.trim();
+    indexEl.textContent = String(index + 1).padStart(2, "0");
+    root.setAttribute("aria-hidden", "false"); root.inert = false;
+    root.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+    open = true; closing = false; scale = 1;
+
+    if (!hasGL) { fallback.src = img.currentSrc || img.src; root.querySelector(".zoom__close").focus(); return; }
+
+    // upload the full image, then fly from the thumbnail to the fitted rect
+    const full = new Image();
+    full.src = img.currentSrc || img.src;
+    const start = () => {
+      gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+      gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, full);
+      jumpTo(thumbRect()); dim.x = 0; dim.v = 0;
+      setTarget(fitRect()); dim.target = 1;
+      last = performance.now();
+      cancelAnimationFrame(raf); raf = requestAnimationFrame(frame);
+      root.querySelector(".zoom__close").focus();
+    };
+    (full.decode ? full.decode().catch(() => {}) : Promise.resolve()).then(start);
+  }
+
+  function hide() {
+    if (!open || closing) return;
+    closing = true;
+    if (!hasGL) { finishClose(); return; }
+    setTarget(thumbRect()); dim.target = 0;
+  }
+
+  function finishClose() {
+    cancelAnimationFrame(raf); raf = 0;
+    open = false; closing = false;
+    root.classList.remove("is-open");
+    root.setAttribute("aria-hidden", "true"); root.inert = true;
+    document.body.style.overflow = "";
+    current?.btn.focus({ preventScroll: true });
+    if (gl) { gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); }
+  }
+
+  // zoom about a point: keep the pixel under the pointer where it is
+  function zoomAt(px, py, next) {
+    next = Math.max(1, Math.min(4, next));
+    const base = fitRect();
+    const cur = { x: rx.target, y: ry.target, w: rw.target, h: rh.target };
+    const fx = (px - cur.x) / cur.w, fy = (py - cur.y) / cur.h;
+    const w = base.w * next, h = base.h * next;
+    scale = next;
+    setTarget(clampRect({ x: px - fx * w, y: py - fy * h, w, h }));
+  }
+
+  // keep the image covering the viewport once it is larger than it
+  function clampRect(r) {
+    const base = fitRect();
+    if (r.w <= base.w + 1) return base;
+    r.x = Math.min(0 + Math.max(0, (innerWidth - r.w)), Math.max(innerWidth - r.w, r.x));
+    r.y = Math.min(0 + Math.max(0, (innerHeight - r.h)), Math.max(innerHeight - r.h, r.y));
+    if (r.w < innerWidth) r.x = (innerWidth - r.w) / 2;
+    if (r.h < innerHeight) r.y = (innerHeight - r.h) / 2;
+    return r;
+  }
+
+  document.querySelectorAll("[data-zoom]").forEach((btn, i) => btn.addEventListener("click", () => show(btn, i)));
+  root.querySelector(".zoom__close").addEventListener("click", (e) => { e.stopPropagation(); hide(); });
+  addEventListener("keydown", (e) => { if (e.key === "Escape") hide(); });
+  addEventListener("resize", () => { if (open && !closing) setTarget(clampRect({ ...fitRect(scale), x: rx.target, y: ry.target })); });
+
+  root.addEventListener("wheel", (e) => {
+    if (!open || closing || !hasGL) return;
+    e.preventDefault();
+    zoomAt(e.clientX, e.clientY, scale * Math.exp(-e.deltaY * 0.0022));
+  }, { passive: false });
+
+  root.addEventListener("dblclick", (e) => {
+    if (!open || closing || !hasGL) return;
+    zoomAt(e.clientX, e.clientY, scale > 1.2 ? 1 : 2.5);
+  });
+
+  root.addEventListener("pointerdown", (e) => {
+    if (!open || closing || e.button !== 0 || !hasGL) return;
+    dragging = { x: e.clientX, y: e.clientY, moved: false, rx: rx.target, ry: ry.target };
+    root.setPointerCapture(e.pointerId);
+  });
+  root.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - dragging.x, dy = e.clientY - dragging.y;
+    if (Math.hypot(dx, dy) > 4) { dragging.moved = true; root.classList.add("is-dragging"); }
+    if (dragging.moved && scale > 1) setTarget(clampRect({ x: dragging.rx + dx, y: dragging.ry + dy, w: rw.target, h: rh.target }));
+  });
+  root.addEventListener("pointerup", (e) => {
+    const d = dragging; dragging = null; root.classList.remove("is-dragging");
+    if (!d) return;
+    // a plain click on the backdrop (not a drag) closes
+    const inside = e.clientX >= rx.target && e.clientX <= rx.target + rw.target && e.clientY >= ry.target && e.clientY <= ry.target + rh.target;
+    if (!d.moved && !inside) hide();
+  });
+  // the fallback has no springs: any click closes
+  root.addEventListener("click", (e) => { if (!hasGL && e.target === root) hide(); });
+
+  // pinch on touch screens
+  let pinch = null;
+  root.addEventListener("touchstart", (e) => { if (e.touches.length === 2) pinch = { d: Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY), s: scale }; }, { passive: true });
+  root.addEventListener("touchmove", (e) => {
+    if (!pinch || e.touches.length !== 2 || !hasGL) return;
+    e.preventDefault();
+    const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+    zoomAt((e.touches[0].clientX + e.touches[1].clientX) / 2, (e.touches[0].clientY + e.touches[1].clientY) / 2, pinch.s * d / pinch.d);
+  }, { passive: false });
+  root.addEventListener("touchend", () => { pinch = null; }, { passive: true });
+
+  return { show, hide };
+})();
