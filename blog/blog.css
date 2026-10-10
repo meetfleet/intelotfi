@@ -438,43 +438,12 @@ ol, ul { list-style: none; }
   color: var(--navy);
 }
 
-/* figures: these are images from the design, never rebuilt in code */
-.fig {
-  margin: clamp(28px, 3vw, 44px) 0;
-  padding: clamp(12px, 1.4vw, 22px);
-  border-radius: clamp(18px, 1.8vw, 28px);
-  background: var(--wash);
-}
+/* figures: images from the design, never rebuilt in code; they run the full article width, no frame */
+.fig { margin: clamp(28px, 3vw, 44px) 0; }
 
-.fig img { width: 100%; border-radius: 10px; }
-
-.fig--dark {
-  padding: 0;
-  background: none;
-}
-
-.fig--dark img { border-radius: clamp(18px, 1.8vw, 28px); }
+.fig img { width: 100%; border-radius: clamp(14px, 1.4vw, 22px); }
 
 .fig--dark + .fig--dark { margin-top: clamp(-16px, -1.6vw, -26px); }
-
-.fig figcaption {
-  display: flex;
-  gap: 14px;
-  align-items: baseline;
-  padding: 14px 6px 2px;
-  font-size: 13.5px;
-  line-height: 1.5;
-  color: var(--muted);
-}
-
-.fig figcaption span {
-  flex: none;
-  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--red);
-}
 
 .sec--conclusion {
   margin-top: clamp(8px, 1vw, 16px);
