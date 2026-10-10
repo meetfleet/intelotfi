@@ -13,8 +13,25 @@ document.querySelectorAll("[data-split]").forEach((el) => {
 
 /* ---------- Reading time ---------- */
 
-const words = document.getElementById("article").textContent.trim().split(/\s+/).length;
-document.getElementById("reading-time").textContent = `${Math.max(1, Math.round(words / 220))} min`;
+// The figures carry as much reading as the prose: dense diagrams with their
+// own labels, tables and charts. Text at ~200 wpm, plus 3 min per diagram,
+// half a minute per lighter image and a minute per video.
+(() => {
+  const art = document.getElementById("article");
+  const words = (art.innerText || art.textContent).trim().split(/\s+/).length;
+  const diagrams = art.querySelectorAll(".fig").length;
+  const images = art.querySelectorAll(".device, .pair li").length;
+  const videos = art.querySelectorAll("video").length;
+  const textMin = words / 200;
+  const visualMin = diagrams * 3 + images * 0.5 + videos;
+  const total = Math.max(1, Math.round(textMin + visualMin));
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set("reading-time", total);
+  set("reading-note", `${Math.round(textMin)} min text · ${Math.round(visualMin)} min figures`);
+  set("figure-count", diagrams + images + videos);
+  const parts = [diagrams && `${diagrams} diagrams`, images && `${images} images`, videos && `${videos} videos`].filter(Boolean);
+  set("figure-note", parts.join(" · "));
+})();
 
 /* ---------- Intro: stagger, then release ---------- */
 
@@ -389,9 +406,9 @@ const zoom = (() => {
 
 (() => {
   const CHAPTERS = [
-    { n: 1, roman: "I",   href: "spillover.html", title: "Meetfleet: the spillover of reality on advanced AI technology", kicker: "The math behind a meetup", cover: "../assets/work-1.webp", min: 10 },
-    { n: 2, roman: "II",  href: "advanced.html",  title: "The Convergence of Advanced Technology and Refined Design",      kicker: "The product people use",   cover: "../assets/work-2.webp", min: 7 },
-    { n: 3, roman: "III", href: "meetchat.html",  title: "AI, Mathematics, and Physics, with Refined Design and Security Beyond the Essentials", kicker: "Messaging and security", cover: "../assets/work-3.webp", min: 6 },
+    { n: 1, roman: "I",   href: "spillover.html", title: "Meetfleet: the spillover of reality on advanced AI technology", kicker: "The math behind a meetup", cover: "../assets/work-1.webp", min: 43 },
+    { n: 2, roman: "II",  href: "advanced.html",  title: "The Convergence of Advanced Technology and Refined Design",      kicker: "The product people use",   cover: "../assets/work-2.webp", min: 35 },
+    { n: 3, roman: "III", href: "meetchat.html",  title: "AI, Mathematics, and Physics, with Refined Design and Security Beyond the Essentials", kicker: "Messaging and security", cover: "../assets/work-3.webp", min: 26 },
   ];
   const cur = Number(document.body.dataset.chapter);
   if (!cur) return;

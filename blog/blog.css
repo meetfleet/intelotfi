@@ -414,7 +414,7 @@ ol, ul { list-style: none; }
 /* ---------- Intro ---------- */
 
 .intro {
-  max-width: 1100px;
+  max-width: none;
   padding: clamp(56px, 9vh, 120px) 0 clamp(36px, 4vw, 56px);
 }
 
@@ -465,44 +465,51 @@ ol, ul { list-style: none; }
   white-space: nowrap;
 }
 
+/* facts strip: four equal cells between hairlines, no author */
 .meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 32px;
-  flex-wrap: wrap;
-  margin-top: clamp(32px, 3.6vw, 56px);
-  padding-top: clamp(20px, 2vw, 28px);
-  border-top: 1px solid var(--line);
-}
-
-.author { display: flex; align-items: center; gap: 14px; }
-
-.author__avatar {
   display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  color: var(--red);
-  background: rgba(225, 6, 0, 0.08);
-  border: 1px solid rgba(225, 6, 0, 0.3);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: clamp(32px, 3.6vw, 56px);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
-.author__name { display: block; font-size: 15px; color: var(--ink); }
-.author__role { display: block; margin-top: 3px; font-size: 13px; color: var(--muted); }
+.meta__cell {
+  padding: clamp(16px, 1.6vw, 24px) clamp(14px, 1.6vw, 28px);
+}
+.meta__cell:first-child { padding-inline-start: 0; }
+.meta__cell + .meta__cell { border-inline-start: 1px solid var(--line); }
 
-.meta__facts { display: flex; gap: clamp(28px, 3vw, 56px); }
-.meta__facts dt {
+.meta dt {
   font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
 }
-.meta__facts dd { margin-top: 6px; font-size: 15px; color: var(--ink); }
+
+.meta dd {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3em;
+  margin-top: 10px;
+  font-size: clamp(17px, 1.35vw, 22px);
+  letter-spacing: -0.01em;
+  color: var(--navy);
+}
+
+.meta__cell--time dd { font-size: clamp(30px, 2.8vw, 48px); line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.meta__cell--time dd small { font-size: 0.36em; letter-spacing: 0; color: var(--red); }
+
+.meta__note {
+  margin-top: 8px;
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10.5px;
+  line-height: 1.6;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
 
 /* ---------- Cover ---------- */
 
@@ -1045,7 +1052,9 @@ ol, ul { list-style: none; }
 
 @media (max-width: 768px) {
   .pill__label { display: none; }
-  .meta__facts { gap: 22px; }
+  .meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .meta__cell:nth-child(3) { padding-inline-start: 0; border-inline-start: 0; }
+  .meta__cell:nth-child(n + 3) { border-top: 1px solid var(--line); }
   .cover img { aspect-ratio: 4 / 3; }
   .cover__card { position: static; max-width: none; margin-top: -24px; margin-inline: 12px; }
   .toc__list { columns: 1; }
