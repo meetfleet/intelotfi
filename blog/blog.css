@@ -619,9 +619,10 @@ ol, ul { list-style: none; }
 
 .sec { padding-bottom: clamp(44px, 5vw, 80px); }
 
+/* text runs the full article column, flush with the images */
 .sec > p,
 .sec > blockquote,
-.sec > h2 { max-width: var(--measure); }
+.sec > h2 { max-width: none; }
 
 .article h2 {
   font-size: clamp(28px, 2.6vw, 44px);
