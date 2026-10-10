@@ -11,7 +11,7 @@
   <link rel="preload" href="../assets/blog/meetchat-hero.webp" as="image" />
   <link rel="stylesheet" href="blog.css" />
 </head>
-<body class="is-loading">
+<body class="is-loading" data-chapter="3">
   <div class="progress" aria-hidden="true"><span></span></div>
   <div class="ambient" aria-hidden="true"></div>
 
@@ -21,11 +21,7 @@
         <span class="logo__text">intelotfi</span><span class="logo__cursor" aria-hidden="true"></span>
       </a>
 
-      <a href="../index.html#work" class="pill">
-        <span class="pill__badge">03 / 03</span>
-        <span class="pill__label">All case studies</span>
-        <svg class="pill__chevron" viewBox="0 0 7 12" aria-hidden="true"><path d="M1 1l5 5-5 5" /></svg>
-      </a>
+      <nav class="chapnav" data-chapnav aria-label="Chapters"><a href="../index.html#work" class="chapnav__fallback">All case studies</a></nav>
     </header>
 
     <main>
@@ -151,16 +147,7 @@
             <p>The account state machine illustrates how New, Verified, Trusted, Restricted, and Banned states are intended to reflect changing behavior and review outcomes. Restrictions are designed to be reviewable and clearable, and bans are reserved for cases that require a person. The diagram also preserves the principle that model flags are inputs, not final decisions, and that everyone can appeal. There are no autonomous bans, and scoring is not based on appearance. Instead, the illustrated process is designed to support human judgment and ongoing safety review, acknowledging that trust and safety are continuous rather than static.</p>
           </section>
 
-          <nav class="next" aria-label="Continue reading">
-            <a href="advanced.html" class="next__card next__card--prev">
-              <span class="next__k">Previously · Chapter II</span>
-              <span class="next__v">The Convergence of Advanced Technology and Refined Design</span>
-            </a>
-            <a href="spillover.html" class="next__card">
-              <span class="next__k">Start again · Chapter I</span>
-              <span class="next__v">Meetfleet: the spillover of reality on advanced AI technology</span>
-            </a>
-          </nav>
+          <div class="continue" data-continue></div>
         </article>
       </div>
     </main>
@@ -181,6 +168,8 @@
     <button type="button" class="zoom__close" aria-label="Close"><span></span><span></span></button>
     <p class="zoom__caption"><span class="zoom__index"></span><span class="zoom__name"></span><span class="zoom__hint">scroll to zoom · drag to pan · double-click to toggle</span></p>
   </div>
+
+  <nav class="dock" data-dock aria-label="Chapter navigation"></nav>
 
   <script src="blog.js"></script>
 </body>

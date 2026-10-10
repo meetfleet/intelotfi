@@ -382,3 +382,85 @@ const zoom = (() => {
 
   videos.forEach((v) => io.observe(v));
 })();
+
+/* ---------- Chapters: one list drives the top switcher, the dock and the continue block ---------- */
+
+(() => {
+  const CHAPTERS = [
+    { n: 1, roman: "I",   href: "spillover.html", title: "Meetfleet: the spillover of reality on advanced AI technology", kicker: "The math behind a meetup", cover: "../assets/work-1.webp", min: 10 },
+    { n: 2, roman: "II",  href: "advanced.html",  title: "The Convergence of Advanced Technology and Refined Design",      kicker: "The product people use",   cover: "../assets/work-2.webp", min: 7 },
+    { n: 3, roman: "III", href: "meetchat.html",  title: "AI, Mathematics, and Physics, with Refined Design and Security Beyond the Essentials", kicker: "Messaging and security", cover: "../assets/work-3.webp", min: 6 },
+  ];
+  const cur = Number(document.body.dataset.chapter);
+  if (!cur) return;
+  const me = CHAPTERS[cur - 1], prev = CHAPTERS[cur - 2], next = CHAPTERS[cur];
+  const esc = (t) => t.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
+  const L = `<svg viewBox="0 0 12 12"><path d="M7.5 1.5L3 6l4.5 4.5"/></svg>`;
+  const R = `<svg viewBox="0 0 12 12"><path d="M4.5 1.5L9 6l-4.5 4.5"/></svg>`;
+  const ARROW = `<svg viewBox="0 0 28 12"><path d="M0 6h26M21 1l5 5-5 5"/></svg>`;
+  const pad = (n) => String(n).padStart(2, "0");
+
+  // top switcher
+  const nav = document.querySelector("[data-chapnav]");
+  if (nav) {
+    nav.insertAdjacentHTML("beforeend", `
+      <a class="chapnav__home" href="../index.html#work">${L}<span>Latest Work</span></a>
+      <span class="chapnav__sep"></span>
+      <a class="chapnav__arrow" href="${prev ? prev.href : "#"}" aria-label="Previous chapter" ${prev ? "" : 'aria-disabled="true"'}>${L}</a>
+      ${CHAPTERS.map((c) => `<a class="chapnav__ch${c.n === cur ? " is-current" : ""}" href="${c.href}" title="${esc(c.title)}" ${c.n === cur ? 'aria-current="page"' : ""}>${c.roman}</a>`).join("")}
+      <a class="chapnav__arrow" href="${next ? next.href : "#"}" aria-label="Next chapter" ${next ? "" : 'aria-disabled="true"'}>${R}</a>`);
+    nav.classList.add("is-built");
+  }
+
+  // floating dock, shown once the cover has scrolled past
+  const dock = document.querySelector("[data-dock]");
+  if (dock) {
+    const link = (c, dir) => c
+      ? `<a class="dock__link dock__link--${dir}" href="${c.href}">${dir === "prev" ? L : ""}<span><span class="dock__k">${dir === "prev" ? "Previous" : "Next"} · Chapter ${c.roman}</span><span class="dock__t">${esc(c.kicker)}</span></span>${dir === "next" ? R : ""}</a>`
+      : `<span class="dock__link dock__link--${dir}" aria-disabled="true"></span>`;
+    dock.innerHTML = `${link(prev, "prev")}
+      <div class="dock__mid"><span>Chapter <b>${me.roman}</b> of III</span><span class="dock__dots">${CHAPTERS.map((c) => `<span class="${c.n < cur ? "is-done" : c.n === cur ? "is-current" : ""}"></span>`).join("")}</span></div>
+      ${link(next, "next")}`;
+    const cover = document.querySelector(".cover");
+    const foot = document.querySelector(".foot");
+    const update = () => {
+      const past = cover ? cover.getBoundingClientRect().bottom < 0 : scrollY > 400;
+      const atFoot = foot ? foot.getBoundingClientRect().top < innerHeight - 40 : false;
+      dock.classList.toggle("is-visible", past && !atFoot && !document.getElementById("zoom")?.classList.contains("is-open"));
+    };
+    addEventListener("scroll", update, { passive: true });
+    addEventListener("resize", update);
+    new MutationObserver(update).observe(document.getElementById("zoom") || document.body, { attributes: true, attributeFilter: ["class"] });
+    update();
+  }
+
+  // continue block at the end of the article
+  const cont = document.querySelector("[data-continue]");
+  if (cont) {
+    const target = next || CHAPTERS[0];
+    const label = next ? `Up next · Chapter <b>${target.roman}</b>` : `Start again · Chapter <b>${target.roman}</b>`;
+    cont.innerHTML = `
+      <a class="continue__next" href="${target.href}">
+        <span>
+          <span class="continue__k">${label}</span>
+          <span class="continue__t" style="display:block">${esc(target.title)}</span>
+          <span class="continue__meta"><span>${esc(target.kicker)}</span><span>${target.min} min read</span></span>
+          <span class="continue__arrow">Read chapter ${target.roman}${ARROW}</span>
+        </span>
+        <img class="continue__img" src="${target.cover}" width="1088" height="923" loading="lazy" alt="" />
+      </a>
+      <div class="continue__index">
+        ${CHAPTERS.map((c) => `<a class="continue__item${c.n === cur ? " is-current" : ""}" href="${c.href}" ${c.n === cur ? 'aria-current="page"' : ""}><span class="continue__k">Chapter ${c.roman}</span><p>${esc(c.kicker)}</p></a>`).join("")}
+      </div>
+      <a class="continue__home" href="../index.html#work">${L}Back to Latest Work</a>`;
+  }
+
+  // arrow keys move between chapters when nothing else wants them
+  addEventListener("keydown", (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (document.getElementById("zoom")?.classList.contains("is-open")) return;
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName || "")) return;
+    if (e.key === "ArrowRight" && next) location.href = next.href;
+    if (e.key === "ArrowLeft" && prev) location.href = prev.href;
+  });
+})();

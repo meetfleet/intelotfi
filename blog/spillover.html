@@ -11,7 +11,7 @@
   <link rel="preload" href="../assets/blog/spillover-hero.webp" as="image" />
   <link rel="stylesheet" href="blog.css" />
 </head>
-<body class="is-loading">
+<body class="is-loading" data-chapter="1">
   <div class="progress" aria-hidden="true"><span></span></div>
   <div class="ambient" aria-hidden="true"></div>
 
@@ -21,11 +21,7 @@
         <span class="logo__text">intelotfi</span><span class="logo__cursor" aria-hidden="true"></span>
       </a>
 
-      <a href="../index.html#work" class="pill">
-        <span class="pill__badge">01 / 03</span>
-        <span class="pill__label">All case studies</span>
-        <svg class="pill__chevron" viewBox="0 0 7 12" aria-hidden="true"><path d="M1 1l5 5-5 5" /></svg>
-      </a>
+      <nav class="chapnav" data-chapnav aria-label="Chapters"><a href="../index.html#work" class="chapnav__fallback">All case studies</a></nav>
     </header>
 
     <main>
@@ -197,13 +193,7 @@
             <p>That is what makes our invention concrete: an explicit decision architecture, not an AI label attached to a feed. Its inputs are defined, its calculations can be inspected, and its recommendations can be traced back to the factors that shaped them. A language model gives those decisions a voice and helps draft the plan; it does not replace the scoring rules or the person’s final choice. We have designed the mechanism. Its calibration and real-world benefits still need to be tested—but the contribution is already specific: a system built to turn compatible intent into a feasible meeting, without letting fit conceal weak reliability.</p>
           </section>
 
-          <nav class="next" aria-label="Continue reading">
-            <a href="../index.html#work" class="next__card">
-              <span class="next__k">Up next · Chapter II</span>
-              <span class="next__v">Meetfleet: Advanced technology and beauty</span>
-              <span class="next__soon">Coming soon</span>
-            </a>
-          </nav>
+          <div class="continue" data-continue></div>
         </article>
       </div>
     </main>
@@ -224,6 +214,8 @@
     <button type="button" class="zoom__close" aria-label="Close"><span></span><span></span></button>
     <p class="zoom__caption"><span class="zoom__index"></span><span class="zoom__name"></span><span class="zoom__hint">scroll to zoom · drag to pan · double-click to toggle</span></p>
   </div>
+
+  <nav class="dock" data-dock aria-label="Chapter navigation"></nav>
 
   <script src="blog.js"></script>
 </body>

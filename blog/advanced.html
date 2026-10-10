@@ -11,7 +11,7 @@
   <link rel="preload" href="../assets/blog/advanced-hero.webp" as="image" />
   <link rel="stylesheet" href="blog.css" />
 </head>
-<body class="is-loading">
+<body class="is-loading" data-chapter="2">
   <div class="progress" aria-hidden="true"><span></span></div>
   <div class="ambient" aria-hidden="true"></div>
 
@@ -21,11 +21,7 @@
         <span class="logo__text">intelotfi</span><span class="logo__cursor" aria-hidden="true"></span>
       </a>
 
-      <a href="../index.html#work" class="pill">
-        <span class="pill__badge">02 / 03</span>
-        <span class="pill__label">All case studies</span>
-        <svg class="pill__chevron" viewBox="0 0 7 12" aria-hidden="true"><path d="M1 1l5 5-5 5" /></svg>
-      </a>
+      <nav class="chapnav" data-chapnav aria-label="Chapters"><a href="../index.html#work" class="chapnav__fallback">All case studies</a></nav>
     </header>
 
     <main>
@@ -175,17 +171,7 @@
             <p>Meetfleet’s direction is simple: make it easier to move from wanting to go out to actually meeting. The Social Activation Score gives recommendations a clear basis, while AI helps people discover, plan and understand their options without taking away the final decision. Across subscriptions and rewards, the principle stays the same: convenience can be paid for, but trust and participation must be earned. The proposed features build toward a product where technology supports real-world connection—not more time on a screen.</p>
           </section>
 
-          <nav class="next" aria-label="Continue reading">
-            <a href="spillover.html" class="next__card next__card--prev">
-              <span class="next__k">Previously · Chapter I</span>
-              <span class="next__v">Meetfleet: the spillover of reality on advanced AI technology</span>
-            </a>
-            <a href="../index.html#work" class="next__card">
-              <span class="next__k">Up next · Chapter III</span>
-              <span class="next__v">AI, Mathematics, and Physics, with Refined Design and Security Beyond the Essentials</span>
-              <span class="next__soon">Coming soon</span>
-            </a>
-          </nav>
+          <div class="continue" data-continue></div>
         </article>
       </div>
     </main>
@@ -199,6 +185,8 @@
       <p class="foot__copy">© 2026 intelotfi</p>
     </footer>
   </div>
+
+  <nav class="dock" data-dock aria-label="Chapter navigation"></nav>
 
   <script src="blog.js"></script>
 </body>
