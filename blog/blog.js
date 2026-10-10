@@ -38,7 +38,7 @@ document.querySelectorAll("[data-split]").forEach((el) => {
 document.querySelectorAll(".intro [data-reveal]").forEach((el, i) => el.style.setProperty("--delay", `${i * 120}ms`));
 
 const ready = document.fonts ? document.fonts.ready : Promise.resolve();
-Promise.race([ready, new Promise((r) => setTimeout(r, 1500))]).then(() => {
+Promise.race([ready, new Promise((r) => setTimeout(r, 400))]).then(() => {
   requestAnimationFrame(() => {
     body.classList.remove("is-loading");
     document.querySelectorAll(".intro [data-reveal], .cover[data-reveal]").forEach((el) => el.classList.add("is-visible"));
@@ -492,3 +492,18 @@ const zoom = (() => {
     if (e.key === "ArrowLeft" && prev) location.href = prev.href;
   });
 })();
+
+/* ---------- page change fallback: a short fade where view transitions are missing ---------- */
+if (!("onpagereveal" in window)) {
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a[href]");
+    if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (a.target === "_blank" || a.hasAttribute("download")) return;
+    const url = new URL(a.href, location.href);
+    if (url.origin !== location.origin || (url.pathname === location.pathname && url.hash)) return;
+    e.preventDefault();
+    document.documentElement.classList.add("is-leaving");
+    setTimeout(() => { location.href = url.href; }, 170);
+  });
+  addEventListener("pageshow", () => document.documentElement.classList.remove("is-leaving"));
+}

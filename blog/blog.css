@@ -1,13 +1,15 @@
+/* the inline head style hides <body> until this sheet has applied */
+body { visibility: visible; }
 @font-face {
   font-family: "Alliance No.2";
-  src: url("../fonts/AllianceNo2-Light.otf") format("opentype");
+  src: url("../fonts/AllianceNo2-Light.woff2") format("woff2"), url("../fonts/AllianceNo2-Light.otf") format("opentype");
   font-weight: 300;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Alliance No.2";
-  src: url("../fonts/AllianceNo2-Regular.otf") format("opentype");
+  src: url("../fonts/AllianceNo2-Regular.woff2") format("woff2"), url("../fonts/AllianceNo2-Regular.otf") format("opentype");
   font-weight: 400;
   font-display: swap;
 }
@@ -1065,3 +1067,21 @@ ol, ul { list-style: none; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: 0.01ms !important; transition-delay: 0s !important; animation: none !important; }
 }
+
+/* ---------- page transitions ----------
+   Cross-document view transitions (Chrome/Edge/Safari 18.2+): pages cross-fade
+   and the chapter/essay artwork morphs between the card and the page. */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vt-out 0.26s cubic-bezier(0.4, 0, 1, 1) both; }
+::view-transition-new(root) { animation: vt-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+::view-transition-group(*) { animation-duration: 0.55s; animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
+@keyframes vt-out { to { opacity: 0; transform: translateY(-10px); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(16px); } }
+/* browsers without view transitions get a short fade (set from JS) */
+html.is-leaving body { opacity: 0; transition: opacity 0.18s ease-in; }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}
+[data-chapter="1"] .cover img { view-transition-name: chapter-1; }
+[data-chapter="2"] .cover img { view-transition-name: chapter-2; }
+[data-chapter="3"] .cover img { view-transition-name: chapter-3; }

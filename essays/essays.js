@@ -28,3 +28,18 @@ const spy = new IntersectionObserver((entries) => {
   if (hit) links.forEach((a) => a.classList.toggle("is-active", a.getAttribute("href") === `#${hit.target.id}`));
 }, { rootMargin: "-20% 0px -65% 0px" });
 document.querySelectorAll(".es").forEach((s) => spy.observe(s));
+
+/* ---------- page change fallback: a short fade where view transitions are missing ---------- */
+if (!("onpagereveal" in window)) {
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a[href]");
+    if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (a.target === "_blank" || a.hasAttribute("download")) return;
+    const url = new URL(a.href, location.href);
+    if (url.origin !== location.origin || (url.pathname === location.pathname && url.hash)) return;
+    e.preventDefault();
+    document.documentElement.classList.add("is-leaving");
+    setTimeout(() => { location.href = url.href; }, 170);
+  });
+  addEventListener("pageshow", () => document.documentElement.classList.remove("is-leaving"));
+}

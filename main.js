@@ -451,7 +451,7 @@ i18n.onChange(buildSpectrum);
 
 /* ---------- Main loop ---------- */
 
-const reveal = { value: 0, start: 0, duration: reduceMotion ? 1200 : 2800 };
+const reveal = { value: 0, start: 0, duration: reduceMotion ? 600 : 1500 };
 const expoOut = (t) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
 let last = performance.now();
 
@@ -515,9 +515,9 @@ const imgReady = heroImg.complete && heroImg.naturalWidth
       heroImg.addEventListener("load", r, { once: true });
       heroImg.addEventListener("error", r, { once: true });
     });
-const timeout = new Promise((r) => setTimeout(r, 2000));
+const timeout = new Promise((r) => setTimeout(r, 900));
 
-Promise.race([Promise.all([imgReady, document.fonts.ready]), timeout]).then(() => {
+Promise.race([imgReady, timeout]).then(() => {
   if (heroImg.naturalWidth) {
     try {
       glView = createGL();
@@ -530,8 +530,8 @@ Promise.race([Promise.all([imgReady, document.fonts.ready]), timeout]).then(() =
 
   requestAnimationFrame(() => {
     body.classList.remove("is-loading");
-    setTimeout(() => { showPair(0); scheduleCycle(); }, reduceMotion ? 200 : 1200);
-    reveal.start = performance.now();
+    setTimeout(() => { showPair(0); scheduleCycle(); }, reduceMotion ? 100 : 450);
+    reveal.start = window.__introStart || performance.now();
   });
 
   requestAnimationFrame(frame);
@@ -557,3 +557,18 @@ menu.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false
 burger.setAttribute("aria-label", i18n.t("nav.open"));
 i18n.onChange(() => setMenu(body.classList.contains("menu-open")));
 addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
+
+/* ---------- page change fallback: a short fade where view transitions are missing ---------- */
+if (!("onpagereveal" in window)) {
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a[href]");
+    if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (a.target === "_blank" || a.hasAttribute("download")) return;
+    const url = new URL(a.href, location.href);
+    if (url.origin !== location.origin || (url.pathname === location.pathname && url.hash)) return;
+    e.preventDefault();
+    document.documentElement.classList.add("is-leaving");
+    setTimeout(() => { location.href = url.href; }, 170);
+  });
+  addEventListener("pageshow", () => document.documentElement.classList.remove("is-leaving"));
+}

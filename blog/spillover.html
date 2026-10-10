@@ -3,13 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <!-- first paint: the page colour only, never unstyled content; the stylesheet reveals the body -->
+  <style>html{background:#ffffff}body{visibility:hidden}</style>
+  <script>setTimeout(function(){document.body&&(document.body.style.visibility="visible")},2500)</script>
   <title>Meetfleet: the spillover of reality on advanced AI technology — intelotfi</title>
   <meta name="description" content="Chapter I: how Meetfleet's Social Activation Score and Trust Protocol turn compatible intent into a feasible, defendable meeting." />
   <meta name="theme-color" content="#ffffff" />
   <link rel="icon" href="../assets/icon.svg" type="image/svg+xml" />
-  <link rel="preload" href="../fonts/AllianceNo2-Regular.otf" as="font" type="font/otf" crossorigin />
-  <link rel="preload" href="../assets/blog/spillover-hero.webp" as="image" />
-  <link rel="stylesheet" href="blog.css?v=202610102314" />
+  <link rel="preload" href="../fonts/AllianceNo2-Regular.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="../assets/blog/spillover-hero.webp" as="image" fetchpriority="high" />
+  <link rel="stylesheet" href="blog.css?v=202610102338" />
+  <!-- instant navigation: pages you are about to open are pre-rendered on hover (Chromium) -->
+  <script type="speculationrules">{"prerender":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/assets/*"}},{"not":{"selector_matches":"[target=_blank], [href^='mailto:'], [href^='tel:']"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body class="is-loading" data-chapter="1">
   <div class="progress" aria-hidden="true"><span></span></div>
@@ -209,6 +215,6 @@
 
   <nav class="dock" data-dock aria-label="Chapter navigation"></nav>
 
-  <script src="blog.js?v=202610102314"></script>
+  <script src="blog.js?v=202610102338"></script>
 </body>
 </html>

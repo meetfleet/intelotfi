@@ -1,13 +1,15 @@
+/* the inline head style hides <body> until this sheet has applied */
+body { visibility: visible; }
 @font-face {
   font-family: "Alliance No.2";
-  src: url("fonts/AllianceNo2-Light.otf") format("opentype");
+  src: url("fonts/AllianceNo2-Light.woff2") format("woff2"), url("fonts/AllianceNo2-Light.otf") format("opentype");
   font-weight: 300;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Alliance No.2";
-  src: url("fonts/AllianceNo2-Regular.otf") format("opentype");
+  src: url("fonts/AllianceNo2-Regular.woff2") format("woff2"), url("fonts/AllianceNo2-Regular.otf") format("opentype");
   font-weight: 400;
   font-display: swap;
 }
@@ -83,9 +85,9 @@ ul { list-style: none; }
   object-position: 62% 50%;
   transform: scale(1.03);
   transition:
-    transform 3.2s var(--expo-out),
-    filter 2.6s var(--expo-out),
-    opacity 2.2s var(--expo-out);
+    transform 1.6s var(--expo-out),
+    filter 1.1s var(--expo-out),
+    opacity 0.9s var(--expo-out);
 }
 
 .is-loading .hero__bg img {
@@ -314,7 +316,7 @@ ul { list-style: none; }
   transition:
     transform 2s var(--expo-out),
     opacity 2s var(--expo-out);
-  transition-delay: calc(1.8s + var(--i, 0) * 200ms);
+  transition-delay: calc(0.55s + var(--i, 0) * 120ms);
 }
 
 .is-loading .manifesto .line > span {
@@ -323,7 +325,7 @@ ul { list-style: none; }
 }
 
 .logo__text, .logo__cursor, .burger__lines {
-  transition: opacity 1.8s var(--expo-out) 0.9s, translate 1.8s var(--expo-out) 0.9s;
+  transition: opacity 1.2s var(--expo-out) 0.25s, translate 1.2s var(--expo-out) 0.25s;
 }
 .is-loading .logo__text,
 .is-loading .logo__cursor { opacity: 0; translate: 0 14px; }
@@ -1855,3 +1857,24 @@ ul { list-style: none; }
     animation: none !important;
   }
 }
+
+/* ---------- page transitions ----------
+   Cross-document view transitions (Chrome/Edge/Safari 18.2+): pages cross-fade
+   and the chapter/essay artwork morphs between the card and the page. */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vt-out 0.26s cubic-bezier(0.4, 0, 1, 1) both; }
+::view-transition-new(root) { animation: vt-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+::view-transition-group(*) { animation-duration: 0.55s; animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
+@keyframes vt-out { to { opacity: 0; transform: translateY(-10px); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(16px); } }
+/* browsers without view transitions get a short fade (set from JS) */
+html.is-leaving body { opacity: 0; transition: opacity 0.18s ease-in; }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}
+.post:nth-child(1) .post__img { view-transition-name: chapter-1; }
+.post:nth-child(2) .post__img { view-transition-name: chapter-2; }
+.post:nth-child(3) .post__img { view-transition-name: chapter-3; }
+.essay:nth-child(1) .essay__motif { view-transition-name: essay-1; }
+.essay:nth-child(2) .essay__motif { view-transition-name: essay-2; }
+.essay:nth-child(3) .essay__motif { view-transition-name: essay-3; }
