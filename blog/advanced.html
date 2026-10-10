@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>The Convergence of Advanced Technology and Refined Design — intelotfi</title>
+  <meta name="description" content="Chapter II: the Meetfleet user product. The journey from “I'm bored” to “see you there”, and how AI shapes the home screen, plans, insights, subscriptions and the Level Regime." />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" href="../assets/icon.svg" type="image/svg+xml" />
+  <link rel="preload" href="../fonts/AllianceNo2-Regular.otf" as="font" type="font/otf" crossorigin />
+  <link rel="preload" href="../assets/blog/advanced-hero.webp" as="image" />
+  <link rel="stylesheet" href="blog.css" />
+</head>
+<body class="is-loading">
+  <div class="progress" aria-hidden="true"><span></span></div>
+  <div class="ambient" aria-hidden="true"></div>
+
+  <div class="page">
+    <header class="top">
+      <a href="../index.html" class="logo" aria-label="intelotfi — home">
+        <span class="logo__text">intelotfi</span><span class="logo__cursor" aria-hidden="true"></span>
+      </a>
+
+      <a href="../index.html#work" class="pill">
+        <span class="pill__badge">02 / 03</span>
+        <span class="pill__label">All case studies</span>
+        <svg class="pill__chevron" viewBox="0 0 7 12" aria-hidden="true"><path d="M1 1l5 5-5 5" /></svg>
+      </a>
+    </header>
+
+    <main>
+      <section class="intro">
+        <p class="eyebrow" data-reveal><span class="eyebrow__dot"></span>Featured deep dive · Case study 02</p>
+        <h1 class="title" data-reveal data-split>The Convergence of Advanced Technology and Refined Design</h1>
+        <p class="chapter" data-reveal><span class="chapter__num">Chapter II</span>The user product</p>
+
+        <div class="meta" data-reveal>
+          <div class="author">
+            <span class="author__avatar" aria-hidden="true">HL</span>
+            <span>
+              <span class="author__name">Hamza Lotfi</span>
+              <span class="author__role">AI engineer · product designer</span>
+            </span>
+          </div>
+          <dl class="meta__facts">
+            <div><dt>Published</dt><dd><time datetime="2026-10-07">Wed 7 Oct 2026</time></dd></div>
+            <div><dt>Reading time</dt><dd id="reading-time">— min</dd></div>
+            <div><dt>Topic</dt><dd>Product design</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <figure class="cover" data-reveal>
+        <img src="../assets/blog/advanced-hero.webp" width="1536" height="1025" alt="People in white T-shirts looking at their phones in front of a large white circle" />
+        <figcaption class="cover__card">
+          <span class="cover__k">In one line</span>
+          <span class="cover__v">Convenience can be paid for. Trust and participation must be earned.</span>
+        </figcaption>
+      </figure>
+
+      <div class="layout">
+        <aside class="toc" aria-label="On this page">
+          <p class="toc__title">On this page</p>
+          <ol class="toc__list">
+            <li><a href="#journey">Designing the journey</a></li>
+            <li class="toc__part">The product</li>
+            <li><a href="#home">Home screen</a></li>
+            <li><a href="#create">Plans creation craft</a></li>
+            <li><a href="#feed">Plans feed</a></li>
+            <li><a href="#insights">Plan Insights</a></li>
+            <li class="toc__part">Business</li>
+            <li><a href="#tiers">Subscriptions</a></li>
+            <li><a href="#levels">The Level Regime</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+          </ol>
+        </aside>
+
+        <article class="article" id="article">
+          <section id="journey" class="sec">
+            <h2>Designing the journey: from “I’m bored” to “see you there”</h2>
+            <p class="lead">Most social apps map a journey that ends on a screen. Ours ends in the real world.</p>
+            <p>We traced every step from the moment someone wants to go out to the moment two people actually meet, then rebuilt each one to remove friction: one sentence instead of ten fields, a preview instead of a form, a Dynamic Island countdown instead of a reminder you forget. The blueprint follows the host, the guest and Meetfleet side by side, so every tap on one phone becomes a signal on the other: a join request, a radar ping, a check-in. It also loops back on itself, because every meetup that happens, or doesn’t, retrains the Social Activation Score. The journey doesn’t stop at the meetup. Each one makes the next plan a little better.</p>
+            <figure class="fig" data-reveal>
+              <img src="../assets/blog/a-journey.webp" width="1592" height="1160" loading="lazy" alt="Meetfleet UX map: user journey, flow chart, user flow and service blueprint for creating and joining a plan" />
+            </figure>
+          </section>
+
+          <section id="home" class="sec">
+            <p class="part">Part 1 · The product</p>
+            <h2>Home Screen: an informative centerpiece</h2>
+            <p>The Meetfleet home screen is planned to shift from showing what’s happening to suggesting what you should do now. An LLM, called through an edge function, would combine a few signals: your approximate location, the time and weather, your past plans, and people you’ve met. From those it ranks nearby plans into a personal “For you” feed and turns the weather card into a “moment” card, such as “Sunny until 6pm, coffee nearby?”.</p>
+            <figure class="fig" data-reveal>
+              <img src="../assets/blog/a-home.webp" width="1600" height="977" loading="lazy" alt="The home screen annotated: greeting, moment card, For you feed, mood room, daily digest and the plan bar, with the ground rules: AI suggests, you decide" />
+            </figure>
+            <p>Its centrepiece is a plan bar: type “sunset walk with 2 friends tomorrow by the sea” and the AI fills in the full Create Plan form, with a real place from Apple Maps, the right time and the group size. The user only reviews and taps Post. Every suggestion comes with a short reason, alerts stay rare, only approximate location ever leaves the phone, and the AI never posts on its own. If the AI is off, the home screen works exactly as before.</p>
+          </section>
+
+          <section id="create" class="sec">
+            <h2>Plans creation craft</h2>
+            <p>Easiest click, is what you want, a dinner? Okay, after choosing the activity, the host answers two quick screens. “Where and When” covers the date, time, a real place from Apple Maps, the duration and the group size. “Who and How” covers a short description, the vibes, who the plan is open to, interests, how payment works and the age range. Every field exists for a reason, because each one feeds the Social Activation Score: the place and time become friction, the vibes become the vibe signature, and the payment choice decides whether anyone pays more than their share.</p>
+            <figure class="fig" data-reveal>
+              <img src="../assets/blog/a-create.webp" width="1600" height="956" loading="lazy" alt="The Create Plan screen annotated: pre-filled header, three steps to one review, activity tiles ranked by intent, and what AI fills in from one sentence" />
+            </figure>
+            <p>With the AI layer, most of this arrives already filled in. The best times come from when your plans usually fill up, places come ranked by SAS, the description is written in your tone, and the vibes are picked from what you typed. The host just reviews the highlighted fields and taps Create Plan.</p>
+          </section>
+
+          <section id="feed" class="sec">
+            <h2>Plans: a feed that explains itself</h2>
+            <p>The Plans tab is where people find something to do, so it’s where the Social Activation Score matters most. Every plan in Discover carries its score and the single reason behind it, curated ideas re-rank with the weather, and a “Why you match” panel opens the four SAS terms for anyone who’s curious. Hosts get requests sorted by match and safety, with a trust profile for each person and a copilot that flags anything that looks wrong. For the ambitious evenings, agent mode plans the whole night in one tap. The AI ranks, explains and drafts, and the person always makes the final tap.</p>
+            <figure class="fig" data-reveal>
+              <img src="../assets/blog/a-feed.webp" width="1600" height="1013" loading="lazy" alt="The Plans tab annotated across Discover, scrolled and Received views: search, tabs, curated ideas, SAS on every card, AI triage, trust profiles and agent mode" />
+            </figure>
+          </section>
+
+          <section id="insights" class="sec">
+            <h2>Plan Insights: an analyst, a strategist and a copilot in one screen</h2>
+            <p>Every plan has its own analytics, and Meetfleet’s AI reads them in real time so the host doesn’t have to. Take a Friday food meetup two days before it starts: 1,248 impressions, 312 views, 26 requests and an 8% conversion rate. A plain dashboard stops at those numbers. Meetfleet’s AI starts there. It sums up the situation in one line (“Trending 2.1× · boost Thursday at 6 pm”), forecasts the final reach from the first hours of data, and draws the next two days as dashed bars before they happen.</p>
+            <figure class="fig" data-reveal>
+              <img src="../assets/blog/a-insights.webp" width="1600" height="981" loading="lazy" alt="Plan Insights annotated: AI summary, smart shortlist, reach forecast, conversion explained, daily activity forecast, best slot to boost, engagement diagnosis and one-tap completeness fix" />
+            </figure>
+            <p>It also explains weak spots through the Social Activation Score. When distant viewers never request, it names friction as the bottleneck: “views drop past 3 km.” When 64 people open the map but few ask to join, it suggests a clearer meeting point. With the host’s approval, it writes missing details in their tone, times boosts so they reach only strong matches, ranks requests by match and flags no-show risks. Hosts can ask questions in plain words, like “why did Sunday dip?” Every outcome retrains the score, and hosts only ever see aggregated numbers, never who viewed their plan.</p>
+          </section>
+
+          <section id="tiers" class="sec">
+            <p class="part">Part 2 · Business</p>
+            <h2>Subscriptions: How AI shapes each tier</h2>
+            <p>In Meetfleet’s future, every tier is built around how much AI it uses and what that AI costs to run. Simple tasks run on the phone for free. Heavier reasoning runs in the cloud, where every request has a price. The tiers follow that cost curve, so each price covers the AI behind it.</p>
+
+            <!-- the four tier reveals: each video plays through, holds its last frame for two seconds, then replays (blog.js) -->
+            <ul class="tiers" aria-label="The four tiers">
+              <li class="tier" data-reveal>
+                <div class="tier__screen"><video class="tier__video" muted playsinline preload="metadata" poster="../assets/blog/tier-free.webp" aria-label="Prime Free reveal"><source src="../assets/blog/tier-free.mp4" type="video/mp4" /></video></div>
+                <p class="tier__label"><span>Fleet</span>Free · on-device AI</p>
+              </li>
+              <li class="tier" data-reveal>
+                <div class="tier__screen"><video class="tier__video" muted playsinline preload="metadata" poster="../assets/blog/tier-basics.webp" aria-label="Prime Basics reveal"><source src="../assets/blog/tier-basics.mp4" type="video/mp4" /></video></div>
+                <p class="tier__label"><span>Prime Basics</span>$1.99 / week · light cloud AI</p>
+              </li>
+              <li class="tier" data-reveal>
+                <div class="tier__screen"><video class="tier__video" muted playsinline preload="metadata" poster="../assets/blog/tier-gold.webp" aria-label="Prime Gold reveal"><source src="../assets/blog/tier-gold.mp4" type="video/mp4" /></video></div>
+                <p class="tier__label"><span>Prime Gold</span>$4.99 / week · predictive AI</p>
+              </li>
+              <li class="tier" data-reveal>
+                <div class="tier__screen"><video class="tier__video" muted playsinline preload="metadata" poster="../assets/blog/tier-onyx.webp" aria-label="Prime Onyx reveal"><source src="../assets/blog/tier-onyx.mp4" type="video/mp4" /></video></div>
+                <p class="tier__label"><span>Prime Onyx</span>$7.99 / week · agent AI</p>
+              </li>
+            </ul>
+
+            <p><strong>Fleet (free): on-device AI.</strong> Small models run directly on the iPhone: the SAS ring on every plan, smart location matching, basic safety screening and catch-up lines for chats. Nothing leaves the phone, so the cost to Meetfleet is almost zero, and that’s what keeps the free tier truly free.</p>
+            <p><strong>Prime Basics ($1.99 / week): light cloud AI.</strong> A small, fast cloud model handles the plan bar (“dinner for 4 tonight”), smart replies in chat and wider-radius ranking. Answers are cached and shared between similar requests, so each user costs a few cents a week.</p>
+            <p><strong>Prime Gold ($4.99 / week): predictive AI.</strong> Gold adds the analytics brain: reach forecasts, conversion explained through SAS, best-time-to-boost suggestions and AI-ranked request shortlists. These models run on a schedule (hourly per live plan) rather than on every tap, which keeps the cost predictable as hosts scale up to 50 plans.</p>
+            <p><strong>Prime Onyx ($7.99 / week): agent AI.</strong> Onyx unlocks the largest models and the most expensive feature, agent mode: “Plan my Friday night” builds a whole evening, coordinates a group, checks weather and venues, and drafts every invite. It also adds live translation, voice-note transcription and an AI concierge in priority support. Agent runs are capped per week to keep costs fair, with the cap set well above what most people ever use.</p>
+            <blockquote>AI cost buys convenience, never ranking. The Social Activation Score and every safety check run the same way for a free user as for Onyx.</blockquote>
+          </section>
+
+          <section id="levels" class="sec">
+            <h2>The Level Regime</h2>
+            <p>On Meetfleet, status isn’t a follower count. It’s proof of things that actually happened. Ten holographic badges mark real moments: The Architect for hosting 10 plans that really took place, The Real One for five vouches from people you’ve met, The Explorer for plans in three neighbourhoods, and The Watchman for keeping the community safe. Each one has a holographic finish, so a screenshot never looks like the real thing.</p>
+            <figure class="fig" data-reveal>
+              <img src="../assets/blog/a-badges.webp" width="1600" height="1075" loading="lazy" alt="The badge constellation: ten holographic badges around a Lv 24 Captain core, grouped into origin and identity, community, and achievement and status" />
+            </figure>
+            <p>Levels work the same way. XP only comes from verified moments: a check-in inside the plan radius, a dinner where guests actually arrived, a new part of the city, a “Great Vibes” tag. A weekly streak can double it, and a no-show takes it away.</p>
+            <figure class="fig" data-reveal>
+              <img src="../assets/blog/a-tiers.webp" width="1574" height="921" loading="lazy" alt="Badges by subscription: Fleet, Prime Basics, Prime Gold and Prime Onyx, each with the status badges and frames it grants, and the seven badges no tier can grant" />
+            </figure>
+            <p>Subscriptions add status badges that a tier genuinely covers: High Roller for being a Prime member, Verified Pilot because Gold pays for the ID check, and Explorer for Onyx’s reach across cities. They also add richer frames, from holographic to animated onyx. Prime never buys XP, and seven of the ten badges can only be earned. An AI badge coach shows what’s next (“one sunset walk in Corniche completes The Explorer”), so the only way to level up is to go out.</p>
+            <figure class="fig" data-reveal>
+              <img src="../assets/blog/a-levels.webp" width="1600" height="1156" loading="lazy" alt="Levels: XP you can only earn outside. A curve from Lv 1 Spark to Lv 50 Legend, verified moments with their XP values, the rule that Prime never buys XP, and the AI badge coach's predicted next unlocks" />
+            </figure>
+            <p>Some of this is imagined: the levels, the XP values, the rarity percentages, the frames and the AI coach. The badges, their earning rules and the tier grants are real and in the code.</p>
+          </section>
+
+          <section id="conclusion" class="sec sec--conclusion">
+            <h2>Conclusion: technology that brings people together</h2>
+            <p>Meetfleet’s direction is simple: make it easier to move from wanting to go out to actually meeting. The Social Activation Score gives recommendations a clear basis, while AI helps people discover, plan and understand their options without taking away the final decision. Across subscriptions and rewards, the principle stays the same: convenience can be paid for, but trust and participation must be earned. The proposed features build toward a product where technology supports real-world connection—not more time on a screen.</p>
+          </section>
+
+          <nav class="next" aria-label="Continue reading">
+            <a href="spillover.html" class="next__card next__card--prev">
+              <span class="next__k">Previously · Chapter I</span>
+              <span class="next__v">Meetfleet: the spillover of reality on advanced AI technology</span>
+            </a>
+            <a href="../index.html#work" class="next__card">
+              <span class="next__k">Up next · Chapter III</span>
+              <span class="next__v">AI, Mathematics, and Physics, with Refined Design and Security Beyond the Essentials</span>
+              <span class="next__soon">Coming soon</span>
+            </a>
+          </nav>
+        </article>
+      </div>
+    </main>
+
+    <footer class="foot">
+      <nav class="foot__nav">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#work">Work</a>
+        <a href="../index.html#about">About</a>
+      </nav>
+      <p class="foot__copy">© 2026 intelotfi</p>
+    </footer>
+  </div>
+
+  <script src="blog.js"></script>
+</body>
+</html>

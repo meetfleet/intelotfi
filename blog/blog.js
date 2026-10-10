@@ -338,3 +338,42 @@ const zoom = (() => {
 
   return { show, hide };
 })();
+
+/* ---------- Tier videos: play, hold the last frame for 2s, replay ---------- */
+// The poster is the last frame, so the first thing seen is the finished
+// reveal; playback starts only once the grid is on screen, and pauses off it.
+
+(() => {
+  const videos = [...document.querySelectorAll(".tier__video")];
+  if (!videos.length) return;
+  document.querySelectorAll(".tier").forEach((el, i) => el.style.setProperty("--i", i));
+  const HOLD = 2000;
+  const timers = new Map();
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const replay = (v) => { v.currentTime = 0; v.play().catch(() => {}); };
+
+  videos.forEach((v) => {
+    v.addEventListener("ended", () => {
+      clearTimeout(timers.get(v));
+      timers.set(v, setTimeout(() => { if (v.dataset.onScreen === "1") replay(v); }, HOLD));
+    });
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      const v = e.target;
+      v.dataset.onScreen = e.isIntersecting ? "1" : "0";
+      if (reduceMotion) continue;                      // leave the last-frame poster in place
+      if (e.isIntersecting) {
+        if (v.ended) { clearTimeout(timers.get(v)); timers.set(v, setTimeout(() => replay(v), HOLD)); }
+        else v.play().catch(() => {});
+      } else {
+        v.pause();
+        clearTimeout(timers.get(v));
+      }
+    }
+  }, { threshold: 0.35 });
+
+  videos.forEach((v) => io.observe(v));
+})();
