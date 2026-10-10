@@ -185,10 +185,13 @@ const zoom = (() => {
   const dim = new Spring(0, 90, 18);
   let open = false, closing = false, raf = 0, current = null, scale = 1, dragging = null, last = performance.now();
 
+  let aspect = 1;
   const fitRect = (s = 1) => {
     const m = Math.min(innerWidth, innerHeight) * 0.06;
-    const size = Math.min(innerWidth, innerHeight) - m * 2;   // the device images are square
-    return { x: (innerWidth - size * s) / 2, y: (innerHeight - size * s) / 2, w: size * s, h: size * s };
+    const maxW = innerWidth - m * 2, maxH = innerHeight - m * 2;
+    let w = maxW, h = w / aspect;
+    if (h > maxH) { h = maxH; w = h * aspect; }
+    return { x: (innerWidth - w * s) / 2, y: (innerHeight - h * s) / 2, w: w * s, h: h * s };
   };
   const thumbRect = () => { const b = current.img.getBoundingClientRect(); return { x: b.left, y: b.top, w: b.width, h: b.height }; };
   const setTarget = (r) => { rx.target = r.x; ry.target = r.y; rw.target = r.w; rh.target = r.h; };
@@ -223,7 +226,9 @@ const zoom = (() => {
   function show(btn, index) {
     const img = btn.querySelector("img");
     current = { btn, img, index };
-    nameEl.textContent = btn.closest(".device").querySelector(".device__label").lastChild.textContent.trim();
+    aspect = (img.naturalWidth || img.width) / (img.naturalHeight || img.height) || 1;
+    const label = btn.closest(".device")?.querySelector(".device__label");
+    nameEl.textContent = label ? label.lastChild.textContent.trim() : (btn.getAttribute("aria-label") || "").replace(/^Zoom:\s*/, "");
     indexEl.textContent = String(index + 1).padStart(2, "0");
     root.setAttribute("aria-hidden", "false"); root.inert = false;
     root.classList.add("is-open");
@@ -344,9 +349,9 @@ const zoom = (() => {
 // reveal; playback starts only once the grid is on screen, and pauses off it.
 
 (() => {
-  const videos = [...document.querySelectorAll(".tier__video")];
+  const videos = [...document.querySelectorAll(".tier__video, video[data-loop]")];
   if (!videos.length) return;
-  document.querySelectorAll(".tier").forEach((el, i) => el.style.setProperty("--i", i));
+  document.querySelectorAll(".tier, .pair li, .phones li").forEach((el, i) => el.style.setProperty("--i", i % 4));
   const HOLD = 2000;
   const timers = new Map();
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
