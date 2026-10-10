@@ -365,6 +365,58 @@ document.querySelectorAll("[data-count]").forEach((el) => {
   el.textContent = String(0).padStart(Number(el.dataset.pad || 0), "0");
 });
 
+/* ---------- Spectrum line: the three work photos compressed into one strip ---------- */
+
+const spectrum = document.querySelector(".spectrum");
+const postImgs = [...document.querySelectorAll(".post__img")];
+const sampled = new Map();
+
+// average colour of each column of a small downscaled copy of the image
+function sampleColumns(img, cols = 32, rows = 24) {
+  const c = document.createElement("canvas");
+  c.width = cols;
+  c.height = rows;
+  const ctx = c.getContext("2d", { willReadFrequently: true });
+  ctx.drawImage(img, 0, 0, cols, rows);
+  const { data } = ctx.getImageData(0, 0, cols, rows); // throws if the image is cross-origin
+  const out = [];
+  for (let x = 0; x < cols; x++) {
+    let r = 0, g = 0, b = 0;
+    for (let y = 0; y < rows; y++) {
+      const i = (y * cols + x) * 4;
+      r += data[i]; g += data[i + 1]; b += data[i + 2];
+    }
+    r /= rows; g /= rows; b /= rows;
+    // lift the mids a little so the line reads against black
+    const l = (r + g + b) / 3;
+    const k = 1.25;
+    out.push(`rgb(${Math.min(255, l + (r - l) * k + 10) | 0}, ${Math.min(255, l + (g - l) * k + 10) | 0}, ${Math.min(255, l + (b - l) * k + 10) | 0})`);
+  }
+  return out;
+}
+
+function buildSpectrum() {
+  if (!spectrum || sampled.size === 0) return;
+  const order = i18n.dir === "rtl" ? [...postImgs].reverse() : postImgs;
+  const stops = order.flatMap((img) => sampled.get(img) || []);
+  if (stops.length) spectrum.style.setProperty("--spectrum", `linear-gradient(to right, ${stops.join(", ")})`);
+}
+
+postImgs.forEach((img) => {
+  const onReady = () => {
+    try {
+      sampled.set(img, sampleColumns(img));
+      buildSpectrum();
+    } catch {
+      /* file:// or tainted canvas: keep the fallback gradient from the CSS */
+    }
+  };
+  if (img.complete && img.naturalWidth) onReady();
+  else img.addEventListener("load", onReady, { once: true });
+});
+
+i18n.onChange(buildSpectrum);
+
 /* ---------- Main loop ---------- */
 
 const reveal = { value: 0, start: 0, duration: reduceMotion ? 1200 : 2800 };

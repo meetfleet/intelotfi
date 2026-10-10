@@ -546,17 +546,37 @@ ul { list-style: none; }
   color: var(--body);
 }
 
-/* ---------- Latest work ---------- */
+/* ---------- Latest work: the centrepiece ---------- */
 
 .work {
-  --navy: #1d2142;
-  --body: #6a6d7c;
   --radius: clamp(20px, 2.2vw, 36px);
-  /* lines the content up with the about card's inner edge */
-  padding: clamp(64px, 7vw, 140px) calc(clamp(0px, 2.8vw, 54px) + clamp(22px, 5.5vw, 108px)) clamp(80px, 9vw, 180px);
+  --body: #9a9ba8;
+  /* same outer rhythm as the about card above it */
+  padding: 0 clamp(0px, 2.8vw, 54px) clamp(16px, 3.6vw, 72px);
+}
+
+.work__band {
+  position: relative;
+  background: #09090b;
+  color: #fff;
+  border-radius: clamp(20px, 2.2vw, 40px);
+  padding: clamp(40px, 6vw, 120px) clamp(22px, 4.2vw, 84px) clamp(28px, 4.2vw, 84px);
+  overflow: hidden;
+}
+
+/* a faint cold light from the top corner so the black isn't flat */
+.work__band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(90% 60% at 100% 0%, rgba(120, 130, 160, 0.16), transparent 60%),
+    radial-gradient(60% 40% at 0% 100%, rgba(255, 73, 76, 0.06), transparent 60%);
+  pointer-events: none;
 }
 
 .work__head {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -564,36 +584,115 @@ ul { list-style: none; }
 }
 
 .work__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
   font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
   font-size: clamp(12px, 0.85vw, 15px);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--body);
-  margin-bottom: 0.9em;
+  margin-bottom: 1.4em;
+}
+
+.work__eyebrow::before {
+  content: "";
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 12px rgba(255, 73, 76, 0.8);
 }
 
 .work__title {
-  font-size: clamp(44px, 4.6vw, 96px);
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: -0.025em;
-  color: var(--navy);
+  font-size: clamp(60px, 9.4vw, 196px);
+  font-weight: 300;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  color: #fff;
+  margin-inline-start: -0.04em;
 }
 
 .work__lede {
-  max-width: 27em;
-  margin-bottom: 0.2em;
-  font-size: clamp(15px, 1.1vw, 21px);
-  line-height: 1.65;
+  max-width: 24em;
+  margin-bottom: 0.35em;
+  font-size: clamp(15px, 1.15vw, 22px);
+  line-height: 1.6;
   color: var(--body);
 }
 
-.posts {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(16px, 2.4vw, 52px);
-  margin-top: clamp(48px, 6.4vw, 128px);
+/* ---- the spectrum line ---- */
+
+.spectrum {
+  --spectrum: linear-gradient(to right, #8a7e7e, #a09899, #b0a7a6, #ad9d99, #938986, #9a8a86, #a69692, #c7bbb8, #bcb9bb, #b5b1b2, #999090, #948a84, #4c4a4b, #6a6260, #636161, #5e5b5b, #797676, #979392, #605957, #555254, #4e4b4b, #48403f, #363131, #2b2929, #010304, #333433, #757371, #82807e, #7a7069, #a2958a, #8b8078, #363331, #1f1b17, #272420, #1e1815, #2c201a);
+  position: relative;
+  height: 5px;
+  margin-top: clamp(32px, 4vw, 80px);
+  border-radius: 5px;
+  transform-origin: 0 50%;
 }
+
+[dir="rtl"] .spectrum { transform-origin: 100% 50%; }
+
+.spectrum__bar,
+.spectrum__glow,
+.spectrum__sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.spectrum__bar { background: var(--spectrum); }
+
+/* the same gradient, blurred, underneath: this is the shine */
+.spectrum__glow {
+  background: var(--spectrum);
+  filter: blur(16px) saturate(1.6) brightness(1.2);
+  transform: scaleY(3.5);
+}
+
+/* a slow highlight travelling along the line */
+.spectrum__sheen {
+  overflow: hidden;
+}
+
+.spectrum__sheen::after {
+  content: "";
+  position: absolute;
+  inset: -2px 0;
+  width: 18%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.85), transparent);
+  animation: sheen 7s cubic-bezier(0.45, 0, 0.2, 1) 1.5s infinite;
+}
+
+@keyframes sheen {
+  0% { transform: translateX(-120%); }
+  60%, 100% { transform: translateX(680%); }
+}
+
+[dir="rtl"] .spectrum__sheen::after { animation-direction: reverse; }
+
+.spectrum[data-reveal] { transition: transform 2.2s var(--expo-out), opacity 1s var(--expo-out); }
+.spectrum[data-reveal]:not(.is-visible) { transform: scaleX(0); filter: none; }
+
+/* ---- the cards: one tall feature, two stacked beside it ---- */
+
+.posts {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(14px, 1.4vw, 28px);
+  margin-top: clamp(32px, 4vw, 80px);
+}
+
+.post { grid-column: span 5; }
+.post--feature { grid-column: span 7; grid-row: span 2; }
+
+.post--feature .post__link { height: 100%; aspect-ratio: auto; }
+/* wider side crops keep the feature card close to square, so its photo keeps the crowd either side */
+.post:not(.post--feature) .post__link { aspect-ratio: 3 / 2; }
+.post--feature .post__title { font-size: clamp(20px, 1.9vw, 38px); max-width: 18em; }
+.post--feature .post__panel { inset-inline: 3.6%; bottom: 4%; }
 
 .post[data-reveal] { transition-delay: calc(var(--i, 0) * 130ms); }
 
@@ -604,9 +703,10 @@ ul { list-style: none; }
   border-radius: var(--radius);
   overflow: hidden;
   isolation: isolate;
-  background: #d9d9dc;
+  background: #1a1a1e;
   color: #fff;
   outline: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07);
 }
 
 .post__img {
@@ -642,6 +742,20 @@ ul { list-style: none; }
     transform 0.7s var(--expo-out),
     clip-path 0.7s var(--expo-out);
 }
+
+.post__index {
+  display: block;
+  margin-bottom: 0.9em;
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: clamp(11px, 0.75vw, 13px);
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.7);
+  opacity: 0;
+  transition: opacity 0.6s var(--expo-out);
+}
+
+.post__link:hover .post__index,
+.post__link:focus-visible .post__index { opacity: 1; transition-delay: 0.2s; }
 
 .post__title {
   display: block;
@@ -761,13 +875,18 @@ ul { list-style: none; }
 :root[lang="ar"] .work__lede { line-height: 1.9; }
 
 @media (max-width: 1100px) {
-  .posts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .post, .post--feature { grid-column: span 12; grid-row: auto; }
+  .post--feature .post__link { aspect-ratio: 16 / 10; height: auto; }
+  .post:not(.post--feature) { grid-column: span 6; }
+  .post:not(.post--feature) .post__link { aspect-ratio: 1088 / 923; }
 }
 
 @media (max-width: 768px) {
-  .work { padding-inline: 16px; }
+  .work { padding-inline: 0; }
+  .work__band { padding-inline: 16px; }
   .work__head { flex-direction: column; align-items: flex-start; }
-  .posts { grid-template-columns: 1fr; }
+  .post, .post:not(.post--feature) { grid-column: span 12; }
+  .post--feature .post__link { aspect-ratio: 1088 / 923; }
 }
 
 /* ---------- Scroll reveals ---------- */
