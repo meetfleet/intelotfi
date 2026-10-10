@@ -268,13 +268,21 @@ function scheduleCycle(delay = HOLD) {
 const magnets = [
   { el: burger, inner: burgerLines, radius: 110, pull: 0.4 },
   { el: logo, inner: null, radius: 120, pull: 0.22 },
+  ...[...document.querySelectorAll("[data-magnet]")].map((el) => ({
+    el,
+    inner: el.querySelector("[data-magnet-inner]"),
+    radius: Number(el.dataset.magnetRadius) || 90,
+    pull: Number(el.dataset.magnetPull) || 0.25,
+  })),
 ].map((m) => ({ ...m, x: spring(0, 150, 13), y: spring(0, 150, 13) }));
 
 function updateMagnets() {
+  if (!finePointer) return;
   for (const m of magnets) {
     const b = m.el.getBoundingClientRect();
+    if (b.bottom < -200 || b.top > innerHeight + 200) { m.x.target = m.y.target = 0; continue; }
     const cx = b.left + b.width / 2 - m.x.x;
-    const cy = b.top + b.height / 2 - m.y.y;
+    const cy = b.top + b.height / 2 - m.y.x;
     const dx = pointer.x - cx;
     const dy = pointer.y - cy;
     const near = Math.hypot(dx, dy) < m.radius;
@@ -331,20 +339,25 @@ i18n.onChange(() => splitEls.forEach(splitWords));
 const stats = [...document.querySelectorAll(".stat")];
 stats.forEach((el, i) => el.style.setProperty("--i", i));
 document.querySelectorAll(".post").forEach((el, i) => el.style.setProperty("--i", i));
+[".result", ".more > li", ".channels > li"].forEach((sel) => setIndex(document.querySelectorAll(sel)));
+
+const fmtCount = (el, n) => {
+  const pad = Number(el.dataset.pad || 0);
+  const dec = Number(el.dataset.decimals || 0);
+  return n.toFixed(dec).padStart(pad + (dec ? dec + 1 : 0), "0");
+};
 
 function countUp(el) {
   const to = Number(el.dataset.count);
-  const pad = Number(el.dataset.pad || 0);
-  const fmt = (n) => String(n).padStart(pad, "0");
-  if (reduceMotion) { el.textContent = fmt(to); return; }
+  if (reduceMotion) { el.textContent = fmtCount(el, to); return; }
   const start = performance.now();
   const duration = 1800 + to * 12;
   const tick = (now) => {
     const t = Math.min((now - start) / duration, 1);
-    el.textContent = fmt(Math.round(to * (1 - Math.pow(2, -10 * t))));
+    el.textContent = fmtCount(el, to * (1 - Math.pow(2, -10 * t)));
     if (t < 1) requestAnimationFrame(tick);
   };
-  el.textContent = fmt(0);
+  el.textContent = fmtCount(el, 0);
   requestAnimationFrame(tick);
 }
 
@@ -361,8 +374,27 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll("[data-reveal]").forEach((el) => revealObserver.observe(el));
 // counters start at zero so the count-up never flashes the final number first
-document.querySelectorAll("[data-count]").forEach((el) => {
-  el.textContent = String(0).padStart(Number(el.dataset.pad || 0), "0");
+document.querySelectorAll("[data-count]").forEach((el) => { el.textContent = fmtCount(el, 0); });
+
+/* ---------- Inventions: pointer-following light on the dark cards ---------- */
+
+if (finePointer) {
+  document.querySelectorAll("[data-spotlight]").forEach((card) => {
+    card.addEventListener("pointermove", (e) => {
+      const b = card.getBoundingClientRect();
+      card.style.setProperty("--mx", `${((e.clientX - b.left) / b.width) * 100}%`);
+      card.style.setProperty("--my", `${((e.clientY - b.top) / b.height) * 100}%`);
+    });
+  });
+}
+
+/* ---------- Footer ---------- */
+
+document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = String(new Date().getFullYear()); });
+
+document.querySelector("[data-totop]")?.addEventListener("click", (e) => {
+  e.preventDefault();
+  scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
 });
 
 /* ---------- Spectrum line: the three work photos compressed into one strip ---------- */

@@ -12,11 +12,11 @@
   <!-- Arabic glyphs: loaded without blocking render; unicode-range means files only download when Arabic is on screen -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400&display=swap" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400&family=Instrument+Serif:ital@0;1&display=swap" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="is-loading">
-  <main class="page">
+  <main class="page" id="top">
     <section class="hero">
       <div class="hero__bg" aria-hidden="true">
         <!-- Phone background: add data-mobile-src="assets/hero-mobile.webp" once provided -->
@@ -125,6 +125,21 @@
         <span class="spectrum__sheen"></span>
       </div>
 
+      <!-- the subject of all three chapters -->
+      <div class="subject" data-reveal>
+        <img class="subject__icon" src="assets/meetfleet-icon.webp" width="512" height="512" alt="" />
+        <div class="subject__body">
+          <p class="subject__tag" data-i18n="work.subject.tag">How we ran our AI systems on Apple and Android · by Meetfleet</p>
+          <p class="subject__name">Meetfleet</p>
+          <p class="subject__desc" data-i18n="work.subject.desc">A social app I designed and built: hyper-local coordination for the spontaneous era, connecting you in real time with what is happening around you.</p>
+        </div>
+        <ul class="subject__platforms" aria-label="Platforms">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.05.28.05.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.45z"/></svg><span>iPhone · iPad · Mac · Watch · Vision</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 12.5a6.5 6.5 0 0 1 13 0v.5h-13z"/><path d="M7.2 5.4l1.6 2.6M16.8 5.4l-1.6 2.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="9.7" cy="10.3" r=".85" fill="#09090b"/><circle cx="14.3" cy="10.3" r=".85" fill="#09090b"/></svg><span>Android</span></li>
+        </ul>
+        <p class="subject__order"><span data-i18n="work.subject.order">Three chapters, read in order</span><svg viewBox="0 0 28 12" aria-hidden="true"><path d="M0 6h26M21 1l5 5-5 5" /></svg></p>
+      </div>
+
       <ul class="posts">
         <li class="post post--feature" data-reveal>
           <a class="post__link" href="blog/spillover.html">
@@ -136,6 +151,7 @@
               <span class="post__more"><span class="post__more-inner"><span class="post__btn"><span data-i18n="work.readMore">Read More</span><svg viewBox="0 0 28 12" aria-hidden="true"><path d="M0 6h26M21 1l5 5-5 5" /></svg></span></span></span>
             </span>
           </a>
+          <p class="post__kicker"><span class="post__kicker-ch"><span data-i18n="work.chapter">Chapter</span> 01</span><span data-i18n="work.post0.kicker">The math behind a meetup</span></p>
         </li>
         <li class="post" data-reveal>
           <a class="post__link" href="blog/advanced.html">
@@ -147,6 +163,7 @@
               <span class="post__more"><span class="post__more-inner"><span class="post__btn"><span data-i18n="work.readMore">Read More</span><svg viewBox="0 0 28 12" aria-hidden="true"><path d="M0 6h26M21 1l5 5-5 5" /></svg></span></span></span>
             </span>
           </a>
+          <p class="post__kicker"><span class="post__kicker-ch"><span data-i18n="work.chapter">Chapter</span> 02</span><span data-i18n="work.post1.kicker">The product people use</span></p>
         </li>
         <li class="post" data-reveal>
           <a class="post__link" href="blog/meetchat.html">
@@ -158,13 +175,239 @@
               <span class="post__more"><span class="post__more-inner"><span class="post__btn"><span data-i18n="work.readMore">Read More</span><svg viewBox="0 0 28 12" aria-hidden="true"><path d="M0 6h26M21 1l5 5-5 5" /></svg></span></span></span>
             </span>
           </a>
+          <p class="post__kicker"><span class="post__kicker-ch"><span data-i18n="work.chapter">Chapter</span> 03</span><span data-i18n="work.post2.kicker">Messaging and security</span></p>
         </li>
       </ul>
       </div>
     </section>
 
-    <!-- next sections go here, on the white page -->
+    <!-- ---------- Academic research ---------- -->
+    <section class="sec research" id="research" aria-labelledby="research-title">
+      <header class="sec__head">
+        <p class="eyebrow" data-reveal data-i18n="research.eyebrow">Academic research / 6 works</p>
+        <h2 class="sec__title" id="research-title" data-reveal data-split data-i18n="research.title">Six research works. AI at the centre.</h2>
+        <p class="sec__lede" data-reveal data-i18n="research.lede">I have 6 scientific research works in academia. Here I highlight the Recovery Readiness Score: research on payment recovery with direct relevance to SaaS and AI product infrastructure.</p>
+      </header>
+
+      <article class="paper" data-reveal aria-labelledby="paper-title">
+        <div class="paper__meta">
+          <span class="pill pill--navy" data-i18n="research.pill.type">Research paper — September 2026</span>
+          <span class="pill pill--blue" data-i18n="research.pill.tag">AI / SaaS billing</span>
+        </div>
+        <h3 class="paper__title" id="paper-title" data-i18n="research.paper.title">The Recovery Readiness Score (RRS): Calendar-Aware Scoring and Exact Retry Planning for Failed Subscription Payments</h3>
+        <p class="paper__author" data-i18n="research.paper.author">Hamza Lotfi</p>
+
+        <div class="paper__body">
+          <div class="paper__overview">
+            <p class="label" data-i18n="research.overview.label">Research overview</p>
+            <p class="paper__p paper__p--lead" data-i18n="research.overview.p0">When a renewal payment fails, a billing engine must decide whether to retry, exactly when, and when to stop. The Recovery Readiness Score estimates the probability of success from four interpretable factors: decline-code recoverability, alignment with the payer’s funding cycle, the rest a card has had since its last failure, and the chance the customer is still there.</p>
+            <p class="paper__p" data-i18n="research.overview.p1">Funding-cycle alignment is learned per account over day-of-month and day-of-week. A Bellman recursion turns the scores into a retry plan that maximises expected recovered revenue net of attempt costs. On 100,000 held-out synthetic invoices, RRS recovered 72.55% of failed payments versus 68.47% for a fixed ladder, with 52% fewer retries and 80% fewer wasted retries. These are synthetic-data results, not measured production outcomes.</p>
+          </div>
+          <aside class="paper__contrib">
+            <p class="label" data-i18n="research.contrib.label">Key contributions</p>
+            <ul class="contrib">
+              <li><h4 data-i18n="research.contrib.0.title">Calendar-aware scoring</h4><p data-i18n="research.contrib.0.desc">RRS learns when in a customer’s cycle a retry is most likely to land — not just how many days to wait.</p></li>
+              <li><h4 data-i18n="research.contrib.1.title">Exact retry planning</h4><p data-i18n="research.contrib.1.desc">A Bellman recursion plans retries to maximise expected recovered revenue net of attempt costs.</p></li>
+              <li><h4 data-i18n="research.contrib.2.title">Four interpretable factors</h4><p data-i18n="research.contrib.2.desc">Decline recoverability, funding-cycle alignment, rest since the card’s last failure, and customer survival.</p></li>
+              <li><h4 data-i18n="research.contrib.3.title">Honest simulation boundary</h4><p data-i18n="research.contrib.3.desc">Results are simulation-based. The paper states this clearly. Real-world performance requires real-world data.</p></li>
+            </ul>
+          </aside>
+        </div>
+
+        <!-- the paper's headline numbers; bars are to scale (value / 100) -->
+        <div class="results">
+          <p class="label results__label" data-i18n="research.results.label">Held-out synthetic set — 100,000 invoices</p>
+          <ul class="results__grid">
+            <li class="result result--compare" data-reveal>
+              <p class="result__value"><span data-count="72.55" data-decimals="2">0.00</span><small>%</small></p>
+              <p class="result__label" data-i18n="research.results.0.label">of failed payments recovered</p>
+              <div class="bars" aria-hidden="true">
+                <div class="bar bar--rrs"><span class="bar__track"><span class="bar__fill" style="--v: 0.7255"></span></span><span class="bar__name"><span data-i18n="research.results.0.rrs">RRS</span><b>72.55%</b></span></div>
+                <div class="bar"><span class="bar__track"><span class="bar__fill" style="--v: 0.6847"></span></span><span class="bar__name"><span data-i18n="research.results.0.ladder">Fixed ladder</span><b>68.47%</b></span></div>
+              </div>
+            </li>
+            <li class="result" data-reveal>
+              <p class="result__value"><span class="result__sign">−</span><span data-count="52">0</span><small>%</small></p>
+              <p class="result__label" data-i18n="research.results.1.label">fewer retries</p>
+            </li>
+            <li class="result" data-reveal>
+              <p class="result__value"><span class="result__sign">−</span><span data-count="80">0</span><small>%</small></p>
+              <p class="result__label" data-i18n="research.results.2.label">fewer wasted retries</p>
+            </li>
+          </ul>
+          <p class="results__note" data-i18n="research.results.note">Synthetic-data results, not measured production outcomes.</p>
+        </div>
+      </article>
+
+      <ul class="more">
+        <li data-reveal>
+          <p class="eyebrow eyebrow--plain" data-i18n="research.more.0.eyebrow">Research 01–05</p>
+          <h3 data-i18n="research.more.0.title">A broader academic practice</h3>
+          <p data-i18n="research.more.0.desc">My academic work includes 6 scientific research works. This portfolio currently highlights RRS; the remaining titles and abstracts are not listed here.</p>
+        </li>
+        <li data-reveal>
+          <p class="eyebrow eyebrow--plain" data-i18n="research.more.1.eyebrow">Featured — September 2026</p>
+          <h3 data-i18n="research.more.1.title">The Recovery Readiness Score (RRS)</h3>
+          <p data-i18n="research.more.1.desc">Calendar-aware scoring and exact retry planning for failed subscription payments. A research overview is featured above.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ---------- Inventions ---------- -->
+    <section class="sec inventions" id="inventions" aria-labelledby="inventions-title">
+      <header class="sec__head">
+        <p class="eyebrow" data-reveal data-i18n="inv.eyebrow">Inventions / AI systems</p>
+        <h2 class="sec__title" id="inventions-title" data-reveal data-split data-i18n="inv.title">AI-native decision architectures.</h2>
+        <p class="sec__lede" data-reveal data-i18n="inv.lede">My inventive contribution is not in the mathematical primitives — cosine similarity, exponential decay, the Wilson bound already exist. It is in how they are assembled around a different question, and in the AI layer that gives those answers a voice.</p>
+      </header>
+
+      <!-- 01 -->
+      <article class="inv inv--dark" data-reveal data-spotlight aria-labelledby="inv-0-title">
+        <header class="inv__head">
+          <div>
+            <p class="eyebrow eyebrow--plain" data-i18n="inv.0.eyebrow">Invention 01 — Social coordination AI</p>
+            <h3 class="inv__title" id="inv-0-title" data-i18n="inv.0.title">Social Activation Score (SAS)</h3>
+          </div>
+          <span class="pill pill--blue" data-i18n="inv.0.pill">AI-powered</span>
+        </header>
+
+        <p class="formula" dir="ltr" lang="en">
+          <span class="formula__lhs">SAS</span><span class="op">=</span>Vibe alignment<span class="op">×</span>Intent fit<span class="op">×</span>Friction decay<span class="op">×</span>Safety/density
+        </p>
+
+        <div class="inv__grid">
+          <div class="inv__text">
+            <p class="inv__p inv__p--lead" data-i18n="inv.0.p0">SAS is a product, not an average. A weak factor — low safety, poor intent fit, high friction — remains visible instead of disappearing into a blended number. That structure is the invention: an explicit decision architecture for “which meetup fits these people, right now?”</p>
+            <p class="inv__p" data-i18n="inv.0.p1">A language model reads the four SAS terms and turns the dominant one into a plain sentence on the moment card (“0.91: you both love quiet cafés, 8 minutes each”). The model never scores anything itself — it calls SAS as a tool and explains what the math already decided.</p>
+          </div>
+          <ul class="factors">
+            <li><h4 data-i18n="inv.0.f0.title">Vibe alignment</h4><p data-i18n="inv.0.f0.desc">Cosine similarity between the merged people vibe and the venue vibe vector</p></li>
+            <li><h4 data-i18n="inv.0.f1.title">Intent fit</h4><p data-i18n="inv.0.f1.desc">Alignment between the stated plan and the people involved</p></li>
+            <li><h4 data-i18n="inv.0.f2.title">Exponential friction decay</h4><p><span class="f" dir="ltr">e<sup>−total friction</sup></span><span data-i18n="inv.0.f2.desc">: travel, time, cost and logistics penalised continuously</span></p></li>
+            <li><h4 data-i18n="inv.0.f3.title">Safety/density factor</h4><p data-i18n="inv.0.f3.desc">Safety squared combined with crowd comfort — a low-safety venue cannot be masked</p></li>
+          </ul>
+        </div>
+
+        <p class="callout"><span class="callout__label" data-i18n="inv.0.role.label">AI role:</span> <span data-i18n="inv.0.role">A language model explains scores in plain language and drafts plans with real venues via Apple Maps. It is a voice for the math — the architecture picks, the model explains, the person decides.</span></p>
+      </article>
+
+      <!-- 02 -->
+      <article class="inv inv--light" data-reveal aria-labelledby="inv-1-title">
+        <header class="inv__head">
+          <div>
+            <p class="eyebrow eyebrow--plain" data-i18n="inv.1.eyebrow">Invention 02 — Trust &amp; evidence AI</p>
+            <h3 class="inv__title" id="inv-1-title" data-i18n="inv.1.title">The Trust Protocol</h3>
+          </div>
+          <span class="pill pill--ghost" data-i18n="inv.1.pill">AI-explained</span>
+        </header>
+
+        <p class="formula" dir="ltr" lang="en">
+          <span class="formula__lhs">T(u)</span><span class="op">=</span>Reviews<sup>0.40</sup><span class="op">×</span>MF-input<sup>0.25</sup><span class="op">×</span>Attendance<sup>0.35</sup><span class="op">×</span>(1<span class="op op--tight">−</span>risk)
+        </p>
+
+        <div class="inv__grid">
+          <div class="inv__text">
+            <p class="inv__p inv__p--lead" data-i18n="inv.1.p0">The Trust Protocol combines reviews weighted by AI-estimated authenticity and recency decay, verified Meetfleet participation signals, and a Wilson lower confidence bound on show-up history. The geometric mean keeps a weak dimension visible. A risk discount reduces trust as estimated risk rises. When the lower trust score falls below 0.35, the match goes to human review — a threshold, not a verdict.</p>
+          </div>
+          <aside class="match">
+            <p class="label" data-i18n="inv.1.match.label">The match formula</p>
+            <p class="formula formula--box" dir="ltr" lang="en"><span class="formula__lhs">MATCH</span><span class="op">=</span>SAS<span class="op">×</span><span class="sqrt"><span class="sqrt__sign">√</span><span class="sqrt__body">T(A)<span class="op">×</span>T(B)</span></span></p>
+            <p class="match__desc" data-i18n="inv.1.match.desc">Fit and trust are kept separate until the final ranking. A high SAS cannot conceal a low trust score; a strong trust record cannot redeem a poor plan fit.</p>
+          </aside>
+        </div>
+      </article>
+
+      <!-- 03 -->
+      <article class="inv inv--dark" data-reveal data-spotlight aria-labelledby="inv-2-title">
+        <header class="inv__head">
+          <div>
+            <p class="eyebrow eyebrow--plain" data-i18n="inv.2.eyebrow">Invention 03 — SaaS &amp; AI infrastructure</p>
+            <h3 class="inv__title" id="inv-2-title" data-i18n="inv.2.title">Usage-Based AI Billing Engine</h3>
+          </div>
+          <span class="pill pill--blue" data-i18n="inv.2.pill">AI &amp; SaaS infra</span>
+        </header>
+
+        <p class="inv__lede" data-i18n="inv.2.lede">Any digital product — AI API, SaaS subscription, app, storage service — should charge the way it actually costs to run. Fixed monthly tiers hide real usage and create silent losses. I built the engine that solves this.</p>
+
+        <ul class="feats">
+          <li><h4 data-i18n="inv.2.i0.title">Prepaid usage wallets</h4><p data-i18n="inv.2.i0.desc">Wallets that top themselves up automatically from any card or digital wallet. Usage never stops and never runs at a loss.</p></li>
+          <li><h4 data-i18n="inv.2.i1.title">Payment recovery</h4><p data-i18n="inv.2.i1.desc">Failed payments recovered automatically, often before the customer notices — guided by the Recovery Readiness Score.</p></li>
+          <li><h4 data-i18n="inv.2.i2.title">Append-only balanced ledger</h4><p data-i18n="inv.2.i2.desc">Idempotent, duplicate-proof and zero-sum by design. A ledger that cannot lie.</p></li>
+          <li><h4 data-i18n="inv.2.i3.title">Team seat management</h4><p data-i18n="inv.2.i3.desc">Seats bought in one tap, assigned in seconds. No team gets locked out because of one failed card.</p></li>
+          <li><h4 data-i18n="inv.2.i4.title">Retention offers</h4><p data-i18n="inv.2.i4.desc">The right offer shown at the right moment — exactly when someone tries to cancel.</p></li>
+          <li><h4 data-i18n="inv.2.i5.title">Seven explicit states</h4><p data-i18n="inv.2.i5.desc">Every subscription state is named. No surprises, no silent failures. Whether AI, SaaS, storage or API — billing follows usage.</p></li>
+        </ul>
+      </article>
+    </section>
   </main>
+
+  <!-- ---------- Contact / footer ----------
+       CONTACT DETAILS — the four hrefs below (and the CTA) are the only places to edit. -->
+  <footer class="contact" id="contact" aria-labelledby="contact-title">
+    <div class="contact__grain" aria-hidden="true"></div>
+
+    <p class="eyebrow eyebrow--dot" data-reveal data-i18n="contact.eyebrow">06 / A conversation starts here</p>
+
+    <div class="contact__body">
+      <h2 class="contact__title" id="contact-title" data-reveal data-split data-i18n="contact.title">Have a question worth building around?</h2>
+      <div class="contact__aside" data-reveal>
+        <p class="contact__lede" data-i18n="contact.lede">For thoughtful conversations about product, decision systems and the people they serve.</p>
+        <a class="cta" href="mailto:hello@intelotfi.com" data-magnet data-magnet-radius="120" data-magnet-pull="0.3">
+          <span class="cta__label" data-i18n="contact.cta">Start a conversation</span>
+          <span class="cta__arrow" data-magnet-inner aria-hidden="true">
+            <svg viewBox="0 0 16 16"><path d="M3 13 13 3M5 3h8v8" /></svg>
+            <svg viewBox="0 0 16 16"><path d="M3 13 13 3M5 3h8v8" /></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <ul class="channels">
+      <li data-reveal>
+        <a class="channel" href="https://www.linkedin.com/in/" target="_blank" rel="noopener" data-magnet data-magnet-radius="90" data-magnet-pull="0.18">
+          <span class="channel__icon" data-magnet-inner aria-hidden="true"><svg viewBox="0 0 24 24" class="ico ico--fill"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg></span>
+          <span class="channel__text"><span class="channel__name" data-i18n="contact.ch0.name">LinkedIn</span><span class="channel__hint" data-i18n="contact.ch0.hint">Profile</span></span>
+          <svg class="channel__arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8" /></svg>
+        </a>
+      </li>
+      <li data-reveal>
+        <a class="channel" href="mailto:hello@intelotfi.com" data-magnet data-magnet-radius="90" data-magnet-pull="0.18">
+          <span class="channel__icon" data-magnet-inner aria-hidden="true"><svg viewBox="0 0 24 24" class="ico"><rect x="3" y="5" width="18" height="14" rx="2.5" /><path d="m3.5 7.5 8.5 6 8.5-6" /></svg></span>
+          <span class="channel__text"><span class="channel__name" data-i18n="contact.ch1.name">Email</span><span class="channel__hint" data-i18n="contact.ch1.hint">Write</span></span>
+          <svg class="channel__arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8" /></svg>
+        </a>
+      </li>
+      <li data-reveal>
+        <a class="channel" href="https://independent.academia.edu/" target="_blank" rel="noopener" data-magnet data-magnet-radius="90" data-magnet-pull="0.18">
+          <span class="channel__icon" data-magnet-inner aria-hidden="true"><svg viewBox="0 0 24 24" class="ico"><path d="M12 4 2 9l10 5 10-5-10-5z" /><path d="M6 11.6V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-4.4" /><path d="M22 9v6" /></svg></span>
+          <span class="channel__text"><span class="channel__name" data-i18n="contact.ch2.name">Academia</span><span class="channel__hint" data-i18n="contact.ch2.hint">Papers</span></span>
+          <svg class="channel__arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8" /></svg>
+        </a>
+      </li>
+      <li data-reveal>
+        <a class="channel" href="tel:+212000000000" data-magnet data-magnet-radius="90" data-magnet-pull="0.18">
+          <span class="channel__icon" data-magnet-inner aria-hidden="true"><svg viewBox="0 0 24 24" class="ico"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg></span>
+          <span class="channel__text"><span class="channel__name" data-i18n="contact.ch3.name">Phone</span><span class="channel__hint" data-i18n="contact.ch3.hint">Call</span></span>
+          <svg class="channel__arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8" /></svg>
+        </a>
+      </li>
+    </ul>
+
+    <div class="contact__bottom">
+      <p class="contact__who">
+        <svg class="asterisk" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2v16M2 10h16M4.3 4.3l11.4 11.4M15.7 4.3 4.3 15.7" /></svg>
+        <span data-i18n="contact.who">Independent creator</span>
+        <span class="contact__copy">© <span data-year>2026</span> intelotfi</span>
+      </p>
+      <p class="contact__motto" data-i18n="contact.motto">Product. Systems. Words.</p>
+      <a class="totop" href="#top" data-totop>
+        <span data-i18n="contact.top">Back to top</span>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14V2M3 7l5-5 5 5" /></svg>
+      </a>
+    </div>
+
+    <p class="contact__mark" aria-hidden="true" data-reveal>intelotfi<span class="contact__mark-cursor"></span></p>
+  </footer>
 
   <div class="cursor" aria-hidden="true">
     <div class="cursor__ring"></div>
