@@ -191,8 +191,8 @@
 
       <article class="paper" data-reveal aria-labelledby="paper-title">
         <div class="paper__meta">
-          <span class="pill pill--navy" data-i18n="research.pill.type">Research paper — September 2026</span>
-          <span class="pill pill--blue" data-i18n="research.pill.tag">AI / SaaS billing</span>
+          <span class="meta-tag meta-tag--dot" data-i18n="research.pill.type">Research paper — September 2026</span>
+          <span class="meta-tag" data-i18n="research.pill.tag">AI / SaaS billing</span>
         </div>
         <h3 class="paper__title" id="paper-title" data-i18n="research.paper.title">The Recovery Readiness Score (RRS): Calendar-Aware Scoring and Exact Retry Planning for Failed Subscription Payments</h3>
         <p class="paper__author" data-i18n="research.paper.author">Hamza Lotfi</p>
@@ -239,18 +239,14 @@
         </div>
       </article>
 
-      <ul class="more">
-        <li data-reveal>
-          <p class="eyebrow eyebrow--plain" data-i18n="research.more.0.eyebrow">Research 01–05</p>
-          <h3 data-i18n="research.more.0.title">A broader academic practice</h3>
-          <p data-i18n="research.more.0.desc">My academic work includes 6 scientific research works. This portfolio currently highlights RRS; the remaining titles and abstracts are not listed here.</p>
-        </li>
-        <li data-reveal>
-          <p class="eyebrow eyebrow--plain" data-i18n="research.more.1.eyebrow">Featured — September 2026</p>
-          <h3 data-i18n="research.more.1.title">The Recovery Readiness Score (RRS)</h3>
-          <p data-i18n="research.more.1.desc">Calendar-aware scoring and exact retry planning for failed subscription payments. A research overview is featured above.</p>
-        </li>
-      </ul>
+      <ol class="index" aria-label="Research index">
+        <li class="index__row is-featured" data-reveal><span class="index__n">01</span><span class="index__t" data-i18n="research.index.featured">The Recovery Readiness Score (RRS)</span><span class="index__s" data-i18n="research.index.featuredNote">Featured above · September 2026</span></li>
+        <li class="index__row" data-reveal><span class="index__n">02</span><span class="index__t" data-i18n="research.index.unlisted">Unlisted</span><span class="index__s" data-i18n="research.index.onRequest">Title and abstract on request</span></li>
+        <li class="index__row" data-reveal><span class="index__n">03</span><span class="index__t" data-i18n="research.index.unlisted">Unlisted</span><span class="index__s" data-i18n="research.index.onRequest">Title and abstract on request</span></li>
+        <li class="index__row" data-reveal><span class="index__n">04</span><span class="index__t" data-i18n="research.index.unlisted">Unlisted</span><span class="index__s" data-i18n="research.index.onRequest">Title and abstract on request</span></li>
+        <li class="index__row" data-reveal><span class="index__n">05</span><span class="index__t" data-i18n="research.index.unlisted">Unlisted</span><span class="index__s" data-i18n="research.index.onRequest">Title and abstract on request</span></li>
+        <li class="index__row" data-reveal><span class="index__n">06</span><span class="index__t" data-i18n="research.index.unlisted">Unlisted</span><span class="index__s" data-i18n="research.index.onRequest">Title and abstract on request</span></li>
+      </ol>
     </section>
 
     <!-- ---------- Inventions ---------- -->
@@ -262,17 +258,17 @@
       </header>
 
       <!-- 01 -->
-      <article class="inv inv--dark" data-reveal data-spotlight aria-labelledby="inv-0-title">
+      <article class="inv" data-reveal aria-labelledby="inv-0-title"><span class="inv__index" aria-hidden="true">01</span>
         <header class="inv__head">
           <div>
             <p class="eyebrow eyebrow--plain" data-i18n="inv.0.eyebrow">Invention 01 — Social coordination AI</p>
             <h3 class="inv__title" id="inv-0-title" data-i18n="inv.0.title">Social Activation Score (SAS)</h3>
           </div>
-          <span class="pill pill--blue" data-i18n="inv.0.pill">AI-powered</span>
+          <span class="meta-tag meta-tag--dot" data-i18n="inv.0.pill">AI-powered</span>
         </header>
 
         <p class="formula" dir="ltr" lang="en">
-          <span class="formula__lhs">SAS</span><span class="op">=</span>Vibe alignment<span class="op">×</span>Intent fit<span class="op">×</span>Friction decay<span class="op">×</span>Safety/density
+          <span class="formula__lhs">SAS</span><span class="op">=</span><span class="term">Vibe alignment</span><span class="op">×</span><span class="term">Intent fit</span><span class="op">×</span><span class="term">Friction decay</span><span class="op">×</span><span class="term">Safety / density</span>
         </p>
 
         <div class="inv__grid">
@@ -292,17 +288,17 @@
       </article>
 
       <!-- 02 -->
-      <article class="inv inv--light" data-reveal aria-labelledby="inv-1-title">
+      <article class="inv" data-reveal aria-labelledby="inv-1-title"><span class="inv__index" aria-hidden="true">02</span>
         <header class="inv__head">
           <div>
             <p class="eyebrow eyebrow--plain" data-i18n="inv.1.eyebrow">Invention 02 — Trust &amp; evidence AI</p>
             <h3 class="inv__title" id="inv-1-title" data-i18n="inv.1.title">The Trust Protocol</h3>
           </div>
-          <span class="pill pill--ghost" data-i18n="inv.1.pill">AI-explained</span>
+          <span class="meta-tag meta-tag--dot" data-i18n="inv.1.pill">AI-explained</span>
         </header>
 
         <p class="formula" dir="ltr" lang="en">
-          <span class="formula__lhs">T(u)</span><span class="op">=</span>Reviews<sup>0.40</sup><span class="op">×</span>MF-input<sup>0.25</sup><span class="op">×</span>Attendance<sup>0.35</sup><span class="op">×</span>(1<span class="op op--tight">−</span>risk)
+          <span class="formula__lhs">T(u)</span><span class="op">=</span><span class="term">Reviews<sup>0.40</sup></span><span class="op">×</span><span class="term">Meetfleet input<sup>0.25</sup></span><span class="op">×</span><span class="term">Attendance<sup>0.35</sup></span><span class="op">×</span><span class="term">1 − risk</span>
         </p>
 
         <div class="inv__grid">
@@ -311,20 +307,20 @@
           </div>
           <aside class="match">
             <p class="label" data-i18n="inv.1.match.label">The match formula</p>
-            <p class="formula formula--box" dir="ltr" lang="en"><span class="formula__lhs">MATCH</span><span class="op">=</span>SAS<span class="op">×</span><span class="sqrt"><span class="sqrt__sign">√</span><span class="sqrt__body">T(A)<span class="op">×</span>T(B)</span></span></p>
+            <p class="formula formula--box" dir="ltr" lang="en"><span class="formula__lhs">MATCH</span><span class="op">=</span><span class="term">SAS</span><span class="op">×</span><span class="term"><span class="sqrt__sign">√</span><span class="sqrt__body">T(A) × T(B)</span></span></p>
             <p class="match__desc" data-i18n="inv.1.match.desc">Fit and trust are kept separate until the final ranking. A high SAS cannot conceal a low trust score; a strong trust record cannot redeem a poor plan fit.</p>
           </aside>
         </div>
       </article>
 
       <!-- 03 -->
-      <article class="inv inv--dark" data-reveal data-spotlight aria-labelledby="inv-2-title">
+      <article class="inv" data-reveal aria-labelledby="inv-2-title"><span class="inv__index" aria-hidden="true">03</span>
         <header class="inv__head">
           <div>
             <p class="eyebrow eyebrow--plain" data-i18n="inv.2.eyebrow">Invention 03 — SaaS &amp; AI infrastructure</p>
             <h3 class="inv__title" id="inv-2-title" data-i18n="inv.2.title">Usage-Based AI Billing Engine</h3>
           </div>
-          <span class="pill pill--blue" data-i18n="inv.2.pill">AI &amp; SaaS infra</span>
+          <span class="meta-tag meta-tag--dot" data-i18n="inv.2.pill">AI &amp; SaaS infra</span>
         </header>
 
         <p class="inv__lede" data-i18n="inv.2.lede">Any digital product — AI API, SaaS subscription, app, storage service — should charge the way it actually costs to run. Fixed monthly tiers hide real usage and create silent losses. I built the engine that solves this.</p>
@@ -344,7 +340,6 @@
   <!-- ---------- Contact / footer ----------
        CONTACT DETAILS — the four hrefs below (and the CTA) are the only places to edit. -->
   <footer class="contact" id="contact" aria-labelledby="contact-title">
-    <div class="contact__grain" aria-hidden="true"></div>
 
     <p class="eyebrow eyebrow--dot" data-reveal data-i18n="contact.eyebrow">06 / A conversation starts here</p>
 

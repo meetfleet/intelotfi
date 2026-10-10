@@ -339,7 +339,7 @@ i18n.onChange(() => splitEls.forEach(splitWords));
 const stats = [...document.querySelectorAll(".stat")];
 stats.forEach((el, i) => el.style.setProperty("--i", i));
 document.querySelectorAll(".post").forEach((el, i) => el.style.setProperty("--i", i));
-[".result", ".more > li", ".channels > li"].forEach((sel) => setIndex(document.querySelectorAll(sel)));
+[".result", ".index__row", ".channels > li"].forEach((sel) => setIndex(document.querySelectorAll(sel)));
 
 const fmtCount = (el, n) => {
   const pad = Number(el.dataset.pad || 0);
@@ -354,7 +354,7 @@ function countUp(el) {
   const duration = 1800 + to * 12;
   const tick = (now) => {
     const t = Math.min((now - start) / duration, 1);
-    el.textContent = fmtCount(el, to * (1 - Math.pow(2, -10 * t)));
+    el.textContent = fmtCount(el, t >= 1 ? to : to * (1 - Math.pow(2, -10 * t)));
     if (t < 1) requestAnimationFrame(tick);
   };
   el.textContent = fmtCount(el, 0);
