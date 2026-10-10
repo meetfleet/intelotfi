@@ -49,7 +49,9 @@ function updateProgress() {
   const top = article.getBoundingClientRect().top + scrollY;
   const span = article.offsetHeight - innerHeight;
   const p = span > 0 ? (scrollY - top) / span : 1;
-  progress.style.setProperty("--p", Math.max(0, Math.min(1, p)).toFixed(4));
+  const v = Math.max(0, Math.min(1, p)).toFixed(4);
+  progress.style.setProperty("--p", v);
+  document.querySelector("[data-dock]")?.style.setProperty("--p", v);
 }
 
 addEventListener("scroll", updateProgress, { passive: true });
@@ -416,10 +418,19 @@ const zoom = (() => {
   const dock = document.querySelector("[data-dock]");
   if (dock) {
     const link = (c, dir) => c
-      ? `<a class="dock__link dock__link--${dir}" href="${c.href}">${dir === "prev" ? L : ""}<span><span class="dock__k">${dir === "prev" ? "Previous" : "Next"} · Chapter ${c.roman}</span><span class="dock__t">${esc(c.kicker)}</span></span>${dir === "next" ? R : ""}</a>`
+      ? `<a class="dock__link dock__link--${dir}" href="${c.href}" title="${esc(c.title)}">
+           <span class="dock__arrow">${dir === "prev" ? L : R}</span>
+           <img class="dock__thumb" src="${c.cover}" width="40" height="40" alt="" />
+           <span class="dock__text"><span class="dock__k">${dir === "prev" ? "Previous chapter" : "Next chapter"} · <b>${c.roman}</b></span><span class="dock__t">${esc(c.kicker)}</span></span>
+         </a>`
       : `<span class="dock__link dock__link--${dir}" aria-disabled="true"></span>`;
     dock.innerHTML = `${link(prev, "prev")}
-      <div class="dock__mid"><span>Chapter <b>${me.roman}</b> of III</span><span class="dock__dots">${CHAPTERS.map((c) => `<span class="${c.n < cur ? "is-done" : c.n === cur ? "is-current" : ""}"></span>`).join("")}</span></div>
+      <div class="dock__mid">
+        <span class="dock__k">Reading · Chapter <b>${me.roman}</b> of III</span>
+        <span class="dock__now">${esc(me.kicker)}</span>
+        <span class="dock__dots">${CHAPTERS.map((c) => `<span class="${c.n < cur ? "is-done" : c.n === cur ? "is-current" : ""}"></span>`).join("")}</span>
+        <span class="dock__hint">← → to switch chapters</span>
+      </div>
       ${link(next, "next")}`;
     const cover = document.querySelector(".cover");
     const foot = document.querySelector(".foot");
