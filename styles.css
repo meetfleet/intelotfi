@@ -802,24 +802,21 @@ ul { list-style: none; }
   .subject__order { justify-self: start; }
 }
 
-/* ---- the cards: one tall feature, two stacked beside it ---- */
+/* ---- the cards: three equal chapters, same size, same crop ---- */
 
 .posts {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(14px, 1.4vw, 28px);
   margin-top: clamp(32px, 4vw, 80px);
 }
 
-.post { grid-column: span 5; }
-.post--feature { grid-column: span 7; grid-row: span 2; }
-
-.post--feature .post__link { height: 100%; aspect-ratio: auto; }
-/* wider side crops keep the feature card close to square, so its photo keeps the crowd either side */
-.post:not(.post--feature) .post__link { aspect-ratio: 3 / 2; }
-.post--feature .post__title { font-size: clamp(20px, 1.9vw, 38px); max-width: 18em; }
-.post--feature .post__panel { inset-inline: 3.6%; bottom: 4%; }
+/* one tall portrait shape for all three; each photo keeps its subject centred */
+.post .post__link { aspect-ratio: 4 / 5; }
+.post:nth-child(1) .post__img { object-position: 50% 40%; }
+.post:nth-child(2) .post__img { object-position: 62% 50%; }
+.post:nth-child(3) .post__img { object-position: 42% 50%; }
 
 .post[data-reveal] { transition-delay: calc(var(--i, 0) * 130ms); }
 
@@ -1001,19 +998,15 @@ ul { list-style: none; }
 :root[lang="ar"] .post__title { letter-spacing: 0; line-height: 1.45; }
 :root[lang="ar"] .work__lede { line-height: 1.9; }
 
-@media (max-width: 1100px) {
-  .post, .post--feature { grid-column: span 12; grid-row: auto; }
-  .post--feature .post__link { aspect-ratio: 16 / 10; height: auto; }
-  .post:not(.post--feature) { grid-column: span 6; }
-  .post:not(.post--feature) .post__link { aspect-ratio: 1088 / 923; }
+@media (max-width: 900px) {
+  .posts { grid-template-columns: 1fr; }
+  .post .post__link { aspect-ratio: 4 / 3; }
 }
 
 @media (max-width: 768px) {
   .work { padding-inline: 0; }
   .work__band { padding-inline: 16px; }
   .work__head { flex-direction: column; align-items: flex-start; }
-  .post, .post:not(.post--feature) { grid-column: span 12; }
-  .post--feature .post__link { aspect-ratio: 1088 / 923; }
 }
 
 /* ---------- Shared: research, inventions, contact ----------
