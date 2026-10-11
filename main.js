@@ -796,3 +796,212 @@ if (!("onpagereveal" in window)) {
   i18n.onChange(compute);
   applyPreset("cafe");
 })();
+
+/* ---------- Contact popup ---------- */
+
+(() => {
+  const dlg = document.getElementById("contact-form");
+  if (!dlg) return;
+  const form = dlg.querySelector(".cf__form");
+  const done = dlg.querySelector(".cf__done");
+  const sendBtn = form.querySelector(".cf__send");
+  const sendLabel = form.querySelector(".cf__send-label");
+  const serverErr = form.querySelector(".cf__server-err");
+  const count = form.querySelector(".cf-count b");
+  const ENDPOINT = "https://formsubmit.co/ajax/hamzades7@gmail.com";
+  const t = (k) => i18n.t(k);
+  let attempted = false, closing = 0;
+
+  const field = (k) => form.querySelector(`[data-field="${k}"]`);
+  const value = (k) => k === "topic" ? (form.querySelector('input[name="topic"]:checked')?.value || "") : form.elements[k].value.trim();
+  const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+
+  function check(k) {
+    const v = value(k);
+    if (k === "name" && !v) return t("cf.err.name");
+    if (k === "email" && !v) return t("cf.err.email");
+    if (k === "email" && !isEmail(v)) return t("cf.err.emailBad");
+    if (k === "topic" && !v) return t("cf.err.topic");
+    if (k === "message" && v.length < 10) return t("cf.err.message");
+    return "";
+  }
+  function show(k, msg) {
+    const f = field(k);
+    f.classList.toggle("is-error", !!msg);
+    f.querySelector(".cf-field__err").textContent = msg;
+    const input = f.querySelector("input:not([type=radio]), textarea");
+    if (input) input.setAttribute("aria-invalid", msg ? "true" : "false");
+  }
+  const KEYS = ["name", "email", "topic", "message"];
+
+  // while typing: an error disappears as soon as you edit that field
+  // after a failed send: a field is re-checked when you leave it, never mid-word
+  ["name", "email", "message"].forEach((k) => {
+    const el = form.elements[k];
+    el.addEventListener("input", () => { if (field(k).classList.contains("is-error")) show(k, ""); serverErr.hidden = true; });
+    el.addEventListener("blur", () => { if (attempted && el.value.trim()) show(k, check(k)); });
+  });
+  form.querySelectorAll('input[name="topic"]').forEach((r) => r.addEventListener("change", () => show("topic", "")));
+
+  const msg = form.elements.message;
+  const grow = () => { msg.style.height = "auto"; msg.style.height = `${Math.min(msg.scrollHeight, 360)}px`; count.textContent = msg.value.length; };
+  msg.addEventListener("input", grow);
+
+  function open(from) {
+    const b = from?.getBoundingClientRect();
+    if (b) { dlg.style.setProperty("--ox", `${b.left + b.width / 2 - 24}px`); dlg.style.setProperty("--oy", `${b.top + b.height / 2 - 24}px`); }
+    clearTimeout(closing);
+    dlg.showModal();
+    document.documentElement.classList.add("cf-lock");
+    body.classList.remove("has-cursor");
+    requestAnimationFrame(() => requestAnimationFrame(() => dlg.classList.add("is-open")));
+    setTimeout(() => (done.hidden ? form.elements.name : done.querySelector("[data-cf-close]")).focus({ preventScroll: true }), reduceMotion ? 0 : 520);
+  }
+  function close() {
+    if (!dlg.open) return;
+    dlg.classList.remove("is-open");
+    closing = setTimeout(() => {
+      dlg.close();
+      document.documentElement.classList.remove("cf-lock");
+      if (finePointer) body.classList.add("has-cursor");
+      if (dlg.classList.contains("is-done")) reset();
+    }, reduceMotion ? 0 : 720);
+  }
+  function reset() {
+    form.reset(); grow(); attempted = false;
+    KEYS.forEach((k) => show(k, ""));
+    serverErr.hidden = true;
+    dlg.classList.remove("is-done", "is-sending");
+    done.hidden = true; form.hidden = false;
+  }
+
+  document.querySelectorAll("[data-contact-open]").forEach((a) => a.addEventListener("click", (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+    e.preventDefault(); open(a);
+  }));
+  dlg.querySelectorAll("[data-cf-close]").forEach((b) => b.addEventListener("click", close));
+  dlg.addEventListener("cancel", (e) => { e.preventDefault(); close(); });
+  dlg.addEventListener("click", (e) => { if (e.target === dlg) close(); });
+  dlg.querySelector("[data-cf-again]").addEventListener("click", () => { reset(); form.elements.name.focus(); });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (dlg.classList.contains("is-sending")) return;
+    attempted = true;
+    const errors = KEYS.map((k) => [k, check(k)]);
+    errors.forEach(([k, m]) => show(k, m));
+    const first = errors.find(([, m]) => m);
+    if (first) {
+      const f = field(first[0]);
+      (f.querySelector("input:not([type=radio]), textarea") || f.querySelector("input")).focus();
+      f.classList.remove("is-shake"); void f.offsetWidth; f.classList.add("is-shake");
+      return;
+    }
+    if (form.elements._honey.value) return;   // bots fill the hidden field; people never see it
+
+    const ref = "HL-" + Math.random().toString(36).slice(2, 8).toUpperCase();
+    const data = { name: value("name"), email: value("email"), topic: value("topic"), message: value("message") };
+    dlg.classList.add("is-sending");
+    sendBtn.disabled = true;
+    sendLabel.textContent = t("cf.sending");
+    serverErr.hidden = true;
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 20000);
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          ...data, reference: ref, page: location.href,
+          _subject: `intelotfi · ${data.topic} · ${data.name}`,
+          _replyto: data.email, _template: "table", _captcha: "false",
+        }),
+        signal: ctrl.signal,
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || String(json.success) !== "true") throw new Error(json.message || `HTTP ${res.status}`);
+      dlg.querySelector('[data-out="cf-done-title"]').textContent = t("cf.done.title").replace("{name}", data.name.split(/\s+/)[0]);
+      dlg.querySelector('[data-out="cf-done-text"]').textContent = t("cf.done.text").replace("{email}", data.email);
+      dlg.querySelector('[data-out="cf-ref"]').textContent = ref;
+      form.hidden = true; done.hidden = false;
+      dlg.classList.add("is-done");
+      dlg.querySelector(".cf__main").scrollTop = 0;
+      done.querySelector("[data-cf-close]").focus({ preventScroll: true });
+    } catch (err) {
+      console.warn("contact form:", err);
+      const offline = !navigator.onLine || err.name === "AbortError" || err instanceof TypeError;
+      serverErr.innerHTML = `${t(offline ? "cf.err.network" : "cf.err.server")} <a href="mailto:hamzades7@gmail.com?subject=${encodeURIComponent("intelotfi · " + data.topic)}&body=${encodeURIComponent(data.message)}">hamzades7@gmail.com</a>`;
+      serverErr.hidden = false;
+    } finally {
+      clearTimeout(timer);
+      dlg.classList.remove("is-sending");
+      sendBtn.disabled = false;
+      sendLabel.textContent = t("cf.send");
+    }
+  });
+
+  i18n.onChange(() => { if (attempted) KEYS.forEach((k) => { if (field(k).classList.contains("is-error")) show(k, check(k)); }); });
+})();
+
+/* ---------- Loupe: round glass magnifier for text fields ----------
+   Press and hold inside a field (or drag to select) and a glass shows the
+   text under the pointer, enlarged. iOS draws its own, so it is skipped there. */
+
+(() => {
+  const loupe = document.querySelector(".loupe");
+  if (!loupe) return;
+  const content = loupe.querySelector(".loupe__content");
+  const isIOS = /iP(hone|ad|od)/.test(navigator.platform) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  if (isIOS) return;
+  const SIZE = 118, ZOOM = 1.7;
+  const COPY = ["fontFamily", "fontSize", "fontWeight", "letterSpacing", "lineHeight", "textAlign", "direction", "paddingTop", "paddingRight", "paddingBottom", "paddingLeft", "color"];
+
+  function build(el) {
+    const cs = getComputedStyle(el);
+    COPY.forEach((p) => { content.style[p] = cs[p]; });
+    content.style.width = `${el.clientWidth}px`;
+    content.style.height = `${el.clientHeight}px`;
+    content.style.background = getComputedStyle(el.closest(".cf__main") || document.body).backgroundColor || "#fff";
+    const single = el.tagName === "INPUT";
+    content.style.whiteSpace = single ? "pre" : "pre-wrap";
+    if (single) content.style.lineHeight = `${el.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom)}px`;
+    content.textContent = el.value || el.placeholder || " ";
+    content.dataset.sx = el.scrollLeft; content.dataset.sy = el.scrollTop;
+  }
+  function move(el, x, y) {
+    const r = el.getBoundingClientRect();
+    const px = x - r.left + (+content.dataset.sx || 0), py = y - r.top + (+content.dataset.sy || 0);
+    content.style.transform = `translate(${SIZE / 2 - px * ZOOM}px, ${SIZE / 2 - py * ZOOM}px) scale(${ZOOM})`;
+    let lx = x - SIZE / 2, ly = y - SIZE - 34;
+    if (ly < 8) ly = y + 34;
+    lx = Math.max(8, Math.min(innerWidth - SIZE - 8, lx));
+    loupe.style.setProperty("--lx", `${lx}px`);
+    loupe.style.setProperty("--ly", `${ly}px`);
+  }
+
+  document.querySelectorAll("[data-loupe]").forEach((el) => {
+    let timer = 0, on = false, start = null;
+    const end = () => { clearTimeout(timer); timer = 0; start = null; if (on) { on = false; loupe.classList.remove("is-on"); } };
+    el.addEventListener("pointerdown", (e) => {
+      if (e.button !== 0) return;
+      start = { x: e.clientX, y: e.clientY, id: e.pointerId };
+      timer = setTimeout(() => {
+        on = true; build(el); move(el, start.lastX ?? start.x, start.lastY ?? start.y);
+        // an open <dialog> sits in the top layer, so the glass has to live inside it to show
+        const host = el.closest("dialog") || document.body;
+        if (loupe.parentNode !== host) host.appendChild(loupe);
+        loupe.classList.add("is-on");
+        try { el.setPointerCapture(start.id); } catch {}
+      }, e.pointerType === "mouse" ? 280 : 380);
+    });
+    el.addEventListener("pointermove", (e) => {
+      if (!start) return;
+      start.lastX = e.clientX; start.lastY = e.clientY;
+      if (on) { build(el); move(el, e.clientX, e.clientY); return; }
+      // a touch that moves before the hold completes is a scroll, not a hold
+      if (e.pointerType !== "mouse" && Math.hypot(e.clientX - start.x, e.clientY - start.y) > 10) end();
+    });
+    ["pointerup", "pointercancel", "blur"].forEach((n) => el.addEventListener(n, end));
+    el.addEventListener("input", () => { if (on) build(el); });
+  });
+})();
