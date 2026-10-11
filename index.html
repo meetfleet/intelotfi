@@ -12,12 +12,13 @@
   <meta name="theme-color" content="#ffffff" />
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
   <link rel="preload" href="fonts/AllianceNo2-Regular.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="assets/hero.webp" as="image" fetchpriority="high" />
+  <link rel="preload" href="assets/hero-mobile.webp" as="image" fetchpriority="high" media="(max-width: 768px)" />
+  <link rel="preload" href="assets/hero.webp" as="image" fetchpriority="high" media="(min-width: 769px)" />
   <!-- Arabic glyphs: loaded without blocking render; unicode-range means files only download when Arabic is on screen -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400&display=swap" media="print" onload="this.media='all'" />
-  <link rel="stylesheet" href="styles.css?v=202610110120" />
+  <link rel="stylesheet" href="styles.css?v=202610110005" />
   <!-- instant navigation: pages you are about to open are pre-rendered on hover (Chromium) -->
   <script type="speculationrules">{"prerender":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/assets/*"}},{"not":{"selector_matches":"[target=_blank], [href^='mailto:'], [href^='tel:']"}}]},"eagerness":"moderate"}]}</script>
 </head>
@@ -25,8 +26,11 @@
   <main class="page" id="top">
     <section class="hero">
       <div class="hero__bg" aria-hidden="true">
-        <!-- Phone background: add data-mobile-src="assets/hero-mobile.webp" once provided -->
-        <img src="assets/hero.webp" alt="" fetchpriority="high" decoding="async" />
+        <!-- phones get a portrait photo; WebGL reads whichever source the browser picked -->
+        <picture>
+          <source media="(max-width: 768px)" srcset="assets/hero-mobile.webp" />
+          <img src="assets/hero.webp" alt="" fetchpriority="high" decoding="async" />
+        </picture>
         <canvas class="hero__gl"></canvas>
       </div>
       <div class="hero__vignette" aria-hidden="true"></div>
@@ -457,7 +461,7 @@
     <div class="cursor__dot"></div>
   </div>
 
-  <script src="i18n.js?v=202610110120"></script>
-  <script src="main.js?v=202610110120"></script>
+  <script src="i18n.js?v=202610110005"></script>
+  <script src="main.js?v=202610110005"></script>
 </body>
 </html>

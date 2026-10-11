@@ -49,7 +49,6 @@ const burgerLines = burger.querySelector(".burger__lines");
 const logo = document.querySelector(".logo");
 const menu = document.getElementById("menu");
 
-if (isMobile() && heroImg.dataset.mobileSrc) heroImg.src = heroImg.dataset.mobileSrc;
 
 /* ---------- Pointer ---------- */
 
@@ -174,7 +173,7 @@ function createGL() {
       gl.viewport(0, 0, w, h);
     }
     gl.uniform2f(u.uRes, w, h);
-    gl.uniform2f(u.uFocus, isMobile() ? 0.7 : 0.62, 0.5);
+    gl.uniform2f(u.uFocus, isMobile() ? 0.5 : 0.62, 0.5);
   };
   resize();
   addEventListener("resize", resize);

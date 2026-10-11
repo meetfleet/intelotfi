@@ -1825,16 +1825,18 @@ ul { list-style: none; }
   border: 1px solid rgba(255, 255, 255, 0.9);
 }
 
-/* ---------- Small screens (placeholder until the phone background arrives) ---------- */
+/* ---------- Small screens: portrait hero photo ---------- */
 
 @media (max-width: 768px) {
   .hero { height: calc(100svh - var(--frame) * 2); }
-  .hero__bg img { object-position: 70% 50%; }
+  .hero__bg img { object-position: 50% 50%; }
 
+  /* the titles sit on the dark side of the portrait photo, so they turn white */
   .roles {
     top: auto;
     bottom: 42vh;
     font-size: 22px;
+    color: var(--white);
   }
 
   .manifesto {
