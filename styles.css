@@ -680,8 +680,7 @@ ul { list-style: none; }
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   grid-template-areas:
-    "icon body tile"
-    "icon order tile";
+    "icon body tile";
   column-gap: clamp(18px, 2.2vw, 36px);
   row-gap: 10px;
   align-items: center;
@@ -792,21 +791,6 @@ ul { list-style: none; }
   .platforms__sheen { display: none; }
 }
 
-.subject__order {
-  grid-area: order;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7em;
-  justify-self: start;
-  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--red);
-}
-
-.subject__order svg { width: 22px; height: 10px; fill: none; stroke: currentColor; stroke-width: 1.4; }
-[dir="rtl"] .subject__order svg { scale: -1 1; }
 
 /* chapter label under each card, visible at rest */
 .post__kicker {
@@ -825,7 +809,6 @@ ul { list-style: none; }
 .post__kicker-ch { color: var(--red); }
 
 :root[lang="ar"] .subject__tag,
-:root[lang="ar"] .subject__order,
 :root[lang="ar"] .post__kicker { font-family: inherit; letter-spacing: 0; font-size: 13px; }
 
 @media (max-width: 900px) {
@@ -837,7 +820,7 @@ ul { list-style: none; }
   }
   .platforms { width: 100%; margin-top: 8px; }
   /* phones: keep the strip calm — drop the tagline and the reading-order cue */
-  .subject__tag, .subject__order { display: none; }
+  .subject__tag { display: none; }
 }
 
 /* ---- the cards: three equal chapters, same size, same crop ---- */
