@@ -432,13 +432,6 @@ ol, ul { list-style: none; }
   margin-bottom: 1.8em;
 }
 
-.eyebrow__dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--red);
-  box-shadow: 0 0 10px rgba(225, 6, 0, 0.7);
-}
 
 .title {
   font-size: clamp(38px, 5.4vw, 92px);
@@ -982,7 +975,6 @@ ol, ul { list-style: none; }
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.7);
 }
-.next__soon::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--red); }
 
 /* ---------- Footer ---------- */
 

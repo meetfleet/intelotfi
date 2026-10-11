@@ -601,14 +601,6 @@ ul { list-style: none; }
   margin-bottom: 1.4em;
 }
 
-.work__eyebrow::before {
-  content: "";
-  width: 0.6em;
-  height: 0.6em;
-  border-radius: 50%;
-  background: var(--red);
-  box-shadow: 0 0 12px rgba(255, 73, 76, 0.8);
-}
 
 .work__title {
   font-size: clamp(60px, 9.4vw, 196px);
@@ -1087,15 +1079,6 @@ ul { list-style: none; }
   color: var(--body);
 }
 
-.eyebrow--dot::before,
-.eyebrow.is-dot::before {
-  content: "";
-  width: 0.6em;
-  height: 0.6em;
-  border-radius: 50%;
-  background: var(--red);
-  box-shadow: 0 0 12px rgba(255, 73, 76, 0.8);
-}
 
 .label {
   font-family: var(--mono);
@@ -1148,7 +1131,6 @@ ul { list-style: none; }
   color: var(--navy);
   white-space: nowrap;
 }
-.meta-tag--dot::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--red); }
 
 /* ---------- Writing: three essays on paper ---------- */
 
@@ -1198,7 +1180,6 @@ ul { list-style: none; }
   text-transform: uppercase;
   color: var(--body);
 }
-.essay__k::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--red); }
 
 .essay__t { margin-top: 14px; font-size: clamp(22px, 1.9vw, 34px); line-height: 1.15; letter-spacing: -0.02em; }
 .essay__d { margin-top: 14px; font-size: clamp(14px, 1vw, 17px); line-height: 1.65; color: var(--body); }
