@@ -1011,3 +1011,103 @@ if (!("onpagereveal" in window)) {
     el.addEventListener("input", () => { if (on) build(el); });
   });
 })();
+
+/* ---------- Build ledger + proof lines ----------
+   Numbers count up once they're on screen; the chart is drawn from the
+   weekly commit counts embedded in the page (read from git, not estimated). */
+
+(() => {
+  const fmt = (n) => new Intl.NumberFormat(i18n.lang === "ar" ? "en-US" : i18n.lang).format(n);
+  const counters = [...document.querySelectorAll(".ledger [data-to], .proof [data-to]")];
+  const run = (el) => {
+    const to = Number(el.dataset.to);
+    el.dataset.done = "1";
+    if (reduceMotion) { el.textContent = fmt(to); return; }
+    const t0 = performance.now(), dur = 1600 + Math.min(to, 400) * 2;
+    const tick = (now) => {
+      const p = Math.min((now - t0) / dur, 1);
+      el.textContent = fmt(p >= 1 ? to : Math.round(to * (1 - Math.pow(2, -10 * p))));
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  counters.forEach((el) => { el.textContent = fmt(0); });
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      io.unobserve(e.target);
+      e.target.querySelectorAll("[data-to]").forEach((el, i) => setTimeout(() => run(el), 200 + i * 140));
+    }
+  }, { threshold: 0.35 });
+  document.querySelectorAll(".ledger__stats, .proof").forEach((el) => io.observe(el));
+  i18n.onChange(() => counters.forEach((el) => { if (el.dataset.done) el.textContent = fmt(Number(el.dataset.to)); }));
+
+  const plot = document.querySelector(".ledger__plot");
+  const src = document.getElementById("ledger-data");
+  if (!plot || !src) return;
+  const { start, weeks, marks } = JSON.parse(src.textContent);
+  const readout = document.querySelector(".ledger__readout");
+  const day0 = new Date(start + "T00:00:00");
+  const max = Math.max(...weeks.map(([a, s]) => a + s));
+  const weekDate = (i) => new Date(day0.getTime() + i * 7 * 864e5);
+
+  const cols = weeks.map(([a, s], i) => {
+    const col = document.createElement("div");
+    col.className = "ledger__col" + (a + s ? "" : " is-empty");
+    col.style.setProperty("--i", i);
+    for (const [n, kind] of [[a, "app"], [s, "site"]]) {
+      if (!n) continue;
+      const bar = document.createElement("i");
+      bar.className = `ledger__bar ledger__bar--${kind}`;
+      bar.style.height = `${(n / max) * 100}%`;
+      bar.style.setProperty("--i", i);
+      col.appendChild(bar);
+    }
+    plot.appendChild(col);
+    return col;
+  });
+
+  const markEls = marks.map(([d, key, flip], k) => {
+    const i = Math.floor((new Date(d + "T00:00:00") - day0) / (7 * 864e5));
+    const m = document.createElement("span");
+    m.className = "ledger__mark" + (flip ? " is-end" : "") + (k > 0 && k < marks.length - 1 ? " is-mid" : "");
+    m.style.insetInlineStart = `${((i + 0.5) / weeks.length) * 100}%`;
+    m.innerHTML = "<span></span>";
+    m.firstChild.dataset.i18n = key;
+    m.firstChild.textContent = i18n.t(key);
+    plot.appendChild(m);
+    return m;
+  });
+  // direction: the chart reads in time order, so it flips with the page in Arabic
+  i18n.onChange(() => { markEls.forEach((m) => { m.firstChild.textContent = i18n.t(m.firstChild.dataset.i18n); }); if (cur >= 0) show(cur); });
+
+  let cur = -1;
+  const show = (i) => {
+    cur = i;
+    cols.forEach((c, k) => c.classList.toggle("is-on", k === i));
+    plot.classList.add("is-scrub");
+    const [a, s] = weeks[i];
+    const date = weekDate(i).toLocaleDateString(i18n.lang, { day: "numeric", month: "short", year: "numeric" });
+    readout.textContent = `${i18n.t("ledger.week").replace("{date}", date)} · ` +
+      (a + s ? i18n.t("ledger.tip").replace("{app}", a).replace("{site}", s) : i18n.t("ledger.quiet"));
+  };
+  const clear = () => { cur = -1; cols.forEach((c) => c.classList.remove("is-on")); plot.classList.remove("is-scrub"); readout.textContent = ""; };
+  const at = (x) => {
+    const r = plot.getBoundingClientRect();
+    let f = (x - r.left) / r.width;
+    if (i18n.dir === "rtl") f = 1 - f;
+    return Math.max(0, Math.min(weeks.length - 1, Math.floor(f * weeks.length)));
+  };
+  plot.tabIndex = 0;
+  plot.addEventListener("pointermove", (e) => show(at(e.clientX)));
+  plot.addEventListener("pointerdown", (e) => show(at(e.clientX)));
+  plot.addEventListener("pointerleave", (e) => { if (e.pointerType === "mouse") clear(); });
+  plot.addEventListener("blur", clear);
+  plot.addEventListener("keydown", (e) => {
+    const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+    if (!step) return;
+    e.preventDefault();
+    const d = i18n.dir === "rtl" ? -step : step;
+    show(Math.max(0, Math.min(weeks.length - 1, (cur < 0 ? (d > 0 ? -1 : weeks.length) : cur) + d)));
+  });
+})();
