@@ -2286,6 +2286,8 @@ html.cf-lock { overflow: hidden; }
 .cf-chip:hover span { border-color: rgba(29, 33, 66, 0.35); }
 .cf-chip input:checked + span { background: var(--navy); border-color: var(--navy); color: #fff; }
 .cf-chip input:active + span { transform: scale(0.96); }
+.cf textarea::placeholder { color: rgba(29, 33, 66, 0.34); transition: color 0.3s; }
+.cf textarea:focus::placeholder { color: rgba(29, 33, 66, 0.5); }
 .cf-chip input:focus-visible + span { outline: 2px solid var(--red); outline-offset: 2px; }
 
 .cf__honey { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }

@@ -622,13 +622,13 @@
 
           <fieldset class="cf-field cf-topics" data-field="topic">
             <legend class="cf-field__k" data-i18n="cf.topic">What is it about?</legend>
-            <div class="cf-chips"><label class="cf-chip"><input type="radio" name="topic" value="A project" /><span data-i18n="cf.topic.project">A project</span></label><label class="cf-chip"><input type="radio" name="topic" value="Research" /><span data-i18n="cf.topic.research">Research</span></label><label class="cf-chip"><input type="radio" name="topic" value="Hiring" /><span data-i18n="cf.topic.hiring">Hiring</span></label><label class="cf-chip"><input type="radio" name="topic" value="Meetfleet" /><span data-i18n="cf.topic.meetfleet">Meetfleet</span></label><label class="cf-chip"><input type="radio" name="topic" value="Something else" /><span data-i18n="cf.topic.other">Something else</span></label></div>
+            <div class="cf-chips"><label class="cf-chip"><input type="radio" name="topic" value="A project" data-hint="project" /><span data-i18n="cf.topic.project">A project</span></label><label class="cf-chip"><input type="radio" name="topic" value="Hiring" data-hint="hiring" /><span data-i18n="cf.topic.hiring">Hiring</span></label><label class="cf-chip"><input type="radio" name="topic" value="Freelance" data-hint="freelance" /><span data-i18n="cf.topic.freelance">Freelance</span></label><label class="cf-chip"><input type="radio" name="topic" value="Collaboration" data-hint="collab" /><span data-i18n="cf.topic.collab">Collaboration</span></label><label class="cf-chip"><input type="radio" name="topic" value="Research" data-hint="research" /><span data-i18n="cf.topic.research">Research</span></label><label class="cf-chip"><input type="radio" name="topic" value="Investment" data-hint="invest" /><span data-i18n="cf.topic.invest">Investment</span></label><label class="cf-chip"><input type="radio" name="topic" value="Press &amp; speaking" data-hint="press" /><span data-i18n="cf.topic.press">Press &amp; speaking</span></label><label class="cf-chip"><input type="radio" name="topic" value="Meetfleet" data-hint="meetfleet" /><span data-i18n="cf.topic.meetfleet">Meetfleet</span></label><label class="cf-chip"><input type="radio" name="topic" value="Something else" data-hint="other" /><span data-i18n="cf.topic.other">Something else</span></label></div>
             <span class="cf-field__err" aria-live="polite"></span>
           </fieldset>
 
           <label class="cf-field cf-field--msg" data-field="message">
             <span class="cf-field__k"><span data-i18n="cf.message">Message</span><span class="cf-count" aria-hidden="true"><b>0</b> / 2000</span></span>
-            <textarea name="message" rows="5" maxlength="2000" data-loupe></textarea>
+            <textarea name="message" rows="5" maxlength="2000" data-loupe data-i18n-attr="placeholder:cf.hint.default" placeholder="A few lines about what you have in mind."></textarea>
             <span class="cf-field__err" aria-live="polite"></span>
           </label>
 

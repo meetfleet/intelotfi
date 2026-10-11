@@ -841,7 +841,13 @@ if (!("onpagereveal" in window)) {
     el.addEventListener("input", () => { if (field(k).classList.contains("is-error")) show(k, ""); serverErr.hidden = true; });
     el.addEventListener("blur", () => { if (attempted && el.value.trim()) show(k, check(k)); });
   });
-  form.querySelectorAll('input[name="topic"]').forEach((r) => r.addEventListener("change", () => show("topic", "")));
+  // the message hint follows the topic, so each kind of sender knows what to include
+  const hint = (k) => {
+    const ta = form.elements.message;
+    ta.dataset.i18nAttr = `placeholder:cf.hint.${k}`;
+    ta.placeholder = t(`cf.hint.${k}`);
+  };
+  form.querySelectorAll('input[name="topic"]').forEach((r) => r.addEventListener("change", () => { show("topic", ""); hint(r.dataset.hint); }));
 
   const msg = form.elements.message;
   const grow = () => { msg.style.height = "auto"; msg.style.height = `${Math.min(msg.scrollHeight, 360)}px`; count.textContent = msg.value.length; };
@@ -868,7 +874,7 @@ if (!("onpagereveal" in window)) {
     }, reduceMotion ? 0 : 720);
   }
   function reset() {
-    form.reset(); grow(); attempted = false;
+    form.reset(); grow(); attempted = false; hint("default");
     KEYS.forEach((k) => show(k, ""));
     serverErr.hidden = true;
     dlg.classList.remove("is-done", "is-sending");
