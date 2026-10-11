@@ -754,25 +754,25 @@ ul { list-style: none; }
   -webkit-backdrop-filter: blur(18px) saturate(1.4);
 }
 
-.platforms__img {
+/* each platform is a link; the animation moves the link, so the visible one is the clickable one */
+.platforms__item {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  display: block;
   animation: platform-swap var(--dur) cubic-bezier(0.76, 0, 0.24, 1) infinite;
 }
-/* offset so the incoming image rises exactly as the outgoing one leaves */
-.platforms__img + .platforms__img { animation-delay: calc(var(--dur) / -2); }
+.platforms__item + .platforms__item { animation-delay: calc(var(--dur) / -2); }
+.platforms__item:focus-visible { outline: 2px solid var(--red); outline-offset: -4px; border-radius: 20px; }
+.platforms__img { display: block; width: 100%; height: 100%; object-fit: contain; }
 
 /* rise in, hold, rise out through a blur. The other image runs half a cycle
    behind, so each exit (50–60%) is exactly the other's entrance (0–10%). */
 @keyframes platform-swap {
-  0%   { transform: translateY(60%) scale(0.96); opacity: 0; filter: blur(12px); }
-  10%  { transform: none; opacity: 1; filter: blur(0); }
-  50%  { transform: none; opacity: 1; filter: blur(0); }
-  60%  { transform: translateY(-60%) scale(0.96); opacity: 0; filter: blur(12px); }
-  100% { transform: translateY(-60%) scale(0.96); opacity: 0; filter: blur(12px); }
+  0%   { transform: translateY(60%) scale(0.96); opacity: 0; filter: blur(12px); visibility: hidden; }
+  10%  { transform: none; opacity: 1; filter: blur(0); visibility: visible; }
+  50%  { transform: none; opacity: 1; filter: blur(0); visibility: visible; }
+  60%  { transform: translateY(-60%) scale(0.96); opacity: 0; filter: blur(12px); visibility: hidden; }
+  100% { transform: translateY(-60%) scale(0.96); opacity: 0; filter: blur(12px); visibility: hidden; }
 }
 
 /* a pale light passes over the glass at each swap */
@@ -790,12 +790,13 @@ ul { list-style: none; }
   100%    { background-position: 0 -20%; }
 }
 
-.platforms:hover .platforms__img,
+.platforms:hover .platforms__item,
+.platforms:focus-within .platforms__item,
 .platforms:hover .platforms__sheen { animation-play-state: paused; }
 
 @media (prefers-reduced-motion: reduce) {
-  .platforms__img { animation: none; }
-  .platforms__img + .platforms__img { display: none; }
+  .platforms__item { animation: none; }
+  .platforms__item + .platforms__item { display: none; }
   .platforms__sheen { display: none; }
 }
 

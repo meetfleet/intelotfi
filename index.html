@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400&display=swap" media="print" onload="this.media='all'" />
-  <link rel="stylesheet" href="styles.css?v=202610110005" />
+  <link rel="stylesheet" href="styles.css?v=202610110016" />
   <!-- instant navigation: pages you are about to open are pre-rendered on hover (Chromium) -->
   <script type="speculationrules">{"prerender":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/assets/*"}},{"not":{"selector_matches":"[target=_blank], [href^='mailto:'], [href^='tel:']"}}]},"eagerness":"moderate"}]}</script>
 </head>
@@ -145,10 +145,15 @@
           <p class="subject__desc" data-i18n="work.subject.desc">A social app I designed and built: hyper-local coordination for the spontaneous era, connecting you in real time with what is happening around you.</p>
         </div>
         <!-- platform tile: Apple and Android take turns, sliding vertically through a glass frame -->
-        <div class="platforms" role="img" aria-label="Available on Apple (iPhone, iPad, Mac, Watch, Vision) and Android" data-i18n-attr="aria-label:work.subject.platforms">
+        <!-- platform tile: Apple and Android take turns; each links to its store -->
+        <div class="platforms" role="group" aria-label="Get Meetfleet" data-i18n-attr="aria-label:work.subject.get">
           <span class="platforms__sheen" aria-hidden="true"></span>
-          <img class="platforms__img" src="assets/platform-apple.webp" width="1439" height="504" alt="" loading="lazy" decoding="async" />
-          <img class="platforms__img" src="assets/platform-android.webp" width="1439" height="504" alt="" loading="lazy" decoding="async" />
+          <a class="platforms__item" href="https://testflight.apple.com/join/nXyfPMSc" target="_blank" rel="noopener" aria-label="Get Meetfleet for Apple devices on TestFlight" data-i18n-attr="aria-label:work.subject.apple">
+            <img class="platforms__img" src="assets/platform-apple.webp" width="1439" height="504" alt="" loading="lazy" decoding="async" />
+          </a>
+          <a class="platforms__item" href="https://play.google.com/store/apps/details?id=com.meetfleet.mobile&amp;pcampaignid=web_share" target="_blank" rel="noopener" aria-label="Get Meetfleet for Android on Google Play" data-i18n-attr="aria-label:work.subject.android">
+            <img class="platforms__img" src="assets/platform-android.webp" width="1439" height="504" alt="" loading="lazy" decoding="async" />
+          </a>
         </div>
         <p class="subject__order"><span data-i18n="work.subject.order">Three chapters, read in order</span><svg viewBox="0 0 28 12" aria-hidden="true"><path d="M0 6h26M21 1l5 5-5 5" /></svg></p>
       </div>
@@ -461,7 +466,7 @@
     <div class="cursor__dot"></div>
   </div>
 
-  <script src="i18n.js?v=202610110005"></script>
-  <script src="main.js?v=202610110005"></script>
+  <script src="i18n.js?v=202610110016"></script>
+  <script src="main.js?v=202610110016"></script>
 </body>
 </html>
