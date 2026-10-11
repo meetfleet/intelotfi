@@ -1112,7 +1112,6 @@ ul { list-style: none; }
 .m-ranges { display: grid; gap: clamp(12px, 1.4vw, 22px); justify-items: center; width: 60%; }
 .m-ranges > span { position: relative; display: block; width: var(--w); height: 1px; background: var(--navy); opacity: 0.55; transition: width 0.9s var(--expo-out); }
 .m-ranges > span::after { content: ""; position: absolute; left: 50%; top: -4px; width: 8px; height: 8px; margin-left: -4px; border-radius: 50%; background: var(--red); }
-.essay__link:hover .m-ranges > span { width: calc(var(--w) * 0.7); }
 .m-decide { display: flex; align-items: center; gap: clamp(12px, 1.4vw, 20px); }
 .m-decide__q { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; font-style: italic; font-size: clamp(36px, 3.4vw, 58px); color: var(--muted); }
 .m-decide__line { width: clamp(36px, 4vw, 64px); height: 1px; background: var(--navy); opacity: 0.3; }
@@ -1813,3 +1812,64 @@ html.is-leaving body { opacity: 0; transition: opacity 0.18s ease-in; }
 .essay:nth-child(1) .essay__motif { view-transition-name: essay-1; }
 .essay:nth-child(2) .essay__motif { view-transition-name: essay-2; }
 .essay:nth-child(3) .essay__motif { view-transition-name: essay-3; }
+
+/* ---------- living motifs: each drawing acts out its essay ----------
+   a × b × c: the factors drift; every cycle the weak one (c) sinks and turns var(--red).
+   ranges: the intervals tighten in turn as evidence accumulates.
+   ? → ✓: hesitation, a dot travels the line, the node fills and the tick draws. */
+.m-math { display: inline-flex; align-items: baseline; gap: 0.16em; }
+.m-math .mf, .m-math .mx { display: inline-block; }
+.m-math .mf { animation: mf-float 3.6s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
+.m-math .mf--2 { animation-delay: 0.25s; }
+.m-math .mf--3 { animation: mf-float 3.6s cubic-bezier(0.45, 0, 0.55, 1) 0.5s infinite, mf-weak 6s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+.m-math .mx { font-style: normal; opacity: 0.5; animation: mx-turn 6s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+.m-math .mx ~ .mx { animation-delay: 0.35s; }
+@keyframes mf-float { 50% { transform: translateY(-5px); } }
+@keyframes mx-turn { 0%, 38% { transform: rotate(0); } 52%, 100% { transform: rotate(180deg); } }
+@keyframes mf-weak {
+  0%, 48%, 100% { color: var(--navy); opacity: 1; scale: 1; }
+  60%, 82%      { color: var(--red); opacity: 0.8; scale: 0.74; }
+}
+
+.m-ranges > span { animation: rg-tighten 6s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+.m-ranges > span:nth-child(2) { animation-delay: 0.3s; }
+.m-ranges > span:nth-child(3) { animation-delay: 0.6s; }
+.m-ranges > span::after { animation: rg-dot 6s cubic-bezier(0.65, 0, 0.35, 1) infinite; animation-delay: inherit; }
+@keyframes rg-tighten { 0%, 100% { width: var(--w); } 42%, 62% { width: calc(var(--w) * 0.42); } }
+@keyframes rg-dot { 0%, 30%, 74%, 100% { transform: scale(1); } 48% { transform: scale(1.7); } }
+
+.m-decide__q { display: inline-block; transform-origin: 50% 80%; animation: dc-q 6s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
+@keyframes dc-q {
+  0%, 100% { transform: rotate(0); opacity: 1; }
+  7% { transform: rotate(-14deg); } 13% { transform: rotate(9deg); } 19% { transform: rotate(0); }
+  44%, 86% { opacity: 0.3; }
+}
+.m-decide__line { position: relative; }
+.m-decide__line i {
+  position: absolute; top: -3px; left: 0; width: 7px; height: 7px; margin-left: -3.5px;
+  border-radius: 50%; background: var(--red); opacity: 0;
+  animation: dc-travel 6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+@keyframes dc-travel {
+  0%, 18% { left: 0; opacity: 0; }
+  22% { left: 0; opacity: 1; }
+  42% { left: 100%; opacity: 1; }
+  46%, 100% { left: 100%; opacity: 0; }
+}
+.m-decide__node { animation: dc-node 6s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+.m-decide__node svg {
+  width: 46%; height: 46%; fill: none; stroke: currentColor; stroke-width: 2.4;
+  stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1;
+  animation: dc-check 6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+@keyframes dc-node {
+  0%, 42%   { background: transparent; color: var(--red); transform: scale(1); }
+  48%       { background: var(--red); color: #fff; transform: scale(1.14); }
+  55%, 86%  { background: var(--red); color: #fff; transform: scale(1); }
+  95%, 100% { background: transparent; color: var(--red); transform: scale(1); }
+}
+@keyframes dc-check { 0%, 48% { stroke-dashoffset: 1; } 60%, 88% { stroke-dashoffset: 0; } 96%, 100% { stroke-dashoffset: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .m-decide__node svg { stroke-dashoffset: 0; }
+}
