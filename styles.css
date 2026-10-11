@@ -1873,3 +1873,5 @@ html.is-leaving body { opacity: 0; transition: opacity 0.18s ease-in; }
 @media (prefers-reduced-motion: reduce) {
   .m-decide__node svg { stroke-dashoffset: 0; }
 }
+
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }

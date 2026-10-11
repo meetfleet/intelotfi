@@ -17,9 +17,10 @@ const STORAGE_KEY = "intelotfi:lang";
 
 const STRINGS = {
   en: {
-    "meta.title": "intelotfi",
-    "meta.description": "intelotfi — AI engineer, product designer, creative technologist.",
-    "nav.home": "intelotfi — home",
+    "meta.title": "Hamza Lotfi | Independent AI Researcher · intelotfi",
+    "meta.h1": "Hamza Lotfi — Independent AI Researcher and Product Engineer",
+    "meta.description": "Hamza Lotfi is an independent AI researcher and product engineer: inventor of the Social Activation Score and the Trust Protocol, and builder of Meetfleet.",
+    "nav.home": "intelotfi — Hamza Lotfi, home",
     "nav.open": "Open menu",
     "nav.close": "Close menu",
     "nav.work": "Work",
@@ -184,9 +185,10 @@ const STRINGS = {
   },
 
   fr: {
-    "meta.title": "intelotfi",
-    "meta.description": "intelotfi — ingénieur IA, designer produit, technologue créatif.",
-    "nav.home": "intelotfi — accueil",
+    "meta.title": "Hamza Lotfi | Chercheur indépendant en IA · intelotfi",
+    "meta.h1": "Hamza Lotfi — Chercheur indépendant en IA et ingénieur produit",
+    "meta.description": "Hamza Lotfi est chercheur indépendant en IA et ingénieur produit : inventeur du Social Activation Score et du Trust Protocol, créateur de Meetfleet.",
+    "nav.home": "intelotfi — Hamza Lotfi, accueil",
     "nav.open": "Ouvrir le menu",
     "nav.close": "Fermer le menu",
     "nav.work": "Projets",
@@ -351,9 +353,10 @@ const STRINGS = {
   },
 
   ar: {
-    "meta.title": "intelotfi",
-    "meta.description": "intelotfi — مهندس ذكاء اصطناعي، مصمم منتجات، تقني مبدع.",
-    "nav.home": "intelotfi — الرئيسية",
+    "meta.title": "حمزة لطفي | باحث مستقل في الذكاء الاصطناعي · intelotfi",
+    "meta.h1": "حمزة لطفي — باحث مستقل في الذكاء الاصطناعي ومهندس منتجات",
+    "meta.description": "حمزة لطفي باحث مستقل في الذكاء الاصطناعي ومهندس منتجات: مخترع درجة التفعيل الاجتماعي وبروتوكول الثقة، ومنشئ Meetfleet.",
+    "nav.home": "intelotfi — حمزة لطفي، الرئيسية",
     "nav.open": "فتح القائمة",
     "nav.close": "إغلاق القائمة",
     "nav.work": "الأعمال",
