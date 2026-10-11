@@ -164,7 +164,7 @@ ul { list-style: none; }
   50% { opacity: 0.15; }
 }
 
-/* Burger: three lines, the last one shorter — springs into an X */
+/* Burger: three lines, the last one shorter, springs into an X */
 .burger {
   --line: #4a4a4a;
   position: relative;
@@ -800,7 +800,7 @@ ul { list-style: none; }
       "tile tile";
   }
   .platforms { width: 100%; margin-top: 8px; }
-  /* phones: keep the strip calm — drop the tagline */
+  /* phones: keep the strip calm, drop the tagline */
   .subject__tag { display: none; }
 }
 
