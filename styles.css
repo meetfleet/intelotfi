@@ -2082,3 +2082,28 @@ html.is-leaving body { opacity: 0; transition: opacity 0.18s ease-in; }
   .lab__ctl { grid-template-columns: 1fr 3.4em; }
   .lab__ctl input { grid-column: 1 / -1; grid-row: 2; }
 }
+
+/* AI touches for the live model */
+.lab__k { display: flex; align-items: center; gap: 10px; }
+.lab__pulse { display: inline-flex; align-items: flex-end; gap: 2px; height: 12px; }
+.lab__pulse i { width: 2px; height: 30%; background: var(--navy); border-radius: 1px; animation: lab-pulse 1.4s ease-in-out infinite; }
+.lab__pulse i:nth-child(2) { animation-delay: 0.15s; }
+.lab__pulse i:nth-child(3) { animation-delay: 0.3s; }
+.lab__pulse i:nth-child(4) { animation-delay: 0.45s; }
+.lab.is-thinking .lab__pulse i { background: var(--red); animation-duration: 0.5s; }
+@keyframes lab-pulse { 0%, 100% { height: 25%; } 50% { height: 100%; } }
+.lab__stats { width: 100%; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.verdict { padding: 16px 18px 18px; border-radius: 12px; background: #f4f4f7; border: 1px solid var(--line); }
+.verdict__k { display: flex; justify-content: space-between; gap: 12px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.verdict__state { color: var(--navy); }
+.verdict__state.is-go { color: #1f7a4d; }
+.verdict__state.is-tweak { color: #a86200; }
+.verdict__state.is-hold { color: var(--red); }
+.verdict__text { min-height: 5.2em; margin-top: 10px; font-size: 15px; line-height: 1.6; color: var(--navy); }
+.verdict__caret { display: inline-block; width: 7px; height: 1.05em; margin-inline-start: 2px; vertical-align: text-bottom; background: var(--navy); animation: lab-caret 1s steps(1) infinite; }
+.lab.is-thinking .verdict__text { background: linear-gradient(90deg, rgba(29, 33, 66, 0.06) 25%, rgba(29, 33, 66, 0.14) 50%, rgba(29, 33, 66, 0.06) 75%); background-size: 200% 100%; animation: lab-shimmer 1s linear infinite; border-radius: 6px; color: transparent; }
+@keyframes lab-caret { 50% { opacity: 0; } }
+@keyframes lab-shimmer { to { background-position: -200% 0; } }
+.lab__tn small { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.04em; color: var(--muted); }
+:root[lang="ar"] .verdict__k { font-family: inherit; letter-spacing: 0; }

@@ -44,7 +44,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400&display=swap" media="print" onload="this.media='all'" />
-  <link rel="stylesheet" href="styles.css?v=202610110109" />
+  <link rel="stylesheet" href="styles.css?v=202610110115" />
   <!-- instant navigation: pages you are about to open are pre-rendered on hover (Chromium) -->
   <script type="speculationrules">{"prerender":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/assets/*"}},{"not":{"selector_matches":"[target=_blank], [href^='mailto:'], [href^='tel:']"}}]},"eagerness":"moderate"}]}</script>
 </head>
@@ -241,15 +241,15 @@
     <!-- ---------- Research desk: the white paper, readable in place, and its formula, live ---------- -->
     <section class="sec desk" id="desk" aria-labelledby="desk-title">
       <header class="sec__head">
-        <p class="eyebrow" data-reveal data-i18n="desk.eyebrow">Research desk · White paper 001</p>
-        <h2 class="sec__title" id="desk-title" data-reveal data-split data-i18n="desk.title">Read the paper. Then run the math.</h2>
-        <p class="sec__lede" data-reveal data-i18n="desk.lede">The Social Activation Score white paper, readable right here, beside a live model of its formula. Move a factor and watch the score answer.</p>
+        <p class="eyebrow" data-reveal data-i18n="desk.eyebrow">AI research desk · Meetfleet matching model</p>
+        <h2 class="sec__title" id="desk-title" data-reveal data-split data-i18n="desk.title">The AI that decides if a meetup should happen.</h2>
+        <p class="sec__lede" data-reveal data-i18n="desk.lede">Meetfleet’s matching AI reads four signals about two people and a place, then decides whether to suggest they meet. Read the white paper behind it, and run the model yourself.</p>
       </header>
 
       <div class="desk__grid">
         <figure class="reader" data-reveal data-pdf="assets/papers/sas-white-paper.pdf" tabindex="0" aria-label="The Social Activation Score white paper" data-i18n-attr="aria-label:desk.reader.label">
           <div class="reader__bar">
-            <span class="reader__name">SAS · R&amp;D No. 001</span>
+            <span class="reader__name" data-i18n="desk.reader.name">SAS · AI white paper</span>
             <span class="reader__nav">
               <button type="button" class="reader__btn" data-act="prev" aria-label="Previous page" data-i18n-attr="aria-label:desk.reader.prev"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
               <span class="reader__count" aria-live="polite"><b data-page>1</b> / <span data-total>5</span></span>
@@ -278,22 +278,26 @@
 
         <div class="lab" data-reveal>
           <div class="lab__head">
-            <p class="lab__k" data-i18n="desk.lab.k">Live model · Eq. 1</p>
+            <p class="lab__k"><span class="lab__pulse" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span data-i18n="desk.lab.k">Meetfleet AI · on-device inference</span></p>
             <p class="lab__formula" dir="ltr">SAS = <span data-term="v">cos θ</span> × <span data-term="i">Φ</span> × <span data-term="f">Ψ</span> × <span data-term="s">Λ</span></p>
           </div>
 
           <div class="lab__result">
-            <p class="lab__score"><span data-out="sas">0.00</span><small>SAS</small></p>
-            <p class="lab__avg"><span data-i18n="desk.lab.avg">An average would say</span> <b data-out="avg">0.00</b></p>
+            <p class="lab__score"><span data-out="sas">0.00</span><small data-i18n="desk.lab.score">AI match score</small></p>
+            <p class="lab__avg"><span data-i18n="desk.lab.avg">A naive model would say</span> <b data-out="avg">0.00</b></p>
+            <p class="lab__stats" dir="ltr"><span data-i18n="desk.lab.signals">4 signals</span> · <span data-out="ms">0.00</span> ms · <span data-i18n="desk.lab.device">on-device</span></p>
           </div>
 
           <ul class="lab__terms">
-            <li data-term-row="v"><span class="lab__tn" data-i18n="desk.term.v">Vibe alignment</span><span class="lab__bar"><i></i></span><span class="lab__tv" data-out="v">0.00</span></li>
-            <li data-term-row="i"><span class="lab__tn" data-i18n="desk.term.i">Intent fit</span><span class="lab__bar"><i></i></span><span class="lab__tv" data-out="i">0.00</span></li>
-            <li data-term-row="f"><span class="lab__tn" data-i18n="desk.term.f">Friction</span><span class="lab__bar"><i></i></span><span class="lab__tv" data-out="f">0.00</span></li>
-            <li data-term-row="s"><span class="lab__tn" data-i18n="desk.term.s">Safety &amp; density</span><span class="lab__bar"><i></i></span><span class="lab__tv" data-out="s">0.00</span></li>
+            <li data-term-row="v"><span class="lab__tn"><span data-i18n="desk.term.v">Vibe alignment</span><small data-i18n="desk.term.v2">embedding similarity</small></span><span class="lab__bar"><i></i></span><span class="lab__tv" data-out="v">0.00</span></li>
+            <li data-term-row="i"><span class="lab__tn"><span data-i18n="desk.term.i">Intent fit</span><small data-i18n="desk.term.i2">intent classifier</small></span><span class="lab__bar"><i></i></span><span class="lab__tv" data-out="i">0.00</span></li>
+            <li data-term-row="f"><span class="lab__tn"><span data-i18n="desk.term.f">Friction</span><small data-i18n="desk.term.f2">logistics model</small></span><span class="lab__bar"><i></i></span><span class="lab__tv" data-out="f">0.00</span></li>
+            <li data-term-row="s"><span class="lab__tn"><span data-i18n="desk.term.s">Safety &amp; density</span><small data-i18n="desk.term.s2">venue risk model</small></span><span class="lab__bar"><i></i></span><span class="lab__tv" data-out="s">0.00</span></li>
           </ul>
-          <p class="lab__note" data-out="note" aria-live="polite"></p>
+          <div class="verdict" aria-live="polite">
+            <p class="verdict__k"><span data-i18n="desk.verdict.k">AI verdict</span><span class="verdict__state" data-out="state"></span></p>
+            <p class="verdict__text"><span data-out="verdict"></span><span class="verdict__caret" aria-hidden="true"></span></p>
+          </div>
 
           <div class="lab__presets" role="group" aria-label="Scenarios" data-i18n-attr="aria-label:desk.lab.scenarios">
             <button type="button" data-preset="cafe" data-i18n="desk.preset.cafe">Quiet café, study session</button>
@@ -303,7 +307,7 @@
           </div>
 
           <details class="lab__controls" open>
-            <summary data-i18n="desk.lab.controls">Tune the factors</summary>
+            <summary data-i18n="desk.lab.controls">Tune the AI’s input signals</summary>
             <div class="lab__ctls">
               <label class="lab__ctl"><span class="lab__ctl-k"><span data-i18n="desk.ctl.theta">Vibe angle</span> <i dir="ltr">θ</i></span><input type="range" min="0" max="90" step="1" value="15" data-in="theta" /><output data-val="theta">15°</output></label>
               <label class="lab__ctl"><span class="lab__ctl-k"><span data-i18n="desk.ctl.mis">Intent mismatch</span> <i dir="ltr">‖I−A‖/n</i></span><input type="range" min="0" max="1" step="0.01" value="0.1" data-in="mis" /><output data-val="mis">0.1</output></label>
@@ -585,7 +589,7 @@
     <div class="cursor__dot"></div>
   </div>
 
-  <script src="i18n.js?v=202610110109"></script>
-  <script src="main.js?v=202610110109"></script>
+  <script src="i18n.js?v=202610110115"></script>
+  <script src="main.js?v=202610110115"></script>
 </body>
 </html>

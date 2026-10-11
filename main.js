@@ -692,7 +692,50 @@ if (!("onpagereveal" in window)) {
   const shown = { sas: 0, avg: 0 };
   let target = { sas: 0, avg: 0 }, raf = 0;
 
+  const model = (x) => {
+    const v = Math.cos((x.theta * Math.PI) / 180), i = 1 - x.mis, f = Math.exp(-(x.fin + x.dist + x.time));
+    const rs = x.rho * x.sig, s = rs / (1 + Math.abs(1 - rs));
+    return { v, i, f, s, sas: v * i * f * s };
+  };
+  const signals = () => Object.fromEntries(Object.keys(inputs).map((k) => [k, val(k)]));
+
+  // the "voice" of the model: verdict, strongest and weakest signal, and a fix it has actually tested
+  const FIX = { v: { theta: 10 }, i: { mis: 0.08 }, f: { fin: 0.1, dist: 0.1, time: 0.1 }, s: { rho: 0.95, sig: 0.85 } };
+  let vt = 0, typing = 0;
+  function scheduleVerdict({ terms, sas, weak }) {
+    clearTimeout(vt); clearInterval(typing);
+    lab.classList.add("is-thinking");
+    outs("state").textContent = i18n.t("desk.verdict.thinking");
+    outs("state").className = "verdict__state";
+    vt = setTimeout(() => {
+      const x = signals();
+      const strong = Object.entries(terms).sort((a, b) => b[1] - a[1])[0][0];
+      const state = x.rho < 0.3 ? "hold" : sas >= 0.45 ? "go" : sas >= 0.2 ? "tweak" : "hold";
+      const fixed = model({ ...x, ...FIX[weak] }).sas;
+      const parts = [
+        i18n.t(`desk.verdict.${state}`),
+        i18n.t(`desk.why.strong.${strong}`).replace("{value}", terms[strong].toFixed(2)),
+      ];
+      if (weak !== strong) {
+        const key = state === "go" ? "desk.why.soft" : `desk.why.weak.${weak}`;
+        parts.push(i18n.t(key).replace("{name}", i18n.t(`desk.term.${weak}`).toLowerCase()).replace("{value}", terms[weak].toFixed(2)));
+      }
+      if (x.rho < 0.3) parts.push(i18n.t("desk.why.gate"));
+      else if (state !== "go" && fixed > sas + 0.02) parts.push(i18n.t(`desk.why.fix.${weak}`).replace("{to}", fixed.toFixed(2)));
+      else parts.push(i18n.t("desk.why.fine"));
+      const text = parts.join(" ");
+      lab.classList.remove("is-thinking");
+      outs("state").textContent = i18n.t(`desk.verdict.state.${state}`);
+      outs("state").className = `verdict__state is-${state}`;
+      const el = outs("verdict");
+      if (reduceMotion) { el.textContent = text; return; }
+      let n = 0; el.textContent = "";
+      typing = setInterval(() => { n += 2; el.textContent = text.slice(0, n); if (n >= text.length) clearInterval(typing); }, 14);
+    }, reduceMotion ? 0 : 420);
+  }
+
   function compute() {
+    const t0 = performance.now();
     const v = Math.cos((val("theta") * Math.PI) / 180);                 // Eq. 2, from the angle between U_ab and V_v
     const i = 1 - val("mis");                                            // Eq. 3
     const f = Math.exp(-(val("fin") + val("dist") + val("time")));       // Eq. 4 with α = β = γ = 1
@@ -701,6 +744,7 @@ if (!("onpagereveal" in window)) {
     const terms = { v, i, f, s };
     const sas = v * i * f * s;                                           // Eq. 1
     const avg = (v + i + f + s) / 4;
+    outs("ms").textContent = Math.max(0.01, performance.now() - t0).toFixed(2);
     const weak = Object.entries(terms).sort((a, b) => a[1] - b[1])[0][0];
     for (const [k, x] of Object.entries(terms)) {
       const row = lab.querySelector(`[data-term-row="${k}"]`);
@@ -713,8 +757,7 @@ if (!("onpagereveal" in window)) {
       const o = lab.querySelector(`[data-val="${k}"]`);
       o.textContent = k === "theta" ? `${el.value}°` : (+el.value).toFixed(2);
     }
-    const name = i18n.t(`desk.term.${weak}`);
-    outs("note").textContent = i18n.t("desk.note").replace("{name}", name).replace("{value}", terms[weak].toFixed(2));
+    scheduleVerdict({ terms, sas, weak });
     target = { sas, avg };
     if (!raf) raf = requestAnimationFrame(tick);
   }
