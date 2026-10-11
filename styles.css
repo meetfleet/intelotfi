@@ -1083,7 +1083,6 @@ ul { list-style: none; }
 
 /* ---------- Writing: three essays on paper ---------- */
 
-.writing { padding-inline: calc(var(--outer) + var(--inner)); padding-block: clamp(72px, 8vw, 150px) clamp(56px, 6vw, 110px); }
 
 .essays {
   display: grid;
@@ -1150,7 +1149,6 @@ ul { list-style: none; }
 
 @media (max-width: 1100px) { .essays { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 768px) {
-  .writing { padding-inline: 16px; }
   .essays { grid-template-columns: 1fr; }
 }
 
@@ -2107,3 +2105,21 @@ html.is-leaving body { opacity: 0; transition: opacity 0.18s ease-in; }
 @keyframes lab-shimmer { to { background-position: -200% 0; } }
 .lab__tn small { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.04em; color: var(--muted); }
 :root[lang="ar"] .verdict__k { font-family: inherit; letter-spacing: 0; }
+
+/* essays, inside Latest Work under the chapters */
+.essays-block {
+  --body: #5f6272;
+  --card: #e7e6eb;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  margin-top: clamp(8px, 1vw, 16px);
+  padding: clamp(36px, 4vw, 72px) 0 clamp(20px, 2.4vw, 40px);
+  border-top: 1px solid var(--rule);
+}
+.essays-block__head { display: flex; justify-content: space-between; align-items: flex-end; gap: clamp(20px, 5vw, 96px); flex-wrap: wrap; }
+.essays-block__k { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.essays-block__t { margin-top: 12px; font-size: clamp(30px, 3.2vw, 60px); font-weight: 300; line-height: 1; letter-spacing: -0.035em; color: var(--navy); }
+.essays-block__lede { max-width: 28em; font-size: clamp(14px, 1vw, 17px); line-height: 1.65; color: var(--body); }
+.essays-block .essays { margin-top: clamp(28px, 3vw, 52px); }
+.essays-block .essay__motif { background: #e9e9ee; }
+:root[lang="ar"] .essays-block__k { font-family: inherit; letter-spacing: 0; }
+:root[lang="ar"] .essays-block__t { letter-spacing: 0; line-height: 1.3; }
