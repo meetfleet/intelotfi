@@ -857,6 +857,9 @@ if (!("onpagereveal" in window)) {
     const b = from?.getBoundingClientRect();
     if (b) { dlg.style.setProperty("--ox", `${b.left + b.width / 2 - 24}px`); dlg.style.setProperty("--oy", `${b.top + b.height / 2 - 24}px`); }
     clearTimeout(closing);
+    // a button can preselect the topic, e.g. "request the other papers" opens on Research
+    const pick = from?.dataset.topic && form.querySelector(`input[name="topic"][data-hint="${from.dataset.topic}"]`);
+    if (pick && !dlg.classList.contains("is-done")) { pick.checked = true; pick.dispatchEvent(new Event("change", { bubbles: true })); }
     dlg.showModal();
     document.documentElement.classList.add("cf-lock");
     body.classList.remove("has-cursor");

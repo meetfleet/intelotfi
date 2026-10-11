@@ -1299,6 +1299,28 @@ ul { list-style: none; }
 .index__row.is-featured { color: var(--navy); }
 .index__row.is-featured .index__n { color: var(--red); }
 .index__row[data-reveal] { transition-delay: calc(var(--i, 0) * 60ms); }
+.index__row.is-link { color: var(--navy); }
+.index__row.is-link .index__t { justify-self: start; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size 0.6s var(--expo-out); }
+.index__row.is-link:hover .index__t { background-size: 100% 1px; }
+.index__row .index__s svg, .index__ask svg { display: inline-block; vertical-align: -1px; margin-inline-start: 6px; transition: transform 0.5s var(--expo-out); }
+[dir="rtl"] .index__row .index__s svg, [dir="rtl"] .index__ask svg { transform: scaleX(-1); }
+.index__row.is-link:hover .index__s svg, .index__ask:hover svg { transform: translateX(4px); }
+.index__row.is-more { align-items: center; }
+.index__row.is-more .index__t { display: inline-flex; align-items: center; gap: 18px; }
+/* four quiet sheets stand in for the unlisted papers */
+.index__ghosts { display: inline-flex; }
+.index__ghosts i { width: 22px; height: 28px; border: 1px solid rgba(29, 33, 66, 0.22); border-radius: 3px; background: linear-gradient(#fff, #f1f1f4); box-shadow: 0 1px 2px rgba(9, 9, 11, 0.06); transition: transform 0.6s var(--spring-soft, cubic-bezier(.2,.9,.25,1.15)); }
+.index__ghosts i + i { margin-inline-start: -12px; }
+.index__ghosts i:nth-child(1) { transform: rotate(-6deg); }
+.index__ghosts i:nth-child(2) { transform: rotate(-2deg); }
+.index__ghosts i:nth-child(3) { transform: rotate(2deg); }
+.index__ghosts i:nth-child(4) { transform: rotate(6deg); }
+.index__row.is-more:hover .index__ghosts i:nth-child(1) { transform: translateX(-6px) rotate(-10deg); }
+.index__row.is-more:hover .index__ghosts i:nth-child(2) { transform: translateX(-2px) rotate(-4deg); }
+.index__row.is-more:hover .index__ghosts i:nth-child(3) { transform: translateX(2px) rotate(4deg); }
+.index__row.is-more:hover .index__ghosts i:nth-child(4) { transform: translateX(6px) rotate(10deg); }
+.index__ask { font: inherit; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--navy); background: none; border: 0; padding: 8px 0; cursor: pointer; white-space: nowrap; }
+.index__ask span { background: linear-gradient(var(--red), var(--red)) 0 100% / 100% 1px no-repeat; padding-bottom: 3px; }
 
 /* ---------- Inventions: a black band, like Latest Work ---------- */
 
@@ -1632,7 +1654,7 @@ ul { list-style: none; }
   .feats { grid-template-columns: 1fr; }
   .inv__index { display: none; }
   .index__row { grid-template-columns: 2.6em 1fr; }
-  .index__s { grid-column: 2; white-space: normal; }
+  .index__s, .index__ask { grid-column: 2; white-space: normal; justify-self: start; text-align: start; }
   .contact { padding-inline: 16px; }
   .channels { grid-template-columns: 1fr; }
   .channels li + li { border-inline-start: 0; border-top: 1px solid var(--line); }

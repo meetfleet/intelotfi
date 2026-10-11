@@ -44,7 +44,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400&display=swap" media="print" onload="this.media='all'" />
-  <link rel="stylesheet" href="styles.css?v=202610110232" />
+  <link rel="stylesheet" href="styles.css?v=202610110237" />
   <!-- instant navigation: pages you are about to open are pre-rendered on hover (Chromium) -->
   <script type="speculationrules">{"prerender":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/assets/*"}},{"not":{"selector_matches":"[target=_blank], [href^='mailto:'], [href^='tel:']"}}]},"eagerness":"moderate"}]}</script>
 </head>
@@ -422,7 +422,7 @@
 
         <!-- the paper's headline numbers; bars are to scale (value / 100) -->
         <div class="results">
-          <p class="label results__label" data-i18n="research.results.label">Held-out synthetic set · 100,000 invoices</p>
+          <p class="label results__label" data-i18n="research.results.label">Simulated test set · 5 runs of 20,000 invoices</p>
           <ul class="results__grid">
             <li class="result result--compare" data-reveal>
               <p class="result__value"><span data-count="72.55" data-decimals="2">0.00</span><small>%</small></p>
@@ -441,17 +441,14 @@
               <p class="result__label" data-i18n="research.results.2.label">fewer wasted retries</p>
             </li>
           </ul>
-          <p class="results__note" data-i18n="research.results.note">Synthetic-data results, not measured production outcomes.</p>
+          <p class="results__note"><span data-i18n="research.results.ci">+4.08 points over the fixed ladder, 95% CI 3.90 to 4.26 · C11 reference implementation, 1,741 lines, 9 property tests</span><br /><span data-i18n="research.results.note">Synthetic-data results, not measured production outcomes.</span></p>
         </div>
       </article>
 
       <ol class="index" aria-label="Research index">
         <li class="index__row is-featured" data-reveal><span class="index__n">01</span><span class="index__t" data-i18n="research.index.featured">The Recovery Readiness Score (RRS)</span><span class="index__s" data-i18n="research.index.featuredNote">Featured above · September 2026</span></li>
-        <li class="index__row" data-reveal><span class="index__n">02</span><span class="index__t" data-i18n="research.index.unlisted">Unlisted</span><span class="index__s" data-i18n="research.index.onRequest">Title and abstract on request</span></li>
-        <li class="index__row" data-reveal><span class="index__n">03</span><span class="index__t" data-i18n="research.index.unlisted">Unlisted</span><span class="index__s" data-i18n="research.index.onRequest">Title and abstract on request</span></li>
-        <li class="index__row" data-reveal><span class="index__n">04</span><span class="index__t" data-i18n="research.index.unlisted">Unlisted</span><span class="index__s" data-i18n="research.index.onRequest">Title and abstract on request</span></li>
-        <li class="index__row" data-reveal><span class="index__n">05</span><span class="index__t" data-i18n="research.index.unlisted">Unlisted</span><span class="index__s" data-i18n="research.index.onRequest">Title and abstract on request</span></li>
-        <li class="index__row" data-reveal><span class="index__n">06</span><span class="index__t" data-i18n="research.index.unlisted">Unlisted</span><span class="index__s" data-i18n="research.index.onRequest">Title and abstract on request</span></li>
+        <li class="index__row is-link" data-reveal><span class="index__n">02</span><a class="index__t" href="#desk" data-i18n="research.index.sas">The Social Activation Score (SAS)</a><span class="index__s"><span data-i18n="research.index.sasNote">White paper · April 2026 · read it in the desk</span> <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
+        <li class="index__row is-more" data-reveal><span class="index__n">03–06</span><span class="index__t"><span data-i18n="research.index.more">Four more works</span><span class="index__ghosts" aria-hidden="true"><i></i><i></i><i></i><i></i></span></span><button type="button" class="index__ask" data-contact-open data-topic="research"><span data-i18n="research.index.ask">Titles and abstracts on request</span> <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></li>
       </ol>
     </section>
 
@@ -690,7 +687,7 @@
     <div class="cursor__dot"></div>
   </div>
 
-  <script src="i18n.js?v=202610110232"></script>
-  <script src="main.js?v=202610110232"></script>
+  <script src="i18n.js?v=202610110237"></script>
+  <script src="main.js?v=202610110237"></script>
 </body>
 </html>
