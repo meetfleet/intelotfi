@@ -841,10 +841,11 @@ ul { list-style: none; }
     grid-template-columns: auto minmax(0, 1fr);
     grid-template-areas:
       "icon body"
-      "order order"
       "tile tile";
   }
   .platforms { width: 100%; margin-top: 8px; }
+  /* phones: keep the strip calm — drop the tagline and the reading-order cue */
+  .subject__tag, .subject__order { display: none; }
 }
 
 /* ---- the cards: three equal chapters, same size, same crop ---- */
