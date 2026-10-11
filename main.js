@@ -571,3 +571,185 @@ if (!("onpagereveal" in window)) {
   });
   addEventListener("pageshow", () => document.documentElement.classList.remove("is-leaving"));
 }
+
+/* ---------- Research desk: PDF reader (PDF.js, loaded on approach) ---------- */
+
+(() => {
+  const reader = document.querySelector(".reader[data-pdf]");
+  if (!reader) return;
+  const canvas = reader.querySelector(".reader__canvas");
+  const stage = reader.querySelector(".reader__stage");
+  const thumbs = reader.querySelector(".reader__thumbs");
+  const pageEl = reader.querySelector("[data-page]");
+  const totalEl = reader.querySelector("[data-total]");
+  const prevBtn = reader.querySelector('[data-act="prev"]');
+  const nextBtn = reader.querySelector('[data-act="next"]');
+  const PDFJS = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/";
+  let doc = null, page = 1, busy = false, queued = null;
+
+  const loadScript = (src) => new Promise((res, rej) => {
+    const s = document.createElement("script");
+    s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s);
+  });
+
+  async function draw(n, dir = 1) {
+    if (!doc) return;
+    if (busy) { queued = [n, dir]; return; }
+    busy = true;
+    n = Math.max(1, Math.min(doc.numPages, n));
+    const turning = n !== page && reader.classList.contains("is-ready");
+    if (turning) {
+      reader.style.setProperty("--dir", dir);
+      reader.classList.add("is-turning");
+      await new Promise((r) => setTimeout(r, 160));
+    }
+    page = n;
+    const p = await doc.getPage(n);
+    const base = p.getViewport({ scale: 1 });
+    const box = stage.getBoundingClientRect();
+    const fit = Math.min((box.width - 24) / base.width, (box.height - 24) / base.height);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+    const vp = p.getViewport({ scale: fit * dpr });
+    const off = document.createElement("canvas");
+    off.width = Math.floor(vp.width); off.height = Math.floor(vp.height);
+    await p.render({ canvasContext: off.getContext("2d"), viewport: vp }).promise;
+    canvas.width = off.width; canvas.height = off.height;
+    canvas.style.width = `${Math.floor(vp.width / dpr)}px`;
+    canvas.style.height = `${Math.floor(vp.height / dpr)}px`;
+    canvas.getContext("2d").drawImage(off, 0, 0);
+    pageEl.textContent = n;
+    prevBtn.disabled = n <= 1; nextBtn.disabled = n >= doc.numPages;
+    thumbs.querySelectorAll("button").forEach((b, i) => b.setAttribute("aria-current", String(i + 1 === n)));
+    reader.classList.add("is-ready");
+    reader.classList.remove("is-turning");
+    busy = false;
+    if (queued) { const q = queued; queued = null; draw(...q); }
+  }
+
+  async function makeThumbs() {
+    for (let i = 1; i <= doc.numPages; i++) {
+      const p = await doc.getPage(i);
+      const vp = p.getViewport({ scale: 80 / p.getViewport({ scale: 1 }).width });
+      const c = document.createElement("canvas");
+      c.width = vp.width; c.height = vp.height;
+      await p.render({ canvasContext: c.getContext("2d"), viewport: vp }).promise;
+      const li = document.createElement("li"), b = document.createElement("button");
+      b.type = "button"; b.setAttribute("aria-label", `Page ${i}`); b.appendChild(c);
+      b.addEventListener("click", () => draw(i, i > page ? 1 : -1));
+      li.appendChild(b); thumbs.appendChild(li);
+    }
+    thumbs.querySelectorAll("button").forEach((b, i) => b.setAttribute("aria-current", String(i + 1 === page)));
+  }
+
+  async function boot() {
+    try {
+      if (!window.pdfjsLib) await loadScript(PDFJS + "pdf.min.js");
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + "pdf.worker.min.js";
+      doc = await window.pdfjsLib.getDocument(reader.dataset.pdf).promise;
+      totalEl.textContent = doc.numPages;
+      await draw(1);
+      makeThumbs();
+    } catch (err) {
+      console.warn("PDF reader unavailable:", err);
+      reader.classList.add("is-failed");
+    }
+  }
+
+  new IntersectionObserver((entries, o) => {
+    if (entries.some((e) => e.isIntersecting)) { o.disconnect(); boot(); }
+  }, { rootMargin: "600px 0px" }).observe(reader);
+
+  prevBtn.addEventListener("click", () => draw(page - 1, -1));
+  nextBtn.addEventListener("click", () => draw(page + 1, 1));
+  reader.querySelectorAll("[data-goto]").forEach((b) => b.addEventListener("click", () => { const n = +b.dataset.goto; draw(n, n > page ? 1 : -1); }));
+  reader.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") { e.preventDefault(); draw(page + 1, 1); }
+    if (e.key === "ArrowLeft") { e.preventDefault(); draw(page - 1, -1); }
+  });
+  reader.querySelector('[data-act="full"]').addEventListener("click", () => {
+    if (document.fullscreenElement) document.exitFullscreen(); else reader.requestFullscreen?.();
+  });
+  let rt = 0;
+  const redraw = () => { clearTimeout(rt); rt = setTimeout(() => doc && draw(page), 150); };
+  addEventListener("resize", redraw);
+  document.addEventListener("fullscreenchange", redraw);
+})();
+
+/* ---------- Research desk: live SAS model (equations 1–5 of the paper) ---------- */
+
+(() => {
+  const lab = document.querySelector(".lab");
+  if (!lab) return;
+  const inputs = Object.fromEntries([...lab.querySelectorAll("[data-in]")].map((el) => [el.dataset.in, el]));
+  const outs = (k) => lab.querySelector(`[data-out="${k}"]`);
+  const PRESETS = {
+    cafe:   { theta: 12, mis: 0.08, fin: 0,    dist: 0.15, time: 0.1,  rho: 0.95, sig: 0.9 },
+    bar:    { theta: 18, mis: 0.82, fin: 0.1,  dist: 0.2,  time: 0.1,  rho: 0.9,  sig: 0.95 },
+    far:    { theta: 8,  mis: 0.06, fin: 0.6,  dist: 1.5,  time: 0.6,  rho: 0.95, sig: 0.9 },
+    unsafe: { theta: 10, mis: 0.1,  fin: 0.05, dist: 0.2,  time: 0.1,  rho: 0.14, sig: 0.7 },
+  };
+  const val = (k) => parseFloat(inputs[k].value);
+  const shown = { sas: 0, avg: 0 };
+  let target = { sas: 0, avg: 0 }, raf = 0;
+
+  function compute() {
+    const v = Math.cos((val("theta") * Math.PI) / 180);                 // Eq. 2, from the angle between U_ab and V_v
+    const i = 1 - val("mis");                                            // Eq. 3
+    const f = Math.exp(-(val("fin") + val("dist") + val("time")));       // Eq. 4 with α = β = γ = 1
+    const rs = val("rho") * val("sig");
+    const s = rs / (1 + Math.abs(1 - rs));                               // Eq. 5
+    const terms = { v, i, f, s };
+    const sas = v * i * f * s;                                           // Eq. 1
+    const avg = (v + i + f + s) / 4;
+    const weak = Object.entries(terms).sort((a, b) => a[1] - b[1])[0][0];
+    for (const [k, x] of Object.entries(terms)) {
+      const row = lab.querySelector(`[data-term-row="${k}"]`);
+      row.querySelector("i").style.setProperty("--v", x.toFixed(4));
+      row.classList.toggle("is-weak", k === weak);
+      outs(k).textContent = x.toFixed(2);
+      lab.querySelector(`[data-term="${k}"]`).classList.toggle("is-weak", k === weak);
+    }
+    for (const [k, el] of Object.entries(inputs)) {
+      const o = lab.querySelector(`[data-val="${k}"]`);
+      o.textContent = k === "theta" ? `${el.value}°` : (+el.value).toFixed(2);
+    }
+    const name = i18n.t(`desk.term.${weak}`);
+    outs("note").textContent = i18n.t("desk.note").replace("{name}", name).replace("{value}", terms[weak].toFixed(2));
+    target = { sas, avg };
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
+
+  // numbers ease toward the new value instead of jumping
+  function tick() {
+    let moving = false;
+    for (const k of ["sas", "avg"]) {
+      const d = target[k] - shown[k];
+      if (Math.abs(d) > 0.0005) { shown[k] += d * 0.18; moving = true; } else shown[k] = target[k];
+      outs(k).textContent = shown[k].toFixed(2);
+    }
+    raf = moving ? requestAnimationFrame(tick) : 0;
+  }
+
+  // presets glide the sliders to their values
+  function applyPreset(name) {
+    const to = PRESETS[name], from = Object.fromEntries(Object.keys(to).map((k) => [k, val(k)]));
+    const t0 = performance.now(), dur = reduceMotion ? 0 : 700;
+    lab.querySelectorAll("[data-preset]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.preset === name)));
+    const step = (now) => {
+      const t = dur ? Math.min(1, (now - t0) / dur) : 1;
+      const e = 1 - Math.pow(1 - t, 3);
+      for (const k in to) inputs[k].value = (from[k] + (to[k] - from[k]) * e).toFixed(3);
+      compute();
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  Object.values(inputs).forEach((el) => el.addEventListener("input", () => {
+    lab.querySelectorAll("[data-preset]").forEach((b) => b.setAttribute("aria-pressed", "false"));
+    compute();
+  }));
+  lab.querySelectorAll("[data-preset]").forEach((b) => b.addEventListener("click", () => applyPreset(b.dataset.preset)));
+  i18n.onChange(compute);
+  applyPreset("cafe");
+})();
