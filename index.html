@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400&display=swap" media="print" onload="this.media='all'" />
-  <link rel="stylesheet" href="styles.css?v=202610110023" />
+  <link rel="stylesheet" href="styles.css?v=202610110032" />
   <!-- instant navigation: pages you are about to open are pre-rendered on hover (Chromium) -->
   <script type="speculationrules">{"prerender":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/assets/*"}},{"not":{"selector_matches":"[target=_blank], [href^='mailto:'], [href^='tel:']"}}]},"eagerness":"moderate"}]}</script>
 </head>
@@ -157,44 +157,57 @@
         </div>
       </div>
 
-      <ul class="posts">
-        <li class="post" data-reveal>
-          <a class="post__link" href="blog/spillover.html">
-            <img class="post__img" src="assets/work-1.webp" width="1088" height="923" loading="lazy" decoding="async"
-                 alt="A woman smiling at her phone in a crowd" data-i18n-attr="alt:work.post0.alt" />
-            <span class="post__panel">
-              <span class="post__index">01</span>
-              <span class="post__title" data-i18n="work.post0.title">Meetfleet: the spillover of reality on advanced AI technology</span>
-              <span class="post__more"><span class="post__more-inner"><span class="post__btn"><span data-i18n="work.readMore">Read More</span><svg viewBox="0 0 28 12" aria-hidden="true"><path d="M0 6h26M21 1l5 5-5 5" /></svg></span></span></span>
-            </span>
-          </a>
-          <p class="post__kicker"><span class="post__kicker-ch"><span data-i18n="work.chapter">Chapter</span> 01</span><span data-i18n="work.post0.kicker">The math behind a meetup</span></p>
-        </li>
-        <li class="post" data-reveal>
-          <a class="post__link" href="blog/advanced.html">
-            <img class="post__img" src="assets/work-2.webp" width="1088" height="923" loading="lazy" decoding="async"
-                 alt="People in white T-shirts looking at their phones" data-i18n-attr="alt:work.post1.alt" />
-            <span class="post__panel">
-              <span class="post__index">02</span>
-              <span class="post__title" data-i18n="work.post1.title">The Convergence of Advanced Technology and Refined Design</span>
-              <span class="post__more"><span class="post__more-inner"><span class="post__btn"><span data-i18n="work.readMore">Read More</span><svg viewBox="0 0 28 12" aria-hidden="true"><path d="M0 6h26M21 1l5 5-5 5" /></svg></span></span></span>
-            </span>
-          </a>
-          <p class="post__kicker"><span class="post__kicker-ch"><span data-i18n="work.chapter">Chapter</span> 02</span><span data-i18n="work.post1.kicker">The product people use</span></p>
-        </li>
-        <li class="post" data-reveal>
-          <a class="post__link" href="blog/meetchat.html">
-            <img class="post__img" src="assets/work-3.webp" width="1088" height="923" loading="lazy" decoding="async"
-                 alt="Profiles of people reading their phones in the dark" data-i18n-attr="alt:work.post2.alt" />
-            <span class="post__panel">
-              <span class="post__index">03</span>
-              <span class="post__title" data-i18n="work.post2.title">AI, Mathematics, and Physics, with Refined Design and Security Beyond the Essentials</span>
-              <span class="post__more"><span class="post__more-inner"><span class="post__btn"><span data-i18n="work.readMore">Read More</span><svg viewBox="0 0 28 12" aria-hidden="true"><path d="M0 6h26M21 1l5 5-5 5" /></svg></span></span></span>
-            </span>
-          </a>
-          <p class="post__kicker"><span class="post__kicker-ch"><span data-i18n="work.chapter">Chapter</span> 03</span><span data-i18n="work.post2.kicker">Messaging and security</span></p>
-        </li>
-      </ul>
+      </div>
+
+      <!-- the chapters sit on a pale sheet that slides under the dark band -->
+      <div class="chapters">
+        <ol class="posts">
+          <li class="post" data-reveal>
+            <a class="post__link" href="blog/spillover.html" tabindex="-1" aria-hidden="true">
+              <img class="post__img" src="assets/work-1.webp" width="1088" height="923" loading="lazy" decoding="async" alt="A woman smiling at her phone in a crowd" data-i18n-attr="alt:work.post0.alt" />
+              <span class="post__panel"><svg class="post__mark" viewBox="0 0 48 48" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M45.0443 29.572C41.7112 38.1868 33.5477 44.282 23.9992 44.2821C14.451 44.2819 6.28873 38.1865 2.95563 29.572L7.73895 27.6014C10.3173 34.2658 16.6291 38.9682 23.9992 38.9684C31.3694 38.9684 37.6825 34.266 40.261 27.6014L45.0443 29.572ZM23.9992 3.71802C33.6452 3.7181 41.4659 11.557 41.4662 21.2272C41.4662 23.4749 41.0427 25.624 40.273 27.5984L35.1417 25.5887C33.398 30.0612 29.0586 33.2148 23.9992 33.2149C18.9401 33.2146 14.6019 30.061 12.8582 25.5887L7.7269 27.5984C6.95724 25.624 6.5337 23.4749 6.5337 21.2272C6.534 11.5571 14.3534 3.71836 23.9992 3.71802Z"/></svg><span class="post__index"><span data-i18n="work.chapter">Chapter</span> 01</span></span>
+            </a>
+            <div class="post__body">
+              <p class="post__ch"><span data-i18n="work.chapter">Chapter</span> <b>01</b></p>
+              <h3 class="post__h"><a href="blog/spillover.html" data-i18n="work.post0.title">Meetfleet: the spillover of reality on advanced AI technology</a></h3>
+              <p class="post__excerpt" data-i18n="work.post0.excerpt">How Meetfleet turns compatible intent into a meeting it can defend: the Social Activation Score, the Trust Protocol, and the maths that keeps a weak factor visible.</p>
+              <div class="post__foot">
+                <a class="post__cta" href="blog/spillover.html"><span data-i18n="work.readChapter">Read the chapter</span><span class="post__cta-arrow"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                <span class="post__time">43 <span data-i18n="work.minRead">min read</span></span>
+              </div>
+            </div>
+          </li>
+          <li class="post" data-reveal>
+            <a class="post__link" href="blog/advanced.html" tabindex="-1" aria-hidden="true">
+              <img class="post__img" src="assets/work-2.webp" width="1088" height="923" loading="lazy" decoding="async" alt="People in white T-shirts looking at their phones" data-i18n-attr="alt:work.post1.alt" />
+              <span class="post__panel"><svg class="post__mark" viewBox="0 0 48 48" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M45.0443 29.572C41.7112 38.1868 33.5477 44.282 23.9992 44.2821C14.451 44.2819 6.28873 38.1865 2.95563 29.572L7.73895 27.6014C10.3173 34.2658 16.6291 38.9682 23.9992 38.9684C31.3694 38.9684 37.6825 34.266 40.261 27.6014L45.0443 29.572ZM23.9992 3.71802C33.6452 3.7181 41.4659 11.557 41.4662 21.2272C41.4662 23.4749 41.0427 25.624 40.273 27.5984L35.1417 25.5887C33.398 30.0612 29.0586 33.2148 23.9992 33.2149C18.9401 33.2146 14.6019 30.061 12.8582 25.5887L7.7269 27.5984C6.95724 25.624 6.5337 23.4749 6.5337 21.2272C6.534 11.5571 14.3534 3.71836 23.9992 3.71802Z"/></svg><span class="post__index"><span data-i18n="work.chapter">Chapter</span> 02</span></span>
+            </a>
+            <div class="post__body">
+              <p class="post__ch"><span data-i18n="work.chapter">Chapter</span> <b>02</b></p>
+              <h3 class="post__h"><a href="blog/advanced.html" data-i18n="work.post1.title">The Convergence of Advanced Technology and Refined Design</a></h3>
+              <p class="post__excerpt" data-i18n="work.post1.excerpt">From “I’m bored” to “see you there”: the home screen, plan creation, the feed, plan insights, and how AI shapes every subscription tier.</p>
+              <div class="post__foot">
+                <a class="post__cta" href="blog/advanced.html"><span data-i18n="work.readChapter">Read the chapter</span><span class="post__cta-arrow"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                <span class="post__time">35 <span data-i18n="work.minRead">min read</span></span>
+              </div>
+            </div>
+          </li>
+          <li class="post" data-reveal>
+            <a class="post__link" href="blog/meetchat.html" tabindex="-1" aria-hidden="true">
+              <img class="post__img" src="assets/work-3.webp" width="1088" height="923" loading="lazy" decoding="async" alt="Profiles of people reading their phones in the dark" data-i18n-attr="alt:work.post2.alt" />
+              <span class="post__panel"><svg class="post__mark" viewBox="0 0 48 48" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M45.0443 29.572C41.7112 38.1868 33.5477 44.282 23.9992 44.2821C14.451 44.2819 6.28873 38.1865 2.95563 29.572L7.73895 27.6014C10.3173 34.2658 16.6291 38.9682 23.9992 38.9684C31.3694 38.9684 37.6825 34.266 40.261 27.6014L45.0443 29.572ZM23.9992 3.71802C33.6452 3.7181 41.4659 11.557 41.4662 21.2272C41.4662 23.4749 41.0427 25.624 40.273 27.5984L35.1417 25.5887C33.398 30.0612 29.0586 33.2148 23.9992 33.2149C18.9401 33.2146 14.6019 30.061 12.8582 25.5887L7.7269 27.5984C6.95724 25.624 6.5337 23.4749 6.5337 21.2272C6.534 11.5571 14.3534 3.71836 23.9992 3.71802Z"/></svg><span class="post__index"><span data-i18n="work.chapter">Chapter</span> 03</span></span>
+            </a>
+            <div class="post__body">
+              <p class="post__ch"><span data-i18n="work.chapter">Chapter</span> <b>03</b></p>
+              <h3 class="post__h"><a href="blog/meetchat.html" data-i18n="work.post2.title">AI, Mathematics, and Physics, with Refined Design and Security Beyond the Essentials</a></h3>
+              <p class="post__excerpt" data-i18n="work.post2.excerpt">Meetchat, the messaging that quietly does the planning, and the security underneath it: Shield, passkey sign-in and the AI that protects meetups.</p>
+              <div class="post__foot">
+                <a class="post__cta" href="blog/meetchat.html"><span data-i18n="work.readChapter">Read the chapter</span><span class="post__cta-arrow"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                <span class="post__time">26 <span data-i18n="work.minRead">min read</span></span>
+              </div>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
 
@@ -465,7 +478,7 @@
     <div class="cursor__dot"></div>
   </div>
 
-  <script src="i18n.js?v=202610110023"></script>
-  <script src="main.js?v=202610110023"></script>
+  <script src="i18n.js?v=202610110032"></script>
+  <script src="main.js?v=202610110032"></script>
 </body>
 </html>
