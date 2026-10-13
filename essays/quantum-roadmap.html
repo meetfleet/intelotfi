@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <!-- first paint: the page colour only, never unstyled content; the stylesheet reveals the body -->
+  <style>html{background:#f2f4f6}body{visibility:hidden}</style>
+  <script>setTimeout(function(){document.body&&(document.body.style.visibility="visible")},2500)</script>
+  <title>What a qubit can’t do for your roadmap | Hamza Lotfi</title>
+  <meta name="description" content="An essay by Hamza Lotfi: Quantum computers are real and mostly misunderstood. A product builder’s guide to what they change, what they don’t, and the one thing to start on now." />
+  <meta name="author" content="Hamza Lotfi" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://intelotfi.com/essays/quantum-roadmap.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="intelotfi · Hamza Lotfi" />
+  <meta property="og:title" content="What a qubit can’t do for your roadmap | Hamza Lotfi" />
+  <meta property="og:description" content="An essay by Hamza Lotfi: Quantum computers are real and mostly misunderstood. A product builder’s guide to what they change, what they don’t, and the one thing to start on now." />
+  <meta property="og:url" content="https://intelotfi.com/essays/quantum-roadmap.html" />
+  <meta property="og:image" content="https://intelotfi.com/assets/og.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Hamza Lotfi: Making the thinking legible" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="article:author" content="Hamza Lotfi" />
+  <meta property="article:published_time" content="2026-10-13" />
+  <meta property="article:section" content="Essay" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What a qubit can’t do for your roadmap | Hamza Lotfi" />
+  <meta name="twitter:description" content="An essay by Hamza Lotfi: Quantum computers are real and mostly misunderstood. A product builder’s guide to what they change, what they don’t, and the one thing to start on now." />
+  <meta name="twitter:image" content="https://intelotfi.com/assets/og.jpg" />
+  <meta name="twitter:image:alt" content="Hamza Lotfi: Making the thinking legible" />
+  <link rel="me" href="https://www.linkedin.com/in/intelpoly/" />
+  <link rel="me" href="https://independent.academia.edu/MeetfleetResearchDivision" />
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+  <link rel="manifest" href="../site.webmanifest" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "What a qubit can’t do for your roadmap", "description": "An essay by Hamza Lotfi: Quantum computers are real and mostly misunderstood. A product builder’s guide to what they change, what they don’t, and the one thing to start on now.", "image": "https://intelotfi.com/assets/og.jpg", "datePublished": "2026-10-13", "dateModified": "2026-10-13", "inLanguage": "en", "articleSection": "Essay", "keywords": "Quantum computing", "author": {"@type": "Person", "name": "Hamza Lotfi", "url": "https://intelotfi.com/", "sameAs": ["https://www.linkedin.com/in/intelpoly/", "https://independent.academia.edu/MeetfleetResearchDivision"]}, "publisher": {"@type": "Person", "name": "Hamza Lotfi", "url": "https://intelotfi.com/", "sameAs": ["https://www.linkedin.com/in/intelpoly/", "https://independent.academia.edu/MeetfleetResearchDivision"]}, "mainEntityOfPage": "https://intelotfi.com/essays/quantum-roadmap.html", "isPartOf": {"@type": "WebSite", "name": "intelotfi", "url": "https://intelotfi.com/"}}</script>
+  <meta name="theme-color" content="#f2f4f6" />
+  <link rel="icon" href="../assets/icon.svg" type="image/svg+xml" />
+  <link rel="preload" href="../fonts/AllianceNo2-Regular.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&amp;family=Lora:ital@0;1&amp;display=swap" />
+  <link rel="stylesheet" href="essays.css?v=202610132251" />
+  <!-- instant navigation: pages you are about to open are pre-rendered on hover (Chromium) -->
+  <script type="speculationrules">{"prerender":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/assets/*"}},{"not":{"selector_matches":"[target=_blank], [href^='mailto:'], [href^='tel:']"}}]},"eagerness":"moderate"}]}</script>
+</head>
+<body data-essay="2">
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <header class="bar">
+    <a class="bar__logo" href="../index.html" aria-label="intelotfi | Hamza Lotfi, home">intelotfi<span class="bar__cursor" aria-hidden="true"></span></a>
+    <a class="bar__back" href="../meetfleet/#essays">← All essays</a>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div class="intro__context">
+        <p class="mono">Quantum computing</p>
+        <p class="mono">Making the thinking legible / 02 / 03 · <span data-read>…</span> min</p>
+      </div>
+      <h1 class="intro__title">What a qubit can’t do for your roadmap</h1>
+      <div class="intro__open">
+        <p class="intro__deck">Quantum computers are real and mostly misunderstood. A product builder’s guide to what they change, what they don’t, and the one thing to start on now.</p>
+        <div class="motif"><span class="m-amps" role="img" aria-label="Eight amplitudes; one grows as the others shrink"><i></i><i></i><i></i><i></i><i></i><i class="is-marked"></i><i></i><i></i></span></div>
+      </div>
+    </section>
+
+    <div class="read">
+      <aside class="guide" aria-label="In this essay">
+        <p class="mono">In this essay</p>
+        <ol class="guide__list">
+          <li><a href="#s1"><span>01</span>Not a faster computer</a></li>
+          <li><a href="#s2"><span>02</span>Interference, step by step</a></li>
+          <li><a href="#s3"><span>03</span>Where the speedups are</a></li>
+          <li><a href="#s4"><span>04</span>Noise is the whole story</a></li>
+          <li><a href="#s5"><span>05</span>The deadline that is already here</a></li>
+          <li><a href="#s6"><span>06</span>What to do on Monday</a></li>
+        </ol>
+        <p class="guide__note">An explainer for people who build products, not physicists. Estimates and dates are as published; the field moves quickly.</p>
+      </aside>
+
+      <article class="body" id="essay">
+        <section class="es" id="s1">
+          <p class="es__n">01 /</p>
+          <h2>Not a faster computer</h2>
+<p>The most common misunderstanding about quantum computers is that they are very fast ordinary computers. They are not. For most tasks, from serving a web page to training a recommendation model, they offer no advantage at all, and in practice they are slower and far more expensive.</p>
+<p>What they offer is a different kind of computation. The state of n qubits is described by 2ⁿ complex numbers called amplitudes. Fifty qubits already need about a quadrillion of them. But you cannot read those numbers out: a measurement returns just n ordinary bits, chosen at random with probabilities set by the amplitudes. The power is not in storing many answers. It is in interference: arranging the computation so the amplitudes of wrong answers cancel each other out and the amplitudes of right answers add up.</p>
+<p>That only works when a problem has a structure the algorithm can exploit. No structure, no speedup. This one sentence removes most of the hype.</p>
+        </section>
+        <section class="es" id="s2">
+          <p class="es__n">02 /</p>
+          <h2>Interference, step by step</h2>
+<p>Grover’s search algorithm is the clearest example. Imagine eight possible answers, one of them correct, and a test that can recognise the right one. Classically you check them one by one: on average you need several tries. Grover starts with every answer equally likely, then repeats one step that flips the sign of the correct answer’s amplitude and reflects all amplitudes around their average. Each repetition moves probability toward the correct answer.</p>
+<figure class="fig-panel">
+<figcaption class="fig-label">Fig. 01 / Grover search over eight candidates</figcaption>
+<div class="amps" role="table" aria-label="Probability of each candidate after zero, one and two Grover iterations">
+<div class="amps__row" role="row"><span class="amps__k" role="rowheader">Start</span><span class="amps__bars" role="cell"><i style="--p:0.1250"></i><i style="--p:0.1250"></i><i style="--p:0.1250"></i><i style="--p:0.1250"></i><i style="--p:0.1250"></i><i class="is-marked" style="--p:0.1250"></i><i style="--p:0.1250"></i><i style="--p:0.1250"></i></span><span class="amps__v" role="cell">12.5%</span></div>
+<div class="amps__row" role="row"><span class="amps__k" role="rowheader">1 step</span><span class="amps__bars" role="cell"><i style="--p:0.0312"></i><i style="--p:0.0312"></i><i style="--p:0.0312"></i><i style="--p:0.0312"></i><i style="--p:0.0312"></i><i class="is-marked" style="--p:0.7812"></i><i style="--p:0.0312"></i><i style="--p:0.0312"></i></span><span class="amps__v" role="cell">78.1%</span></div>
+<div class="amps__row" role="row"><span class="amps__k" role="rowheader">2 steps</span><span class="amps__bars" role="cell"><i style="--p:0.0078"></i><i style="--p:0.0078"></i><i style="--p:0.0078"></i><i style="--p:0.0078"></i><i style="--p:0.0078"></i><i class="is-marked" style="--p:0.9453"></i><i style="--p:0.0078"></i><i style="--p:0.0078"></i></span><span class="amps__v" role="cell">94.5%</span></div>
+</div>
+<p class="fig-note">Exact probabilities of measuring the marked candidate (red). For N items the number of steps grows like √N, so a million candidates need about 800 steps instead of hundreds of thousands of checks.</p>
+</figure>
+<p>Notice what the speedup is: quadratic, not magical. And the “test that recognises the right answer” must itself run on the quantum computer. For a real database, a classical index already finds a record in a handful of steps, so Grover helps nothing there. Its value is in search problems where no shortcut exists.</p>
+        </section>
+        <section class="es" id="s3">
+          <p class="es__n">03 /</p>
+          <h2>Where the speedups are</h2>
+<p>A small number of problem families have strong quantum algorithms. Most of what product teams do is not in them.</p>
+<figure class="fig-panel">
+<figcaption class="fig-label">Fig. 02 / Where quantum advantage is expected</figcaption>
+<div class="tbl tbl--3" role="table" aria-label="Problem families and expected quantum advantage">
+<div class="tbl__row tbl__row--head" role="row"><span role="columnheader">Problem</span><span role="columnheader">Quantum approach</span><span role="columnheader">Expected advantage</span></div>
+<div class="tbl__row" role="row"><span role="cell">Simulating molecules and materials</span><span role="cell">Hamiltonian simulation</span><span role="cell" class="hi">Large, for some systems</span></div>
+<div class="tbl__row" role="row"><span role="cell">Factoring, discrete logarithms</span><span role="cell">Shor’s algorithm</span><span role="cell" class="hi">Superpolynomial</span></div>
+<div class="tbl__row" role="row"><span role="cell">Unstructured search</span><span role="cell">Grover’s algorithm</span><span role="cell">Quadratic at most</span></div>
+<div class="tbl__row" role="row"><span role="cell">Optimisation, machine learning</span><span role="cell">Various heuristics</span><span role="cell">Unproven</span></div>
+<div class="tbl__row" role="row"><span role="cell">Web, databases, sorting</span><span role="cell">None useful</span><span role="cell">None</span></div>
+</div>
+<p class="fig-note">Simplified. Several proposed machine-learning speedups were later matched by classical “quantum-inspired” algorithms, starting with Ewin Tang’s 2018 result on recommendation systems.</p>
+</figure>
+<p>Chemistry and materials are the most credible near-term wins, because nature itself is quantum and classical computers struggle to simulate it exactly. Factoring matters for a different reason: it is the problem the internet’s security quietly depends on.</p>
+        </section>
+        <section class="es" id="s4">
+          <p class="es__n">04 /</p>
+          <h2>Noise is the whole story</h2>
+<p>Today’s machines have hundreds to around a thousand physical qubits, and every one of them is noisy. Operations fail at small but significant rates, and errors accumulate faster than a long algorithm can finish. John Preskill named this era NISQ: noisy intermediate-scale quantum.</p>
+<p>The way out is quantum error correction: encoding one reliable logical qubit across many physical ones, and continuously detecting and correcting errors without destroying the computation. The overhead is large, often hundreds or thousands of physical qubits per logical qubit. The crucial milestone is being below threshold, where adding more physical qubits makes the logical qubit better rather than worse. In late 2024 Google reported exactly that with its Willow chip. It does not make useful quantum computers arrive tomorrow, but it moved the question from whether to when.</p>
+        </section>
+        <section class="es" id="s5">
+          <p class="es__n">05 /</p>
+          <h2>The deadline that is already here</h2>
+<p>Shor’s algorithm, on a large error-corrected machine, would break RSA and elliptic-curve cryptography: the public-key systems behind HTTPS, VPNs, software updates and digital signatures. Published estimates for breaking RSA-2048 have fallen from about 20 million noisy qubits (Gidney and Ekerå, 2019) to under a million (Gidney, 2025). Nobody can build that yet. But attackers do not need to wait: traffic recorded today can be stored and decrypted later. This is called harvest now, decrypt later.</p>
+<figure class="fig-dark">
+<figcaption class="fig-label">Fig. 03 / Mosca’s inequality</figcaption>
+<div class="mosca">
+<p class="mosca__eq"><span>x</span> + <span>y</span> &gt; <span class="hi">z</span></p>
+<dl class="mosca__terms">
+<div><dt>x</dt><dd>How many years your data must stay secret</dd></div>
+<div><dt>y</dt><dd>How many years your migration to new cryptography will take</dd></div>
+<div><dt class="hi">z</dt><dd>Years until a quantum computer can break today’s public-key cryptography</dd></div>
+</dl>
+</div>
+<p class="fig-note">If x + y is greater than z, data you encrypt today is already at risk. Proposed by Michele Mosca.</p>
+</figure>
+<p>The replacement exists. In August 2024 NIST published the first post-quantum cryptography standards: FIPS 203 (ML-KEM) for key exchange, and FIPS 204 (ML-DSA) and FIPS 205 (SLH-DSA) for signatures. Chrome and Cloudflare already use hybrid key exchange that combines a classical algorithm with ML-KEM, so much of today’s web traffic is protected without anyone noticing.</p>
+        </section>
+        <section class="es" id="s6">
+          <p class="es__n">06 /</p>
+          <h2>What to do on Monday</h2>
+<p>For a product team, the quantum to-do list is short and has nothing to do with qubits. First, inventory where your product uses public-key cryptography: TLS, tokens, signed URLs, stored encrypted data, third-party SDKs. Second, build crypto agility: keep algorithms behind interfaces and configuration, so changing them is a deployment, not a rewrite. Third, ask your vendors and cloud providers for their post-quantum plans. If you want to experiment, the Open Quantum Safe project ships liboqs with Python bindings.</p>
+<p>And keep the hype off the roadmap. A pitch that promises quantum speedups for your recommendation engine or logistics in the next few years deserves the same question as any other: what is the structure being exploited, and has a classical method already matched it? The real quantum work for most teams is defensive, unglamorous and already overdue.</p>
+        </section>
+        <aside class="take">
+          <p class="mono">Take this with you</p>
+          <p class="take__title">Quantum changes a few things completely, and most things not at all.</p>
+          <ul class="take__list">
+          <li>Speedups need structure: chemistry, factoring and some search, not general computing.</li>
+          <li>Error correction below threshold is the milestone to watch, not raw qubit counts.</li>
+          <li>Start the post-quantum cryptography migration now; it is a software project you can do today.</li>
+          </ul>
+        </aside>
+
+        <nav class="pager" aria-label="More essays">
+          <a class="pager__item pager__item--prev" href="evals-first.html"><span class="pager__k">← Previous · 01 / 03</span><span class="pager__t">Write the eval before the prompt</span></a>
+          <a class="pager__item pager__item--next" href="python-latency.html"><span class="pager__k">Next → · 03 / 03</span><span class="pager__t">The prototype is Python. The product is the latency.</span></a>
+        </nav>
+      </article>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <a href="../meetfleet/#essays">← All essays</a>
+    <p class="mono">© 2026 Hamza Lotfi · intelotfi</p>
+  </footer>
+
+  <script src="essays.js?v=202610132251"></script>
+</body>
+</html>

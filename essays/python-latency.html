@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <!-- first paint: the page colour only, never unstyled content; the stylesheet reveals the body -->
+  <style>html{background:#f2f4f6}body{visibility:hidden}</style>
+  <script>setTimeout(function(){document.body&&(document.body.style.visibility="visible")},2500)</script>
+  <title>The prototype is Python. The product is the latency. | Hamza Lotfi</title>
+  <meta name="description" content="An essay by Hamza Lotfi: Most AI features are born in a notebook. What changes when real people wait for the answer, and why Python is still the right place to fix it." />
+  <meta name="author" content="Hamza Lotfi" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://intelotfi.com/essays/python-latency.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="intelotfi · Hamza Lotfi" />
+  <meta property="og:title" content="The prototype is Python. The product is the latency. | Hamza Lotfi" />
+  <meta property="og:description" content="An essay by Hamza Lotfi: Most AI features are born in a notebook. What changes when real people wait for the answer, and why Python is still the right place to fix it." />
+  <meta property="og:url" content="https://intelotfi.com/essays/python-latency.html" />
+  <meta property="og:image" content="https://intelotfi.com/assets/og.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Hamza Lotfi: Making the thinking legible" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="article:author" content="Hamza Lotfi" />
+  <meta property="article:published_time" content="2026-10-13" />
+  <meta property="article:section" content="Essay" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The prototype is Python. The product is the latency. | Hamza Lotfi" />
+  <meta name="twitter:description" content="An essay by Hamza Lotfi: Most AI features are born in a notebook. What changes when real people wait for the answer, and why Python is still the right place to fix it." />
+  <meta name="twitter:image" content="https://intelotfi.com/assets/og.jpg" />
+  <meta name="twitter:image:alt" content="Hamza Lotfi: Making the thinking legible" />
+  <link rel="me" href="https://www.linkedin.com/in/intelpoly/" />
+  <link rel="me" href="https://independent.academia.edu/MeetfleetResearchDivision" />
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+  <link rel="manifest" href="../site.webmanifest" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "The prototype is Python. The product is the latency.", "description": "An essay by Hamza Lotfi: Most AI features are born in a notebook. What changes when real people wait for the answer, and why Python is still the right place to fix it.", "image": "https://intelotfi.com/assets/og.jpg", "datePublished": "2026-10-13", "dateModified": "2026-10-13", "inLanguage": "en", "articleSection": "Essay", "keywords": "Python & systems", "author": {"@type": "Person", "name": "Hamza Lotfi", "url": "https://intelotfi.com/", "sameAs": ["https://www.linkedin.com/in/intelpoly/", "https://independent.academia.edu/MeetfleetResearchDivision"]}, "publisher": {"@type": "Person", "name": "Hamza Lotfi", "url": "https://intelotfi.com/", "sameAs": ["https://www.linkedin.com/in/intelpoly/", "https://independent.academia.edu/MeetfleetResearchDivision"]}, "mainEntityOfPage": "https://intelotfi.com/essays/python-latency.html", "isPartOf": {"@type": "WebSite", "name": "intelotfi", "url": "https://intelotfi.com/"}}</script>
+  <meta name="theme-color" content="#f2f4f6" />
+  <link rel="icon" href="../assets/icon.svg" type="image/svg+xml" />
+  <link rel="preload" href="../fonts/AllianceNo2-Regular.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&amp;family=Lora:ital@0;1&amp;display=swap" />
+  <link rel="stylesheet" href="essays.css?v=202610132251" />
+  <!-- instant navigation: pages you are about to open are pre-rendered on hover (Chromium) -->
+  <script type="speculationrules">{"prerender":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/assets/*"}},{"not":{"selector_matches":"[target=_blank], [href^='mailto:'], [href^='tel:']"}}]},"eagerness":"moderate"}]}</script>
+</head>
+<body data-essay="3">
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <header class="bar">
+    <a class="bar__logo" href="../index.html" aria-label="intelotfi | Hamza Lotfi, home">intelotfi<span class="bar__cursor" aria-hidden="true"></span></a>
+    <a class="bar__back" href="../meetfleet/#essays">← All essays</a>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div class="intro__context">
+        <p class="mono">Python &amp; systems</p>
+        <p class="mono">Making the thinking legible / 03 / 03 · <span data-read>…</span> min</p>
+      </div>
+      <h1 class="intro__title">The prototype is Python. The product is the latency.</h1>
+      <div class="intro__open">
+        <p class="intro__deck">Most AI features are born in a notebook. What changes when real people wait for the answer, and why Python is still the right place to fix it.</p>
+        <div class="motif"><span class="m-stream" role="img" aria-label="A prompt streaming tokens"><b>&gt;&gt;&gt;</b><i style="--k:0;--w:22px"></i><i style="--k:1;--w:34px"></i><i style="--k:2;--w:14px"></i><i style="--k:3;--w:40px"></i><i style="--k:4;--w:26px"></i><i style="--k:5;--w:18px"></i><u></u></span></div>
+      </div>
+    </section>
+
+    <div class="read">
+      <aside class="guide" aria-label="In this essay">
+        <p class="mono">In this essay</p>
+        <ol class="guide__list">
+          <li><a href="#s1"><span>01</span>A notebook hides time</a></li>
+          <li><a href="#s2"><span>02</span>Measure the right numbers</a></li>
+          <li><a href="#s3"><span>03</span>Overlap, then stream</a></li>
+          <li><a href="#s4"><span>04</span>Cache what repeats</a></li>
+          <li><a href="#s5"><span>05</span>Know where Python is slow, and where it isn’t</a></li>
+          <li><a href="#s6"><span>06</span>Design the wait</a></li>
+        </ol>
+        <p class="guide__note">Written for builders shipping AI features. Timings in the figures are illustrative; measure your own.</p>
+      </aside>
+
+      <article class="body" id="essay">
+        <section class="es" id="s1">
+          <p class="es__n">01 /</p>
+          <h2>A notebook hides time</h2>
+<p>In a notebook, waiting is free. You run a cell, the model thinks for eight seconds, a good answer appears, and the prototype is a success. Nobody in that room is bored, and nobody leaves.</p>
+<p>Put the same code behind a button and those eight seconds become the product. People stare at a spinner, wonder whether it is broken, tap again, and send a second request that costs you twice. The answer can be excellent and the feature can still fail, because the experience of waiting was never designed. It was inherited from the notebook.</p>
+<p>The good news is that most of that time can be removed or hidden, and Python, the language the prototype was written in, is perfectly capable of doing it.</p>
+        </section>
+        <section class="es" id="s2">
+          <p class="es__n">02 /</p>
+          <h2>Measure the right numbers</h2>
+<p>Average latency is the wrong number. A feature that takes 1.5 seconds on average can still take 9 seconds for one request in twenty, and those are the requests people remember. Track percentiles: the median (p50) for the typical experience, and p95 or p99 for the tail.</p>
+<p>For AI features, split the time into stages. How long until the first word appears on screen? How long until the answer is complete? How much of the time is retrieval, how much is the model, how much is your own code? Time to first token shapes how fast a feature feels; time to the last token shapes how much it costs.</p>
+        </section>
+        <section class="es" id="s3">
+          <p class="es__n">03 /</p>
+          <h2>Overlap, then stream</h2>
+<p>Prototype code tends to be strictly sequential: load the user’s profile, then search the documents, then call the model, then wait for the whole answer, then show it. Two of those steps usually do not depend on each other, and the last step does not need to wait at all.</p>
+<figure class="fig-dark">
+<figcaption class="fig-label">Fig. 01 / Same work, different wait</figcaption>
+<div class="wf" role="img" aria-label="Sequential pipeline shows the first word at 4.5 seconds; overlapped and streamed pipeline shows it at 1.2 seconds">
+<div class="wf__row"><span class="wf__k">Sequential</span><span class="wf__track"><i class="wf__seg" style="--a:0;--b:0.3">profile</i><i class="wf__seg" style="--a:0.3;--b:0.8">docs</i><i class="wf__seg wf__seg--model" style="--a:0.8;--b:4.5">model, full answer</i><b class="wf__mark" style="--t:4.5"></b></span><span class="wf__v">4.5 s</span></div>
+<div class="wf__row"><span class="wf__k">Overlapped + streamed</span><span class="wf__track"><i class="wf__seg wf__seg--top" style="--a:0;--b:0.3">profile</i><i class="wf__seg wf__seg--alt" style="--a:0;--b:0.5">docs</i><i class="wf__seg wf__seg--model" style="--a:0.5;--b:4.2">words arrive as they are written</i><b class="wf__mark" style="--t:1.2"></b></span><span class="wf__v hi">1.2 s</span></div>
+<div class="wf__axis"><span></span><span class="wf__ticks"><span>0 s</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5 s</span></span><span></span></div>
+</div>
+<p class="fig-note">The marker is when the first word reaches the screen. Illustrative timings: profile 0.3 s, document search 0.5 s, first token 0.7 s after the prompt is sent, full answer 3.7 s.</p>
+</figure>
+<p>With asyncio, independent calls run together with one line, and an async generator hands each token to the user as soon as it exists:</p>
+<figure class="fig-dark">
+<figcaption class="fig-label">Fig. 02 / The same pipeline, overlapped and streamed</figcaption>
+<pre class="code"><code><span class="c-k">import</span> asyncio
+
+<span class="c-k">async def</span> <span class="c-f">answer</span>(question: str):
+    <span class="c-c"># independent lookups run together, not one after the other</span>
+    profile, docs = <span class="c-k">await</span> asyncio.gather(
+        load_profile(question),
+        search_docs(question),
+    )
+    prompt = build_prompt(question, profile, docs)
+    <span class="c-k">async for</span> token <span class="c-k">in</span> model.stream(prompt):
+        <span class="c-k">yield</span> token   <span class="c-c"># the first words reach the screen immediately</span></code></pre>
+<p class="fig-note">load_profile, search_docs and model.stream stand in for your own clients. Most model SDKs offer a streaming call with this shape.</p>
+</figure>
+        </section>
+        <section class="es" id="s4">
+          <p class="es__n">04 /</p>
+          <h2>Cache what repeats</h2>
+<p>The fastest request is the one you do not make. Pure, repeated computations, such as embedding the same document or formatting the same template, can be cached. For ordinary synchronous functions, functools.lru_cache does this in one line. Be careful with async code: decorating a coroutine function with lru_cache stores the coroutine object, which can only be awaited once, not its result. Async calls need a cache that stores finished values, in memory or in something like Redis.</p>
+<p>Model providers offer a second kind of cache. When many requests share a long, stable prefix, such as system instructions, tool definitions or a reference document, prompt caching lets the provider reuse that work, which cuts both latency and cost. It rewards a simple discipline: put the stable parts of the prompt first and the changing parts last.</p>
+        </section>
+        <section class="es" id="s5">
+          <p class="es__n">05 /</p>
+          <h2>Know where Python is slow, and where it isn’t</h2>
+<p>It is tempting to blame the language. Usually the evidence points elsewhere. An AI request spends most of its life waiting on the network, and while one coroutine waits, asyncio serves the others. The heavy numerical work in NumPy and PyTorch runs in compiled code. For this kind of workload, Python is rarely the bottleneck.</p>
+<p>CPU-bound Python is different. The global interpreter lock lets only one thread run Python bytecode at a time, so threads do not speed up pure-Python computation; processes do. That is starting to change: Python 3.13 introduced an experimental free-threaded build, and Python 3.14 made it officially supported. Either way, the rule is the same. Profile before you rewrite, with cProfile or py-spy, and fix the part the profile shows you, not the part you suspected.</p>
+        </section>
+        <section class="es" id="s6">
+          <p class="es__n">06 /</p>
+          <h2>Design the wait</h2>
+<p>Some waiting cannot be removed, so it has to be designed. Show what is happening in plain words: searching your documents, writing the answer. Show partial results as they arrive. Let people cancel, and make sure cancelling actually stops the work on the server. Disable the button after the first tap instead of sending duplicate requests.</p>
+<p>Finally, give each feature a latency budget, for example a first word within one second at p95, and treat it like any other requirement in the eval suite. A budget turns “it feels slow” into a number the team can defend, and it keeps the notebook’s eight seconds out of the product for good.</p>
+        </section>
+        <aside class="take">
+          <p class="mono">Take this with you</p>
+          <p class="take__title">Speed is a product decision.</p>
+          <ul class="take__list">
+          <li>Measure percentiles and time to first token, stage by stage.</li>
+          <li>Overlap independent calls, stream the answer, and cache what repeats.</li>
+          <li>Profile before rewriting, and give every AI feature a latency budget.</li>
+          </ul>
+        </aside>
+
+        <nav class="pager" aria-label="More essays">
+          <a class="pager__item pager__item--prev" href="quantum-roadmap.html"><span class="pager__k">← Previous · 02 / 03</span><span class="pager__t">What a qubit can’t do for your roadmap</span></a>
+          <span class="pager__item is-empty"></span>
+        </nav>
+      </article>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <a href="../meetfleet/#essays">← All essays</a>
+    <p class="mono">© 2026 Hamza Lotfi · intelotfi</p>
+  </footer>
+
+  <script src="essays.js?v=202610132251"></script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <!-- first paint: the page colour only, never unstyled content; the stylesheet reveals the body -->
+  <style>html{background:#f2f4f6}body{visibility:hidden}</style>
+  <script>setTimeout(function(){document.body&&(document.body.style.visibility="visible")},2500)</script>
+  <title>Write the eval before the prompt | Hamza Lotfi</title>
+  <meta name="description" content="An essay by Hamza Lotfi: An AI feature without an evaluation set is a demo. How to turn “it feels better” into a number you can ship against." />
+  <meta name="author" content="Hamza Lotfi" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://intelotfi.com/essays/evals-first.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="intelotfi · Hamza Lotfi" />
+  <meta property="og:title" content="Write the eval before the prompt | Hamza Lotfi" />
+  <meta property="og:description" content="An essay by Hamza Lotfi: An AI feature without an evaluation set is a demo. How to turn “it feels better” into a number you can ship against." />
+  <meta property="og:url" content="https://intelotfi.com/essays/evals-first.html" />
+  <meta property="og:image" content="https://intelotfi.com/assets/og.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Hamza Lotfi: Making the thinking legible" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="article:author" content="Hamza Lotfi" />
+  <meta property="article:published_time" content="2026-10-13" />
+  <meta property="article:section" content="Essay" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Write the eval before the prompt | Hamza Lotfi" />
+  <meta name="twitter:description" content="An essay by Hamza Lotfi: An AI feature without an evaluation set is a demo. How to turn “it feels better” into a number you can ship against." />
+  <meta name="twitter:image" content="https://intelotfi.com/assets/og.jpg" />
+  <meta name="twitter:image:alt" content="Hamza Lotfi: Making the thinking legible" />
+  <link rel="me" href="https://www.linkedin.com/in/intelpoly/" />
+  <link rel="me" href="https://independent.academia.edu/MeetfleetResearchDivision" />
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+  <link rel="manifest" href="../site.webmanifest" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Write the eval before the prompt", "description": "An essay by Hamza Lotfi: An AI feature without an evaluation set is a demo. How to turn “it feels better” into a number you can ship against.", "image": "https://intelotfi.com/assets/og.jpg", "datePublished": "2026-10-13", "dateModified": "2026-10-13", "inLanguage": "en", "articleSection": "Essay", "keywords": "AI product engineering", "author": {"@type": "Person", "name": "Hamza Lotfi", "url": "https://intelotfi.com/", "sameAs": ["https://www.linkedin.com/in/intelpoly/", "https://independent.academia.edu/MeetfleetResearchDivision"]}, "publisher": {"@type": "Person", "name": "Hamza Lotfi", "url": "https://intelotfi.com/", "sameAs": ["https://www.linkedin.com/in/intelpoly/", "https://independent.academia.edu/MeetfleetResearchDivision"]}, "mainEntityOfPage": "https://intelotfi.com/essays/evals-first.html", "isPartOf": {"@type": "WebSite", "name": "intelotfi", "url": "https://intelotfi.com/"}}</script>
+  <meta name="theme-color" content="#f2f4f6" />
+  <link rel="icon" href="../assets/icon.svg" type="image/svg+xml" />
+  <link rel="preload" href="../fonts/AllianceNo2-Regular.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&amp;family=Lora:ital@0;1&amp;display=swap" />
+  <link rel="stylesheet" href="essays.css?v=202610132251" />
+  <!-- instant navigation: pages you are about to open are pre-rendered on hover (Chromium) -->
+  <script type="speculationrules">{"prerender":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/assets/*"}},{"not":{"selector_matches":"[target=_blank], [href^='mailto:'], [href^='tel:']"}}]},"eagerness":"moderate"}]}</script>
+</head>
+<body data-essay="1">
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <header class="bar">
+    <a class="bar__logo" href="../index.html" aria-label="intelotfi | Hamza Lotfi, home">intelotfi<span class="bar__cursor" aria-hidden="true"></span></a>
+    <a class="bar__back" href="../meetfleet/#essays">← All essays</a>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div class="intro__context">
+        <p class="mono">AI product engineering</p>
+        <p class="mono">Making the thinking legible / 01 / 03 · <span data-read>…</span> min</p>
+      </div>
+      <h1 class="intro__title">Write the eval before the prompt</h1>
+      <div class="intro__open">
+        <p class="intro__deck">An AI feature without an evaluation set is a demo. How to turn “it feels better” into a number you can ship against.</p>
+        <div class="motif"><span class="m-evals" role="img" aria-label="A grid of passing checks with one failure"><i style="--k:0"></i><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i><i style="--k:5"></i><i style="--k:6"></i><i style="--k:7" class="is-fail"></i><i style="--k:8"></i><i style="--k:9"></i><i style="--k:10"></i><i style="--k:11"></i></span></div>
+      </div>
+    </section>
+
+    <div class="read">
+      <aside class="guide" aria-label="In this essay">
+        <p class="mono">In this essay</p>
+        <ol class="guide__list">
+          <li><a href="#s1"><span>01</span>The demo trap</a></li>
+          <li><a href="#s2"><span>02</span>An eval is a spec you can run</a></li>
+          <li><a href="#s3"><span>03</span>Grade properties, not strings</a></li>
+          <li><a href="#s4"><span>04</span>Read the failures, not the average</a></li>
+          <li><a href="#s5"><span>05</span>Make the eval the gate</a></li>
+          <li><a href="#s6"><span>06</span>Keep it alive</a></li>
+        </ol>
+        <p class="guide__note">A working method, not a framework. Every number in the figures is illustrative.</p>
+      </aside>
+
+      <article class="body" id="essay">
+        <section class="es" id="s1">
+          <p class="es__n">01 /</p>
+          <h2>The demo trap</h2>
+<p>Every AI feature starts with a good demo. Someone writes a prompt, tries five inputs, and four of the answers are impressive. The fifth gets a quick fix in the prompt. The team ships.</p>
+<p>Then the reports arrive. The fix for the fifth input quietly broke two others nobody looked at. A model update changed the tone. A customer in another language gets answers that are confidently wrong. Each problem is patched by hand, and each patch is judged the same way the first prompt was: by reading a few outputs and deciding they feel better.</p>
+<p>Language models are not deterministic functions you can test once. Their behaviour shifts with wording, context, temperature and model version. Without a fixed set of cases to measure against, every change is a guess, and the guesses compound. Building an AI product starts with something less exciting than the prompt: the test it has to pass.</p>
+        </section>
+        <section class="es" id="s2">
+          <p class="es__n">02 /</p>
+          <h2>An eval is a spec you can run</h2>
+<p>An evaluation set is a collection of realistic inputs, each paired with what a good output must do. It does not need to be large to be useful. Thirty to a hundred cases taken from real usage, or from the situations you are most afraid of, will catch more than any amount of manual spot-checking.</p>
+<p>The key move is to write down properties, not exact answers. You rarely know the one right sentence, but you do know that the output must be valid JSON, must cite the document it used, must stay under 120 words, must refuse to give medical dosages, must answer in the user’s language. Those properties are the product specification, written in a form a machine can check.</p>
+<figure class="fig-dark">
+<figcaption class="fig-label">Fig. 01 / A minimal eval harness in Python</figcaption>
+<pre class="code"><code><span class="c-k">from</span> dataclasses <span class="c-k">import</span> dataclass
+<span class="c-k">from</span> typing <span class="c-k">import</span> Callable
+<span class="c-k">import</span> json
+
+<span class="c-d">@dataclass</span>
+<span class="c-k">class</span> <span class="c-f">Case</span>:
+    input: str
+    checks: list[Callable[[str], bool]]
+    tag: str                      <span class="c-c"># the slice this case belongs to</span>
+
+<span class="c-k">def</span> <span class="c-f">is_json</span>(out: str) -&gt; bool:
+    <span class="c-k">try</span>:
+        json.loads(out)
+        <span class="c-k">return</span> True
+    <span class="c-k">except</span> ValueError:
+        <span class="c-k">return</span> False
+
+<span class="c-k">def</span> <span class="c-f">under</span>(n: int) -&gt; Callable[[str], bool]:
+    <span class="c-k">return lambda</span> out: len(out.split()) &lt;= n
+
+<span class="c-k">def</span> <span class="c-f">run</span>(model, cases: list[Case]) -&gt; dict[str, float]:
+    results: dict[str, list[bool]] = {}
+    <span class="c-k">for</span> case <span class="c-k">in</span> cases:
+        out = model(case.input)
+        passed = all(check(out) <span class="c-k">for</span> check <span class="c-k">in</span> case.checks)
+        results.setdefault(case.tag, []).append(passed)
+    <span class="c-k">return</span> {tag: sum(r) / len(r) <span class="c-k">for</span> tag, r <span class="c-k">in</span> results.items()}</code></pre>
+<p class="fig-note">Thirty lines is enough to start. The model is any function from text to text, so the same suite can compare prompts, models and providers.</p>
+</figure>
+        </section>
+        <section class="es" id="s3">
+          <p class="es__n">03 /</p>
+          <h2>Grade properties, not strings</h2>
+<p>Start with checks that are cheap and certain: parsing, length, required fields, forbidden phrases, whether a cited source actually exists. They run in milliseconds, never disagree with themselves, and catch a surprising share of real failures.</p>
+<p>Some qualities cannot be checked by code: is the answer helpful, is the tone right, did it actually address the question? Here a second model can act as a grader, scoring each output against a short rubric. That grader is itself a model and can be wrong, so treat it like any other instrument. Have people label a sample, measure how often the grader agrees with them, and refine the rubric until the agreement is high enough to trust. A grader you have never checked is just a more expensive opinion.</p>
+        </section>
+        <section class="es" id="s4">
+          <p class="es__n">04 /</p>
+          <h2>Read the failures, not the average</h2>
+<p>A single pass rate is comforting and dangerous. An overall improvement can hide a regression in exactly the group of users you cannot afford to fail. Tag every case with the slice it belongs to, and report each slice separately.</p>
+<figure class="fig-panel">
+<figcaption class="fig-label">Fig. 02 / The average improved. One slice did not.</figcaption>
+<div class="tbl" role="table" aria-label="Pass rate by slice for two prompt versions">
+<div class="tbl__row tbl__row--head" role="row"><span role="columnheader">Slice</span><span role="columnheader">Prompt v1</span><span role="columnheader">Prompt v2</span><span role="columnheader">Change</span></div>
+<div class="tbl__row" role="row"><span role="cell">Refund questions</span><span role="cell">90%</span><span role="cell">97%</span><span role="cell">+7</span></div>
+<div class="tbl__row" role="row"><span role="cell">Dates and deadlines</span><span role="cell">85%</span><span role="cell">95%</span><span role="cell">+10</span></div>
+<div class="tbl__row" role="row"><span role="cell">Non-English</span><span role="cell">78%</span><span role="cell">66%</span><span role="cell" class="hi">−12</span></div>
+<div class="tbl__row tbl__row--total" role="row"><span role="cell">All cases</span><span role="cell">84%</span><span role="cell">86%</span><span role="cell">+2</span></div>
+</div>
+<p class="fig-note">Illustrative numbers for three equal-sized slices, rounded. Shipping v2 on the total alone would make the product worse for every non-English user.</p>
+</figure>
+<p>Then read the failing outputs themselves. Ten minutes with the actual failures teaches more than any dashboard: you see whether the model misunderstood, whether the case was ambiguous, or whether the check was wrong. All three happen, and only one of them is the model’s fault.</p>
+        </section>
+        <section class="es" id="s5">
+          <p class="es__n">05 /</p>
+          <h2>Make the eval the gate</h2>
+<p>Once the suite exists, run it on every change: a new prompt, a new model version, a new retrieval setting. Treat some checks as must-pass, such as safety refusals and output format, and block the change if any of them fail. Treat quality scores as a trend to watch, not a single threshold to game.</p>
+<p>Measure cost and latency in the same run. A prompt that adds three points of quality but doubles the response time is a product decision, not a technical one, and the eval is what makes that trade-off visible. It also changes how model upgrades feel. Without an eval, a new model is a risky migration. With one, it is an afternoon: run the suite, read the diffs, decide.</p>
+        </section>
+        <section class="es" id="s6">
+          <p class="es__n">06 /</p>
+          <h2>Keep it alive</h2>
+<p>An eval set is never finished. Every failure reported in production becomes a new case, so the same mistake can only happen once. Cases that every version passes easily can be retired or made harder. Over time the set becomes the most precise description of what the product is supposed to do, more precise than any document, because it is checked every day.</p>
+<p>That is the real reason to write it first. The prompt is a guess about how to get good behaviour. The eval is the definition of good behaviour. Teams that keep the definition separate from the guess can change the guess as often as they like.</p>
+        </section>
+        <aside class="take">
+          <p class="mono">Take this with you</p>
+          <p class="take__title">“Better” has to be measurable.</p>
+          <ul class="take__list">
+          <li>Write down the properties a good output must have, and collect real cases before tuning the prompt.</li>
+          <li>Use cheap deterministic checks first; check any model grader against human labels.</li>
+          <li>Report every slice, read the failures, and run the suite on every change.</li>
+          </ul>
+        </aside>
+
+        <nav class="pager" aria-label="More essays">
+          <span class="pager__item is-empty"></span>
+          <a class="pager__item pager__item--next" href="quantum-roadmap.html"><span class="pager__k">Next → · 02 / 03</span><span class="pager__t">What a qubit can’t do for your roadmap</span></a>
+        </nav>
+      </article>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <a href="../meetfleet/#essays">← All essays</a>
+    <p class="mono">© 2026 Hamza Lotfi · intelotfi</p>
+  </footer>
+
+  <script src="essays.js?v=202610132251"></script>
+</body>
+</html>

@@ -33,20 +33,20 @@
     <image:image><image:loc>https://intelotfi.com/assets/og-meetchat.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://intelotfi.com/essays/weak-factor.html</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://intelotfi.com/essays/evals-first.html</loc>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://intelotfi.com/essays/one-appearance.html</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://intelotfi.com/essays/quantum-roadmap.html</loc>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://intelotfi.com/essays/ai-can-draft.html</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://intelotfi.com/essays/python-latency.html</loc>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
