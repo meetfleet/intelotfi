@@ -42,7 +42,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400&display=swap" media="print" onload="this.media='all'" />
-  <link rel="stylesheet" href="styles.css?v=202610130215" />
+  <link rel="stylesheet" href="styles.css?v=202610132140" />
   <!-- instant navigation: pages you are about to open are pre-rendered on hover (Chromium) -->
   <script type="speculationrules">{"prerender":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/assets/*"}},{"not":{"selector_matches":"[target=_blank], [href^='mailto:'], [href^='tel:']"}}]},"eagerness":"moderate"}]}</script>
 </head>
@@ -294,6 +294,55 @@
             </li>
           </ul>
         </div>
+      </div>
+    </section>
+
+    <!-- ---------- Projects: each one runs live in its tile ----------
+         The tile frames the real site at 1440x900, scaled down. It loads when
+         it scrolls near, unloads when it leaves, and takes the pointer while
+         hovered. Phones get the still poster and open the site on tap. -->
+    <section class="projects" id="projects" aria-labelledby="projects-title">
+      <div class="projects__band">
+        <header class="projects__head">
+          <div>
+            <p class="projects__eyebrow" data-reveal data-i18n="projects.eyebrow">Projects · technology and AI</p>
+            <h2 class="projects__title" id="projects-title" data-reveal data-split data-i18n="projects.title">Live, not screenshots.</h2>
+          </div>
+          <p class="projects__lede" data-reveal data-i18n="projects.lede">Products I built, running right here. Move into a window to use the real site; click the arrow to open it.</p>
+        </header>
+
+        <ol class="project-list">
+          <li class="project project--feature" data-reveal>
+            <div class="project__info">
+              <div class="project__top">
+                <span class="project__n">01</span>
+                <a class="project__open" href="https://www.breachify.com/" target="_blank" rel="noopener" aria-label="Open breachify.com in a new tab" data-i18n-attr="aria-label:projects.breachify.open">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8" /></svg>
+                </a>
+              </div>
+              <h3 class="project__name"><svg class="project__logo" viewBox="0 0 259 51" role="img" aria-label="Breachify"><path d="M75.452 41.046C70.538 41.046 68.018 37.812 67.304 36.174H67.052V40.5H64.616V9H67.136V23.07H67.388C68.186 21.138 70.832 18.114 75.62 18.114C81.878 18.114 86.162 22.86 86.162 29.622C86.162 36.3 81.878 41.046 75.452 41.046ZM75.284 38.778C80.282 38.778 83.6 35.124 83.6 29.622C83.6 24.204 80.282 20.424 75.326 20.424C70.496 20.424 67.052 24.036 67.052 29.622C67.052 34.62 70.118 38.778 75.284 38.778Z"/><path d="M92.5066 40.5V18.66H95.0266V23.028H95.2786C95.9506 20.928 98.1346 18.66 101.495 18.66H103.175V21.18H101.537C97.3366 21.18 95.0266 24.582 95.0266 28.74V40.5H92.5066Z"/><path d="M117.408 41.046C110.856 41.046 106.572 36.132 106.572 29.58C106.572 22.608 111.276 18.114 117.198 18.114C123.834 18.114 127.782 22.902 127.782 29.202V30.504H109.218C109.344 35.25 112.494 38.736 117.45 38.736C120.936 38.736 123.96 36.888 124.926 34.074H127.572C126.354 38.148 122.532 41.046 117.408 41.046ZM109.26 28.236H125.094C124.884 23.238 121.608 20.424 117.198 20.424C113.082 20.424 109.512 23.532 109.26 28.236Z"/><path d="M142.916 41.046C136.49 41.046 132.206 36.3 132.206 29.622C132.206 22.86 136.49 18.114 142.748 18.114C147.536 18.114 150.182 21.138 150.98 23.07H151.232V18.66H153.752V40.5H151.316V36.174H151.064C150.35 37.812 147.83 41.046 142.916 41.046ZM143.084 38.778C148.25 38.778 151.316 34.62 151.316 29.622C151.316 24.036 147.872 20.424 143.042 20.424C138.086 20.424 134.768 24.204 134.768 29.622C134.768 35.124 138.086 38.778 143.084 38.778Z"/><path d="M170.901 41.046C164.349 41.046 159.687 36.048 159.687 29.58C159.687 23.112 164.433 18.114 170.859 18.114C175.605 18.114 180.057 21.012 181.191 25.842H178.587C177.663 22.566 174.471 20.424 170.901 20.424C165.777 20.424 162.291 24.498 162.291 29.58C162.291 34.788 165.903 38.736 170.985 38.736C174.513 38.736 177.747 36.594 178.629 33.318H181.191C180.141 38.148 175.605 41.046 170.901 41.046Z"/><path d="M187.54 40.5V9H190.06V22.272H190.312C191.278 20.046 193.84 18.114 197.41 18.114C202.492 18.114 205.684 21.852 205.684 26.514V40.5H203.164V26.682C203.164 23.07 200.392 20.466 196.822 20.466C193.042 20.466 190.06 23.364 190.06 27.06V40.5H187.54Z"/><path d="M214.846 14.166C213.712 14.166 212.872 13.284 212.872 12.108C212.872 10.974 213.712 10.134 214.846 10.134C216.064 10.134 216.904 10.974 216.904 12.108C216.904 13.284 216.064 14.166 214.846 14.166ZM213.544 40.5V18.66H216.064V40.5H213.544Z"/><path d="M225.307 40.5V20.802H221.191V18.66H225.307V15.888C225.307 11.562 228.205 9 232.447 9H234.211V11.226H232.405C229.297 11.226 227.827 13.158 227.827 15.93V18.66H234.337V20.802H227.827V40.5H225.307Z"/><path d="M239.736 50.16V47.85H241.038C243.432 47.85 244.818 46.716 245.616 44.658L246.876 41.466L237.846 18.66H240.618L248.094 37.938H248.346L255.78 18.66H258.594L247.884 45.54C246.75 48.438 245.028 50.16 241.5 50.16H239.736Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M37.3142 13.9585L21.2227 31.3068C20.6564 31.9174 19.6919 31.9372 19.1006 31.3504L11.3933 23.7016C10.8689 23.1812 10.8689 22.3374 11.3933 21.8169C11.9178 21.2965 12.768 21.2965 13.2925 21.8169L20.1043 28.5771L36.7811 10.5977C37.9253 9.36415 40 10.1675 40 11.8441V28.88C40 31.5297 39.4717 34.1532 38.4457 36.5995L38.1703 37.2559C37.4102 39.0681 36.3246 40.7282 34.9665 42.1553C32.8753 44.3527 30.4378 46.1979 27.7496 47.6187L26.1703 48.4533L20.6925 50.8836C20.0154 51.184 19.2212 50.8828 18.9185 50.2109C18.6158 49.539 18.9193 48.7507 19.5964 48.4503L24.9896 46.0575L26.4872 45.2661C28.9183 43.9812 31.1227 42.3125 33.0139 40.3252C34.1486 39.1328 35.0557 37.7457 35.6908 36.2316L35.9661 35.5752C36.8561 33.4535 37.3142 31.1781 37.3142 28.88V13.9585Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M1.3303 26C0.595592 26 0 26.6121 0 27.3672V28.3078C0 31.026 0.5233 33.7174 1.53976 36.2269L1.81189 36.8988C2.56531 38.7589 3.64129 40.4629 4.98742 41.9277C7.05823 44.1811 9.47158 46.0737 12.1331 47.5314L13.6362 48.3546L19.1258 50.8803C19.7964 51.1888 20.5834 50.8803 20.8836 50.1911C21.1838 49.502 20.8835 48.6932 20.2129 48.3847L14.8068 45.8974L13.3844 45.1184C10.9773 43.7999 8.79459 42.0883 6.92171 40.0502C5.79685 38.8262 4.89774 37.4023 4.26817 35.848L3.99603 35.1761C3.11445 32.9996 2.66059 30.6653 2.66059 28.3078V27.3672C2.66059 26.6121 2.065 26 1.3303 26Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M21.8161 2.8752C21.0029 2.52801 20.0717 2.53353 19.2631 2.89033L10.3544 6.82169L4.39308 9.31772C3.39461 9.73578 2.74997 10.6763 2.74997 11.7149V18.6906C2.74997 19.4138 2.13437 20 1.37499 20C0.615602 20 0 19.4138 0 18.6906V11.7149C0 9.63761 1.28927 7.75662 3.28622 6.9205L9.22275 4.43486L18.1069 0.514349C19.6379 -0.161303 21.4014 -0.171757 22.9412 0.485693L32.1872 4.43353C32.8801 4.72938 33.19 5.50414 32.8793 6.16398C32.5686 6.82382 31.755 7.11889 31.0621 6.82303L21.8161 2.8752Z"/></svg></h3>
+              <p class="project__desc" data-i18n="projects.breachify.desc">Comprehensive breach monitoring and phishing simulation for individuals, companies and private organizations.</p>
+              <dl class="project__facts">
+                <div><dt data-i18n="projects.f.field">Field</dt><dd data-i18n="projects.breachify.field">Cyber risk</dd></div>
+                <div><dt data-i18n="projects.f.ai">AI</dt><dd data-i18n="projects.breachify.ai">Phishing simulation</dd></div>
+                <div><dt data-i18n="projects.f.site">Site</dt><dd dir="ltr">breachify.com</dd></div>
+              </dl>
+            </div>
+
+            <div class="live" data-live="https://www.breachify.com/" data-poster="assets/projects/breachify.webp">
+              <div class="live__chrome" aria-hidden="true">
+                <span class="live__dots"><i></i><i></i><i></i></span>
+                <span class="live__url" dir="ltr">breachify.com</span>
+                <span class="live__state"><i></i><span data-i18n="projects.live">Live</span></span>
+              </div>
+              <div class="live__viewport">
+                <img class="live__poster" src="assets/projects/breachify.webp" width="1440" height="900" alt="The Breachify homepage" data-i18n-attr="alt:projects.breachify.alt" loading="lazy" decoding="async" />
+                <a class="live__tap" href="https://www.breachify.com/" target="_blank" rel="noopener" aria-label="Open breachify.com" data-i18n-attr="aria-label:projects.breachify.open"></a>
+              </div>
+              <p class="live__hint" aria-hidden="true" data-i18n="projects.hint">Move in to interact</p>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
 
@@ -681,7 +730,7 @@
     <div class="cursor__dot"></div>
   </div>
 
-  <script src="i18n.js?v=202610130215"></script>
-  <script src="main.js?v=202610130215"></script>
+  <script src="i18n.js?v=202610132140"></script>
+  <script src="main.js?v=202610132140"></script>
 </body>
 </html>
