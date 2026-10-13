@@ -8,6 +8,10 @@
     <image:image><image:loc>https://intelotfi.com/assets/og.jpg</image:loc></image:image>
   </url>
   <url>
+    <loc>https://intelotfi.com/meetfleet/</loc>
+    <lastmod>2026-10-13</lastmod>
+  </url>
+  <url>
     <loc>https://intelotfi.com/blog/spillover.html</loc>
     <lastmod>2026-10-11</lastmod>
     <changefreq>yearly</changefreq>

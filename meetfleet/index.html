@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en" data-title-key="mf.meta.title">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <!-- first paint: the page colour only, never unstyled content; the stylesheet reveals the body -->
+  <style>html{background:#ffffff}body{visibility:hidden}</style>
+  <script>setTimeout(function(){document.body&&(document.body.style.visibility="visible")},2500)</script>
+  <title>Meetfleet | Hamza Lotfi · intelotfi</title>
+  <meta name="description" content="Meetfleet, the hyper-local social app Hamza Lotfi designed and built: the build in numbers, three deep-dive chapters on its AI, design and security, and the essays behind it." />
+  <meta name="author" content="Hamza Lotfi" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <link rel="canonical" href="https://intelotfi.com/meetfleet/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="intelotfi · Hamza Lotfi" />
+  <meta property="og:title" content="Meetfleet | Hamza Lotfi · intelotfi" />
+  <meta property="og:description" content="Meetfleet, the hyper-local social app Hamza Lotfi designed and built: the build in numbers, three deep-dive chapters on its AI, design and security, and the essays behind it." />
+  <meta property="og:url" content="https://intelotfi.com/meetfleet/" />
+  <meta property="og:image" content="https://intelotfi.com/assets/og-spillover.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="A woman smiling at her phone in a crowd, in front of a large white circle" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="fr_FR" />
+  <meta property="og:locale:alternate" content="ar_MA" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Meetfleet | Hamza Lotfi · intelotfi" />
+  <meta name="twitter:description" content="Meetfleet, the hyper-local social app Hamza Lotfi designed and built: the build in numbers, three deep-dive chapters on its AI, design and security, and the essays behind it." />
+  <meta name="twitter:image" content="https://intelotfi.com/assets/og-spillover.jpg" />
+  <meta name="twitter:image:alt" content="A woman smiling at her phone in a crowd, in front of a large white circle" />
+  <link rel="me" href="https://www.linkedin.com/in/intelpoly/" />
+  <link rel="me" href="https://independent.academia.edu/MeetfleetResearchDivision" />
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+  <link rel="manifest" href="../site.webmanifest" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "@id": "https://intelotfi.com/meetfleet/#page", "url": "https://intelotfi.com/meetfleet/", "name": "Meetfleet | Hamza Lotfi · intelotfi", "description": "Meetfleet, the hyper-local social app Hamza Lotfi designed and built: the build in numbers, three deep-dive chapters on its AI, design and security, and the essays behind it.", "author": {"@id": "https://intelotfi.com/#person"}, "isPartOf": {"@id": "https://intelotfi.com/#website"}, "hasPart": [{"@type": "BlogPosting", "url": "https://intelotfi.com/blog/spillover.html"}, {"@type": "BlogPosting", "url": "https://intelotfi.com/blog/advanced.html"}, {"@type": "BlogPosting", "url": "https://intelotfi.com/blog/meetchat.html"}]}</script>
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" href="../assets/icon.svg" type="image/svg+xml" />
+  <link rel="preload" href="../fonts/AllianceNo2-Regular.woff2" as="font" type="font/woff2" crossorigin />
+  <!-- Arabic glyphs: loaded without blocking render; unicode-range means files only download when Arabic is on screen -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400&display=swap" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../styles.css?v=202610140010" />
+  <!-- instant navigation: pages you are about to open are pre-rendered on hover (Chromium) -->
+  <script type="speculationrules">{"prerender":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/assets/*"}},{"not":{"selector_matches":"[target=_blank], [href^='mailto:'], [href^='tel:']"}}]},"eagerness":"moderate"}]}</script>
+</head>
+<body class="is-loading">
+  <main class="page">
+    <section class="work work--page" id="top" aria-labelledby="work-title">
+      <div class="work__band">
+      <header class="topbar">
+        <a href="../" class="logo" aria-label="intelotfi | Hamza Lotfi, home" data-i18n-attr="aria-label:nav.home">
+          <span class="logo__text">intelotfi</span><span class="logo__cursor" aria-hidden="true"></span>
+        </a>
+        <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+          <span class="burger__lines"><span></span><span></span><span></span></span>
+        </button>
+      </header>
+      <header class="work__head">
+        <div>
+          <p class="work__eyebrow" data-reveal data-i18n="mf.eyebrow">Meetfleet · the full case study</p>
+          <h1 class="work__title" id="work-title" data-reveal data-split data-i18n="mf.title">The social OS for the spontaneous era.</h1>
+        </div>
+        <p class="work__lede" data-reveal data-i18n="mf.lede">Meetfleet is a hyper-local social app I designed and built.</p>
+      </header>
+
+      <!-- the subject of all three chapters -->
+      <div class="subject" data-reveal>
+        <img class="subject__icon" src="../assets/meetfleet-icon.webp" width="512" height="512" alt="" loading="lazy" decoding="async" />
+        <div class="subject__body">
+          <p class="subject__tag" data-i18n="work.subject.tag">How we ran our AI systems on Apple and Android · by Meetfleet</p>
+          <p class="subject__name">Meetfleet</p>
+          <p class="subject__desc" data-i18n="work.subject.desc">A social app I designed and built: hyper-local coordination for the spontaneous era, connecting you in real time with what is happening around you.</p>
+        </div>
+        <!-- platform tile: Apple and Android take turns, sliding vertically through a glass frame -->
+        <!-- platform tile: Apple and Android take turns; each links to its store -->
+        <div class="platforms" role="group" aria-label="Get Meetfleet" data-i18n-attr="aria-label:work.subject.get">
+          <span class="platforms__sheen" aria-hidden="true"></span>
+          <a class="platforms__item" href="https://testflight.apple.com/join/nXyfPMSc" target="_blank" rel="noopener" aria-label="Get Meetfleet for Apple devices on TestFlight" data-i18n-attr="aria-label:work.subject.apple">
+            <img class="platforms__img" src="../assets/platform-apple.webp" width="1439" height="504" alt="" loading="lazy" decoding="async" />
+          </a>
+          <a class="platforms__item" href="https://play.google.com/store/apps/details?id=com.meetfleet.mobile&amp;pcampaignid=web_share" target="_blank" rel="noopener" aria-label="Get Meetfleet for Android on Google Play" data-i18n-attr="aria-label:work.subject.android">
+            <img class="platforms__img" src="../assets/platform-android.webp" width="1439" height="504" alt="" loading="lazy" decoding="async" />
+          </a>
+        </div>
+      </div>
+
+      <!-- the build in numbers: every figure here is read from the git history and code of the app and website -->
+      <section class="ledger" data-reveal aria-labelledby="ledger-title">
+        <header class="ledger__head">
+          <p class="ledger__k" data-i18n="ledger.k">Build ledger · read from the code</p>
+          <h3 class="ledger__title" id="ledger-title" data-i18n="ledger.title">299 days of building Meetfleet, one commit at a time.</h3>
+        </header>
+        <dl class="ledger__stats">
+          <div class="ledger__stat"><dt data-i18n="ledger.days">Days from first commit to latest release</dt><dd data-to="299">299</dd></div>
+          <div class="ledger__stat"><dt data-i18n="ledger.commits">Commits across the app and its website</dt><dd data-to="177">177</dd></div>
+          <div class="ledger__stat"><dt data-i18n="ledger.lines">Lines of TypeScript in the app</dt><dd data-to="85073">85,073</dd></div>
+          <div class="ledger__stat"><dt data-i18n="ledger.screens">Screens, from sign-up to settings</dt><dd data-to="72">72</dd></div>
+        </dl>
+        <figure class="ledger__chart">
+          <div class="ledger__plot" role="img" aria-label="Weekly commits from November 2025 to September 2026" data-i18n-attr="aria-label:ledger.chart"></div>
+          <figcaption class="ledger__foot">
+            <span class="ledger__legend"><i class="ledger__sw ledger__sw--app"></i><span data-i18n="ledger.app">App</span><i class="ledger__sw ledger__sw--site"></i><span data-i18n="ledger.site">Website</span></span>
+            <span class="ledger__readout" aria-live="polite"></span>
+          </figcaption>
+          <script type="application/json" id="ledger-data">{"start":"2025-11-17","weeks":[[10,0],[16,0],[2,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[2,0],[0,0],[0,0],[1,0],[2,0],[2,0],[1,0],[0,0],[0,0],[0,0],[0,0],[0,0],[1,26],[0,24],[1,0],[1,0],[9,2],[0,0],[0,2],[0,1],[0,0],[0,0],[10,5],[15,11],[1,8],[0,14],[0,1],[4,1],[0,0],[0,0],[0,0],[0,4]],"marks":[["2025-11-22","ledger.m.first"],["2026-05-07","ledger.m.site"],["2026-07-17","ledger.m.v2","flip"],["2026-08-18","ledger.m.v3"]]}</script>
+        </figure>
+        <p class="ledger__src" data-i18n="ledger.src">Source: the git history of the Meetfleet app and website, November 2025 to September 2026. One bar per week.</p>
+      </section>
+
+      </div>
+
+      <!-- the chapters sit on a pale sheet that slides under the dark band -->
+      <div class="chapters" id="chapters">
+        <ol class="posts">
+          <li class="post" data-reveal>
+            <a class="post__link" href="../blog/spillover.html" tabindex="-1" aria-hidden="true">
+              <img class="post__img" src="../assets/work-1.webp" width="1088" height="923" loading="lazy" decoding="async" alt="A woman smiling at her phone in a crowd" data-i18n-attr="alt:work.post0.alt" />
+              <span class="post__panel"><svg class="post__mark" viewBox="0 0 48 48" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M45.0443 29.572C41.7112 38.1868 33.5477 44.282 23.9992 44.2821C14.451 44.2819 6.28873 38.1865 2.95563 29.572L7.73895 27.6014C10.3173 34.2658 16.6291 38.9682 23.9992 38.9684C31.3694 38.9684 37.6825 34.266 40.261 27.6014L45.0443 29.572ZM23.9992 3.71802C33.6452 3.7181 41.4659 11.557 41.4662 21.2272C41.4662 23.4749 41.0427 25.624 40.273 27.5984L35.1417 25.5887C33.398 30.0612 29.0586 33.2148 23.9992 33.2149C18.9401 33.2146 14.6019 30.061 12.8582 25.5887L7.7269 27.5984C6.95724 25.624 6.5337 23.4749 6.5337 21.2272C6.534 11.5571 14.3534 3.71836 23.9992 3.71802Z"/></svg><span class="post__index"><span data-i18n="work.chapter">Chapter</span> 01</span></span>
+            </a>
+            <div class="post__body">
+              <p class="post__ch"><span data-i18n="work.chapter">Chapter</span> <b>01</b></p>
+              <h3 class="post__h"><a href="../blog/spillover.html" data-i18n="work.post0.title">Meetfleet: the spillover of reality on advanced AI technology</a></h3>
+              <p class="post__excerpt" data-i18n="work.post0.excerpt">How Meetfleet turns compatible intent into a meeting it can defend: the Social Activation Score, the Trust Protocol, and the maths that keeps a weak factor visible.</p>
+              <dl class="proof"><div class="proof__item"><dt data-i18n="proof.factors">factors in one score</dt><dd data-to="4">4</dd></div><div class="proof__item"><dt data-i18n="proof.equations">equations in the white paper</dt><dd data-to="5">5</dd></div><div class="proof__item"><dt data-i18n="proof.places">places mapped in 6 cities</dt><dd data-to="68">68</dd></div></dl>
+              <div class="post__foot">
+                <a class="post__cta" href="../blog/spillover.html"><span data-i18n="work.readChapter">Read the chapter</span><span class="post__cta-arrow"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                <span class="post__time">43 <span data-i18n="work.minRead">min read</span></span>
+              </div>
+            </div>
+          </li>
+          <li class="post" data-reveal>
+            <a class="post__link" href="../blog/advanced.html" tabindex="-1" aria-hidden="true">
+              <img class="post__img" src="../assets/work-2.webp" width="1088" height="923" loading="lazy" decoding="async" alt="People in white T-shirts looking at their phones" data-i18n-attr="alt:work.post1.alt" />
+              <span class="post__panel"><svg class="post__mark" viewBox="0 0 48 48" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M45.0443 29.572C41.7112 38.1868 33.5477 44.282 23.9992 44.2821C14.451 44.2819 6.28873 38.1865 2.95563 29.572L7.73895 27.6014C10.3173 34.2658 16.6291 38.9682 23.9992 38.9684C31.3694 38.9684 37.6825 34.266 40.261 27.6014L45.0443 29.572ZM23.9992 3.71802C33.6452 3.7181 41.4659 11.557 41.4662 21.2272C41.4662 23.4749 41.0427 25.624 40.273 27.5984L35.1417 25.5887C33.398 30.0612 29.0586 33.2148 23.9992 33.2149C18.9401 33.2146 14.6019 30.061 12.8582 25.5887L7.7269 27.5984C6.95724 25.624 6.5337 23.4749 6.5337 21.2272C6.534 11.5571 14.3534 3.71836 23.9992 3.71802Z"/></svg><span class="post__index"><span data-i18n="work.chapter">Chapter</span> 02</span></span>
+            </a>
+            <div class="post__body">
+              <p class="post__ch"><span data-i18n="work.chapter">Chapter</span> <b>02</b></p>
+              <h3 class="post__h"><a href="../blog/advanced.html" data-i18n="work.post1.title">The Convergence of Advanced Technology and Refined Design</a></h3>
+              <p class="post__excerpt" data-i18n="work.post1.excerpt">From “I’m bored” to “see you there”: the home screen, plan creation, the feed, plan insights, and how AI shapes every subscription tier.</p>
+              <dl class="proof"><div class="proof__item"><dt data-i18n="proof.screens">screens designed and shipped</dt><dd data-to="72">72</dd></div><div class="proof__item"><dt data-i18n="proof.tiers">subscription tiers</dt><dd data-to="4">4</dd></div><div class="proof__item"><dt data-i18n="proof.push">kinds of notification</dt><dd data-to="29">29</dd></div></dl>
+              <div class="post__foot">
+                <a class="post__cta" href="../blog/advanced.html"><span data-i18n="work.readChapter">Read the chapter</span><span class="post__cta-arrow"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                <span class="post__time">35 <span data-i18n="work.minRead">min read</span></span>
+              </div>
+            </div>
+          </li>
+          <li class="post" data-reveal>
+            <a class="post__link" href="../blog/meetchat.html" tabindex="-1" aria-hidden="true">
+              <img class="post__img" src="../assets/work-3.webp" width="1088" height="923" loading="lazy" decoding="async" alt="Profiles of people reading their phones in the dark" data-i18n-attr="alt:work.post2.alt" />
+              <span class="post__panel"><svg class="post__mark" viewBox="0 0 48 48" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M45.0443 29.572C41.7112 38.1868 33.5477 44.282 23.9992 44.2821C14.451 44.2819 6.28873 38.1865 2.95563 29.572L7.73895 27.6014C10.3173 34.2658 16.6291 38.9682 23.9992 38.9684C31.3694 38.9684 37.6825 34.266 40.261 27.6014L45.0443 29.572ZM23.9992 3.71802C33.6452 3.7181 41.4659 11.557 41.4662 21.2272C41.4662 23.4749 41.0427 25.624 40.273 27.5984L35.1417 25.5887C33.398 30.0612 29.0586 33.2148 23.9992 33.2149C18.9401 33.2146 14.6019 30.061 12.8582 25.5887L7.7269 27.5984C6.95724 25.624 6.5337 23.4749 6.5337 21.2272C6.534 11.5571 14.3534 3.71836 23.9992 3.71802Z"/></svg><span class="post__index"><span data-i18n="work.chapter">Chapter</span> 03</span></span>
+            </a>
+            <div class="post__body">
+              <p class="post__ch"><span data-i18n="work.chapter">Chapter</span> <b>03</b></p>
+              <h3 class="post__h"><a href="../blog/meetchat.html" data-i18n="work.post2.title">AI, Mathematics, and Physics, with Refined Design and Security Beyond the Essentials</a></h3>
+              <p class="post__excerpt" data-i18n="work.post2.excerpt">Meetchat, the messaging that quietly does the planning, and the security underneath it: Shield, passkey sign-in and the AI that protects meetups.</p>
+              <dl class="proof"><div class="proof__item"><dt data-i18n="proof.msgtypes">message types in chat</dt><dd data-to="8">8</dd></div><div class="proof__item"><dt data-i18n="proof.live">Live Activities on iPhone</dt><dd data-to="6">6</dd></div><div class="proof__item"><dt data-i18n="proof.strings">strings in 3 languages</dt><dd data-to="1239">1,239</dd></div></dl>
+              <div class="post__foot">
+                <a class="post__cta" href="../blog/meetchat.html"><span data-i18n="work.readChapter">Read the chapter</span><span class="post__cta-arrow"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                <span class="post__time">26 <span data-i18n="work.minRead">min read</span></span>
+              </div>
+            </div>
+          </li>
+        </ol>
+
+        <!-- essays: shorter reads that belong to the same body of work -->
+        <div class="essays-block" id="essays">
+          <header class="essays-block__head">
+            <div>
+              <p class="essays-block__k" data-reveal data-i18n="writing.eyebrow">Essays</p>
+              <h3 class="essays-block__t" data-reveal data-i18n="writing.title">Making the thinking legible.</h3>
+            </div>
+            <p class="essays-block__lede" data-reveal data-i18n="writing.lede">Explanatory essays on the choices, trade-offs and limits behind the systems.</p>
+          </header>
+          <ul class="essays">
+            <li class="essay" data-reveal>
+              <a class="essay__link" href="../essays/weak-factor.html">
+                <span class="essay__motif" aria-hidden="true"><span class="m-math"><span class="mf mf--1">a</span><span class="mx">×</span><span class="mf mf--2">b</span><span class="mx">×</span><span class="mf mf--3">c</span></span></span>
+                <span class="essay__k" data-i18n="writing.0.k">Decision design</span>
+                <span class="essay__t" data-i18n="writing.0.t">Why a weak factor should stay visible</span>
+                <span class="essay__d" data-i18n="writing.0.d">A product of factors tells a different story from an average. What that means for vibe, intent, friction and safety.</span>
+                <span class="essay__more"><span data-i18n="writing.read">Read the essay</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8" /></svg></span>
+              </a>
+            </li>
+            <li class="essay" data-reveal>
+              <a class="essay__link" href="../essays/one-appearance.html">
+                <span class="essay__motif" aria-hidden="true"><span class="m-ranges"><span style="--w:70%"></span><span style="--w:42%"></span><span style="--w:20%"></span></span></span>
+                <span class="essay__k" data-i18n="writing.1.k">Trust &amp; uncertainty</span>
+                <span class="essay__t" data-i18n="writing.1.t">One appearance is not a perfect record</span>
+                <span class="essay__d" data-i18n="writing.1.d">How a Wilson lower bound keeps thin show-up evidence from becoming an overconfident trust signal.</span>
+                <span class="essay__more"><span data-i18n="writing.read">Read the essay</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8" /></svg></span>
+              </a>
+            </li>
+            <li class="essay" data-reveal>
+              <a class="essay__link" href="../essays/ai-can-draft.html">
+                <span class="essay__motif" aria-hidden="true"><span class="m-decide"><span class="m-decide__q">?</span><span class="m-decide__line"><i></i></span><span class="m-decide__node"><svg viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M6 12.5l4 4 8-9"/></svg></span></span></span>
+                <span class="essay__k" data-i18n="writing.2.k">Human–AI interaction</span>
+                <span class="essay__t" data-i18n="writing.2.t">AI can draft. People decide.</span>
+                <span class="essay__d" data-i18n="writing.2.d">The difference between helping someone make a plan and making the decision for them. Consent belongs in the architecture.</span>
+                <span class="essay__more"><span data-i18n="writing.read">Read the essay</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8" /></svg></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- the live SAS simulator, with the white paper it runs -->
+    <section class="sec desk" id="desk" aria-labelledby="desk-title">
+      <header class="sec__head">
+        <p class="eyebrow" data-reveal data-i18n="desk.eyebrow">AI research desk · Meetfleet matching model</p>
+        <h2 class="sec__title" id="desk-title" data-reveal data-split data-i18n="desk.title">The AI that decides if a meetup should happen.</h2>
+        <p class="sec__lede" data-reveal data-i18n="desk.lede">Meetfleet’s matching AI reads four signals about two people and a place, then decides whether to suggest they meet. Read the white paper behind it, and run the model yourself.</p>
+      </header>
+
+      <div class="desk__grid">
+        <figure class="reader" data-reveal data-pdf="../assets/papers/sas-white-paper.pdf" tabindex="0" aria-label="The Social Activation Score white paper" data-i18n-attr="aria-label:desk.reader.label">
+          <div class="reader__bar">
+            <span class="reader__name" data-i18n="desk.reader.name">SAS · AI white paper</span>
+            <span class="reader__nav">
+              <button type="button" class="reader__btn" data-act="prev" aria-label="Previous page" data-i18n-attr="aria-label:desk.reader.prev"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <span class="reader__count" aria-live="polite"><b data-page>1</b> / <span data-total>5</span></span>
+              <button type="button" class="reader__btn" data-act="next" aria-label="Next page" data-i18n-attr="aria-label:desk.reader.next"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </span>
+            <span class="reader__tools">
+              <a class="reader__btn" href="../assets/papers/sas-white-paper.pdf" download aria-label="Download the PDF" data-i18n-attr="aria-label:desk.reader.download"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M8 2v8M4.5 6.5 8 10l3.5-3.5M3 13h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <button type="button" class="reader__btn" data-act="full" aria-label="Full screen" data-i18n-attr="aria-label:desk.reader.full"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </span>
+          </div>
+          <div class="reader__stage">
+            <canvas class="reader__canvas" aria-hidden="true"></canvas>
+            <p class="reader__status" data-i18n="desk.reader.loading">Loading the paper…</p>
+            <a class="reader__fallback" href="../assets/papers/sas-white-paper.pdf" target="_blank" rel="noopener" data-i18n="desk.reader.open">Open the PDF</a>
+          </div>
+          <ol class="reader__thumbs" aria-label="Pages"></ol>
+          <nav class="reader__jump" aria-label="Jump to">
+            <button type="button" data-goto="2"><span>Eq. 1</span><span data-i18n="desk.jump.master">Master formula</span></button>
+            <button type="button" data-goto="2"><span>Eq. 2</span><span data-i18n="desk.jump.vibe">Vibe alignment</span></button>
+            <button type="button" data-goto="3"><span>Eq. 3</span><span data-i18n="desk.jump.intent">Intent fit</span></button>
+            <button type="button" data-goto="3"><span>Eq. 4</span><span data-i18n="desk.jump.friction">Friction</span></button>
+            <button type="button" data-goto="4"><span>Eq. 5</span><span data-i18n="desk.jump.safety">Safety layer</span></button>
+            <button type="button" data-goto="4"><span>§5</span><span data-i18n="desk.jump.props">Properties</span></button>
+          </nav>
+        </figure>
+
+        <div class="lab" data-reveal>
+          <div class="lab__head">
+            <p class="lab__k"><span class="lab__pulse" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span data-i18n="desk.lab.k">Meetfleet AI · on-device inference</span></p>
+            <p class="lab__formula" dir="ltr">SAS = <span data-term="v">cos θ</span> × <span data-term="i">Φ</span> × <span data-term="f">Ψ</span> × <span data-term="s">Λ</span></p>
+          </div>
+
+          <div class="lab__result">
+            <p class="lab__score"><span data-out="sas">0.00</span><small data-i18n="desk.lab.score">AI match score</small></p>
+            <p class="lab__avg"><span data-i18n="desk.lab.avg">A naive model would say</span> <b data-out="avg">0.00</b></p>
+            <p class="lab__stats" dir="ltr"><span data-i18n="desk.lab.signals">4 signals</span> · <span data-out="ms">0.00</span> ms · <span data-i18n="desk.lab.device">on-device</span></p>
+          </div>
+
+          <ul class="lab__terms">
+            <li data-term-row="v"><span class="lab__tn"><span data-i18n="desk.term.v">Vibe alignment</span><small data-i18n="desk.term.v2">embedding similarity</small></span><span class="lab__bar"><i></i></span><span class="lab__tv" data-out="v">0.00</span></li>
+            <li data-term-row="i"><span class="lab__tn"><span data-i18n="desk.term.i">Intent fit</span><small data-i18n="desk.term.i2">intent classifier</small></span><span class="lab__bar"><i></i></span><span class="lab__tv" data-out="i">0.00</span></li>
+            <li data-term-row="f"><span class="lab__tn"><span data-i18n="desk.term.f">Friction</span><small data-i18n="desk.term.f2">logistics model</small></span><span class="lab__bar"><i></i></span><span class="lab__tv" data-out="f">0.00</span></li>
+            <li data-term-row="s"><span class="lab__tn"><span data-i18n="desk.term.s">Safety &amp; density</span><small data-i18n="desk.term.s2">venue risk model</small></span><span class="lab__bar"><i></i></span><span class="lab__tv" data-out="s">0.00</span></li>
+          </ul>
+          <div class="verdict" aria-live="polite">
+            <p class="verdict__k"><span data-i18n="desk.verdict.k">AI verdict</span><span class="verdict__state" data-out="state"></span></p>
+            <p class="verdict__text"><span data-out="verdict"></span><span class="verdict__caret" aria-hidden="true"></span></p>
+          </div>
+
+          <div class="lab__presets" role="group" aria-label="Scenarios" data-i18n-attr="aria-label:desk.lab.scenarios">
+            <button type="button" data-preset="cafe" data-i18n="desk.preset.cafe">Quiet café, study session</button>
+            <button type="button" data-preset="bar" data-i18n="desk.preset.bar">Loud bar for a study plan</button>
+            <button type="button" data-preset="far" data-i18n="desk.preset.far">Perfect vibe, across town</button>
+            <button type="button" data-preset="unsafe" data-i18n="desk.preset.unsafe">Great match, unsafe venue</button>
+          </div>
+
+          <details class="lab__controls" open>
+            <summary data-i18n="desk.lab.controls">Tune the AI’s input signals</summary>
+            <div class="lab__ctls">
+              <label class="lab__ctl"><span class="lab__ctl-k"><span data-i18n="desk.ctl.theta">Vibe angle</span> <i dir="ltr">θ</i></span><input type="range" min="0" max="90" step="1" value="15" data-in="theta" /><output data-val="theta">15°</output></label>
+              <label class="lab__ctl"><span class="lab__ctl-k"><span data-i18n="desk.ctl.mis">Intent mismatch</span> <i dir="ltr">‖I−A‖/n</i></span><input type="range" min="0" max="1" step="0.01" value="0.1" data-in="mis" /><output data-val="mis">0.1</output></label>
+              <label class="lab__ctl"><span class="lab__ctl-k"><span data-i18n="desk.ctl.fin">Money friction</span> <i dir="ltr">f</i></span><input type="range" min="0" max="2" step="0.05" value="0.1" data-in="fin" /><output data-val="fin">0.1</output></label>
+              <label class="lab__ctl"><span class="lab__ctl-k"><span data-i18n="desk.ctl.dist">Distance delta</span> <i dir="ltr">δ</i></span><input type="range" min="0" max="2" step="0.05" value="0.2" data-in="dist" /><output data-val="dist">0.2</output></label>
+              <label class="lab__ctl"><span class="lab__ctl-k"><span data-i18n="desk.ctl.time">Time misalignment</span> <i dir="ltr">τ</i></span><input type="range" min="0" max="2" step="0.05" value="0.1" data-in="time" /><output data-val="time">0.1</output></label>
+              <label class="lab__ctl"><span class="lab__ctl-k"><span data-i18n="desk.ctl.rho">Venue safety</span> <i dir="ltr">ρ</i></span><input type="range" min="0" max="1" step="0.01" value="0.92" data-in="rho" /><output data-val="rho">0.92</output></label>
+              <label class="lab__ctl"><span class="lab__ctl-k"><span data-i18n="desk.ctl.sig">Social density</span> <i dir="ltr">σ</i></span><input type="range" min="0" max="1" step="0.01" value="0.85" data-in="sig" /><output data-val="sig">0.85</output></label>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <nav class="menu" id="menu" aria-hidden="true" inert>
+      <ul>
+        <li><a href="../"><sup>01</sup><span data-i18n="mf.nav.home">Home</span></a></li>
+        <li><a href="#chapters"><sup>02</sup><span data-i18n="mf.nav.chapters">Chapters</span></a></li>
+        <li><a href="#desk"><sup>03</sup><span data-i18n="mf.nav.sim">Simulator</span></a></li>
+        <li><a href="#contact"><sup>04</sup><span data-i18n="nav.contact">Contact</span></a></li>
+      </ul>
+      <div class="lang" role="group" aria-label="Language" data-i18n-attr="aria-label:nav.language">
+        <button type="button" data-set-lang="en" lang="en" aria-label="English">EN</button>
+        <button type="button" data-set-lang="fr" lang="fr" aria-label="Français">FR</button>
+        <button type="button" data-set-lang="ar" lang="ar" aria-label="العربية">عربي</button>
+      </div>
+    </nav>
+    <script>requestAnimationFrame(function(){document.body.classList.remove("is-loading");window.__introStart=performance.now()})</script>
+  </main>
+
+
+  <!-- ---------- Contact / footer ----------
+       CONTACT DETAILS: the four hrefs below (and the CTA) are the only places to edit. -->
+  <footer class="contact" id="contact" aria-labelledby="contact-title">
+
+    <p class="eyebrow eyebrow--dot" data-reveal data-i18n="contact.eyebrow">06 / A conversation starts here</p>
+
+    <div class="contact__body">
+      <h2 class="contact__title" id="contact-title" data-reveal data-split data-i18n="contact.title">Have a question worth building around?</h2>
+      <div class="contact__aside" data-reveal>
+        <p class="contact__lede" data-i18n="contact.lede">For thoughtful conversations about product, decision systems and the people they serve.</p>
+        <a class="cta" href="mailto:hamzades7@gmail.com" data-contact-open data-magnet data-magnet-radius="120" data-magnet-pull="0.3">
+          <span class="cta__label" data-i18n="contact.cta">Start a conversation</span>
+          <span class="cta__arrow" data-magnet-inner aria-hidden="true">
+            <svg viewBox="0 0 16 16"><path d="M3 13 13 3M5 3h8v8" /></svg>
+            <svg viewBox="0 0 16 16"><path d="M3 13 13 3M5 3h8v8" /></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <ul class="channels">
+      <li data-reveal>
+        <a class="channel" href="https://www.linkedin.com/in/intelpoly/" target="_blank" rel="noopener" data-magnet data-magnet-radius="90" data-magnet-pull="0.18">
+          <span class="channel__icon" data-magnet-inner aria-hidden="true"><svg viewBox="0 0 24 24" class="ico ico--fill"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg></span>
+          <span class="channel__text"><span class="channel__name" data-i18n="contact.ch0.name">LinkedIn</span><span class="channel__hint" dir="ltr">/in/intelpoly</span></span>
+          <svg class="channel__arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8" /></svg>
+        </a>
+      </li>
+      <li data-reveal>
+        <a class="channel" href="mailto:hamzades7@gmail.com" data-magnet data-magnet-radius="90" data-magnet-pull="0.18">
+          <span class="channel__icon" data-magnet-inner aria-hidden="true"><svg viewBox="0 0 24 24" class="ico"><rect x="3" y="5" width="18" height="14" rx="2.5" /><path d="m3.5 7.5 8.5 6 8.5-6" /></svg></span>
+          <span class="channel__text"><span class="channel__name" data-i18n="contact.ch1.name">Email</span><span class="channel__hint channel__hint--plain" dir="ltr">hamzades7@gmail.com</span></span>
+          <svg class="channel__arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8" /></svg>
+        </a>
+      </li>
+      <li data-reveal>
+        <a class="channel" href="tel:+212633533135" data-magnet data-magnet-radius="90" data-magnet-pull="0.18">
+          <span class="channel__icon" data-magnet-inner aria-hidden="true"><svg viewBox="0 0 24 24" class="ico"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg></span>
+          <span class="channel__text"><span class="channel__name" data-i18n="contact.ch3.name">Phone</span><span class="channel__hint" dir="ltr">+212 6 33 53 31 35</span></span>
+          <svg class="channel__arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8" /></svg>
+        </a>
+      </li>
+      <li data-reveal>
+        <a class="channel" href="https://independent.academia.edu/MeetfleetResearchDivision" target="_blank" rel="noopener" data-magnet data-magnet-radius="90" data-magnet-pull="0.18">
+          <span class="channel__icon" data-magnet-inner aria-hidden="true"><svg viewBox="0 0 24 24" class="ico"><path d="M12 4 2 9l10 5 10-5-10-5z" /><path d="M6 11.6V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-4.4" /><path d="M22 9v6" /></svg></span>
+          <span class="channel__text"><span class="channel__name" data-i18n="contact.ch2.name">Academia</span><span class="channel__hint" data-i18n="contact.ch2.hint">Papers</span></span>
+          <svg class="channel__arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8" /></svg>
+        </a>
+      </li>
+    </ul>
+
+    <div class="contact__bottom">
+      <p class="contact__who">
+        <svg class="asterisk" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2v16M2 10h16M4.3 4.3l11.4 11.4M15.7 4.3 4.3 15.7" /></svg>
+        <span data-i18n="contact.who">Independent creator</span>
+        <span class="contact__copy">© <span data-year>2026</span> Hamza Lotfi · intelotfi</span>
+      </p>
+      <p class="contact__motto" data-i18n="contact.motto">Product. Systems. Words.</p>
+      <a class="totop" href="#top" data-totop>
+        <span data-i18n="contact.top">Back to top</span>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14V2M3 7l5-5 5 5" /></svg>
+      </a>
+    </div>
+
+    <p class="contact__mark" aria-hidden="true" data-reveal>intelotfi<span class="contact__mark-cursor"></span></p>
+  </footer>
+
+  <!-- ---------- Contact popup ----------
+       Opens from the footer CTA. Sends through FormSubmit to hamzades7@gmail.com. -->
+  <dialog class="cf" id="contact-form" aria-labelledby="cf-title">
+    <div class="cf__shell">
+      <button type="button" class="cf__close" data-cf-close aria-label="Close" data-i18n-attr="aria-label:cf.close"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+
+      <aside class="cf__side">
+        <div class="cf__intro">
+          <p class="cf__k" data-i18n="cf.k">Start a conversation</p>
+          <h2 class="cf__title" id="cf-title" data-i18n="cf.title">Have a question worth building around?</h2>
+          <p class="cf__lede" data-i18n="cf.lede">Write to Hamza directly. Every message is read by a person, and you’ll get a reply within 48 hours.</p>
+        </div>
+        <ul class="cf__lines">
+          <li><span data-i18n="cf.line.email">Email</span><a href="mailto:hamzades7@gmail.com">hamzades7@gmail.com</a></li>
+          <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/intelpoly/" target="_blank" rel="noopener">in/intelpoly</a></li>
+          <li><span>Academia</span><a href="https://independent.academia.edu/MeetfleetResearchDivision" target="_blank" rel="noopener">MeetfleetResearchDivision</a></li>
+          <li><span data-i18n="cf.line.phone">Phone</span><a href="tel:+212633533135" dir="ltr">+212 633 533 135</a></li>
+        </ul>
+        <svg class="cf__spark" viewBox="0 0 160 120" aria-hidden="true"><path pathLength="1" d="M76.1868 116.43V3.36702C76.1868 1.50747 77.6943 0 79.5538 0C81.4134 0 82.9208 1.50747 82.9208 3.36702V116.43C82.9207 118.29 81.4133 119.797 79.5538 119.797C77.6943 119.797 76.1869 118.29 76.1868 116.43Z"/><path pathLength="1" d="M82.7003 59.9381L82.9043 37.5615C82.9043 49.5853 98.5101 53.4568 108.303 46.4808C113.19 42.9998 117.992 39.4547 121.277 36.7354L133.528 27.4678C135.882 25.6692 138.314 24.0363 140.721 22.3178C142.673 20.9239 144.581 19.4601 146.501 18.0227C148.026 16.8824 154.269 11.8827 155.649 11.5124C156.167 11.3735 157.176 11.37 157.653 11.6707C158.326 12.095 158.844 12.7472 159.024 13.5294C159.2 14.2987 159.036 15.1118 158.53 15.7239C157.634 16.8098 156.274 17.673 155.159 18.5398C152.525 20.5862 149.858 22.5558 147.195 24.5589C142.535 28.0638 137.923 31.7127 133.377 35.3657C131.897 36.5534 130.475 37.8019 128.976 38.967L119.108 46.6499C117.501 47.9045 115.197 49.6012 113.711 50.9373C112.937 51.6231 112.268 52.4197 111.726 53.3014C110.52 55.259 109.728 57.6648 109.728 59.9614C109.728 62.258 110.52 64.6171 111.726 66.5747C112.268 67.4564 112.937 68.253 113.711 68.9389C115.197 70.2749 117.501 71.9716 119.108 73.2262L128.976 80.9091C130.475 82.0742 131.897 83.3228 133.377 84.5105C137.923 88.1635 142.535 91.8123 147.195 95.3172C149.858 97.3203 152.525 99.2899 155.159 101.336C156.274 102.203 157.634 103.066 158.53 104.152C159.036 104.764 159.2 105.577 159.024 106.347C158.844 107.129 158.326 107.781 157.653 108.205C157.176 108.506 156.167 108.503 155.649 108.364C154.269 107.993 148.026 102.994 146.501 101.853C144.581 100.416 142.673 98.9522 140.721 97.5583C138.314 95.8398 135.882 94.2069 133.528 92.4083L121.277 83.1407C117.992 80.4214 113.19 76.8763 108.303 73.3953C98.5101 66.4193 82.9043 70.2908 82.9043 82.3146L82.7003 59.9381Z"/><path pathLength="1" d="M76.3923 59.9381L76.1882 37.5615C76.1882 49.5853 60.5824 53.4568 50.7892 46.4808C45.9024 42.9998 41.1003 39.4547 37.815 36.7354L25.5643 27.4678C23.2103 25.6692 20.779 24.0363 18.3717 22.3178C16.4195 20.9239 14.512 19.4601 12.5912 18.0227C11.0669 16.8824 4.82324 11.8827 3.44308 11.5124C2.92524 11.3735 1.91691 11.37 1.4398 11.6707C0.766073 12.095 0.248063 12.7472 0.0680913 13.5294C-0.107668 14.2987 0.0567735 15.1118 0.562073 15.7239C1.45867 16.8098 2.81876 17.673 3.93399 18.5398C6.5672 20.5862 9.23416 22.5558 11.8977 24.5589C16.5575 28.0638 21.169 31.7127 25.7158 35.3657C27.1951 36.5534 28.618 37.8019 30.1162 38.967L39.9841 46.6499C41.5911 47.9045 43.8957 49.6012 45.3813 50.9373C46.1555 51.6231 46.8243 52.4197 47.3662 53.3014C48.5724 55.259 49.3644 57.6648 49.3644 59.9614C49.3644 62.258 48.5724 64.6171 47.3662 66.5747C46.8243 67.4564 46.1555 68.253 45.3813 68.9389C43.8958 70.2749 41.5911 71.9716 39.9841 73.2262L30.1162 80.9091C28.618 82.0742 27.1951 83.3228 25.7158 84.5105C21.169 88.1635 16.5575 91.8123 11.8977 95.3172C9.23416 97.3203 6.5672 99.2899 3.93399 101.336C2.81876 102.203 1.45868 103.066 0.562073 104.152C0.0567689 104.764 -0.107661 105.577 0.0680913 106.347C0.248057 107.129 0.766072 107.781 1.4398 108.205C1.91691 108.506 2.92523 108.503 3.44308 108.364C4.82325 107.993 11.067 102.994 12.5912 101.853C14.512 100.416 16.4195 98.9522 18.3717 97.5583C20.779 95.8398 23.2103 94.2069 25.5643 92.4083L37.815 83.1407C41.1003 80.4214 45.9024 76.8763 50.7892 73.3953C60.5824 66.4193 76.1882 70.2908 76.1882 82.3146L76.3923 59.9381Z"/></svg>
+      </aside>
+
+      <div class="cf__main">
+        <form class="cf__form" novalidate>
+          <div class="cf__row">
+            <label class="cf-field" data-field="name">
+              <span class="cf-field__k" data-i18n="cf.name">Your name</span>
+              <input type="text" name="name" autocomplete="name" maxlength="80" data-loupe />
+              <span class="cf-field__err" aria-live="polite"></span>
+            </label>
+            <label class="cf-field" data-field="email">
+              <span class="cf-field__k" data-i18n="cf.email">Email</span>
+              <input type="email" name="email" autocomplete="email" inputmode="email" maxlength="120" data-loupe />
+              <span class="cf-field__err" aria-live="polite"></span>
+            </label>
+          </div>
+
+          <fieldset class="cf-field cf-topics" data-field="topic">
+            <legend class="cf-field__k" data-i18n="cf.topic">What is it about?</legend>
+            <div class="cf-chips"><label class="cf-chip"><input type="radio" name="topic" value="A project" data-hint="project" /><span data-i18n="cf.topic.project">A project</span></label><label class="cf-chip"><input type="radio" name="topic" value="Hiring" data-hint="hiring" /><span data-i18n="cf.topic.hiring">Hiring</span></label><label class="cf-chip"><input type="radio" name="topic" value="Freelance" data-hint="freelance" /><span data-i18n="cf.topic.freelance">Freelance</span></label><label class="cf-chip"><input type="radio" name="topic" value="Collaboration" data-hint="collab" /><span data-i18n="cf.topic.collab">Collaboration</span></label><label class="cf-chip"><input type="radio" name="topic" value="Research" data-hint="research" /><span data-i18n="cf.topic.research">Research</span></label><label class="cf-chip"><input type="radio" name="topic" value="Investment" data-hint="invest" /><span data-i18n="cf.topic.invest">Investment</span></label><label class="cf-chip"><input type="radio" name="topic" value="Press &amp; speaking" data-hint="press" /><span data-i18n="cf.topic.press">Press &amp; speaking</span></label><label class="cf-chip"><input type="radio" name="topic" value="Meetfleet" data-hint="meetfleet" /><span data-i18n="cf.topic.meetfleet">Meetfleet</span></label><label class="cf-chip"><input type="radio" name="topic" value="Something else" data-hint="other" /><span data-i18n="cf.topic.other">Something else</span></label></div>
+            <span class="cf-field__err" aria-live="polite"></span>
+          </fieldset>
+
+          <label class="cf-field cf-field--msg" data-field="message">
+            <span class="cf-field__k"><span data-i18n="cf.message">Message</span><span class="cf-count" aria-hidden="true"><b>0</b> / 2000</span></span>
+            <textarea name="message" rows="5" maxlength="2000" data-loupe data-i18n-attr="placeholder:cf.hint.default" placeholder="A few lines about what you have in mind."></textarea>
+            <span class="cf-field__err" aria-live="polite"></span>
+          </label>
+
+          <input class="cf__honey" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+          <div class="cf__foot">
+            <button type="submit" class="cf__send"><span class="cf__send-label" data-i18n="cf.send">Send message</span><span class="cf__send-arrow"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+            <p class="cf__note" data-i18n="cf.note">Straight to Hamza’s inbox. No newsletter, no lists.</p>
+          </div>
+          <p class="cf__server-err" role="alert" hidden></p>
+        </form>
+
+        <div class="cf__done" hidden>
+          <svg class="cf__done-mark" viewBox="0 0 160 120" aria-hidden="true"><path pathLength="1" d="M76.1868 116.43V3.36702C76.1868 1.50747 77.6943 0 79.5538 0C81.4134 0 82.9208 1.50747 82.9208 3.36702V116.43C82.9207 118.29 81.4133 119.797 79.5538 119.797C77.6943 119.797 76.1869 118.29 76.1868 116.43Z"/><path pathLength="1" d="M82.7003 59.9381L82.9043 37.5615C82.9043 49.5853 98.5101 53.4568 108.303 46.4808C113.19 42.9998 117.992 39.4547 121.277 36.7354L133.528 27.4678C135.882 25.6692 138.314 24.0363 140.721 22.3178C142.673 20.9239 144.581 19.4601 146.501 18.0227C148.026 16.8824 154.269 11.8827 155.649 11.5124C156.167 11.3735 157.176 11.37 157.653 11.6707C158.326 12.095 158.844 12.7472 159.024 13.5294C159.2 14.2987 159.036 15.1118 158.53 15.7239C157.634 16.8098 156.274 17.673 155.159 18.5398C152.525 20.5862 149.858 22.5558 147.195 24.5589C142.535 28.0638 137.923 31.7127 133.377 35.3657C131.897 36.5534 130.475 37.8019 128.976 38.967L119.108 46.6499C117.501 47.9045 115.197 49.6012 113.711 50.9373C112.937 51.6231 112.268 52.4197 111.726 53.3014C110.52 55.259 109.728 57.6648 109.728 59.9614C109.728 62.258 110.52 64.6171 111.726 66.5747C112.268 67.4564 112.937 68.253 113.711 68.9389C115.197 70.2749 117.501 71.9716 119.108 73.2262L128.976 80.9091C130.475 82.0742 131.897 83.3228 133.377 84.5105C137.923 88.1635 142.535 91.8123 147.195 95.3172C149.858 97.3203 152.525 99.2899 155.159 101.336C156.274 102.203 157.634 103.066 158.53 104.152C159.036 104.764 159.2 105.577 159.024 106.347C158.844 107.129 158.326 107.781 157.653 108.205C157.176 108.506 156.167 108.503 155.649 108.364C154.269 107.993 148.026 102.994 146.501 101.853C144.581 100.416 142.673 98.9522 140.721 97.5583C138.314 95.8398 135.882 94.2069 133.528 92.4083L121.277 83.1407C117.992 80.4214 113.19 76.8763 108.303 73.3953C98.5101 66.4193 82.9043 70.2908 82.9043 82.3146L82.7003 59.9381Z"/><path pathLength="1" d="M76.3923 59.9381L76.1882 37.5615C76.1882 49.5853 60.5824 53.4568 50.7892 46.4808C45.9024 42.9998 41.1003 39.4547 37.815 36.7354L25.5643 27.4678C23.2103 25.6692 20.779 24.0363 18.3717 22.3178C16.4195 20.9239 14.512 19.4601 12.5912 18.0227C11.0669 16.8824 4.82324 11.8827 3.44308 11.5124C2.92524 11.3735 1.91691 11.37 1.4398 11.6707C0.766073 12.095 0.248063 12.7472 0.0680913 13.5294C-0.107668 14.2987 0.0567735 15.1118 0.562073 15.7239C1.45867 16.8098 2.81876 17.673 3.93399 18.5398C6.5672 20.5862 9.23416 22.5558 11.8977 24.5589C16.5575 28.0638 21.169 31.7127 25.7158 35.3657C27.1951 36.5534 28.618 37.8019 30.1162 38.967L39.9841 46.6499C41.5911 47.9045 43.8957 49.6012 45.3813 50.9373C46.1555 51.6231 46.8243 52.4197 47.3662 53.3014C48.5724 55.259 49.3644 57.6648 49.3644 59.9614C49.3644 62.258 48.5724 64.6171 47.3662 66.5747C46.8243 67.4564 46.1555 68.253 45.3813 68.9389C43.8958 70.2749 41.5911 71.9716 39.9841 73.2262L30.1162 80.9091C28.618 82.0742 27.1951 83.3228 25.7158 84.5105C21.169 88.1635 16.5575 91.8123 11.8977 95.3172C9.23416 97.3203 6.5672 99.2899 3.93399 101.336C2.81876 102.203 1.45868 103.066 0.562073 104.152C0.0567689 104.764 -0.107661 105.577 0.0680913 106.347C0.248057 107.129 0.766072 107.781 1.4398 108.205C1.91691 108.506 2.92523 108.503 3.44308 108.364C4.82325 107.993 11.067 102.994 12.5912 101.853C14.512 100.416 16.4195 98.9522 18.3717 97.5583C20.779 95.8398 23.2103 94.2069 25.5643 92.4083L37.815 83.1407C41.1003 80.4214 45.9024 76.8763 50.7892 73.3953C60.5824 66.4193 76.1882 70.2908 76.1882 82.3146L76.3923 59.9381Z"/></svg>
+          <p class="cf__k" data-i18n="cf.done.k">Message sent</p>
+          <h3 class="cf__done-title" data-out="cf-done-title">Thank you.</h3>
+          <p class="cf__done-text" data-out="cf-done-text"></p>
+          <p class="cf__ref" dir="ltr"><span data-i18n="cf.done.ref">Reference</span> · <b data-out="cf-ref"></b></p>
+          <div class="cf__done-actions">
+            <button type="button" class="cf__send" data-cf-close><span data-i18n="cf.done.back">Back to the site</span><span class="cf__send-arrow"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+            <button type="button" class="cf__again" data-cf-again data-i18n="cf.done.again">Send another</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- round glass loupe: press and hold inside a field to magnify the text under the pointer -->
+  <div class="loupe" aria-hidden="true"><div class="loupe__lens"><div class="loupe__content"></div><i class="loupe__caret"></i></div></div>
+
+  <div class="cursor" aria-hidden="true">
+    <div class="cursor__ring"></div>
+    <div class="cursor__dot"></div>
+  </div>
+
+  <script src="../i18n.js?v=202610140010"></script>
+  <script src="../main.js?v=202610140010"></script>
+</body>
+</html>
+

@@ -40,12 +40,13 @@ setIndex(document.querySelectorAll(".menu a"));
 /* ---------- Elements ---------- */
 
 const hero = document.querySelector(".hero");
-const heroImg = hero.querySelector(".hero__bg img");
-const canvas = hero.querySelector(".hero__gl");
+// hero, roles, manifesto and burger only exist on the home page; other pages reuse this file
+const heroImg = hero?.querySelector(".hero__bg img");
+const canvas = hero?.querySelector(".hero__gl");
 const rolesEl = document.querySelector(".roles");
 const manifesto = document.querySelector(".manifesto");
 const burger = document.querySelector(".burger");
-const burgerLines = burger.querySelector(".burger__lines");
+const burgerLines = burger?.querySelector(".burger__lines");
 const logo = document.querySelector(".logo");
 const menu = document.getElementById("menu");
 
@@ -190,7 +191,7 @@ function createGL() {
 
 let glView = null;
 let heroVisible = true;
-new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; }).observe(hero);
+if (hero) new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; }).observe(hero);
 
 /* ---------- Roles: per-item springs ---------- */
 
@@ -231,7 +232,7 @@ function updateRoleTargets() {
 
 /* ---------- Roles cycle: two at a time, looping ---------- */
 
-const roleItems = [...rolesEl.children];
+const roleItems = rolesEl ? [...rolesEl.children] : [];
 const pairs = [];
 for (let i = 0; i < roleItems.length; i += 2) pairs.push(roleItems.slice(i, i + 2));
 pairs.forEach((pair) => pair.forEach((li, j) => li.style.setProperty("--pair-i", j)));
@@ -242,6 +243,7 @@ let pairIndex = -1;
 let cycleTimer = 0;
 
 function showPair(next) {
+  if (!pairs.length) return;
   const prev = pairs[pairIndex];
   if (prev) {
     prev.forEach((li) => { li.classList.remove("is-in"); li.classList.add("is-out"); });
@@ -253,6 +255,7 @@ function showPair(next) {
 }
 
 function scheduleCycle(delay = HOLD) {
+  if (!pairs.length) return;
   clearTimeout(cycleTimer);
   cycleTimer = setTimeout(() => {
     const paused = hoveredRole !== -1 || body.classList.contains("menu-open") || document.hidden;
@@ -273,7 +276,7 @@ const magnets = [
     radius: Number(el.dataset.magnetRadius) || 90,
     pull: Number(el.dataset.magnetPull) || 0.25,
   })),
-].map((m) => ({ ...m, x: spring(0, 150, 13), y: spring(0, 150, 13) }));
+].filter((m) => m.el).map((m) => ({ ...m, x: spring(0, 150, 13), y: spring(0, 150, 13) }));
 
 function updateMagnets() {
   if (!finePointer) return;
@@ -421,8 +424,8 @@ function frame(now) {
 
   // apply
   const px = par.x.x * AMP, py = par.y.x * AMP;
-  rolesEl.style.transform = `translate3d(${px * 8}px, ${py * 5}px, 0)`;
-  manifesto.style.transform = `translate3d(${px * 5}px, ${py * 3}px, 0)`;
+  if (rolesEl) rolesEl.style.transform = `translate3d(${px * 8}px, ${py * 5}px, 0)`;
+  if (manifesto) manifesto.style.transform = `translate3d(${px * 5}px, ${py * 3}px, 0)`;
 
   for (const r of roles) {
     r.el.style.transform = `translate3d(${r.x.x.toFixed(2)}px, ${r.y.x.toFixed(2)}px, 0)`;
@@ -487,6 +490,7 @@ Promise.race([imgReady, timeout]).then(() => {
 /* ---------- Menu ---------- */
 
 function setMenu(open) {
+  if (!burger || !menu) return;
   if (open) {
     const b = burger.getBoundingClientRect();
     menu.style.setProperty("--ox", `${b.left + b.width / 2}px`);
@@ -499,9 +503,9 @@ function setMenu(open) {
   menu.inert = !open;
 }
 
-burger.addEventListener("click", () => setMenu(!body.classList.contains("menu-open")));
-menu.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
-burger.setAttribute("aria-label", i18n.t("nav.open"));
+burger?.addEventListener("click", () => setMenu(!body.classList.contains("menu-open")));
+menu?.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
+burger?.setAttribute("aria-label", i18n.t("nav.open"));
 i18n.onChange(() => setMenu(body.classList.contains("menu-open")));
 addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
 

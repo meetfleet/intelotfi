@@ -423,7 +423,7 @@ const zoom = (() => {
   const nav = document.querySelector("[data-chapnav]");
   if (nav) {
     nav.insertAdjacentHTML("beforeend", `
-      <a class="chapnav__home" href="../index.html#work">${L}<span>Latest Work</span></a>
+      <a class="chapnav__home" href="../meetfleet/">${L}<span>Meetfleet</span></a>
       <span class="chapnav__sep"></span>
       <a class="chapnav__arrow" href="${prev ? prev.href : "#"}" aria-label="Previous chapter" ${prev ? "" : 'aria-disabled="true"'}>${L}</a>
       ${CHAPTERS.map((c) => `<a class="chapnav__ch${c.n === cur ? " is-current" : ""}" href="${c.href}" title="${esc(c.title)}" ${c.n === cur ? 'aria-current="page"' : ""}>${c.roman}</a>`).join("")}
@@ -480,7 +480,7 @@ const zoom = (() => {
       <div class="continue__index">
         ${CHAPTERS.map((c) => `<a class="continue__item${c.n === cur ? " is-current" : ""}" href="${c.href}" ${c.n === cur ? 'aria-current="page"' : ""}><span class="continue__k">Chapter ${c.roman}</span><p>${esc(c.kicker)}</p></a>`).join("")}
       </div>
-      <a class="continue__home" href="../index.html#work">${L}Back to Latest Work</a>`;
+      <a class="continue__home" href="../meetfleet/">${L}Back to Meetfleet</a>`;
   }
 
   // arrow keys move between chapters when nothing else wants them

@@ -17,6 +17,15 @@ const STORAGE_KEY = "intelotfi:lang";
 
 const STRINGS = {
   en: {
+    "mf.meta.title": "Meetfleet | Hamza Lotfi · intelotfi",
+    "mf.eyebrow": "Meetfleet · the full case study",
+    "mf.title": "The social OS for the spontaneous era.",
+    "mf.lede": "Meetfleet is a hyper-local social app I designed and built. It connects you in real time with plans happening around you, from a coffee chat to a sunset walk or a group dinner. Every plan is scored by the Social Activation Score, every person by the Trust Protocol, and every screen is shaped by AI. Below: the build in numbers, three chapters under the hood, and the essays behind its choices.",
+    "mf.nav.home": "Home",
+    "mf.nav.chapters": "Chapters",
+    "mf.nav.sim": "المحاكي",
+    "mf.nav.sim": "Simulateur",
+    "mf.nav.sim": "Simulator",
     "meta.title": "Hamza Lotfi | Independent AI Researcher · intelotfi",
     "meta.h1": "Hamza Lotfi, Independent AI Researcher and Product Engineer",
     "meta.description": "Hamza Lotfi is an independent AI researcher and product engineer: inventor of the Social Activation Score and the Trust Protocol, and builder of Meetfleet.",
@@ -335,6 +344,12 @@ const STRINGS = {
   },
 
   fr: {
+    "mf.meta.title": "Meetfleet | Hamza Lotfi · intelotfi",
+    "mf.eyebrow": "Meetfleet · l’étude de cas complète",
+    "mf.title": "Le système social de l’ère spontanée.",
+    "mf.lede": "Meetfleet est une app sociale hyper-locale que j’ai conçue et développée. Elle vous relie en temps réel aux plans qui se passent autour de vous, d’un café à une balade au coucher du soleil ou un dîner de groupe. Chaque plan est noté par le Social Activation Score, chaque personne par le Trust Protocol, et chaque écran est façonné par l’IA. Ci-dessous : la construction en chiffres, trois chapitres sous le capot, et les essais derrière ses choix.",
+    "mf.nav.home": "Accueil",
+    "mf.nav.chapters": "Chapitres",
     "meta.title": "Hamza Lotfi | Chercheur indépendant en IA · intelotfi",
     "meta.h1": "Hamza Lotfi, Chercheur indépendant en IA et ingénieur produit",
     "meta.description": "Hamza Lotfi est chercheur indépendant en IA et ingénieur produit : inventeur du Social Activation Score et du Trust Protocol, créateur de Meetfleet.",
@@ -653,6 +668,12 @@ const STRINGS = {
   },
 
   ar: {
+    "mf.meta.title": "Meetfleet | حمزة لطفي · intelotfi",
+    "mf.eyebrow": "Meetfleet · دراسة الحالة الكاملة",
+    "mf.title": "النظام الاجتماعي لعصر العفوية.",
+    "mf.lede": "Meetfleet تطبيق اجتماعي محلي صمّمته وبنيته. يربطك في الوقت الحقيقي بالخطط التي تحدث من حولك، من فنجان قهوة إلى نزهة عند الغروب أو عشاء جماعي. كل خطة يقيّمها Social Activation Score، وكل شخص يقيّمه Trust Protocol، وكل شاشة يصوغها الذكاء الاصطناعي. في الأسفل: البناء بالأرقام، وثلاثة فصول تكشف ما تحت الغطاء، والمقالات التي تشرح اختياراته.",
+    "mf.nav.home": "الرئيسية",
+    "mf.nav.chapters": "الفصول",
     "meta.title": "حمزة لطفي | باحث مستقل في الذكاء الاصطناعي · intelotfi",
     "meta.h1": "حمزة لطفي، باحث مستقل في الذكاء الاصطناعي ومهندس منتجات",
     "meta.description": "حمزة لطفي باحث مستقل في الذكاء الاصطناعي ومهندس منتجات: مخترع درجة التفعيل الاجتماعي وبروتوكول الثقة، ومنشئ Meetfleet.",
@@ -1000,7 +1021,8 @@ const i18n = (() => {
     const root = document.documentElement;
     root.lang = lang;
     root.dir = LANGS[lang].dir;
-    document.title = t("meta.title");
+    // a page can name its own title key on <html data-title-key>; the home page uses meta.title
+    document.title = t(root.dataset.titleKey || "meta.title");
 
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       el.textContent = t(el.dataset.i18n);
