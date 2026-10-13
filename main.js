@@ -1114,3 +1114,49 @@ if (!("onpagereveal" in window)) {
     show(Math.max(0, Math.min(weeks.length - 1, (cur < 0 ? (d > 0 ? -1 : weeks.length) : cur) + d)));
   });
 })();
+
+/* ---------- Quiet parallax ----------
+   Layers drift a few pixels at slightly different speeds as the page scrolls,
+   enough to feel depth, too little to notice. Uses the `translate` property so it
+   never fights the reveal transforms. The hero is left still on purpose. */
+
+(() => {
+  if (reduceMotion) return;
+  const LAYERS = [
+    [".eyebrow, .work__eyebrow, .ledger__k", 0.07, 22],
+    [".sec__title, .work__title, .about__title, .contact__title, .ledger__title, .paper__title", 0.04, 16],
+    [".sec__lede, .work__lede, .about__lede, .contact__lede, .essays-block__lede", 0.02, 10],
+    [".stat__value, .result__value, .ledger__stat dd", 0.03, 12],
+    [".subject__icon, .essay__motif", -0.035, 14],
+    [".post__img", -0.05, 14],
+  ];
+  const items = [];
+  for (const [sel, f, max] of LAYERS) {
+    document.querySelectorAll(sel).forEach((el) => {
+      if (el.closest(".hero, dialog")) return;
+      items.push({ el, f, max, y: 0, img: el.classList.contains("post__img") });
+    });
+  }
+  // images get a touch of headroom so their edges never show while drifting
+  items.forEach((it) => { if (it.img) it.el.style.scale = "1.06"; });
+
+  let queued = false;
+  const update = () => {
+    queued = false;
+    const mid = innerHeight / 2;
+    for (const it of items) {
+      const r = it.el.getBoundingClientRect();
+      const top = r.top - it.y;   // undo our own offset so the measure stays stable
+      if (top > innerHeight * 1.4 || top + r.height < -innerHeight * 0.4) continue;
+      const d = top + r.height / 2 - mid;
+      const y = Math.max(-it.max, Math.min(it.max, d * it.f));
+      if (Math.abs(y - it.y) < 0.1) continue;
+      it.y = y;
+      it.el.style.translate = `0 ${y.toFixed(2)}px`;
+    }
+  };
+  const queue = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+  addEventListener("scroll", queue, { passive: true });
+  addEventListener("resize", queue);
+  queue();
+})();
