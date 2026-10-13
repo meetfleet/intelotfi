@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light" />
   <!-- first paint: the page colour only, never unstyled content; the stylesheet reveals the body -->
-  <style>html{background:#ffffff}body{visibility:hidden}</style>
+  <style>@view-transition{navigation:auto}html{background:#ffffff}body{visibility:hidden}</style>
   <script>setTimeout(function(){document.body&&(document.body.style.visibility="visible")},2500)</script>
+  <!-- page transitions: tell the incoming page which way the visitor travelled, and whether they came from inside the site -->
+  <script>addEventListener("pagereveal",function(e){var a=window.navigation&&navigation.activation,f=a&&a.from;try{if(f&&new URL(f.url).origin===location.origin)document.documentElement.classList.add("vt-internal")}catch(_){}if(e.viewTransition&&e.viewTransition.types){var back=a&&a.navigationType==="traverse"&&f&&a.entry&&f.index>a.entry.index;e.viewTransition.types.add(back?"back":"forward")}});</script>
   <title>AI, Mathematics, and Physics, with Refined Design and Security | Hamza Lotfi</title>
   <meta name="description" content="Chapter III of the Meetfleet case study by Hamza Lotfi: Meetchat messaging, Messages Shield, defence in depth, passkey sign-in and the AI that protects meetups." />
   <meta name="author" content="Hamza Lotfi" />

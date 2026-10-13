@@ -355,7 +355,7 @@ function countUp(el) {
   const start = performance.now();
   const duration = 1800 + to * 12;
   const tick = (now) => {
-    const t = Math.min((now - start) / duration, 1);
+    const t = Math.max(0, Math.min((now - start) / duration, 1));
     el.textContent = fmtCount(el, t >= 1 ? to : to * (1 - Math.pow(2, -10 * t)));
     if (t < 1) requestAnimationFrame(tick);
   };
@@ -980,7 +980,7 @@ if (!("onpagereveal" in window)) {
     if (reduceMotion) { el.textContent = fmt(to); return; }
     const t0 = performance.now(), dur = 1600 + Math.min(to, 400) * 2;
     const tick = (now) => {
-      const p = Math.min((now - t0) / dur, 1);
+      const p = Math.max(0, Math.min((now - t0) / dur, 1));
       el.textContent = fmt(p >= 1 ? to : Math.round(to * (1 - Math.pow(2, -10 * p))));
       if (p < 1) requestAnimationFrame(tick);
     };
@@ -1112,3 +1112,14 @@ if (!("onpagereveal" in window)) {
   addEventListener("resize", queue);
   queue();
 })();
+
+/* ---------- Meetfleet page: chapter peeks load their figures on first hover ---------- */
+
+document.querySelectorAll(".post").forEach((post) => {
+  const peek = post.querySelector(".peek");
+  if (!peek) return;
+  peek.querySelectorAll(".peek__toc li").forEach((li, i) => li.style.setProperty("--n", i));
+  const load = () => peek.querySelectorAll("img[data-src]").forEach((img) => { img.src = img.dataset.src; img.removeAttribute("data-src"); });
+  post.addEventListener("pointerenter", load, { once: true });
+  post.addEventListener("focusin", load, { once: true });
+});

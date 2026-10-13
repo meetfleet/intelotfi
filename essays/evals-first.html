@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light" />
   <!-- first paint: the page colour only, never unstyled content; the stylesheet reveals the body -->
-  <style>html{background:#f2f4f6}body{visibility:hidden}</style>
+  <style>@view-transition{navigation:auto}html{background:#f2f4f6}body{visibility:hidden}</style>
   <script>setTimeout(function(){document.body&&(document.body.style.visibility="visible")},2500)</script>
+  <!-- page transitions: tell the incoming page which way the visitor travelled, and whether they came from inside the site -->
+  <script>addEventListener("pagereveal",function(e){var a=window.navigation&&navigation.activation,f=a&&a.from;try{if(f&&new URL(f.url).origin===location.origin)document.documentElement.classList.add("vt-internal")}catch(_){}if(e.viewTransition&&e.viewTransition.types){var back=a&&a.navigationType==="traverse"&&f&&a.entry&&f.index>a.entry.index;e.viewTransition.types.add(back?"back":"forward")}});</script>
   <title>Write the eval before the prompt | Hamza Lotfi</title>
   <meta name="description" content="An essay by Hamza Lotfi: An AI feature without an evaluation set is a demo. How to turn “it feels better” into a number you can ship against." />
   <meta name="author" content="Hamza Lotfi" />

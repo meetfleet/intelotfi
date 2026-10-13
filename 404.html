@@ -4,6 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Page not found | Hamza Lotfi · intelotfi</title>
+  <!-- page transitions: tell the incoming page which way the visitor travelled, and whether they came from inside the site -->
+  <script>addEventListener("pagereveal",function(e){var a=window.navigation&&navigation.activation,f=a&&a.from;try{if(f&&new URL(f.url).origin===location.origin)document.documentElement.classList.add("vt-internal")}catch(_){}if(e.viewTransition&&e.viewTransition.types){var back=a&&a.navigationType==="traverse"&&f&&a.entry&&f.index>a.entry.index;e.viewTransition.types.add(back?"back":"forward")}});</script>
   <meta name="robots" content="noindex" />
   <link rel="icon" href="/assets/icon.svg" type="image/svg+xml" />
   <style>

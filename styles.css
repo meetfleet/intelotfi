@@ -1758,26 +1758,54 @@ ul { list-style: none; }
   }
 }
 
-/* ---------- page transitions ----------
-   Cross-document view transitions (Chrome/Edge/Safari 18.2+): pages cross-fade
-   and the chapter/essay artwork morphs between the card and the page. */
+/* ---------- page transitions: the site behaves like one page ----------
+   Cross-document view transitions (Chrome/Edge/Safari 18.2+). The logo and the
+   menu button never leave the screen; cards grow into the pages they open
+   (chapter covers, essay motifs, the meetfleet tile); everything else slides
+   in the direction of travel: forward rises, back settles down. */
 @view-transition { navigation: auto; }
-::view-transition-old(root) { animation: vt-out 0.26s cubic-bezier(0.4, 0, 1, 1) both; }
-::view-transition-new(root) { animation: vt-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
-::view-transition-group(*) { animation-duration: 0.55s; animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
-@keyframes vt-out { to { opacity: 0; transform: translateY(-10px); } }
-@keyframes vt-in { from { opacity: 0; transform: translateY(16px); } }
+::view-transition-group(*) { animation-duration: 0.7s; animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+::view-transition-old(root) { animation: vt-out 0.38s cubic-bezier(0.4, 0, 0.2, 1) both; }
+::view-transition-new(root) { animation: vt-in 0.72s cubic-bezier(0.22, 1, 0.36, 1) 0.06s both; }
+html:active-view-transition-type(back)::view-transition-old(root) { animation-name: vt-out-back; }
+html:active-view-transition-type(back)::view-transition-new(root) { animation-name: vt-in-back; }
+@keyframes vt-out { to { opacity: 0; transform: translateY(-28px) scale(0.985); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(44px); } }
+@keyframes vt-out-back { to { opacity: 0; transform: translateY(28px) scale(0.985); } }
+@keyframes vt-in-back { from { opacity: 0; transform: translateY(-44px); } }
+/* persistent chrome: no fade, it simply glides to its new place */
+::view-transition-old(site-logo), ::view-transition-old(site-burger) { animation: none; opacity: 0; }
+::view-transition-new(site-logo), ::view-transition-new(site-burger) { animation: none; }
+/* shared artwork: crop, don't squash, while the frame changes shape */
+::view-transition-image-pair(mf-stage), ::view-transition-image-pair(chapter-1), ::view-transition-image-pair(chapter-2), ::view-transition-image-pair(chapter-3) { overflow: hidden; border-radius: clamp(14px, 1.6vw, 28px); }
+::view-transition-old(mf-stage), ::view-transition-new(mf-stage),
+::view-transition-old(chapter-1), ::view-transition-new(chapter-1),
+::view-transition-old(chapter-2), ::view-transition-new(chapter-2),
+::view-transition-old(chapter-3), ::view-transition-new(chapter-3) { width: 100%; height: 100%; object-fit: cover; }
+::view-transition-old(mf-stage) { animation: vt-fade-out 0.45s ease both; }
+::view-transition-new(mf-stage) { animation: vt-fade-in 0.5s ease 0.12s both; }
+@keyframes vt-fade-out { to { opacity: 0; } }
+@keyframes vt-fade-in { from { opacity: 0; } }
 /* browsers without view transitions get a short fade (set from JS) */
 html.is-leaving body { opacity: 0; transition: opacity 0.18s ease-in; }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
 }
+.logo, .bar__logo { view-transition-name: site-logo; }
+.burger { view-transition-name: site-burger; }
 .post:nth-child(1) .post__img { view-transition-name: chapter-1; }
 .post:nth-child(2) .post__img { view-transition-name: chapter-2; }
 .post:nth-child(3) .post__img { view-transition-name: chapter-3; }
 .essay:nth-child(1) .essay__motif { view-transition-name: essay-1; }
 .essay:nth-child(2) .essay__motif { view-transition-name: essay-2; }
 .essay:nth-child(3) .essay__motif { view-transition-name: essay-3; }
+/* the meetfleet tile on the home page grows into the /meetfleet header band */
+.project-list--feature .project:first-child .project__cover { view-transition-name: mf-stage; }
+.work--page .work__band { isolation: isolate; }
+.work__stage { position: absolute; inset: 0 0 auto 0; z-index: -1; height: min(100%, 100svh); background: #09090b; border-radius: inherit; pointer-events: none; view-transition-name: mf-stage; }
+/* arriving from inside the site: the logo and menu are already here, so no intro for them */
+.vt-internal .is-loading .logo__text, .vt-internal .is-loading .logo__cursor { opacity: 1; translate: none; transition: none; }
+.vt-internal .is-loading .burger__lines { opacity: 1; transition: none; }
 
 /* ---------- living motifs: each drawing acts out its essay ----------
    a × b × c: the factors drift; every cycle the weak one (c) sinks and turns var(--red).
@@ -2737,3 +2765,77 @@ html.cf-lock { overflow: hidden; }
 .essay__motif .m-evals, .essay__motif .m-amps, .essay__motif .m-stream { color: var(--navy, #1d2142); }
 .writing { padding-bottom: clamp(48px, 5.4vw, 104px); }
 .project--compact .project__top { position: relative; z-index: 1; }
+
+/* ---------- Meetfleet page: chapters first, as tiles that let you look inside ---------- */
+
+.work--page .work__band { padding-bottom: clamp(56px, 6vw, 110px); }
+
+@media (min-width: 1101px) {
+  .work--page .posts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 2.4vw, 44px); }
+  .work--page .post { grid-template-columns: 1fr; align-items: start; align-content: start; gap: clamp(20px, 2vw, 32px); padding-block: clamp(20px, 2.4vw, 40px); }
+  .work--page .post + .post { border-top: 0; }
+  .work--page .post:nth-child(even) .post__link { order: 0; }
+  .work--page .post__ch { font-size: clamp(36px, 3.2vw, 64px); }
+}
+
+/* the peek: on hover the cover gives way to the chapter itself,
+   its sections on one side and its figures rolling past on the other */
+.peek {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+  background: rgba(11, 11, 14, 0.94);
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s var(--expo-out);
+}
+
+.peek__toc { display: flex; flex-direction: column; justify-content: center; gap: 10px; padding: 0 clamp(14px, 1.4vw, 22px); min-width: 0; }
+.peek__k { font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); }
+.peek__toc ol { list-style: none; display: grid; gap: 3px; counter-reset: s; }
+.peek__toc li {
+  counter-increment: s;
+  display: flex;
+  gap: 8px;
+  font-size: clamp(11px, 0.78vw, 13px);
+  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.82);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0;
+  translate: -6px 0;
+  transition: opacity 0.5s var(--expo-out), translate 0.6s var(--expo-out);
+  transition-delay: calc(var(--n, 0) * 45ms);
+}
+.peek__toc li::before { content: counter(s, decimal-leading-zero); flex: none; font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.85em; color: rgba(255, 255, 255, 0.4); }
+.peek__toc li.peek__more { color: rgba(255, 255, 255, 0.45); }
+.peek__toc li.peek__more::before { content: none; }
+
+.peek__strip { position: relative; overflow: hidden; border-inline-start: 1px solid rgba(255, 255, 255, 0.08); -webkit-mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent); mask-image: linear-gradient(180deg, transparent, #000 14%, #000 86%, transparent); }
+.peek__roll { position: absolute; inset: 0 10px auto; display: grid; gap: 10px; padding-top: 10px; animation: peek-roll 22s linear infinite; animation-play-state: paused; }
+.peek__roll img { width: 100%; height: auto; border-radius: 4px; background: #fff; }
+@keyframes peek-roll { to { transform: translateY(-50%); } }
+
+@media (hover: hover) {
+  .post:hover .peek,
+  .post:focus-within .peek { opacity: 1; }
+  .post:hover .peek__toc li,
+  .post:focus-within .peek__toc li { opacity: 1; translate: 0 0; }
+  .post:hover .peek__roll,
+  .post:focus-within .peek__roll { animation-play-state: running; }
+  /* the glass badge steps aside while the peek is open */
+  .work--page .post:hover .post__panel { opacity: 0; }
+}
+@media (hover: none) { .peek { display: none; } }
+@media (prefers-reduced-motion: reduce) { .peek__roll { animation: none; } }
+
+:root[lang="ar"] .peek__k { font-family: inherit; letter-spacing: 0; }
+
+/* the app and its build ledger close the page, after the reading */
+.work--end { padding-top: clamp(16px, 3.6vw, 72px); }
+.work--end .work__band { padding-top: clamp(32px, 4vw, 72px); }
+.work--end .subject { margin-top: 0; }
