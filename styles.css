@@ -2619,3 +2619,4 @@ html.cf-lock { overflow: hidden; }
 @keyframes st-caret { 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .m-evals i, .m-amps i, .m-stream i, .m-stream u { animation: none; opacity: 0.8; } .m-evals i { background: currentColor; } }
 .essay__motif .m-evals, .essay__motif .m-amps, .essay__motif .m-stream { color: var(--navy, #1d2142); }
+.writing { padding-bottom: clamp(48px, 5.4vw, 104px); }
