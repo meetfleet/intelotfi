@@ -2736,3 +2736,5 @@ html.cf-lock { overflow: hidden; }
 
 /* the page's custom cursor can't follow the pointer into a framed site */
 .in-live .cursor { visibility: hidden !important; }
+/* inside a live site, give the pointer back its normal cursor (the framed page sets its own) */
+.has-cursor .live__frame { cursor: auto !important; }

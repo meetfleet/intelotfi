@@ -1188,7 +1188,6 @@ if (!("onpagereveal" in window)) {
     f.referrerPolicy = "strict-origin-when-cross-origin";
     // the framed site may run scripts and forms, open new tabs, but never navigate this page
     f.setAttribute("sandbox", "allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox");
-    f.setAttribute("scrolling", "no");
     f.tabIndex = -1;
     f.addEventListener("load", () => tile.classList.add("is-loaded", "is-live"), { once: true });
     tile.querySelector(".live__viewport").prepend(f);
