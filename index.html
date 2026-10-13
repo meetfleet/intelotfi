@@ -42,7 +42,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400&display=swap" media="print" onload="this.media='all'" />
-  <link rel="stylesheet" href="styles.css?v=202610132205" />
+  <link rel="stylesheet" href="styles.css?v=202610132230" />
   <!-- instant navigation: pages you are about to open are pre-rendered on hover (Chromium) -->
   <script type="speculationrules">{"prerender":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/assets/*"}},{"not":{"selector_matches":"[target=_blank], [href^='mailto:'], [href^='tel:']"}}]},"eagerness":"moderate"}]}</script>
 </head>
@@ -297,22 +297,19 @@
       </div>
     </section>
 
-    <!-- ---------- Projects: each one runs live in its tile ----------
-         The tile frames the real site at 1440x900, scaled down. It loads when
-         it scrolls near, unloads when it leaves, and takes the pointer while
-         hovered. Phones get the still poster and open the site on tap. -->
+    <!-- ---------- Projects ---------- -->
     <section class="projects" id="projects" aria-labelledby="projects-title">
       <div class="projects__band">
         <header class="projects__head">
           <div>
             <p class="projects__eyebrow" data-reveal data-i18n="projects.eyebrow">Projects · technology and AI</p>
-            <h2 class="projects__title" id="projects-title" data-reveal data-split data-i18n="projects.title">Live, not screenshots.</h2>
+            <h2 class="projects__title" id="projects-title" data-reveal data-split data-i18n="projects.title">Things I built.</h2>
           </div>
-          <p class="projects__lede" data-reveal data-i18n="projects.lede">Products I built, running right here. Move into a window to use the real site; click the arrow to open it.</p>
+          <p class="projects__lede" data-reveal data-i18n="projects.lede">Products in security, data and AI. Each one opens in a new tab.</p>
         </header>
 
         <ol class="project-list">
-          <li class="project project--feature" data-reveal>
+          <li class="project" data-reveal>
             <div class="project__info">
               <div class="project__top">
                 <span class="project__n">01</span>
@@ -327,19 +324,6 @@
                 <div><dt data-i18n="projects.f.ai">AI</dt><dd data-i18n="projects.breachify.ai">Phishing simulation</dd></div>
                 <div><dt data-i18n="projects.f.site">Site</dt><dd dir="ltr">breachify.com</dd></div>
               </dl>
-            </div>
-
-            <div class="live" data-live="https://www.breachify.com/" data-poster="assets/projects/breachify.webp">
-              <div class="live__chrome" aria-hidden="true">
-                <span class="live__dots"><i></i><i></i><i></i></span>
-                <span class="live__url" dir="ltr">breachify.com</span>
-                <span class="live__state"><i></i><span data-i18n="projects.live">Live</span></span>
-              </div>
-              <div class="live__viewport">
-                <img class="live__poster" src="assets/projects/breachify.webp" width="1440" height="900" alt="The Breachify homepage" data-i18n-attr="alt:projects.breachify.alt" loading="lazy" decoding="async" />
-                <a class="live__tap" href="https://www.breachify.com/" target="_blank" rel="noopener" aria-label="Open breachify.com" data-i18n-attr="aria-label:projects.breachify.open"></a>
-              </div>
-              <p class="live__hint" aria-hidden="true" data-i18n="projects.hint">Move in to interact</p>
             </div>
           </li>
         </ol>
@@ -730,7 +714,7 @@
     <div class="cursor__dot"></div>
   </div>
 
-  <script src="i18n.js?v=202610132205"></script>
-  <script src="main.js?v=202610132205"></script>
+  <script src="i18n.js?v=202610132230"></script>
+  <script src="main.js?v=202610132230"></script>
 </body>
 </html>
