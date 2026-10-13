@@ -619,60 +619,6 @@ ul { list-style: none; }
   color: var(--body);
 }
 
-/* ---- the spectrum line ---- */
-
-.spectrum {
-  --spectrum: linear-gradient(to right, #8a7e7e, #a09899, #b0a7a6, #ad9d99, #938986, #9a8a86, #a69692, #c7bbb8, #bcb9bb, #b5b1b2, #999090, #948a84, #4c4a4b, #6a6260, #636161, #5e5b5b, #797676, #979392, #605957, #555254, #4e4b4b, #48403f, #363131, #2b2929, #010304, #333433, #757371, #82807e, #7a7069, #a2958a, #8b8078, #363331, #1f1b17, #272420, #1e1815, #2c201a);
-  position: relative;
-  height: 5px;
-  margin-top: clamp(32px, 4vw, 80px);
-  border-radius: 5px;
-  transform-origin: 0 50%;
-}
-
-[dir="rtl"] .spectrum { transform-origin: 100% 50%; }
-
-.spectrum__bar,
-.spectrum__glow,
-.spectrum__sheen {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-}
-
-.spectrum__bar { background: var(--spectrum); }
-
-/* the same gradient, blurred, underneath: this is the shine */
-.spectrum__glow {
-  background: var(--spectrum);
-  filter: blur(16px) saturate(1.6) brightness(1.2);
-  transform: scaleY(3.5);
-}
-
-/* a slow highlight travelling along the line */
-.spectrum__sheen {
-  overflow: hidden;
-}
-
-.spectrum__sheen::after {
-  content: "";
-  position: absolute;
-  inset: -2px 0;
-  width: 18%;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.85), transparent);
-  animation: sheen 7s cubic-bezier(0.45, 0, 0.2, 1) 1.5s infinite;
-}
-
-@keyframes sheen {
-  0% { transform: translateX(-120%); }
-  60%, 100% { transform: translateX(680%); }
-}
-
-[dir="rtl"] .spectrum__sheen::after { animation-direction: reverse; }
-
-.spectrum[data-reveal] { transition: transform 2.2s var(--expo-out), opacity 1s var(--expo-out); }
-.spectrum[data-reveal]:not(.is-visible) { transform: scaleX(0); filter: none; }
-
 /* ---- the subject strip: what all three chapters are about ---- */
 
 .subject {
