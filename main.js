@@ -508,7 +508,7 @@ function frame(now) {
 
 /* ---------- Intro ---------- */
 
-const imgReady = heroImg.complete && heroImg.naturalWidth
+const imgReady = !heroImg || (heroImg.complete && heroImg.naturalWidth)
   ? Promise.resolve()
   : new Promise((r) => {
       heroImg.addEventListener("load", r, { once: true });
@@ -517,7 +517,7 @@ const imgReady = heroImg.complete && heroImg.naturalWidth
 const timeout = new Promise((r) => setTimeout(r, 900));
 
 Promise.race([imgReady, timeout]).then(() => {
-  if (heroImg.naturalWidth) {
+  if (heroImg?.naturalWidth) {
     try {
       glView = createGL();
       if (glView) body.classList.add("has-gl");
