@@ -2475,7 +2475,7 @@ html.cf-lock { overflow: hidden; }
 .proof dd { font-size: clamp(24px, 2vw, 36px); font-weight: 300; line-height: 1; letter-spacing: -0.035em; color: var(--navy); font-variant-numeric: tabular-nums; }
 .proof dt { font-size: 12.5px; line-height: 1.4; color: var(--muted); }
 
-/* ---------- Projects: live tiles ---------- */
+/* ---------- Projects ---------- */
 
 .projects {
   --body: #9a9ba8;
@@ -2527,31 +2527,52 @@ html.cf-lock { overflow: hidden; }
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: clamp(20px, 2.6vw, 48px);
+  gap: clamp(40px, 4vw, 72px) clamp(20px, 2.6vw, 48px);
   margin-top: clamp(40px, 5vw, 96px);
 }
 
 .project {
-  display: grid;
-  gap: clamp(20px, 2vw, 32px);
-  padding: clamp(22px, 2vw, 34px) 0 clamp(28px, 3vw, 52px);
+  display: flex;
+  flex-direction: column;
+  padding-top: clamp(22px, 2vw, 34px);
   border-top: 1px solid var(--hair);
 }
 
-.project__top { display: flex; justify-content: space-between; align-items: center; }
+/* the cover carries the brand's own logo, so the name below is set in type */
+.project__cover {
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: clamp(10px, 1vw, 16px);
+  background: #17171a;
+}
+.project__cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.project__top { display: flex; justify-content: space-between; align-items: center; margin-top: clamp(18px, 1.8vw, 28px); }
 .project__n { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; color: var(--muted); }
 .project__open { display: grid; place-items: center; width: 34px; height: 34px; margin: -6px -6px -6px 0; border-radius: 8px; color: #fff; transition: background-color 0.4s; }
 .project__open:hover { background: rgba(255, 255, 255, 0.08); }
 .project__open svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.6s var(--expo-out); }
-.project__open:hover svg { transform: translate(2px, -2px); }
+.project:hover .project__open svg { transform: translate(2px, -2px); }
 [dir="rtl"] .project__open svg { scale: -1 1; }
 
-.project__name { margin-top: clamp(26px, 3vw, 52px); }
-.project__logo { display: block; height: clamp(34px, 3vw, 52px); width: auto; fill: #fff; }
+.project__name {
+  margin-top: clamp(10px, 1vw, 16px);
+  font-size: clamp(40px, 3.8vw, 76px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  direction: ltr;
+  text-align: start;
+}
+[dir="rtl"] .project__name { text-align: right; }
+.project__name a { color: #fff; }
 
-.project__desc { max-width: 26em; margin-top: clamp(18px, 1.8vw, 28px); font-size: clamp(15px, 1.15vw, 21px); line-height: 1.6; color: var(--body); }
+.project__desc { max-width: 26em; margin-top: clamp(14px, 1.4vw, 22px); font-size: clamp(15px, 1.05vw, 19px); line-height: 1.6; color: var(--body); }
 
-.project__facts { display: grid; gap: 0; margin-top: clamp(24px, 2.6vw, 44px); border-top: 1px solid var(--hair); }
+/* facts sit at the bottom so the three tiles line up */
+.project__facts { margin-top: auto; padding-top: clamp(22px, 2.4vw, 40px); }
+.project__facts > div:first-child { border-top: 1px solid var(--hair); }
 .project__facts div { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--hair); }
 .project__facts dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .project__facts dd { font-size: 14px; color: #e6e6ea; }
