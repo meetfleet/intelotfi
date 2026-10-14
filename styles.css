@@ -2590,6 +2590,8 @@ html.cf-lock { overflow: hidden; }
 }
 /* alternate sides so the column reads as a rhythm, not a list */
 .project--wide:nth-child(even) .project__cover { order: 2; }
+/* keep the image column the same width on both sides, so every cover matches */
+.project--wide:nth-child(even) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); }
 
 .project--wide .project__name { margin-top: clamp(14px, 1.4vw, 22px); font-size: clamp(48px, 5.2vw, 104px); }
 .project--wide .project__desc { max-width: 28em; margin-top: clamp(14px, 1.4vw, 22px); font-size: clamp(15px, 1.15vw, 20px); }
