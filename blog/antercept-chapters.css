@@ -1,0 +1,99 @@
+/* ===========================================================================
+   Antercept chapters · inline-SVG figure styling
+   Loaded after blog.css + bf.css on the three Antercept chapters. The figures
+   are dark panels (matching the product) sitting on the blog's pale paper.
+   =========================================================================== */
+
+.acfig {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+  overflow: visible;
+  font-family: Alliance, Arial, sans-serif;
+}
+.acfig__bg {
+  fill: #0c0c12;
+  stroke: #ffffff14;
+  stroke-width: 1;
+}
+
+/* text roles */
+.acfig__title { fill: #ece9ff; font-size: 18px; letter-spacing: -0.01em; }
+.acfig__k { fill: #cfc6ff; font-size: 13px; }
+.acfig__k--neg { fill: #ff9fb0; }
+.acfig__v { fill: #8a8a98; font-size: 11.5px; }
+.acfig__s { fill: #6a6a78; font-size: 11px; }
+.acfig__foot { fill: #8a8a98; font-size: 12.5px; }
+.acfig__eq {
+  fill: #cfc6ff;
+  font-size: 15px;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  letter-spacing: -0.01em;
+}
+.acfig__ax { fill: #6a6a78; font-size: 11px; text-anchor: middle; }
+.acfig__lv { fill: #cfc6ff; font-size: 12.5px; text-anchor: middle; }
+.acfig__lvs { fill: #8a8a98; font-size: 10.5px; text-anchor: middle; }
+
+/* lever cards */
+.acfig__card rect {
+  fill: #15151e;
+  stroke: #7c4dff40;
+  stroke-width: 1;
+}
+.acfig__card .acfig__k { fill: #b79bff; font-size: 14px; }
+
+/* pipeline stages */
+.acfig__stage rect {
+  fill: #15151e;
+  stroke: #ffffff18;
+  stroke-width: 1;
+}
+.acfig__stage text {
+  fill: #e7e4f6;
+  font-size: 12.5px;
+  text-anchor: middle;
+}
+.acfig__stage .acfig__s { fill: #7a7a88; font-size: 10px; }
+.acfig__stage--out rect { fill: #221a40; stroke: #7c4dff; }
+.acfig__arrow {
+  stroke: #7c4dff;
+  stroke-width: 1.6;
+  fill: none;
+  marker-end: url(#acarrow);
+}
+
+/* mail mock */
+.acfig__mail { fill: #121219; stroke: #ffffff18; }
+.acfig__from { fill: #7a7a88; font-size: 12px; }
+.acfig__subj { fill: #ece9ff; font-size: 16px; }
+.acfig__body { fill: #c7c7d4; font-size: 13.5px; }
+.acfig__chk { fill: #b79bff; font-size: 11px; letter-spacing: 0.14em; }
+.acfig__cta { fill: #7c4dff; }
+.acfig__ctat { fill: #fff; font-size: 13px; text-anchor: middle; }
+
+/* lever tags on the annotated mail */
+.acfig__tag { opacity: 0.9; }
+.acfig__tag--urg { fill: #f4c04e33; stroke: #f4c04e; stroke-width: 1; }
+.acfig__tag--aut { fill: #7c4dff33; stroke: #9e7bff; stroke-width: 1; }
+.acfig__tag--fear { fill: #ff5c7233; stroke: #ff5c72; stroke-width: 1; }
+.acfig__tagt { fill: #e7e4f6; font-size: 10.5px; text-anchor: middle; }
+
+/* axes, curves, dots */
+.acfig__axis { stroke: #ffffff26; stroke-width: 1; }
+.acfig__curve { fill: none; stroke: #9e7bff; stroke-width: 2.2; }
+.acfig__dot { fill: #9e7bff; }
+.acfig__line { fill: none; stroke-width: 2.4; }
+.acfig__line--click { stroke: #ff5c72; }
+.acfig__line--report { stroke: #3ad29f; }
+.acfig__lgd { font-size: 12px; }
+.acfig__lgd--click { fill: #ff8c9c; }
+.acfig__lgd--report { fill: #5fe0b4; }
+
+/* the arrowhead marker is defined once, inline, in the first figure that needs
+   it; if a browser drops the marker the plain stroke still reads as a link. */
+
+@media (prefers-color-scheme: dark) {
+  /* chapters render on the blog's light paper regardless of OS theme, so the
+     figures keep their dark panels; nothing to override here. */
+}

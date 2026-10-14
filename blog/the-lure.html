@@ -23,28 +23,24 @@
       });
     </script>
     <title>Antercept: the AI that builds the lure | Hamza Lotfi</title>
-    <meta name="description" content="Capability 1 of Antercept: how its AI composes a security-awareness phishing template, explains why each element works, and predicts the campaign's outcome before launch." />
+    <meta name="description" content="Chapter 1 of the Antercept case study: how an AI composes a security-awareness phishing lure, the psychology of persuasion it encodes, and the transparent model that predicts a campaign's outcome before launch." />
     <meta name="author" content="Hamza Lotfi" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="https://intelotfi.com/blog/the-lure.html" />
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="intelotfi · Hamza Lotfi" />
     <meta property="og:title" content="Antercept: the AI that builds the lure | Hamza Lotfi" />
-    <meta property="og:description" content="How Antercept's AI composes an awareness lure, explains each persuasion lever, and predicts who will click." />
+    <meta property="og:description" content="The craft of the lure: persuasion psychology, an AI composition pipeline, and a transparent outcome model." />
     <meta property="og:url" content="https://intelotfi.com/blog/the-lure.html" />
     <meta property="og:image" content="https://intelotfi.com/assets/antercept/cover-1.webp" />
     <link rel="icon" href="../assets/icon.svg" type="image/svg+xml" />
     <link rel="preload" href="../fonts/AllianceNo2-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="../assets/antercept/cover-1.webp" as="image" fetchpriority="high" />
     <link rel="stylesheet" href="blog.css?v=202610132334" />
-    <link rel="stylesheet" href="../antercept/ui.css?v=20261014a" />
-    <link rel="stylesheet" href="bf.css?v=20261014a" />
-    <link rel="stylesheet" href="../antercept/labs.css?v=20261014a" />
+    <link rel="stylesheet" href="bf.css?v=20261014b" />
+    <link rel="stylesheet" href="antercept-chapters.css?v=20261014b" />
     <noscript>
-      <style>
-        body [data-reveal] { opacity: 1 !important; transform: none !important; filter: none !important; }
-        .spots, .ref { display: none; }
-      </style>
+      <style>body [data-reveal] { opacity: 1 !important; transform: none !important; filter: none !important; }</style>
     </noscript>
   </head>
   <body class="is-loading" data-chapter="1" data-series="antercept">
@@ -57,26 +53,30 @@
           <span class="logo__text">intelotfi</span><span class="logo__cursor" aria-hidden="true"></span>
         </a>
         <nav class="chapnav" data-chapnav aria-label="Chapters">
-          <a href="../antercept/" class="chapnav__fallback">All capabilities</a>
+          <a href="../antercept/" class="chapnav__fallback">All chapters</a>
         </nav>
       </header>
 
       <main>
         <section class="intro">
-          <p class="eyebrow" data-reveal>Antercept · Capability 01</p>
-          <h1 class="title" data-reveal data-split>The AI that builds the lure</h1>
+          <p class="eyebrow" data-reveal>Featured deep dive · Antercept 01</p>
+          <h1 class="title" data-reveal data-split>Antercept: the AI that builds the lure</h1>
           <p class="chapter" data-reveal>
-            <span class="chapter__num">Capability I</span>The template studio: composing an
-            awareness lure, explaining every lever, and predicting the click
+            <span class="chapter__num">Chapter I</span>The craft of the lure: persuasion
+            psychology, an AI composition pipeline, and the model that predicts the click
           </p>
           <dl class="meta" data-reveal>
             <div class="meta__cell">
               <dt>Published</dt>
               <dd><time datetime="2026-10-14">Wed 14 Oct 2026</time></dd>
             </div>
+            <div class="meta__cell meta__cell--time">
+              <dt>Reading time</dt>
+              <dd><span id="reading-time">32</span><small>min</small></dd>
+            </div>
             <div class="meta__cell">
-              <dt>Topic</dt>
-              <dd>Security awareness</dd>
+              <dt>Figures</dt>
+              <dd id="figure-count">9</dd>
             </div>
             <div class="meta__cell">
               <dt>Framing</dt>
@@ -87,96 +87,373 @@
 
         <figure class="cover" data-reveal>
           <img src="../assets/antercept/cover-1.webp" width="1280" height="800"
-            alt="Antercept's template studio composing a phishing-awareness lure" />
+            alt="Antercept's template studio composing a phishing-awareness lure over a dark grid" />
           <figcaption class="cover__card">
-            <b>The template studio.</b> Pick a brand and a pretext; Antercept writes
-            the lure and marks why each line works.
+            <b>The lure.</b> Antercept composes an awareness template, marks the psychology
+            behind every line, and predicts who will click before it is ever sent.
           </figcaption>
         </figure>
 
         <article class="article" id="article">
-          <section class="sec">
-          <p class="kicker">Security awareness</p>
-          <p class="lead" data-reveal>
-            A phishing-awareness test only teaches something when the lure is good enough
-            to fool a careful person — and honest enough to explain itself afterwards.
-            Antercept's first job is to build that lure, and to show its working.
-          </p>
 
-          <!-- ====== section: what a lure is made of ====== -->
-          <h2 data-reveal>What a lure is made of</h2>
-          <p data-reveal>
-            Every convincing message leans on a small set of levers: urgency, authority,
-            familiarity, curiosity, fear, scarcity. Antercept composes a template from a
-            fictional brand and a channel, then tags each sentence with the lever it uses —
-            so the security team can turn the test into a lesson.
-          </p>
-
-          <!-- live demo: the template studio -->
-          <div class="ac-lab" data-lab="studio" role="region"
-            aria-label="AI template studio with sample data" data-reveal>
-            <p class="ac-fallback">Enable JavaScript to run the template studio.</p>
-          </div>
-
-          <h2 data-reveal>Why the AI explains itself</h2>
-          <p data-reveal>
-            A black-box generator that only produces a convincing fake would make the problem
-            worse. Antercept's studio annotates the lever behind every clause, and pairs it
-            with what to teach: slow down when a message rushes you, verify the sender rather
-            than the logo, and remember that real services do not threaten you into a link.
-          </p>
-
-          <h2 data-reveal>From a lure to a prediction</h2>
-          <p data-reveal>
-            Before a campaign is sent, Antercept estimates how many targets will click and how
-            many will report it. The model is deliberately transparent: a handful of named
-            factors, each with a visible weight, combined into a single rate you can argue with.
-          </p>
-
-          <!-- live demo: the outcome predictor -->
-          <div class="ac-lab" data-lab="predict" role="region"
-            aria-label="AI campaign outcome predictor with sample data" data-reveal>
-            <p class="ac-fallback">Enable JavaScript to run the outcome predictor.</p>
-          </div>
-
-          <h2 data-reveal>Reading the prediction</h2>
-          <p data-reveal>
-            Urgency and a well-fitted pretext push the click rate up; recent training pushes it
-            down and the report rate up. Because every contribution is shown, a security lead can
-            see not just how many people will fall for a test, but why — and what to change before
-            running it for real.
-          </p>
-
-          <aside class="note" aria-label="About the data" data-reveal>
-            <span class="note__icon" aria-hidden="true">ⓘ</span>
-            <div>
-              <span class="note__k">About the data</span>
-              <p>
-                Everything shown here is fictional sample data running locally in your browser.
-                The brands are invented, the domains are reserved <code>.example</code> names, and
-                nothing is sent. Antercept is built for authorized security-awareness testing.
-              </p>
-            </div>
-          </aside>
+          <!-- ============ 1. Why a lure is a product ============ -->
+          <section id="intro-lure" class="sec">
+            <p class="kicker">Authorized security awareness</p>
+            <h2>The lure is the product</h2>
+            <p class="lead">
+              A phishing-awareness programme has one job: to find who is exposed before a real
+              attacker does, and to teach them without shame. Everything in Antercept turns on the
+              quality of a single artefact — the lure — because a test is only as instructive as the
+              message a careful person might, for one honest moment, have believed.
+            </p>
+            <p>
+              The uncomfortable truth of this field is that a good awareness lure and a real
+              criminal lure are built from the same parts. The difference is not the craft; it is
+              the authorization, the fictional brand, the reserved domain, and the fact that the
+              only thing waiting behind the link is a lesson. Antercept leans into that symmetry on
+              purpose. To teach someone to recognise manipulation, you have to be able to produce it
+              convincingly, label every mechanism inside it, and then dismantle it in front of them.
+            </p>
+            <aside class="note" aria-label="About the examples">
+              <span class="note__icon" aria-hidden="true">ⓘ</span>
+              <div>
+                <span class="note__k">About the examples</span>
+                <p>
+                  Every brand, sender, domain and person in this chapter is fictional. Antercept
+                  composes awareness lures from invented brands on reserved <code>.example</code>
+                  names, for authorized testing only. Nothing here is sendable, and no real service
+                  is imitated.
+                </p>
+              </div>
+            </aside>
+            <blockquote>You cannot teach someone to see a trap you are unwilling to build in front of them.</blockquote>
           </section>
-        </article>
 
-        <nav class="continue" aria-label="Continue">
-          <a class="continue__item" href="the-catch.html">
-            <span class="continue__k">Next · Capability II</span>
-            <span class="continue__t">Managing what a click reveals</span>
-          </a>
-          <a class="continue__item" href="../antercept/">
-            <span class="continue__k">Back</span>
-            <span class="continue__t">All capabilities</span>
-          </a>
-        </nav>
+          <!-- ============ 2. The six levers ============ -->
+          <section id="levers" class="sec">
+            <p class="part">Part 1 · The psychology</p>
+            <h2>The six levers of persuasion</h2>
+            <p>
+              Decades of social-engineering research reduce to a short, stubborn list. Almost every
+              deceptive message pulls on one or more of six levers: <b>authority</b> (it appears to
+              come from someone who may instruct you), <b>urgency</b> (it gives you less time than you
+              need to think), <b>familiarity</b> (it wears a brand or a colleague you already trust),
+              <b>curiosity</b> (it dangles something unnamed), <b>fear</b> (it threatens your money,
+              access or standing), and <b>scarcity</b> (it implies a closing window). Antercept treats
+              these as the primitives of composition. You do not write a lure; you choose which levers
+              to pull, and the system assembles language around them.
+            </p>
+            <figure class="fig" data-reveal>
+              <svg class="acfig" viewBox="0 0 720 300" role="img" aria-label="Six persuasion levers — authority, urgency, familiarity, curiosity, fear, scarcity — each with a short definition">
+                <rect class="acfig__bg" x="0" y="0" width="720" height="300" rx="14" />
+                <text class="acfig__title" x="28" y="40">The six levers Antercept composes from</text>
+                <!-- six lever cards -->
+                <g class="acfig__card" transform="translate(28,64)">
+                  <rect width="208" height="64" rx="9" /><text class="acfig__k" x="16" y="26">Authority</text><text class="acfig__v" x="16" y="48">looks like someone who can instruct you</text>
+                </g>
+                <g class="acfig__card" transform="translate(256,64)">
+                  <rect width="208" height="64" rx="9" /><text class="acfig__k" x="16" y="26">Urgency</text><text class="acfig__v" x="16" y="48">less time than you need to think</text>
+                </g>
+                <g class="acfig__card" transform="translate(484,64)">
+                  <rect width="208" height="64" rx="9" /><text class="acfig__k" x="16" y="26">Familiarity</text><text class="acfig__v" x="16" y="48">a brand or colleague you trust</text>
+                </g>
+                <g class="acfig__card" transform="translate(28,146)">
+                  <rect width="208" height="64" rx="9" /><text class="acfig__k" x="16" y="26">Curiosity</text><text class="acfig__v" x="16" y="48">something unnamed, dangled</text>
+                </g>
+                <g class="acfig__card" transform="translate(256,146)">
+                  <rect width="208" height="64" rx="9" /><text class="acfig__k" x="16" y="26">Fear</text><text class="acfig__v" x="16" y="48">a threat to money, access, standing</text>
+                </g>
+                <g class="acfig__card" transform="translate(484,146)">
+                  <rect width="208" height="64" rx="9" /><text class="acfig__k" x="16" y="26">Scarcity</text><text class="acfig__v" x="16" y="48">a window that is closing</text>
+                </g>
+                <text class="acfig__foot" x="28" y="246">A lure is a chosen subset of these, assembled into language.</text>
+                <text class="acfig__foot" x="28" y="270">The teaching is naming which ones were pulled on you.</text>
+              </svg>
+            </figure>
+            <p>
+              The reason to make the levers explicit is pedagogical. When a target later sees the
+              debrief, Antercept does not merely say “this was a phishing test.” It highlights the
+              exact clause that carried each lever and names it: <em>this sentence was authority, this
+              deadline was urgency</em>. People do not generalise from “be careful online”; they
+              generalise from seeing the specific hook that nearly caught them.
+            </p>
+          </section>
+
+          <!-- ============ 3. The composition pipeline ============ -->
+          <section id="pipeline" class="sec">
+            <p class="part">Part 2 · The AI</p>
+            <h2>How the AI composes a lure</h2>
+            <p>
+              Antercept’s template studio is a pipeline, not a prompt. A brand profile and a channel
+              go in; a structured, annotated lure comes out. The steps are deliberately separable so
+              that each one can be inspected, constrained, and overridden — a black box that simply
+              emitted convincing text would be the wrong tool for a programme whose purpose is to
+              reveal mechanism.
+            </p>
+            <figure class="fig" data-reveal>
+              <svg class="acfig" viewBox="0 0 720 230" role="img" aria-label="The composition pipeline: a brand profile feeds lever selection, which feeds clause assembly, which feeds annotation, producing an annotated lure and a predicted outcome">
+                <defs>
+                  <marker id="acarrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0 0L10 5L0 10z" fill="#7c4dff" />
+                  </marker>
+                </defs>
+                <rect class="acfig__bg" x="0" y="0" width="720" height="230" rx="14" />
+                <text class="acfig__title" x="28" y="38">The composition pipeline</text>
+                <!-- stage boxes -->
+                <g class="acfig__stage" transform="translate(28,70)"><rect width="110" height="56" rx="9"/><text x="55" y="26">Brand profile</text><text class="acfig__s" x="55" y="44">tone · kind</text></g>
+                <g class="acfig__stage" transform="translate(168,70)"><rect width="110" height="56" rx="9"/><text x="55" y="26">Lever select</text><text class="acfig__s" x="55" y="44">which hooks</text></g>
+                <g class="acfig__stage" transform="translate(308,70)"><rect width="110" height="56" rx="9"/><text x="55" y="26">Clause build</text><text class="acfig__s" x="55" y="44">per-lever text</text></g>
+                <g class="acfig__stage" transform="translate(448,70)"><rect width="110" height="56" rx="9"/><text x="55" y="26">Annotate</text><text class="acfig__s" x="55" y="44">tag each span</text></g>
+                <g class="acfig__stage acfig__stage--out" transform="translate(588,70)"><rect width="104" height="56" rx="9"/><text x="52" y="26">Lure +</text><text x="52" y="44">forecast</text></g>
+                <!-- arrows -->
+                <path class="acfig__arrow" d="M140 98h24"/>
+                <path class="acfig__arrow" d="M280 98h24"/>
+                <path class="acfig__arrow" d="M420 98h24"/>
+                <path class="acfig__arrow" d="M560 98h24"/>
+                <text class="acfig__foot" x="28" y="168">Guardrails are structural: fictional brand, reserved domain, no live payload,</text>
+                <text class="acfig__foot" x="28" y="192">every generated span carries the lever it serves, and a person approves before use.</text>
+              </svg>
+            </figure>
+            <p>
+              Stage one reads a <b>brand profile</b>: a fictional sender’s kind (webmail, finance,
+              delivery, HR) and tone (clerical, urgent, friendly). Stage two performs <b>lever
+              selection</b>, choosing which of the six hooks to use and in what order — a finance
+              pretext leans on fear and authority, a delivery pretext on curiosity and urgency.
+              Stage three is <b>clause assembly</b>, where each selected lever is rendered into a
+              concrete sentence. Stage four <b>annotates</b> every generated span with the lever it
+              carries, so nothing in the output is unexplained. The result is a lure and, attached to
+              it, a forecast.
+            </p>
+            <blockquote>The studio does not emit a message; it emits a message with its own X-ray.</blockquote>
+          </section>
+
+          <!-- ============ 4. Clause assembly, worked ============ -->
+          <section id="assembly" class="sec">
+            <h2>Clause assembly, worked</h2>
+            <p>
+              Consider a fictional “Contoso 365” password-expiry pretext on email, with the levers
+              <em>urgency</em> and <em>authority</em> selected. Antercept composes a subject that
+              encodes urgency (“Action required today”), an opening that encodes authority (“an
+              official notice from the Contoso 365 security team”), and a deadline that re-applies
+              urgency (“confirm within the next 30 minutes”). Each span is tagged. The call to action
+              is rendered to the channel: a button in email, a short link in SMS.
+            </p>
+            <figure class="fig" data-reveal>
+              <svg class="acfig" viewBox="0 0 720 280" role="img" aria-label="An annotated email lure: subject line tagged urgency, opening tagged authority, body tagged fear, deadline tagged urgency, and a call-to-action button">
+                <rect class="acfig__bg" x="0" y="0" width="720" height="280" rx="14" />
+                <rect class="acfig__mail" x="28" y="28" width="664" height="224" rx="10" />
+                <text class="acfig__from" x="48" y="58">From: Contoso 365 &lt;no-reply@contoso.example&gt;</text>
+                <text class="acfig__subj" x="48" y="86">Action required today — Contoso 365</text>
+                <rect class="acfig__tag acfig__tag--urg" x="360" y="72" width="70" height="18" rx="9"/><text class="acfig__tagt" x="395" y="85">urgency</text>
+                <text class="acfig__body" x="48" y="122">This is an official notice from the Contoso 365 security team.</text>
+                <rect class="acfig__tag acfig__tag--aut" x="560" y="110" width="78" height="18" rx="9"/><text class="acfig__tagt" x="599" y="123">authority</text>
+                <text class="acfig__body" x="48" y="150">We detected unusual activity that may lock your account.</text>
+                <rect class="acfig__tag acfig__tag--fear" x="520" y="138" width="54" height="18" rx="9"/><text class="acfig__tagt" x="547" y="151">fear</text>
+                <text class="acfig__body" x="48" y="178">Please confirm within the next 30 minutes.</text>
+                <rect class="acfig__tag acfig__tag--urg" x="370" y="166" width="70" height="18" rx="9"/><text class="acfig__tagt" x="405" y="179">urgency</text>
+                <rect class="acfig__cta" x="48" y="200" width="168" height="36" rx="8"/><text class="acfig__ctat" x="132" y="223">Confirm your account</text>
+              </svg>
+            </figure>
+            <p>
+              Because the composition is structured rather than free-form, it is also
+              <em>constrainable</em>. A programme can forbid certain levers for a vulnerable audience,
+              require the fictional brand to never resemble a real one, or cap difficulty. The same
+              structure that makes the lure convincing makes it governable.
+            </p>
+          </section>
+
+          <!-- ============ 5. Difficulty ============ -->
+          <section id="difficulty" class="sec">
+            <h2>Difficulty is a dial, not an accident</h2>
+            <p>
+              Not every target should receive the same test. A new hire and a seasoned finance
+              controller need different pressure to learn something. Antercept models difficulty as the
+              count and intensity of levers, the plausibility of the pretext for the audience, and the
+              subtlety of the tells it leaves in. A level-one lure is almost polite; a level-three lure
+              stacks authority, fear and urgency and hides its seams.
+            </p>
+            <figure class="fig" data-reveal>
+              <svg class="acfig" viewBox="0 0 720 240" role="img" aria-label="Difficulty rises from level one to level three as levers stack and tells become subtler, with expected click rate rising accordingly">
+                <rect class="acfig__bg" x="0" y="0" width="720" height="240" rx="14" />
+                <text class="acfig__title" x="28" y="38">Difficulty as a composition dial</text>
+                <!-- axis -->
+                <line class="acfig__axis" x1="60" y1="190" x2="680" y2="190"/>
+                <line class="acfig__axis" x1="60" y1="60" x2="60" y2="190"/>
+                <text class="acfig__ax" x="36" y="70" transform="rotate(-90 36,70)">click rate</text>
+                <!-- three levels -->
+                <g transform="translate(160,0)"><circle class="acfig__dot" cx="0" cy="168" r="7"/><text class="acfig__lv" x="0" y="212">Level 1</text><text class="acfig__lvs" x="0" y="150">1 lever · obvious tells</text></g>
+                <g transform="translate(380,0)"><circle class="acfig__dot" cx="0" cy="124" r="7"/><text class="acfig__lv" x="0" y="212">Level 2</text><text class="acfig__lvs" x="0" y="106">2 levers · plausible</text></g>
+                <g transform="translate(600,0)"><circle class="acfig__dot" cx="0" cy="84" r="7"/><text class="acfig__lv" x="0" y="212">Level 3</text><text class="acfig__lvs" x="0" y="66">3 levers · seams hidden</text></g>
+                <path class="acfig__curve" d="M160 168 Q 270 150 380 124 T 600 84"/>
+              </svg>
+            </figure>
+            <p>
+              The dial matters because an awareness programme is a curriculum, not a single exam. You
+              start people where they can succeed, raise difficulty as they improve, and reserve the
+              hardest lures for audiences whose compromise would hurt most. Difficulty is how a
+              programme turns one lure into a learning path.
+            </p>
+          </section>
+
+          <!-- ============ 6. Channels ============ -->
+          <section id="channels" class="sec">
+            <h2>Email and SMS are different animals</h2>
+            <p>
+              A lure is shaped by its channel. Email affords a sender name, a subject, formatting, and
+              a visible link — room for authority and detail. SMS strips all of that away: no subject,
+              little formatting, a bare link, and a cultural expectation of brevity that makes urgency
+              feel natural rather than suspicious. Antercept composes per-channel, not once-then-truncated,
+              because the persuasion that works in an inbox fails on a lock screen and vice versa.
+            </p>
+            <figure class="fig" data-reveal>
+              <svg class="acfig" viewBox="0 0 720 230" role="img" aria-label="Email versus SMS: email carries sender, subject and a button; SMS carries a short line and a bare link">
+                <rect class="acfig__bg" x="0" y="0" width="720" height="230" rx="14" />
+                <text class="acfig__title" x="28" y="38">One pretext, two channels</text>
+                <!-- email -->
+                <rect class="acfig__mail" x="28" y="56" width="320" height="150" rx="10"/>
+                <text class="acfig__chk" x="44" y="80">EMAIL</text>
+                <text class="acfig__body" x="44" y="106">From: Parcelo</text>
+                <text class="acfig__body" x="44" y="128">Subject: We missed you</text>
+                <text class="acfig__body" x="44" y="150">A reschedule link, a button, a footer.</text>
+                <rect class="acfig__cta" x="44" y="164" width="130" height="28" rx="7"/><text class="acfig__ctat" x="109" y="183">Reschedule</text>
+                <!-- sms -->
+                <rect class="acfig__mail" x="372" y="56" width="320" height="150" rx="10"/>
+                <text class="acfig__chk" x="388" y="80">SMS</text>
+                <text class="acfig__body" x="388" y="118">Parcelo: we missed you.</text>
+                <text class="acfig__body" x="388" y="140">Reschedule: prcl-verify.example</text>
+                <text class="acfig__s" x="388" y="170">no subject · no sender name · a bare link</text>
+              </svg>
+            </figure>
+            <p>
+              The SMS case is where honesty matters most. A short link on a phone is nearly impossible
+              to vet, which is exactly why it is effective and exactly why the debrief has to teach the
+              one durable rule: a message you did not initiate should never be the thing that takes you
+              to a login.
+            </p>
+          </section>
+
+          <!-- ============ 7. The prediction model ============ -->
+          <section id="model" class="sec">
+            <p class="part">Part 3 · The forecast</p>
+            <h2>Predicting the click, transparently</h2>
+            <p>
+              Before a campaign is launched, Antercept estimates two numbers: the share of targets who
+              will click, and the share who will report. A black-box score would be useless to a
+              security lead who has to defend the exercise to leadership, so the model is deliberately
+              small and legible — a handful of named factors, each with a visible weight, combined
+              through a logistic function into a probability.
+            </p>
+            <figure class="fig" data-reveal>
+              <svg class="acfig" viewBox="0 0 720 250" role="img" aria-label="The prediction model: named factors with weights sum to a logit z, passed through a sigmoid to a click probability">
+                <rect class="acfig__bg" x="0" y="0" width="720" height="250" rx="14" />
+                <text class="acfig__title" x="28" y="38">A transparent click model</text>
+                <text class="acfig__eq" x="28" y="80">z = −0.4 + 1.6·urgency + 1.4·pretextFit + 1.2·audience − 1.8·training</text>
+                <text class="acfig__eq" x="28" y="112">P(click) = σ(z) = 1 / (1 + e⁻ᶻ)</text>
+                <!-- sigmoid curve -->
+                <g transform="translate(0,20)">
+                  <line class="acfig__axis" x1="60" y1="210" x2="420" y2="210"/>
+                  <line class="acfig__axis" x1="60" y1="130" x2="60" y2="210"/>
+                  <path class="acfig__curve" d="M60 206 C 180 204 200 150 240 140 C 280 130 300 136 420 134"/>
+                  <text class="acfig__ax" x="240" y="230">z (summed evidence)</text>
+                  <text class="acfig__ax" x="36" y="150" transform="rotate(-90 36,150)">P(click)</text>
+                </g>
+                <!-- weight chips -->
+                <g transform="translate(470,120)">
+                  <text class="acfig__k" x="0" y="0">+1.6 urgency</text>
+                  <text class="acfig__k" x="0" y="26">+1.4 pretext fit</text>
+                  <text class="acfig__k" x="0" y="52">+1.2 audience</text>
+                  <text class="acfig__k acfig__k--neg" x="0" y="78">−1.8 training</text>
+                </g>
+              </svg>
+            </figure>
+            <p>
+              The weights are not fitted on real victims; they are explicit modelling choices that
+              encode a defensible belief: urgency and a well-fitted pretext raise the click rate, a
+              susceptible audience raises it further, and recent training lowers it. Because every term
+              is visible, a security lead can argue with the model — raise the training weight for a
+              department that just completed a course, or lower pretext fit for an audience the lure
+              does not suit — and watch the forecast move.
+            </p>
+          </section>
+
+          <!-- ============ 8. Click vs report ============ -->
+          <section id="report" class="sec">
+            <h2>The number that actually matters</h2>
+            <p>
+              Click rate measures exposure; <b>report rate</b> measures resilience. A mature programme
+              watches the report rate climb more than it watches the click rate fall, because reporting
+              is the behaviour you actually want — a person who clicks and reports has still done the
+              organisation a service. Antercept models report rate as rising with training and falling
+              as the lure becomes more convincing, and bounds it so it can never exceed what the click
+              rate leaves room for.
+            </p>
+            <figure class="fig" data-reveal>
+              <svg class="acfig" viewBox="0 0 720 220" role="img" aria-label="Over four campaigns, click rate falls while report rate rises as a programme matures">
+                <rect class="acfig__bg" x="0" y="0" width="720" height="220" rx="14" />
+                <text class="acfig__title" x="28" y="38">What a maturing programme looks like</text>
+                <line class="acfig__axis" x1="70" y1="180" x2="680" y2="180"/>
+                <line class="acfig__axis" x1="70" y1="60" x2="70" y2="180"/>
+                <!-- click falling -->
+                <path class="acfig__line acfig__line--click" d="M110 96 L 290 112 L 470 134 L 650 154"/>
+                <!-- report rising -->
+                <path class="acfig__line acfig__line--report" d="M110 150 L 290 132 L 470 110 L 650 84"/>
+                <text class="acfig__lgd acfig__lgd--click" x="110" y="84">click rate ↓</text>
+                <text class="acfig__lgd acfig__lgd--report" x="560" y="74">report rate ↑</text>
+                <text class="acfig__ax" x="375" y="206">Campaign 1 → 4</text>
+              </svg>
+            </figure>
+            <p>
+              This is why the forecast reports both. A campaign that is predicted to produce a low click
+              rate and a high report rate is a healthy exercise; one predicted to produce a high click
+              rate and a low report rate is a warning that the audience needs teaching before, not
+              after, the test. The prediction is not there to score people. It is there to decide
+              whether the test is worth running yet.
+            </p>
+          </section>
+
+          <!-- ============ 9. Conclusion ============ -->
+          <section id="conclusion" class="sec sec--conclusion">
+            <h2>Conclusion: the craft is the curriculum</h2>
+            <p>
+              Antercept’s first capability is not “generate phishing.” It is to make the craft of
+              persuasion inspectable: to choose levers deliberately, assemble them into a convincing but
+              fully annotated message, tune difficulty to an audience, and predict the outcome
+              transparently enough to decide whether the lesson is ready to be taught. The lure is the
+              product because the lure, dismantled, is the lesson.
+            </p>
+            <p>
+              The next chapter follows what happens when the lesson lands — when a target clicks, and a
+              controlled test turns a moment of inattention into clear, measurable evidence of exposure.
+            </p>
+            <aside class="note" aria-label="Scope reminder">
+              <span class="note__icon" aria-hidden="true">ⓘ</span>
+              <div>
+                <span class="note__k">Scope reminder</span>
+                <p>
+                  Antercept is built for authorized security-awareness testing and red-team engagements.
+                  The lures, brands, domains and forecasts in this chapter are fictional and run as a
+                  local demonstration. Nothing is sent, and no real person is targeted.
+                </p>
+              </div>
+            </aside>
+          </section>
+
+          <div class="continue" data-continue></div>
+        </article>
       </main>
+
+      <footer class="foot">
+        <nav class="foot__nav">
+          <a href="../antercept/">Antercept</a>
+          <a href="../">Home</a>
+          <a href="../#contact">Contact</a>
+        </nav>
+        <p class="foot__copy">© 2026 Hamza Lotfi · intelotfi</p>
+      </footer>
     </div>
 
-    <script src="../antercept/ui.js?v=20261014a"></script>
-    <script src="../antercept/records.js?v=20261014a"></script>
-    <script src="../antercept/labs.js?v=20261014a"></script>
+    <nav class="dock" data-dock aria-label="Chapter navigation"></nav>
+
     <script src="blog.js?v=202610132334"></script>
   </body>
 </html>

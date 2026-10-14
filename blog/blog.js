@@ -438,6 +438,15 @@ const zoom = (() => {
         { n: 3, roman: "III", href: "machinery.html",          title: "The Machinery Behind the Intelligence: Companies, Exports and Access", kicker: "Running the service",  cover: "../assets/breachify/cover-3-tile.webp", min: 27 },
       ],
     },
+    antercept: {
+      name: "Antercept",
+      home: "../antercept/",
+      chapters: [
+        { n: 1, roman: "I",   href: "the-lure.html",  title: "The AI that builds the lure",          kicker: "The craft of the lure",   cover: "../assets/antercept/cover-1.webp", min: 32 },
+        { n: 2, roman: "II",  href: "the-catch.html", title: "Managing what a click reveals",        kicker: "The science of exposure", cover: "../assets/antercept/cover-2.webp", min: 30 },
+        { n: 3, roman: "III", href: "the-map.html",   title: "The map and the machinery",            kicker: "Running the operation",   cover: "../assets/antercept/cover-3.webp", min: 34 },
+      ],
+    },
   };
   const series = SERIES[document.body.dataset.series] || SERIES.meetfleet;
   const CHAPTERS = series.chapters;
