@@ -1,0 +1,232 @@
+/* ===========================================================================
+   Antercept · product UI kit (miniature)
+   The dark/violet surfaces, pills, tables and buttons that the console and the
+   AI labs are built from. Namespaced under .acui so it never leaks to the page.
+   =========================================================================== */
+.acui {
+  --ac: #7c4dff;
+  --ac-bright: #9e7bff;
+  --ac-soft: rgba(124, 77, 255, 0.14);
+  --bg: #0a0a0e;
+  --panel: #101017;
+  --card: #15151d;
+  --line: #ffffff14;
+  --ink: #e7e7ee;
+  --muted: #8a8a98;
+  --faint: #5c5c6a;
+  --ok: #3ad29f;
+  --warn: #f4c04e;
+  --bad: #ff5c72;
+  color: var(--ink);
+  font-size: 14px;
+}
+.acui * {
+  box-sizing: border-box;
+}
+
+/* ---- status pills ---- */
+.ac-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  border: 1px solid var(--line);
+  background: #ffffff08;
+  white-space: nowrap;
+}
+.ac-pill::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.ac-pill--pending { color: var(--muted); }
+.ac-pill--opened { color: var(--warn); }
+.ac-pill--clicked { color: var(--bad); }
+.ac-pill--reported { color: var(--ok); }
+
+/* ---- buttons ---- */
+.ac-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 15px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #ffffff09;
+  color: var(--ink);
+  font-size: 13.5px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+.ac-btn:hover {
+  background: #ffffff12;
+  border-color: #ffffff2a;
+}
+.ac-btn:active { transform: translateY(1px); }
+.ac-btn--primary {
+  background: var(--ac);
+  border-color: var(--ac);
+  color: #fff;
+}
+.ac-btn--primary:hover {
+  background: var(--ac-bright);
+  border-color: var(--ac-bright);
+}
+.ac-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---- the risk meter ---- */
+.ac-risk {
+  display: inline-grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 8px;
+  min-width: 92px;
+}
+.ac-risk__track {
+  height: 6px;
+  border-radius: 99px;
+  background: #ffffff14;
+  overflow: hidden;
+}
+.ac-risk__fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--ok), var(--warn) 55%, var(--bad));
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ac-risk__n {
+  font-variant-numeric: tabular-nums;
+  font-size: 12.5px;
+  color: var(--muted);
+  min-width: 2ch;
+  text-align: right;
+}
+
+/* ---- a generic sidebar scaffold (used by the console) ---- */
+.ac-shell {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  min-height: 520px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.ac-side {
+  background: #08080b;
+  border-right: 1px solid var(--line);
+  padding: 18px 12px;
+  overflow: auto;
+}
+.ac-side__brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 4px 8px 16px;
+  font-size: 16px;
+}
+.ac-side__brand svg {
+  width: 26px;
+  height: 18px;
+  color: var(--ink);
+}
+.ac-side__group {
+  margin-top: 14px;
+  padding: 0 8px;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.ac-nav {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+}
+.ac-nav li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 9px;
+  color: var(--muted);
+  font-size: 13.5px;
+  cursor: default;
+  transition: background 0.2s, color 0.2s;
+}
+.ac-nav li .ac-nav__ico {
+  width: 16px;
+  height: 16px;
+  color: var(--ac);
+  flex: none;
+}
+.ac-nav li.is-active {
+  background: var(--ac-soft);
+  color: var(--ink);
+}
+.ac-nav li.is-active .ac-nav__ico { color: var(--ac-bright); }
+.ac-main {
+  padding: 18px 20px;
+  overflow: auto;
+}
+
+/* ---- table ---- */
+.ac-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.ac-table th {
+  text-align: left;
+  font-weight: 400;
+  color: var(--faint);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+}
+.ac-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ffffff0a;
+  vertical-align: middle;
+}
+.ac-table tbody tr {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.ac-table tbody tr:hover { background: #ffffff07; }
+.ac-table tbody tr.is-open { background: var(--ac-soft); }
+.ac-mono {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ---- card ---- */
+.ac-cardlet {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.ac-cardlet__k {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.ac-cardlet__v {
+  margin-top: 6px;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
