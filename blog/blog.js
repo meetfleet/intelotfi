@@ -22,14 +22,22 @@ document.querySelectorAll("[data-split]").forEach((el) => {
   const diagrams = art.querySelectorAll(".fig").length;
   const images = art.querySelectorAll(".device, .pair li").length;
   const videos = art.querySelectorAll("video").length;
+  // Breachify chapters: annotated screens, the screens inside flows, the
+  // dashboard scroller, and live demos you are invited to play with
+  const screens = art.querySelectorAll(".shot, .flow__panel").length;
+  const scrollers = art.querySelectorAll(".scrolly").length;
+  const demos = art.querySelectorAll(".demo").length;
   const textMin = words / 200;
-  const visualMin = diagrams * 3 + images * 0.5 + videos;
+  const visualMin = diagrams * 3 + images * 0.5 + videos + screens * 1 + scrollers * 3 + demos * 2;
   const total = Math.max(1, Math.round(textMin + visualMin));
   const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
   set("reading-time", total);
   set("reading-note", `${Math.round(textMin)} min text · ${Math.round(visualMin)} min figures`);
-  set("figure-count", diagrams + images + videos);
-  const parts = [diagrams && `${diagrams} diagrams`, images && `${images} images`, videos && `${videos} videos`].filter(Boolean);
+  set("figure-count", diagrams + images + videos + screens + scrollers + demos);
+  const parts = [
+    diagrams && `${diagrams} diagrams`, images && `${images} images`, videos && `${videos} videos`,
+    (screens + scrollers) && `${screens + scrollers} screens`, demos && `${demos} live demos`,
+  ].filter(Boolean);
   set("figure-note", parts.join(" · "));
 })();
 
@@ -312,7 +320,13 @@ const zoom = (() => {
     return r;
   }
 
-  document.querySelectorAll("[data-zoom]").forEach((btn, i) => btn.addEventListener("click", () => show(btn, i)));
+  // one listener for every zoomable, including screens a flow reveals later
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-zoom]");
+    if (!btn || !btn.querySelector("img")) return;
+    const all = [...document.querySelectorAll("[data-zoom]")];
+    show(btn, all.indexOf(btn));
+  });
   root.querySelector(".zoom__close").addEventListener("click", (e) => { e.stopPropagation(); hide(); });
   addEventListener("keydown", (e) => { if (e.key === "Escape") hide(); });
   addEventListener("resize", () => { if (open && !closing) setTarget(clampRect({ ...fitRect(scale), x: rx.target, y: ry.target })); });
@@ -405,11 +419,28 @@ const zoom = (() => {
 /* ---------- Chapters: one list drives the top switcher, the dock and the continue block ---------- */
 
 (() => {
-  const CHAPTERS = [
-    { n: 1, roman: "I",   href: "spillover.html", title: "Meetfleet: the spillover of reality on advanced AI technology", kicker: "The math behind a meetup", cover: "../assets/work-1.webp", min: 43 },
-    { n: 2, roman: "II",  href: "advanced.html",  title: "The Convergence of Advanced Technology and Refined Design",      kicker: "The product people use",   cover: "../assets/work-2.webp", min: 35 },
-    { n: 3, roman: "III", href: "meetchat.html",  title: "AI, Mathematics, and Physics, with Refined Design and Security Beyond the Essentials", kicker: "Messaging and security", cover: "../assets/work-3.webp", min: 26 },
-  ];
+  const SERIES = {
+    meetfleet: {
+      name: "Meetfleet",
+      home: "../meetfleet/",
+      chapters: [
+        { n: 1, roman: "I",   href: "spillover.html", title: "Meetfleet: the spillover of reality on advanced AI technology", kicker: "The math behind a meetup", cover: "../assets/work-1.webp", min: 43 },
+        { n: 2, roman: "II",  href: "advanced.html",  title: "The Convergence of Advanced Technology and Refined Design",      kicker: "The product people use",   cover: "../assets/work-2.webp", min: 35 },
+        { n: 3, roman: "III", href: "meetchat.html",  title: "AI, Mathematics, and Physics, with Refined Design and Security Beyond the Essentials", kicker: "Messaging and security", cover: "../assets/work-3.webp", min: 26 },
+      ],
+    },
+    breachify: {
+      name: "Breachify",
+      home: "../breachify/",
+      chapters: [
+        { n: 1, roman: "I",   href: "outside-in.html",         title: "Breachify: reading a breach from the outside in",                  kicker: "The investigation",     cover: "../assets/breachify/cover-1-tile.webp", min: 0 },
+        { n: 2, roman: "II",  href: "beyond-the-password.html", title: "Beyond the Password: Sessions, Applications and the Raw Evidence", kicker: "Evidence beyond logins", cover: "../assets/breachify/cover-2-tile.webp", min: 0 },
+        { n: 3, roman: "III", href: "machinery.html",          title: "The Machinery Behind the Intelligence: Companies, Exports and Access", kicker: "Running the service",  cover: "../assets/breachify/cover-3-tile.webp", min: 0 },
+      ],
+    },
+  };
+  const series = SERIES[document.body.dataset.series] || SERIES.meetfleet;
+  const CHAPTERS = series.chapters;
   const cur = Number(document.body.dataset.chapter);
   if (!cur) return;
   const me = CHAPTERS[cur - 1], prev = CHAPTERS[cur - 2], next = CHAPTERS[cur];
@@ -423,7 +454,7 @@ const zoom = (() => {
   const nav = document.querySelector("[data-chapnav]");
   if (nav) {
     nav.insertAdjacentHTML("beforeend", `
-      <a class="chapnav__home" href="../meetfleet/">${L}<span>Meetfleet</span></a>
+      <a class="chapnav__home" href="${series.home}">${L}<span>${series.name}</span></a>
       <span class="chapnav__sep"></span>
       <a class="chapnav__arrow" href="${prev ? prev.href : "#"}" aria-label="Previous chapter" ${prev ? "" : 'aria-disabled="true"'}>${L}</a>
       ${CHAPTERS.map((c) => `<a class="chapnav__ch${c.n === cur ? " is-current" : ""}" href="${c.href}" title="${esc(c.title)}" ${c.n === cur ? 'aria-current="page"' : ""}>${c.roman}</a>`).join("")}
@@ -443,7 +474,7 @@ const zoom = (() => {
       : `<span class="dock__link dock__link--${dir}" aria-disabled="true"></span>`;
     dock.innerHTML = `${link(prev, "prev")}
       <div class="dock__mid">
-        <span class="dock__k">Reading · Chapter <b>${me.roman}</b> of III</span>
+        <span class="dock__k">Reading · Chapter <b>${me.roman}</b> of ${CHAPTERS[CHAPTERS.length - 1].roman}</span>
         <span class="dock__now">${esc(me.kicker)}</span>
         <span class="dock__dots">${CHAPTERS.map((c) => `<span class="${c.n < cur ? "is-done" : c.n === cur ? "is-current" : ""}"></span>`).join("")}</span>
         <span class="dock__hint">← → to switch chapters</span>
@@ -480,14 +511,16 @@ const zoom = (() => {
       <div class="continue__index">
         ${CHAPTERS.map((c) => `<a class="continue__item${c.n === cur ? " is-current" : ""}" href="${c.href}" ${c.n === cur ? 'aria-current="page"' : ""}><span class="continue__k">Chapter ${c.roman}</span><p>${esc(c.kicker)}</p></a>`).join("")}
       </div>
-      <a class="continue__home" href="../meetfleet/">${L}Back to Meetfleet</a>`;
+      <a class="continue__home" href="${series.home}">${L}Back to ${series.name}</a>`;
   }
 
   // arrow keys move between chapters when nothing else wants them
   addEventListener("keydown", (e) => {
-    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.altKey) return;
     if (document.getElementById("zoom")?.classList.contains("is-open")) return;
     if (/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName || "")) return;
+    // tabs, flows and live demos use the arrows themselves
+    if (document.activeElement?.closest?.('[role="tablist"], [role="slider"], .bfui, .demo')) return;
     if (e.key === "ArrowRight" && next) location.href = next.href;
     if (e.key === "ArrowLeft" && prev) location.href = prev.href;
   });

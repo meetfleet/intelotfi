@@ -1,0 +1,394 @@
+/* ---------- Breachify chapters ----------
+   Loaded after blog.css on the three Breachify chapters. The series keeps the
+   blog's paper and layout, swaps the accent for Breachify orange, and adds
+   four figure types: annotated screens, step flows, a scroller for the long
+   dashboard, and live demos built with the product's own UI kit. */
+
+/* the accent: Breachify orange, dark enough for small text on white (4.9:1) */
+body[data-series="breachify"] {
+  --red: #b8541d;
+  --accent-dark: #ef8148;   /* the same orange, lifted for dark surfaces */
+}
+/* the site's own mark keeps its red */
+[data-series="breachify"] .logo__cursor { background: #e10600; }
+[data-series="breachify"] .ambient {
+  background:
+    radial-gradient(60% 40% at 90% 0%, rgba(194, 90, 32, 0.07), transparent 70%),
+    radial-gradient(40% 30% at 0% 10%, rgba(29, 33, 66, 0.05), transparent 70%);
+}
+[data-series="breachify"] .chapnav__ch.is-current { box-shadow: 0 2px 12px rgba(184, 84, 29, 0.35); }
+/* on dark glass the darker orange is too quiet: lift it */
+[data-series="breachify"] .dock__mid .dock__k b,
+[data-series="breachify"] .continue__k b,
+[data-series="breachify"] .zoom__index { color: var(--accent-dark); }
+[data-series="breachify"] .dock__dots span.is-current::after { background: var(--accent-dark); }
+[data-series="breachify"] .continue__item.is-current .continue__k::after { color: var(--red); }
+
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* screens are dark: give them a hairline so they sit on the paper, not in it */
+.shot img,
+.flow img,
+.scrolly__img { background: #141415; }
+
+/* ---------- Note: what the numbers in the screens are ---------- */
+
+.note {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  margin: 0 0 clamp(36px, 4vw, 56px);
+  padding: 16px 20px 18px 16px;
+  border-radius: 16px;
+  background: var(--wash);
+  border: 1px solid var(--line);
+}
+.note__icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: #fff;
+  color: var(--red);
+  box-shadow: 0 0 0 1px var(--line);
+}
+.note__icon svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.note__k {
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.article .note p, .note p { margin-top: 6px; font-size: 14.5px; line-height: 1.6; color: var(--body); }
+
+/* ---------- Annotated screens: numbered callouts on the real design ---------- */
+
+.shot { position: relative; margin: clamp(28px, 3vw, 44px) 0; }
+.shot__frame { position: relative; }
+
+.spots { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; pointer-events: none; }
+.spot { position: absolute; left: var(--x); top: var(--y); width: 0; height: 0; pointer-events: auto; z-index: 1; }
+.spot.is-open, .spot:hover { z-index: 3; }
+
+.spot__dot {
+  position: absolute;
+  left: -14px;
+  top: -14px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--red);
+  color: #fff;
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11.5px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.92), 0 8px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.6s var(--spring, var(--expo-out)), background-color 0.3s;
+  -webkit-tap-highlight-color: transparent;
+}
+/* a slow ring that says "there is something here" without shouting */
+.spot__dot::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 2px solid var(--red);
+  opacity: 0;
+  animation: spot-ring 2.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  animation-delay: calc(var(--n, 0) * 0.35s);
+}
+@keyframes spot-ring { 0% { transform: scale(0.9); opacity: 0.8; } 70%, 100% { transform: scale(1.9); opacity: 0; } }
+.spot__dot:hover, .spot.is-open .spot__dot, .spot.is-flash .spot__dot { transform: scale(1.14); }
+.spot__dot:focus-visible { outline: 2px solid var(--navy); outline-offset: 4px; }
+
+.spot__tip {
+  position: absolute;
+  left: 0;
+  bottom: 22px;
+  width: max-content;
+  max-width: min(300px, 62vw);
+  padding: 11px 13px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.97);
+  color: var(--ink);
+  font-size: 13.5px;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  box-shadow: 0 22px 48px -16px rgba(9, 9, 11, 0.55), 0 0 0 1px rgba(29, 33, 66, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, 8px) scale(0.97);
+  transform-origin: 50% 100%;
+  transition: opacity 0.25s, transform 0.5s var(--expo-out), visibility 0s linear 0.25s;
+}
+.spot__tip b { display: block; margin-bottom: 3px; font-weight: 400; color: var(--navy); }
+.spot.is-below .spot__tip { bottom: auto; top: 22px; transform-origin: 50% 0; transform: translate(-50%, -8px) scale(0.97); }
+.spot.is-start .spot__tip { transform: translate(-22px, 8px) scale(0.97); transform-origin: 0 100%; }
+.spot.is-end .spot__tip { transform: translate(calc(-100% + 22px), 8px) scale(0.97); transform-origin: 100% 100%; }
+.spot.is-below.is-start .spot__tip { transform: translate(-22px, -8px) scale(0.97); }
+.spot.is-below.is-end .spot__tip { transform: translate(calc(-100% + 22px), -8px) scale(0.97); }
+
+@media (hover: hover) {
+  .spot:hover .spot__tip { opacity: 1; visibility: visible; transition: opacity 0.25s, transform 0.5s var(--expo-out), visibility 0s; }
+}
+.spot.is-open .spot__tip,
+.spot__dot:focus-visible + .spot__tip { opacity: 1; visibility: visible; transition: opacity 0.25s, transform 0.5s var(--expo-out), visibility 0s; }
+.spot:hover .spot__tip, .spot.is-open .spot__tip, .spot__dot:focus-visible + .spot__tip { transform: translate(-50%, 0) scale(1); }
+.spot.is-start:hover .spot__tip, .spot.is-start.is-open .spot__tip, .spot.is-start .spot__dot:focus-visible + .spot__tip { transform: translate(-22px, 0) scale(1); }
+.spot.is-end:hover .spot__tip, .spot.is-end.is-open .spot__tip, .spot.is-end .spot__dot:focus-visible + .spot__tip { transform: translate(calc(-100% + 22px), 0) scale(1); }
+
+/* inline references in the prose: hover one and its callout answers */
+.ref {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.45em;
+  height: 1.45em;
+  margin: 0 0.1em;
+  padding: 0 0.3em;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(184, 84, 29, 0.12);
+  color: var(--red);
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.68em;
+  line-height: 1;
+  vertical-align: 0.18em;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+.ref:hover, .ref:focus-visible { background: var(--red); color: #fff; outline: none; }
+
+@media (max-width: 768px) {
+  .spot__dot { left: -11px; top: -11px; width: 22px; height: 22px; font-size: 10px; box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.92), 0 6px 14px rgba(0, 0, 0, 0.4); }
+  .spot__tip { font-size: 13px; bottom: 18px; }
+  .spot.is-below .spot__tip { top: 18px; }
+}
+
+/* ---------- Flows: one figure, several screens, in order ---------- */
+
+.flow { margin: clamp(28px, 3vw, 44px) 0; }
+
+.flow__tabs {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.flow__tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 38px;
+  padding: 0 15px 0 11px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--muted);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.4s, background-color 0.4s, border-color 0.4s, box-shadow 0.5s var(--expo-out);
+  -webkit-tap-highlight-color: transparent;
+}
+.flow__tab:hover { color: var(--ink); border-color: #cfcfd8; }
+.flow__tab[aria-selected="true"] { color: var(--navy); background: var(--wash); border-color: transparent; box-shadow: inset 0 0 0 1px rgba(29, 33, 66, 0.06); }
+.flow__tab:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.flow__n {
+  display: grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  border-radius: 6px;
+  background: var(--wash);
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  transition: background-color 0.4s, color 0.4s;
+}
+.flow__tab[aria-selected="true"] .flow__n { background: var(--red); color: #fff; }
+/* a thin arrow between steps, so the tabs read as an order, not a choice */
+.flow__tab + .flow__tab::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  width: 8px;
+  height: 1px;
+  background: var(--line);
+}
+
+.flow__stage { position: relative; transition: height 0.7s var(--expo-out); }
+.flow__panel { transition: opacity 0.55s var(--expo-out), transform 0.8s var(--expo-out), filter 0.6s var(--expo-out); }
+.flow__panel.is-out {
+  position: absolute;
+  inset: 0 0 auto 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(calc(var(--dir, 1) * -28px));
+  filter: blur(6px);
+}
+.flow__panel.is-in-start { opacity: 0; transform: translateX(calc(var(--dir, 1) * 28px)); filter: blur(6px); transition: none; }
+.flow__panel[hidden] { display: none; }
+
+/* ---------- Scroller: the long overview dashboard, read top to bottom ---------- */
+
+.scrolly { position: relative; margin: clamp(28px, 3vw, 44px) 0; }
+/* without the script it is simply the full screen and a list */
+.scrolly__window { position: relative; overflow: hidden; background: #141415; }
+.scrolly__img { display: block; width: 100%; height: auto; }
+.scrolly__steps { display: grid; gap: 14px; margin-top: 18px; }
+.scrolly__step { display: grid; gap: 4px; }
+.scrolly__n, .scrolly__count {
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.scrolly__t { font-size: clamp(18px, 1.5vw, 22px); line-height: 1.25; letter-spacing: -0.012em; color: var(--navy); }
+.scrolly__d { font-size: clamp(15px, 1.05vw, 17px); line-height: 1.6; color: var(--body); }
+.scrolly__rail, .scrolly__count { display: none; }
+
+/* with the script: the frame pins, the dashboard slides through it */
+.scrolly.is-on { height: calc(var(--steps, 6) * 72vh + 40vh); }
+.scrolly.is-on .scrolly__pin {
+  position: sticky;
+  top: max(24px, calc(50vh - (var(--win-h) + 150px) / 2));
+}
+.scrolly.is-on .scrolly__window { height: var(--win-h); }
+.scrolly.is-on .scrolly__img { will-change: transform; transform: translate3d(0, var(--ty, 0px), 0); }
+.scrolly.is-on .scrolly__rail {
+  display: block;
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  right: 10px;
+  width: 4px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.12);
+}
+.scrolly.is-on .scrolly__thumb {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: var(--th, 20%);
+  border-radius: 4px;
+  background: var(--accent-dark, #ef8148);
+  transform: translateY(var(--tt, 0px));
+}
+.scrolly__text { position: relative; }
+.scrolly.is-on .scrolly__steps { position: relative; display: grid; margin-top: 16px; min-height: 120px; padding-inline-end: 72px; }
+.scrolly.is-on .scrolly__step {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.45s var(--expo-out), transform 0.7s var(--expo-out);
+}
+.scrolly.is-on .scrolly__step.is-active { opacity: 1; transform: none; }
+.scrolly.is-on .scrolly__count { display: block; position: absolute; top: 18px; inset-inline-end: 0; color: var(--muted); }
+.scrolly.is-on .scrolly__count b { font-weight: 400; color: var(--red); }
+
+@media (max-width: 768px) {
+  .scrolly.is-on { height: calc(var(--steps, 6) * 64vh + 40vh); }
+}
+
+/* ---------- Demos: live pieces of the product, with sample data ---------- */
+
+.demo {
+  position: relative;
+  margin: clamp(32px, 3.4vw, 52px) 0;
+  border-radius: clamp(14px, 1.4vw, 20px);
+  overflow: hidden;
+  background: #141415;
+  box-shadow: 0 40px 80px -48px rgba(9, 9, 11, 0.7), 0 0 0 1px rgba(9, 9, 11, 0.08);
+  isolation: isolate;
+}
+.demo__bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 8px 10px 8px 16px;
+  background: #0d0d0e;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.demo__k {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-dark, #ef8148);
+}
+.demo__k::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 10px currentColor; }
+.demo__t {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.86);
+}
+.demo__tag {
+  flex: none;
+  margin-inline-start: auto;
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+.demo__reset {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.7);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+.demo__reset:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+.demo__reset svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.6s var(--expo-out); }
+.demo__reset:hover svg { transform: rotate(-120deg); }
+.demo__reset:focus-visible { outline: 2px solid var(--accent-dark, #ef8148); outline-offset: 2px; }
+.demo__body { position: relative; padding: clamp(14px, 1.8vw, 24px); min-height: 220px; }
+/* without the script the demo says so, quietly */
+.demo__fallback { margin: 0; padding: 40px 12px; text-align: center; color: rgba(255, 255, 255, 0.5); font-size: 14px; }
+.article .demo__fallback { font-size: 14px; color: rgba(255, 255, 255, 0.5); }
+
+@media (max-width: 768px) {
+  .demo__bar { flex-wrap: wrap; row-gap: 4px; padding-block: 10px; }
+  .demo__t { order: 3; flex-basis: 100%; white-space: normal; }
+  .demo__body { padding: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spot__dot::before { animation: none; }
+}
+
+/* view transitions: the chapter covers morph with the tiles on /breachify/ */
+[data-series="breachify"] .cover img { background: #060912; }
