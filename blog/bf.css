@@ -24,6 +24,24 @@ body[data-series="breachify"] {
 [data-series="breachify"] .dock__dots span.is-current::after { background: var(--accent-dark); }
 [data-series="breachify"] .continue__item.is-current .continue__k::after { color: var(--red); }
 
+/* the accent: Antercept violet, dark enough for small text on white */
+body[data-series="antercept"] {
+  --red: #6d3fe0;
+  --accent-dark: #9e7bff;   /* the same violet, lifted for dark surfaces */
+}
+[data-series="antercept"] .logo__cursor { background: #7c4dff; }
+[data-series="antercept"] .ambient {
+  background:
+    radial-gradient(60% 40% at 90% 0%, rgba(124, 77, 255, 0.08), transparent 70%),
+    radial-gradient(40% 30% at 0% 10%, rgba(124, 77, 255, 0.05), transparent 70%);
+}
+[data-series="antercept"] .chapnav__ch.is-current { box-shadow: 0 2px 12px rgba(124, 77, 255, 0.35); }
+[data-series="antercept"] .dock__mid .dock__k b,
+[data-series="antercept"] .continue__k b,
+[data-series="antercept"] .zoom__index { color: var(--accent-dark); }
+[data-series="antercept"] .dock__dots span.is-current::after { background: var(--accent-dark); }
+[data-series="antercept"] .continue__item.is-current .continue__k::after { color: var(--red); }
+
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 /* screens are dark: give them a hairline so they sit on the paper, not in it */

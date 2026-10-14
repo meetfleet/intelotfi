@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light" />
+    <style>
+      @view-transition { navigation: auto; }
+      html { background: #ffffff; }
+      body { visibility: hidden; }
+    </style>
+    <script>
+      setTimeout(function () { document.body && (document.body.style.visibility = "visible"); }, 2500);
+    </script>
+    <script>
+      addEventListener("pagereveal", function (e) {
+        var a = window.navigation && navigation.activation, f = a && a.from;
+        try { if (f && new URL(f.url).origin === location.origin) document.documentElement.classList.add("vt-internal"); } catch (_) {}
+        if (e.viewTransition && e.viewTransition.types) {
+          var back = a && a.navigationType === "traverse" && f && a.entry && f.index > a.entry.index;
+          e.viewTransition.types.add(back ? "back" : "forward");
+        }
+      });
+    </script>
+    <title>Antercept: the AI that builds the lure | Hamza Lotfi</title>
+    <meta name="description" content="Capability 1 of Antercept: how its AI composes a security-awareness phishing template, explains why each element works, and predicts the campaign's outcome before launch." />
+    <meta name="author" content="Hamza Lotfi" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://intelotfi.com/blog/the-lure.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="intelotfi · Hamza Lotfi" />
+    <meta property="og:title" content="Antercept: the AI that builds the lure | Hamza Lotfi" />
+    <meta property="og:description" content="How Antercept's AI composes an awareness lure, explains each persuasion lever, and predicts who will click." />
+    <meta property="og:url" content="https://intelotfi.com/blog/the-lure.html" />
+    <meta property="og:image" content="https://intelotfi.com/assets/antercept/cover-1.webp" />
+    <link rel="icon" href="../assets/icon.svg" type="image/svg+xml" />
+    <link rel="preload" href="../fonts/AllianceNo2-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="../assets/antercept/cover-1.webp" as="image" fetchpriority="high" />
+    <link rel="stylesheet" href="blog.css?v=202610132334" />
+    <link rel="stylesheet" href="../antercept/ui.css?v=20261014a" />
+    <link rel="stylesheet" href="bf.css?v=20261014a" />
+    <link rel="stylesheet" href="../antercept/labs.css?v=20261014a" />
+    <noscript>
+      <style>
+        body [data-reveal] { opacity: 1 !important; transform: none !important; filter: none !important; }
+        .spots, .ref { display: none; }
+      </style>
+    </noscript>
+  </head>
+  <body class="is-loading" data-chapter="1" data-series="antercept">
+    <div class="progress" aria-hidden="true"><span></span></div>
+    <div class="ambient" aria-hidden="true"></div>
+
+    <div class="page">
+      <header class="top">
+        <a href="../index.html" class="logo" aria-label="intelotfi | Hamza Lotfi, home">
+          <span class="logo__text">intelotfi</span><span class="logo__cursor" aria-hidden="true"></span>
+        </a>
+        <nav class="chapnav" data-chapnav aria-label="Chapters">
+          <a href="../antercept/" class="chapnav__fallback">All capabilities</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="intro">
+          <p class="eyebrow" data-reveal>Antercept · Capability 01</p>
+          <h1 class="title" data-reveal data-split>The AI that builds the lure</h1>
+          <p class="chapter" data-reveal>
+            <span class="chapter__num">Capability I</span>The template studio: composing an
+            awareness lure, explaining every lever, and predicting the click
+          </p>
+          <dl class="meta" data-reveal>
+            <div class="meta__cell">
+              <dt>Published</dt>
+              <dd><time datetime="2026-10-14">Wed 14 Oct 2026</time></dd>
+            </div>
+            <div class="meta__cell">
+              <dt>Topic</dt>
+              <dd>Security awareness</dd>
+            </div>
+            <div class="meta__cell">
+              <dt>Framing</dt>
+              <dd>Authorized testing</dd>
+            </div>
+          </dl>
+        </section>
+
+        <figure class="cover" data-reveal>
+          <img src="../assets/antercept/cover-1.webp" width="1280" height="800"
+            alt="Antercept's template studio composing a phishing-awareness lure" />
+          <figcaption class="cover__card">
+            <b>The template studio.</b> Pick a brand and a pretext; Antercept writes
+            the lure and marks why each line works.
+          </figcaption>
+        </figure>
+
+        <article class="article" id="article">
+          <section class="sec">
+          <p class="kicker">Security awareness</p>
+          <p class="lead" data-reveal>
+            A phishing-awareness test only teaches something when the lure is good enough
+            to fool a careful person — and honest enough to explain itself afterwards.
+            Antercept's first job is to build that lure, and to show its working.
+          </p>
+
+          <!-- ====== section: what a lure is made of ====== -->
+          <h2 data-reveal>What a lure is made of</h2>
+          <p data-reveal>
+            Every convincing message leans on a small set of levers: urgency, authority,
+            familiarity, curiosity, fear, scarcity. Antercept composes a template from a
+            fictional brand and a channel, then tags each sentence with the lever it uses —
+            so the security team can turn the test into a lesson.
+          </p>
+
+          <!-- live demo: the template studio -->
+          <div class="ac-lab" data-lab="studio" role="region"
+            aria-label="AI template studio with sample data" data-reveal>
+            <p class="ac-fallback">Enable JavaScript to run the template studio.</p>
+          </div>
+
+          <h2 data-reveal>Why the AI explains itself</h2>
+          <p data-reveal>
+            A black-box generator that only produces a convincing fake would make the problem
+            worse. Antercept's studio annotates the lever behind every clause, and pairs it
+            with what to teach: slow down when a message rushes you, verify the sender rather
+            than the logo, and remember that real services do not threaten you into a link.
+          </p>
+
+          <h2 data-reveal>From a lure to a prediction</h2>
+          <p data-reveal>
+            Before a campaign is sent, Antercept estimates how many targets will click and how
+            many will report it. The model is deliberately transparent: a handful of named
+            factors, each with a visible weight, combined into a single rate you can argue with.
+          </p>
+
+          <!-- live demo: the outcome predictor -->
+          <div class="ac-lab" data-lab="predict" role="region"
+            aria-label="AI campaign outcome predictor with sample data" data-reveal>
+            <p class="ac-fallback">Enable JavaScript to run the outcome predictor.</p>
+          </div>
+
+          <h2 data-reveal>Reading the prediction</h2>
+          <p data-reveal>
+            Urgency and a well-fitted pretext push the click rate up; recent training pushes it
+            down and the report rate up. Because every contribution is shown, a security lead can
+            see not just how many people will fall for a test, but why — and what to change before
+            running it for real.
+          </p>
+
+          <aside class="note" aria-label="About the data" data-reveal>
+            <span class="note__icon" aria-hidden="true">ⓘ</span>
+            <div>
+              <span class="note__k">About the data</span>
+              <p>
+                Everything shown here is fictional sample data running locally in your browser.
+                The brands are invented, the domains are reserved <code>.example</code> names, and
+                nothing is sent. Antercept is built for authorized security-awareness testing.
+              </p>
+            </div>
+          </aside>
+          </section>
+        </article>
+
+        <nav class="continue" aria-label="Continue">
+          <a class="continue__item" href="the-catch.html">
+            <span class="continue__k">Next · Capability II</span>
+            <span class="continue__t">Managing what a click reveals</span>
+          </a>
+          <a class="continue__item" href="../antercept/">
+            <span class="continue__k">Back</span>
+            <span class="continue__t">All capabilities</span>
+          </a>
+        </nav>
+      </main>
+    </div>
+
+    <script src="../antercept/ui.js?v=20261014a"></script>
+    <script src="../antercept/records.js?v=20261014a"></script>
+    <script src="../antercept/labs.js?v=20261014a"></script>
+    <script src="blog.js?v=202610132334"></script>
+  </body>
+</html>

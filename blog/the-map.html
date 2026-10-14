@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light" />
+    <style>
+      @view-transition { navigation: auto; }
+      html { background: #ffffff; }
+      body { visibility: hidden; }
+    </style>
+    <script>
+      setTimeout(function () { document.body && (document.body.style.visibility = "visible"); }, 2500);
+    </script>
+    <script>
+      addEventListener("pagereveal", function (e) {
+        var a = window.navigation && navigation.activation, f = a && a.from;
+        try { if (f && new URL(f.url).origin === location.origin) document.documentElement.classList.add("vt-internal"); } catch (_) {}
+        if (e.viewTransition && e.viewTransition.types) {
+          var back = a && a.navigationType === "traverse" && f && a.entry && f.index > a.entry.index;
+          e.viewTransition.types.add(back ? "back" : "forward");
+        }
+      });
+    </script>
+    <title>Antercept: the map and the machinery | Hamza Lotfi</title>
+    <meta name="description" content="Capability 3 of Antercept: geolocation, IPs, phone-data views and the infrastructure — servers, domains, providers — that runs a security-awareness programme at scale." />
+    <meta name="author" content="Hamza Lotfi" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://intelotfi.com/blog/the-map.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="intelotfi · Hamza Lotfi" />
+    <meta property="og:title" content="Antercept: the map and the machinery | Hamza Lotfi" />
+    <meta property="og:description" content="How Antercept runs an awareness operation: geolocation, IPs, and the infrastructure behind it." />
+    <meta property="og:url" content="https://intelotfi.com/blog/the-map.html" />
+    <meta property="og:image" content="https://intelotfi.com/assets/antercept/cover-3.webp" />
+    <link rel="icon" href="../assets/icon.svg" type="image/svg+xml" />
+    <link rel="preload" href="../fonts/AllianceNo2-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="../assets/antercept/cover-3.webp" as="image" fetchpriority="high" />
+    <link rel="stylesheet" href="blog.css?v=202610132334" />
+    <link rel="stylesheet" href="../antercept/ui.css?v=20261014a" />
+    <link rel="stylesheet" href="bf.css?v=20261014a" />
+    <noscript>
+      <style>body [data-reveal] { opacity: 1 !important; transform: none !important; filter: none !important; }</style>
+    </noscript>
+  </head>
+  <body class="is-loading" data-chapter="3" data-series="antercept">
+    <div class="progress" aria-hidden="true"><span></span></div>
+    <div class="ambient" aria-hidden="true"></div>
+
+    <div class="page">
+      <header class="top">
+        <a href="../index.html" class="logo" aria-label="intelotfi | Hamza Lotfi, home">
+          <span class="logo__text">intelotfi</span><span class="logo__cursor" aria-hidden="true"></span>
+        </a>
+        <nav class="chapnav" data-chapnav aria-label="Chapters">
+          <a href="../antercept/" class="chapnav__fallback">All capabilities</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="intro">
+          <p class="eyebrow" data-reveal>Antercept · Capability 03</p>
+          <h1 class="title" data-reveal data-split>The map and the machinery</h1>
+          <p class="chapter" data-reveal>
+            <span class="chapter__num">Capability III</span>Geolocation, IPs and the infrastructure
+            that runs a programme at scale
+          </p>
+          <dl class="meta" data-reveal>
+            <div class="meta__cell"><dt>Published</dt><dd><time datetime="2026-10-14">Wed 14 Oct 2026</time></dd></div>
+            <div class="meta__cell"><dt>Topic</dt><dd>Operations</dd></div>
+            <div class="meta__cell"><dt>Framing</dt><dd>Authorized testing</dd></div>
+          </dl>
+        </section>
+
+        <figure class="cover" data-reveal>
+          <img src="../assets/antercept/cover-3.webp" width="1280" height="800"
+            alt="Geolocation, infrastructure and the operations map" />
+          <figcaption class="cover__card">
+            <b>The machinery.</b> The servers, domains and providers that turn a single test into a
+            programme.
+          </figcaption>
+        </figure>
+
+        <article class="article" id="article">
+          <section class="sec">
+          <p class="kicker">Operations</p>
+          <p class="lead" data-reveal>
+            A single awareness email is easy. Running a programme — many campaigns, many audiences,
+            over months — is an infrastructure problem. Antercept's third job is to manage that
+            machinery so the security team can focus on the result.
+          </p>
+
+          <h2 data-reveal>The map</h2>
+          <p data-reveal>
+            Geolocation and IP views place each interaction on a map: where a target opened a message,
+            where a click came from, which office or region is most exposed. For an awareness programme,
+            the map is a heat chart of where to train next.
+          </p>
+
+          <h2 data-reveal>The machinery</h2>
+          <p data-reveal>
+            Behind the map sit the servers that host the test pages, the domains that carry the
+            campaign, and the providers that deliver email and SMS. Antercept manages them as one
+            inventory, so a campaign can be stood up, run, and torn down cleanly.
+          </p>
+
+          <h2 data-reveal>One console, end to end</h2>
+          <p data-reveal>
+            From the first template to the final report, every module — Phisher, Cookies, Credentials,
+            Locater, IPs, Extracter, Data, Templates, Servers, Domains, Users and Settings — lives in one
+            console. That is what makes Antercept a platform rather than a tool.
+          </p>
+
+          <aside class="note" aria-label="About the data" data-reveal>
+            <span class="note__icon" aria-hidden="true">ⓘ</span>
+            <div>
+              <span class="note__k">About the data</span>
+              <p>
+                All locations, IPs, servers and domains referenced here are fictional sample data for
+                an authorized-testing demonstration. No real location is tracked and no real
+                infrastructure is operated from this page.
+              </p>
+            </div>
+          </aside>
+          </section>
+        </article>
+
+        <nav class="continue" aria-label="Continue">
+          <a class="continue__item" href="../antercept/#console">
+            <span class="continue__k">Try it · Console</span>
+            <span class="continue__t">Run the operation</span>
+          </a>
+          <a class="continue__item" href="the-catch.html">
+            <span class="continue__k">Back · Capability II</span>
+            <span class="continue__t">Managing what a click reveals</span>
+          </a>
+        </nav>
+      </main>
+    </div>
+
+    <script src="blog.js?v=202610132334"></script>
+  </body>
+</html>
