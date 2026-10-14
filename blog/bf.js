@@ -18,13 +18,18 @@ window.BF = (() => {
     s.querySelector(".spot__dot")?.setAttribute("aria-expanded", "false");
   });
 
+  const shotObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => entry.target.classList.toggle("is-in-view", entry.isIntersecting));
+  });
+  document.querySelectorAll(".shot").forEach(shot => shotObserver.observe(shot));
+
   spots.forEach((spot, i) => {
     const x = parseFloat(spot.style.getPropertyValue("--x"));
     const y = parseFloat(spot.style.getPropertyValue("--y"));
     // tips open away from the nearest edges of the screen
     if (y < 24) spot.classList.add("is-below");
-    if (x < 24) spot.classList.add("is-start");
-    else if (x > 76) spot.classList.add("is-end");
+    if (x < 35) spot.classList.add("is-start");
+    else if (x > 65) spot.classList.add("is-end");
     spot.style.setProperty("--n", spot.dataset.n ? Number(spot.dataset.n) - 1 : i);
     const dot = spot.querySelector(".spot__dot");
     if (!dot) return;
@@ -87,7 +92,7 @@ window.BF = (() => {
       tabs.forEach((t, k) => { t.setAttribute("aria-selected", String(k === i)); t.tabIndex = k === i ? 0 : -1; });
       if (focus) tabs[i].focus();
       cur = i;
-      if (reduce) { from.hidden = true; to.hidden = false; return; }
+      if (reduce || focus || tabs[i].matches(":focus-visible")) { from.hidden = true; to.hidden = false; return; }
       stage.style.height = `${from.offsetHeight}px`;
       to.hidden = false;
       to.classList.add("is-in-start");
@@ -121,7 +126,7 @@ window.BF = (() => {
     const steps = [...box.querySelectorAll(".scrolly__step")];
     const thumb = box.querySelector(".scrolly__thumb");
     const count = box.querySelector(".scrolly__count");
-    if (!win || !img || !steps.length) return;
+    if (!win || !img || !steps.length || reduce) return;
     const ratio = Number(img.getAttribute("height")) / Number(img.getAttribute("width"));
     const at = steps.map((s) => Math.max(0, Math.min(1, Number(s.dataset.at) || 0)));
     box.style.setProperty("--steps", steps.length);

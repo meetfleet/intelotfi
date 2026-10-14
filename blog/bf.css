@@ -230,7 +230,7 @@ body[data-series="breachify"] {
   background: var(--line);
 }
 
-.flow__stage { position: relative; transition: height 0.7s var(--expo-out); }
+.flow__stage { position: relative; }
 .flow__panel { transition: opacity 0.55s var(--expo-out), transform 0.8s var(--expo-out), filter 0.6s var(--expo-out); }
 .flow__panel.is-out {
   position: absolute;
@@ -392,3 +392,21 @@ body[data-series="breachify"] {
 
 /* view transitions: the chapter covers morph with the tiles on /breachify/ */
 [data-series="breachify"] .cover img { background: #060912; }
+
+@media (prefers-reduced-motion: reduce) {
+  .flow *, .demo *, .shot *, .scrolly * { animation: none !important; transition: none !important; }
+}
+
+.spot__dot::before { animation-play-state: paused; }
+.shot.is-in-view .spot__dot::before { animation-play-state: running; }
+/* Keep the chapter switcher inside the smallest supported viewport. */
+@media (max-width: 360px) {
+  [data-series="breachify"] .chapnav__home span {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip-path: inset(50%); white-space: nowrap;
+  }
+}
+@media (max-width: 360px) {
+  [data-series="breachify"] .chapnav__arrow { display: none; }
+  [data-series="breachify"] .chapnav__ch { min-width: 30px; height: 30px; }
+}

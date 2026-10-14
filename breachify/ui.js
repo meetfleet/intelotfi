@@ -140,6 +140,26 @@ window.BFUI = (() => {
     inkEl.style.setProperty("--w", `${r.width}px`);
   };
 
+  // One observer for all widgets; removed demo bodies release their entries.
+  const resizeCallbacks = new Map();
+  const widgetResize = "ResizeObserver" in window ? new ResizeObserver(entries => {
+    entries.forEach(entry => resizeCallbacks.get(entry.target)?.());
+  }) : null;
+  const observeResize = (element, callback) => {
+    if (!widgetResize) return;
+    resizeCallbacks.set(element, callback);
+    widgetResize.observe(element);
+  };
+  new MutationObserver(records => {
+    if (!records.some(record => record.removedNodes.length)) return;
+    resizeCallbacks.forEach((_, element) => {
+      if (!element.isConnected) {
+        widgetResize.unobserve(element);
+        resizeCallbacks.delete(element);
+      }
+    });
+  }).observe(document.body, { childList: true, subtree: true });
+
   /* ---------- Widgets ---------- */
 
   // tabs: role=tab buttons inside a .bf-tabs; arrows/Home/End move, the ink follows
@@ -160,8 +180,8 @@ window.BFUI = (() => {
       if (focus) items[cur].focus({ preventScroll: true });
       // a tab half hidden in an overflowing bar slides into view; the page never scrolls
       const t = items[cur], l = t.offsetLeft, r = l + t.offsetWidth;
-      if (l < list.scrollLeft + 8) list.scrollTo({ left: Math.max(0, l - 24), behavior: reduceMotion ? "auto" : "smooth" });
-      else if (r > list.scrollLeft + list.clientWidth - 8) list.scrollTo({ left: r - list.clientWidth + 24, behavior: reduceMotion ? "auto" : "smooth" });
+      if (l < list.scrollLeft + 8) list.scrollTo({ left: Math.max(0, l - 24), behavior: reduceMotion || focus ? "auto" : "smooth" });
+      else if (r > list.scrollLeft + list.clientWidth - 8) list.scrollTo({ left: r - list.clientWidth + 24, behavior: reduceMotion || focus ? "auto" : "smooth" });
       if (!silent) onChange?.(cur, items[cur]);
     };
     items.forEach((t, i) => t.addEventListener("click", () => select(i)));
@@ -172,7 +192,7 @@ window.BFUI = (() => {
       select(k === "home" ? 0 : k === "end" ? items.length - 1 : cur + k, { focus: true });
     });
     const relayout = () => ink(list, items[cur], inkEl);
-    if ("ResizeObserver" in window) new ResizeObserver(relayout).observe(list);
+    observeResize(list, relayout);
     list.addEventListener("scroll", relayout, { passive: true });
     select(cur, { silent: true });
     return { select, get index() { return cur; }, relayout };
@@ -191,7 +211,7 @@ window.BFUI = (() => {
       if (!silent) onChange?.(cur, items[cur]);
     };
     items.forEach((b, i) => b.addEventListener("click", () => select(i)));
-    if ("ResizeObserver" in window) new ResizeObserver(() => ink(root, items[cur], inkEl)).observe(root);
+    observeResize(root, () => ink(root, items[cur], inkEl));
     select(cur, { silent: true });
     return { select, get index() { return cur; }, relayout: () => ink(root, items[cur], inkEl) };
   };

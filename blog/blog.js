@@ -433,9 +433,9 @@ const zoom = (() => {
       name: "Breachify",
       home: "../breachify/",
       chapters: [
-        { n: 1, roman: "I",   href: "outside-in.html",         title: "Breachify: reading a breach from the outside in",                  kicker: "The investigation",     cover: "../assets/breachify/cover-1-tile.webp", min: 0 },
-        { n: 2, roman: "II",  href: "beyond-the-password.html", title: "Beyond the Password: Sessions, Applications and the Raw Evidence", kicker: "Evidence beyond logins", cover: "../assets/breachify/cover-2-tile.webp", min: 0 },
-        { n: 3, roman: "III", href: "machinery.html",          title: "The Machinery Behind the Intelligence: Companies, Exports and Access", kicker: "Running the service",  cover: "../assets/breachify/cover-3-tile.webp", min: 0 },
+        { n: 1, roman: "I",   href: "outside-in.html",         title: "Breachify: reading a breach from the outside in",                  kicker: "The investigation",     cover: "../assets/breachify/cover-1-tile.webp", min: 26 },
+        { n: 2, roman: "II",  href: "beyond-the-password.html", title: "Beyond the Password: Sessions, Applications and the Raw Evidence", kicker: "Evidence beyond logins", cover: "../assets/breachify/cover-2-tile.webp", min: 25 },
+        { n: 3, roman: "III", href: "machinery.html",          title: "The Machinery Behind the Intelligence: Companies, Exports and Access", kicker: "Running the service",  cover: "../assets/breachify/cover-3-tile.webp", min: 27 },
       ],
     },
   };
@@ -454,7 +454,7 @@ const zoom = (() => {
   const nav = document.querySelector("[data-chapnav]");
   if (nav) {
     nav.insertAdjacentHTML("beforeend", `
-      <a class="chapnav__home" href="${series.home}">${L}<span>${series.name}</span></a>
+      <a class="chapnav__home" href="${series.home}" aria-label="Back to ${series.name}">${L}<span>${series.name}</span></a>
       <span class="chapnav__sep"></span>
       <a class="chapnav__arrow" href="${prev ? prev.href : "#"}" aria-label="Previous chapter" ${prev ? "" : 'aria-disabled="true"'}>${L}</a>
       ${CHAPTERS.map((c) => `<a class="chapnav__ch${c.n === cur ? " is-current" : ""}" href="${c.href}" title="${esc(c.title)}" ${c.n === cur ? 'aria-current="page"' : ""}>${c.roman}</a>`).join("")}

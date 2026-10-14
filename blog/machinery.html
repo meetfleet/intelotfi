@@ -1,0 +1,1314 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="light" />
+    <!-- first paint: the page colour only, never unstyled content; the stylesheet reveals the body -->
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+      html {
+        background: #ffffff;
+      }
+      body {
+        visibility: hidden;
+      }
+    </style>
+    <script>
+      setTimeout(function () {
+        document.body && (document.body.style.visibility = "visible");
+      }, 2500);
+    </script>
+    <!-- page transitions: tell the incoming page which way the visitor travelled, and whether they came from inside the site -->
+    <script>
+      addEventListener("pagereveal", function (e) {
+        var a = window.navigation && navigation.activation,
+          f = a && a.from;
+        try {
+          if (f && new URL(f.url).origin === location.origin)
+            document.documentElement.classList.add("vt-internal");
+        } catch (_) {}
+        if (e.viewTransition && e.viewTransition.types) {
+          var back =
+            a &&
+            a.navigationType === "traverse" &&
+            f &&
+            a.entry &&
+            f.index > a.entry.index;
+          e.viewTransition.types.add(back ? "back" : "forward");
+        }
+      });
+    </script>
+    <title>
+      The Machinery Behind the Intelligence: Companies, Exports and Access |
+      Hamza Lotfi
+    </title>
+    <meta
+      name="description"
+      content="Chapter 3 of the Breachify case study by Hamza Lotfi: companies, exports, subscriptions, channels and file access."
+    />
+    <meta name="author" content="Hamza Lotfi" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://intelotfi.com/blog/machinery.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="intelotfi · Hamza Lotfi" />
+    <meta
+      property="og:title"
+      content="The Machinery Behind the Intelligence: Companies, Exports and Access | Hamza Lotfi"
+    />
+    <meta
+      property="og:description"
+      content="Chapter 3 of the Breachify case study by Hamza Lotfi: companies, exports, subscriptions, channels and file access."
+    />
+    <meta
+      property="og:url"
+      content="https://intelotfi.com/blog/machinery.html"
+    />
+    <meta
+      property="og:image"
+      content="https://intelotfi.com/assets/og-breachify-3.jpg"
+    />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Breachify chapter 3: interface design and investigation evidence"
+    />
+    <meta property="og:locale" content="en_US" />
+    <meta property="article:author" content="Hamza Lotfi" />
+    <meta property="article:published_time" content="2026-10-14" />
+    <meta property="article:section" content="Case study" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="The Machinery Behind the Intelligence: Companies, Exports and Access | Hamza Lotfi"
+    />
+    <meta
+      name="twitter:description"
+      content="Chapter 3 of the Breachify case study by Hamza Lotfi: companies, exports, subscriptions, channels and file access."
+    />
+    <meta
+      name="twitter:image"
+      content="https://intelotfi.com/assets/og-breachify-3.jpg"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Breachify chapter 3: interface design and investigation evidence"
+    />
+    <link rel="me" href="https://www.linkedin.com/in/intelpoly/" />
+    <link
+      rel="me"
+      href="https://independent.academia.edu/MeetfleetResearchDivision"
+    />
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+    <link rel="manifest" href="../site.webmanifest" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "The Machinery Behind the Intelligence: Companies, Exports and Access",
+        "description": "Chapter 3 of the Breachify case study by Hamza Lotfi: companies, exports, subscriptions, channels and file access.",
+        "datePublished": "2026-10-14",
+        "dateModified": "2026-10-14",
+        "articleSection": "Case study",
+        "inLanguage": "en",
+        "image": "https://intelotfi.com/assets/og-breachify-3.jpg",
+        "author": {
+          "@type": "Person",
+          "name": "Hamza Lotfi",
+          "url": "https://intelotfi.com/"
+        },
+        "mainEntityOfPage": "https://intelotfi.com/blog/machinery.html"
+      }
+    </script>
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href="../assets/icon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="../fonts/AllianceNo2-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="../assets/breachify/cover-3.webp"
+      as="image"
+      fetchpriority="high"
+    />
+    <link rel="stylesheet" href="blog.css?v=202610132334" />
+    <link rel="stylesheet" href="../breachify/ui.css?v=20261014d" />
+    <link rel="stylesheet" href="bf.css?v=20261014d" />
+    <link rel="stylesheet" href="../breachify/demos.css?v=20261014d" />
+    <!-- instant navigation: pages you are about to open are pre-rendered on hover (Chromium) -->
+    <script type="speculationrules">
+      {
+        "prerender": [
+          {
+            "source": "document",
+            "where": {
+              "and": [
+                { "href_matches": "/*" },
+                { "not": { "href_matches": "/assets/*" } },
+                {
+                  "not": {
+                    "selector_matches": "[target=_blank], [href^='mailto:'], [href^='tel:']"
+                  }
+                }
+              ]
+            },
+            "eagerness": "moderate"
+          }
+        ]
+      }
+    </script>
+    <noscript
+      ><style>
+        body [data-reveal],
+        body.is-loading .intro [data-reveal] {
+          opacity: 1 !important;
+          transform: none !important;
+          filter: none !important;
+        }
+        .flow__panel[hidden] {
+          display: block;
+        }
+        .flow__tabs,
+        .spots,
+        .ref {
+          display: none;
+        }
+        .zoomable {
+          cursor: default;
+        }
+      </style></noscript
+    >
+    <link rel="stylesheet" href="../breachify/ai.css?v=20261014d" />
+  </head>
+  <body class="is-loading" data-chapter="3" data-series="breachify">
+    <div class="progress" aria-hidden="true"><span></span></div>
+    <div class="ambient" aria-hidden="true"></div>
+
+    <div class="page">
+      <header class="top">
+        <a
+          href="../index.html"
+          class="logo"
+          aria-label="intelotfi | Hamza Lotfi, home"
+        >
+          <span class="logo__text">intelotfi</span
+          ><span class="logo__cursor" aria-hidden="true"></span>
+        </a>
+
+        <nav class="chapnav" data-chapnav aria-label="Chapters">
+          <a href="../breachify/" class="chapnav__fallback">All chapters</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="intro">
+          <p class="eyebrow" data-reveal>Featured deep dive · Breachify 03</p>
+          <h1 class="title" data-reveal data-split>
+            The Machinery Behind the Intelligence: Companies, Exports and Access
+          </h1>
+          <p class="chapter" data-reveal>
+            <span class="chapter__num">Chapter III</span>Monitoring setup,
+            exports at scale, and the model that sells and protects the data
+          </p>
+          <dl class="meta" data-reveal>
+            <div class="meta__cell">
+              <dt>Published</dt>
+              <dd><time datetime="2026-10-14">Wed 14 Oct 2026</time></dd>
+            </div>
+            <div class="meta__cell meta__cell--time">
+              <dt>Reading time</dt>
+              <dd><span id="reading-time">27</span><small>min</small></dd>
+              <p class="meta__note" id="reading-note"></p>
+            </div>
+            <div class="meta__cell">
+              <dt>Figures</dt>
+              <dd id="figure-count">15</dd>
+              <p class="meta__note" id="figure-note"></p>
+            </div>
+            <div class="meta__cell">
+              <dt>Topic</dt>
+              <dd>Platform design</dd>
+            </div>
+          </dl>
+        </section>
+        <figure class="cover" data-reveal>
+          <img
+            src="../assets/breachify/cover-3.webp"
+            width="2400"
+            height="1500"
+            alt="Breachify chapter 3: dark interface screens arranged over a technical grid"
+          />
+          <figcaption class="cover__card">
+            <span class="cover__k">In one line</span
+            ><span class="cover__v"
+              >Plans decide what you can do, tiers what it costs, keys who gets
+              the file.</span
+            >
+          </figcaption>
+        </figure>
+        <div class="layout">
+          <aside class="toc" aria-label="On this page">
+            <p class="toc__title">On this page</p>
+            <ol class="toc__list">
+              <li>
+                <a href="#companies">A company is a set of identifiers</a>
+              </li>
+              <li><a href="#settings">Identity, notifications, access</a></li>
+              <li><a href="#exports">Exports at scale</a></li>
+              <li><a href="#admin">Seven tabs that run the service</a></li>
+              <li><a href="#groups">Groups connect the model</a></li>
+              <li><a href="#commerce">Plans, tiers and paid plans</a></li>
+              <li><a href="#channels">Channels and files</a></li>
+              <li><a href="#passkeys">A key for one file</a></li>
+              <li><a href="#ai-operations">Operating the AI layer</a></li>
+              <li><a href="#next">What comes next</a></li>
+            </ol>
+          </aside>
+          <article class="article" id="article">
+            <section id="companies" class="sec">
+              <p class="kicker">Platform design</p>
+              <h2>A company is a set of identifiers</h2>
+              <p class="lead">
+                An investigation answers a question at a moment in time.
+                Monitoring gives that question a durable scope. In Breachify, a
+                company is represented through domains, Android packages and
+                external domains it depends on. The add-company view arranges
+                those three asset types in parallel columns, each with a manual
+                input and a file-import route. A few identifiers can be entered
+                directly; a larger inventory can arrive in bulk. The company
+                list then provides a place for notifications and management
+                actions, although its rows remain unfilled in this design frame.
+              </p>
+              <aside class="note" aria-label="About the data">
+                <span class="note__icon" aria-hidden="true">ⓘ</span>
+                <div>
+                  <span class="note__k">About the data</span>
+                  <p>
+                    Every company, person, credential and number in these
+                    screens is placeholder design data, not a security finding.
+                    The live demos use made-up companies on reserved example
+                    domains.
+                  </p>
+                </div>
+              </aside>
+              <figure class="flow" data-flow data-reveal>
+                <div
+                  class="flow__tabs"
+                  role="tablist"
+                  aria-label="company setup"
+                >
+                  <button
+                    type="button"
+                    class="flow__tab"
+                    role="tab"
+                    id="company-setup-t1"
+                    aria-controls="company-setup-p1"
+                    aria-selected="true"
+                  >
+                    <span class="flow__n">01</span>The company list</button
+                  ><button
+                    type="button"
+                    class="flow__tab"
+                    role="tab"
+                    id="company-setup-t2"
+                    aria-controls="company-setup-p2"
+                    aria-selected="false"
+                  >
+                    <span class="flow__n">02</span>Add a company
+                  </button>
+                </div>
+                <div class="flow__stage">
+                  <div
+                    class="flow__panel"
+                    role="tabpanel"
+                    id="company-setup-p1"
+                    aria-labelledby="company-setup-t1"
+                  >
+                    <button
+                      type="button"
+                      class="zoomable"
+                      data-zoom
+                      aria-label="Zoom: companies"
+                    >
+                      <img
+                        src="../assets/breachify/companies.webp"
+                        width="1920"
+                        height="1080"
+                        loading="lazy"
+                        alt="Breachify design: companies, with placeholder data"
+                      />
+                    </button>
+                  </div>
+                  <div
+                    class="flow__panel"
+                    role="tabpanel"
+                    id="company-setup-p2"
+                    aria-labelledby="company-setup-t2"
+                    hidden
+                  >
+                    <button
+                      type="button"
+                      class="zoomable"
+                      data-zoom
+                      aria-label="Zoom: company add"
+                    >
+                      <img
+                        src="../assets/breachify/company-add.webp"
+                        width="1920"
+                        height="1080"
+                        loading="lazy"
+                        alt="Breachify design: company add, with placeholder data"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </figure>
+              <p>
+                Separating the organisation from any single domain is a
+                practical modelling choice. A business may operate several
+                brands, mobile applications and services, while an analyst still
+                needs to understand who owns the investigation. The company
+                record supplies that grouping. Before production, imports need
+                validation and a clear preview of what will be added, and
+                destructive actions such as Delete All need confirmation and
+                recovery rules. Those states are work still to draw; the visible
+                controls establish the proposed workflow rather than proving its
+                implementation.
+              </p>
+            </section>
+            <section id="settings" class="sec">
+              <h2>Identity, notifications, access</h2>
+              <p>
+                Settings collects several responsibilities: user identity,
+                notification addresses, registering another user and copying an
+                API key. The registration form includes company, domains and
+                apps
+                <button
+                  type="button"
+                  class="ref"
+                  data-for="shot-settings"
+                  data-n="3"
+                >
+                  3</button
+                >, suggesting access scoped to assets rather than a single
+                unrestricted account. The permission model is not fully drawn
+                yet, so these fields should be understood as an intent that
+                needs explicit enforcement rules. The truncated API-key field
+                <button
+                  type="button"
+                  class="ref"
+                  data-for="shot-settings"
+                  data-n="4"
+                >
+                  4
+                </button>
+                belongs to the same boundary: an interface can shorten a value
+                visually, but lifecycle, rotation and authorisation must be
+                defined behind the control.
+              </p>
+              <figure class="shot" id="shot-settings" data-reveal>
+                <div class="shot__frame">
+                  <button
+                    type="button"
+                    class="zoomable"
+                    data-zoom
+                    aria-label="Zoom: settings"
+                  >
+                    <img
+                      src="../assets/breachify/settings.webp"
+                      width="1920"
+                      height="1086"
+                      loading="lazy"
+                      alt="Breachify design: settings, with placeholder data"
+                    />
+                  </button>
+                  <ol class="spots">
+                    <li class="spot" data-n="1" style="--x: 33%; --y: 30%">
+                      <button
+                        type="button"
+                        class="spot__dot"
+                        aria-describedby="shot-settings-1"
+                      >
+                        <span aria-hidden="true">1</span
+                        ><span class="sr-only"
+                          >Callout 1: Account identity</span
+                        ></button
+                      ><span
+                        class="spot__tip"
+                        role="tooltip"
+                        id="shot-settings-1"
+                        ><b>Account identity</b>The current user has a distinct
+                        information card.</span
+                      >
+                    </li>
+                    <li class="spot" data-n="2" style="--x: 41.8%; --y: 52.4%">
+                      <button
+                        type="button"
+                        class="spot__dot"
+                        aria-describedby="shot-settings-2"
+                      >
+                        <span aria-hidden="true">2</span
+                        ><span class="sr-only"
+                          >Callout 2: Notification addresses</span
+                        ></button
+                      ><span
+                        class="spot__tip"
+                        role="tooltip"
+                        id="shot-settings-2"
+                        ><b>Notification addresses</b>An address and removal
+                        control manage the delivery target.</span
+                      >
+                    </li>
+                    <li class="spot" data-n="3" style="--x: 58%; --y: 54%">
+                      <button
+                        type="button"
+                        class="spot__dot"
+                        aria-describedby="shot-settings-3"
+                      >
+                        <span aria-hidden="true">3</span
+                        ><span class="sr-only"
+                          >Callout 3: Register within a scope</span
+                        ></button
+                      ><span
+                        class="spot__tip"
+                        role="tooltip"
+                        id="shot-settings-3"
+                        ><b>Register within a scope</b>Company, domains and apps
+                        appear in the registration form.</span
+                      >
+                    </li>
+                    <li class="spot" data-n="4" style="--x: 92.4%; --y: 27.3%">
+                      <button
+                        type="button"
+                        class="spot__dot"
+                        aria-describedby="shot-settings-4"
+                      >
+                        <span aria-hidden="true">4</span
+                        ><span class="sr-only"
+                          >Callout 4: API access</span
+                        ></button
+                      ><span
+                        class="spot__tip"
+                        role="tooltip"
+                        id="shot-settings-4"
+                        ><b>API access</b>The field shortens the sample value
+                        and offers a copy action.</span
+                      >
+                    </li>
+                  </ol>
+                </div>
+              </figure>
+            </section>
+            <section id="exports" class="sec">
+              <h2>Exports at scale</h2>
+              <p>
+                A large export cannot always behave like an immediate download.
+                The design file describes a request that may take more than an
+                hour, with shorter periods reducing preparation time. When
+                ready, the ZIP appears in the account area and an email
+                announces it. The Zip Files panel
+                <button
+                  type="button"
+                  class="ref"
+                  data-for="shot-exports"
+                  data-n="1"
+                >
+                  1
+                </button>
+                makes a second boundary explicit: exports stop at 300,000
+                results, with an API route for additional history. Created and
+                expiry dates
+                <button
+                  type="button"
+                  class="ref"
+                  data-for="shot-exports"
+                  data-n="3"
+                >
+                  3
+                </button>
+                then describe a retrieval window. The demo accelerates that
+                lifecycle and downloads only five fictional CSV rows, not a full
+                archive.
+              </p>
+              <figure class="shot" id="shot-exports" data-reveal>
+                <div class="shot__frame">
+                  <button
+                    type="button"
+                    class="zoomable"
+                    data-zoom
+                    aria-label="Zoom: zip exports"
+                  >
+                    <img
+                      src="../assets/breachify/zip-exports.webp"
+                      width="1431"
+                      height="494"
+                      loading="lazy"
+                      alt="Breachify design: zip exports, with placeholder data"
+                    />
+                  </button>
+                  <ol class="spots">
+                    <li class="spot" data-n="1" style="--x: 20%; --y: 25%">
+                      <button
+                        type="button"
+                        class="spot__dot"
+                        aria-describedby="shot-exports-1"
+                      >
+                        <span aria-hidden="true">1</span
+                        ><span class="sr-only"
+                          >Callout 1: The export boundary</span
+                        ></button
+                      ><span
+                        class="spot__tip"
+                        role="tooltip"
+                        id="shot-exports-1"
+                        ><b>The export boundary</b>The notice sets a
+                        300,000-result limit.</span
+                      >
+                    </li>
+                    <li class="spot" data-n="2" style="--x: 90%; --y: 26%">
+                      <button
+                        type="button"
+                        class="spot__dot"
+                        aria-describedby="shot-exports-2"
+                      >
+                        <span aria-hidden="true">2</span
+                        ><span class="sr-only"
+                          >Callout 2: Latest request</span
+                        ></button
+                      ><span
+                        class="spot__tip"
+                        role="tooltip"
+                        id="shot-exports-2"
+                        ><b>Latest request</b>A returning user can find the
+                        newest export.</span
+                      >
+                    </li>
+                    <li class="spot" data-n="3" style="--x: 54%; --y: 66%">
+                      <button
+                        type="button"
+                        class="spot__dot"
+                        aria-describedby="shot-exports-3"
+                      >
+                        <span aria-hidden="true">3</span
+                        ><span class="sr-only"
+                          >Callout 3: A retrieval window</span
+                        ></button
+                      ><span
+                        class="spot__tip"
+                        role="tooltip"
+                        id="shot-exports-3"
+                        ><b>A retrieval window</b>Each archive has created and
+                        expiry dates.</span
+                      >
+                    </li>
+                    <li class="spot" data-n="4" style="--x: 94%; --y: 66%">
+                      <button
+                        type="button"
+                        class="spot__dot"
+                        aria-describedby="shot-exports-4"
+                      >
+                        <span aria-hidden="true">4</span
+                        ><span class="sr-only"
+                          >Callout 4: Download</span
+                        ></button
+                      ><span
+                        class="spot__tip"
+                        role="tooltip"
+                        id="shot-exports-4"
+                        ><b>Download</b>The available file has a direct
+                        retrieval action.</span
+                      >
+                    </li>
+                  </ol>
+                </div>
+              </figure>
+              <figure
+                class="demo"
+                data-demo="export"
+                data-reveal
+                aria-label="Live demo: An export, from request to expiry"
+              >
+                <div class="demo__bar">
+                  <span class="demo__k">Try it</span
+                  ><span class="demo__t">An export, from request to expiry</span
+                  ><span class="demo__tag">Sample data</span
+                  ><button type="button" class="demo__reset">↻ Reset</button>
+                </div>
+                <div class="demo__body bfui">
+                  <p class="demo__fallback">This live demo needs JavaScript.</p>
+                </div>
+              </figure>
+            </section>
+            <section id="admin" class="sec">
+              <h2>Seven tabs that run the service</h2>
+              <p>
+                The administration area serves the operator rather than the
+                investigator. Its seven sections connect people, commercial
+                terms and incoming material without flattening them into one
+                table. Every screen follows the same rhythm: a breadcrumb and
+                explanation, tabs, search and filters, a primary create action,
+                separated table rows, then a create or defaults panel beside a
+                summary. The repetition is useful because administration is full
+                of small differences with large consequences. Familiar placement
+                lets the reader spend attention on the object being changed, not
+                on finding its controls.
+              </p>
+              <figure
+                class="demo"
+                data-demo="admin-map"
+                data-reveal
+                aria-label="Live demo: Seven parts, one model"
+              >
+                <div class="demo__bar">
+                  <span class="demo__k">Try it</span
+                  ><span class="demo__t">Seven parts, one model</span
+                  ><span class="demo__tag">Sample data</span
+                  ><button type="button" class="demo__reset">↻ Reset</button>
+                </div>
+                <div class="demo__body bfui">
+                  <p class="demo__fallback">This live demo needs JavaScript.</p>
+                </div>
+              </figure>
+            </section>
+            <section id="groups" class="sec">
+              <h2>Groups connect the model</h2>
+              <p>
+                A group joins people to a plan and to information channels. In
+                the table, the owner, member count, assigned plan and channel
+                count are visible together
+                <button
+                  type="button"
+                  class="ref"
+                  data-for="shot-groups"
+                  data-n="3"
+                >
+                  3</button
+                >. Status is separate: the sample includes an archived Sandbox
+                group, which should remain distinguishable from active
+                customers. The Create Group panel
+                <button
+                  type="button"
+                  class="ref"
+                  data-for="shot-groups"
+                  data-n="4"
+                >
+                  4
+                </button>
+                asks for a name, owner and plan, while the overview card
+                summarises the collection. This makes the group a useful
+                junction in the model, but the exact effect of archiving on
+                members, channels and existing subscriptions still needs an
+                explicit product rule.
+              </p>
+              <figure class="shot" id="shot-groups" data-reveal>
+                <div class="shot__frame">
+                  <button
+                    type="button"
+                    class="zoomable"
+                    data-zoom
+                    aria-label="Zoom: admin groups"
+                  >
+                    <img
+                      src="../assets/breachify/admin-groups.webp"
+                      width="1920"
+                      height="1428"
+                      loading="lazy"
+                      alt="Breachify design: admin groups, with placeholder data"
+                    />
+                  </button>
+                  <ol class="spots">
+                    <li class="spot" data-n="1" style="--x: 29%; --y: 16.5%">
+                      <button
+                        type="button"
+                        class="spot__dot"
+                        aria-describedby="shot-groups-1"
+                      >
+                        <span aria-hidden="true">1</span
+                        ><span class="sr-only"
+                          >Callout 1: Explain the object</span
+                        ></button
+                      ><span class="spot__tip" role="tooltip" id="shot-groups-1"
+                        ><b>Explain the object</b>The breadcrumb and description
+                        establish the current task.</span
+                      >
+                    </li>
+                    <li class="spot" data-n="2" style="--x: 52%; --y: 21.5%">
+                      <button
+                        type="button"
+                        class="spot__dot"
+                        aria-describedby="shot-groups-2"
+                      >
+                        <span aria-hidden="true">2</span
+                        ><span class="sr-only"
+                          >Callout 2: Seven sections</span
+                        ></button
+                      ><span class="spot__tip" role="tooltip" id="shot-groups-2"
+                        ><b>Seven sections</b>The same admin navigation appears
+                        throughout.</span
+                      >
+                    </li>
+                    <li class="spot" data-n="3" style="--x: 55%; --y: 38.6%">
+                      <button
+                        type="button"
+                        class="spot__dot"
+                        aria-describedby="shot-groups-3"
+                      >
+                        <span aria-hidden="true">3</span
+                        ><span class="sr-only"
+                          >Callout 3: One group, several relationships</span
+                        ></button
+                      ><span class="spot__tip" role="tooltip" id="shot-groups-3"
+                        ><b>One group, several relationships</b>Plan, members
+                        and channels stay visible together.</span
+                      >
+                    </li>
+                    <li class="spot" data-n="4" style="--x: 46%; --y: 78%">
+                      <button
+                        type="button"
+                        class="spot__dot"
+                        aria-describedby="shot-groups-4"
+                      >
+                        <span aria-hidden="true">4</span
+                        ><span class="sr-only"
+                          >Callout 4: Create a group</span
+                        ></button
+                      ><span class="spot__tip" role="tooltip" id="shot-groups-4"
+                        ><b>Create a group</b>Name, owner and plan define the
+                        initial assignment.</span
+                      >
+                    </li>
+                    <li class="spot" data-n="5" style="--x: 82%; --y: 77%">
+                      <button
+                        type="button"
+                        class="spot__dot"
+                        aria-describedby="shot-groups-5"
+                      >
+                        <span aria-hidden="true">5</span
+                        ><span class="sr-only"
+                          >Callout 5: A collection summary</span
+                        ></button
+                      ><span class="spot__tip" role="tooltip" id="shot-groups-5"
+                        ><b>A collection summary</b>Overview counts refer to
+                        sample design data.</span
+                      >
+                    </li>
+                  </ol>
+                </div>
+              </figure>
+            </section>
+            <section id="commerce" class="sec">
+              <h2>Plans, tiers and paid plans</h2>
+              <p>
+                A plan defines capabilities and limits: monthly searches, export
+                size and members. A pricing tier attaches a price and billing
+                period to that plan. A paid plan represents an actual customer
+                subscription to a tier. Those are three different objects
+                because they change for different reasons. The sample defaults
+                propose a Starter plan, a 14-day trial and pausing new searches
+                when a limit is reached. The pricing view adds currency and tax
+                treatment, while subscriptions carry their own state and
+                next-payment date. None of the sample prices is a published
+                offer.
+              </p>
+              <figure class="flow" data-flow data-reveal>
+                <div
+                  class="flow__tabs"
+                  role="tablist"
+                  aria-label="commercial model"
+                >
+                  <button
+                    type="button"
+                    class="flow__tab"
+                    role="tab"
+                    id="commercial-model-t1"
+                    aria-controls="commercial-model-p1"
+                    aria-selected="true"
+                  >
+                    <span class="flow__n">01</span>Plans</button
+                  ><button
+                    type="button"
+                    class="flow__tab"
+                    role="tab"
+                    id="commercial-model-t2"
+                    aria-controls="commercial-model-p2"
+                    aria-selected="false"
+                  >
+                    <span class="flow__n">02</span>Pricing tiers</button
+                  ><button
+                    type="button"
+                    class="flow__tab"
+                    role="tab"
+                    id="commercial-model-t3"
+                    aria-controls="commercial-model-p3"
+                    aria-selected="false"
+                  >
+                    <span class="flow__n">03</span>Paid plans
+                  </button>
+                </div>
+                <div class="flow__stage">
+                  <div
+                    class="flow__panel"
+                    role="tabpanel"
+                    id="commercial-model-p1"
+                    aria-labelledby="commercial-model-t1"
+                  >
+                    <button
+                      type="button"
+                      class="zoomable"
+                      data-zoom
+                      aria-label="Zoom: admin plans"
+                    >
+                      <img
+                        src="../assets/breachify/admin-plans.webp"
+                        width="1920"
+                        height="1428"
+                        loading="lazy"
+                        alt="Breachify design: admin plans, with placeholder data"
+                      />
+                    </button>
+                  </div>
+                  <div
+                    class="flow__panel"
+                    role="tabpanel"
+                    id="commercial-model-p2"
+                    aria-labelledby="commercial-model-t2"
+                    hidden
+                  >
+                    <button
+                      type="button"
+                      class="zoomable"
+                      data-zoom
+                      aria-label="Zoom: admin tiers"
+                    >
+                      <img
+                        src="../assets/breachify/admin-tiers.webp"
+                        width="1920"
+                        height="1428"
+                        loading="lazy"
+                        alt="Breachify design: admin tiers, with placeholder data"
+                      />
+                    </button>
+                  </div>
+                  <div
+                    class="flow__panel"
+                    role="tabpanel"
+                    id="commercial-model-p3"
+                    aria-labelledby="commercial-model-t3"
+                    hidden
+                  >
+                    <button
+                      type="button"
+                      class="zoomable"
+                      data-zoom
+                      aria-label="Zoom: admin paid"
+                    >
+                      <img
+                        src="../assets/breachify/admin-paid.webp"
+                        width="1920"
+                        height="1428"
+                        loading="lazy"
+                        alt="Breachify design: admin paid, with placeholder data"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </figure>
+              <blockquote>
+                Capabilities, prices and subscriptions are three different
+                questions, so they live in three different places.
+              </blockquote>
+              <p>
+                Two rules on the pricing screen make the separation concrete. An
+                existing paid plan keeps its agreed price when a tier changes.
+                Archiving a tier prevents new purchases without ending current
+                subscriptions. In the demo, moving the price changes only the
+                new-purchase row; the three existing agreements keep their
+                amount and state. This is a compact way to show a consequence
+                before asking someone to apply a change. It also avoids
+                disguising a past-due subscription as healthy merely because its
+                price remains protected.
+              </p>
+              <figure
+                class="demo"
+                data-demo="tier-change"
+                data-reveal
+                aria-label="Live demo: Change a price without breaking a promise"
+              >
+                <div class="demo__bar">
+                  <span class="demo__k">Try it</span
+                  ><span class="demo__t"
+                    >Change a price without breaking a promise</span
+                  ><span class="demo__tag">Sample data</span
+                  ><button type="button" class="demo__reset">↻ Reset</button>
+                </div>
+                <div class="demo__body bfui">
+                  <p class="demo__fallback">This live demo needs JavaScript.</p>
+                </div>
+              </figure>
+            </section>
+            <section id="channels" class="sec">
+              <h2>Channels and files</h2>
+              <p>
+                Channels organise incoming material under a group: domain
+                monitoring, research feeds, file uploads or API imports. Files
+                arrive through those channels and inherit the group’s access
+                permissions. This storage is distinct from a customer’s personal
+                export archive. Its table includes Ready, Processing and Failed
+                states; its upload panel proposes ZIP, CSV or PDF files up to
+                100 MB, a sample 30-day retention setting and an option
+                requiring a passkey. Keeping origin and access visible together
+                helps an operator reason about who should receive material
+                before it becomes downloadable.
+              </p>
+              <figure class="flow" data-flow data-reveal>
+                <div
+                  class="flow__tabs"
+                  role="tablist"
+                  aria-label="incoming material"
+                >
+                  <button
+                    type="button"
+                    class="flow__tab"
+                    role="tab"
+                    id="incoming-material-t1"
+                    aria-controls="incoming-material-p1"
+                    aria-selected="true"
+                  >
+                    <span class="flow__n">01</span>Channels</button
+                  ><button
+                    type="button"
+                    class="flow__tab"
+                    role="tab"
+                    id="incoming-material-t2"
+                    aria-controls="incoming-material-p2"
+                    aria-selected="false"
+                  >
+                    <span class="flow__n">02</span>Files
+                  </button>
+                </div>
+                <div class="flow__stage">
+                  <div
+                    class="flow__panel"
+                    role="tabpanel"
+                    id="incoming-material-p1"
+                    aria-labelledby="incoming-material-t1"
+                  >
+                    <button
+                      type="button"
+                      class="zoomable"
+                      data-zoom
+                      aria-label="Zoom: admin channels"
+                    >
+                      <img
+                        src="../assets/breachify/admin-channels.webp"
+                        width="1920"
+                        height="1428"
+                        loading="lazy"
+                        alt="Breachify design: admin channels, with placeholder data"
+                      />
+                    </button>
+                  </div>
+                  <div
+                    class="flow__panel"
+                    role="tabpanel"
+                    id="incoming-material-p2"
+                    aria-labelledby="incoming-material-t2"
+                    hidden
+                  >
+                    <button
+                      type="button"
+                      class="zoomable"
+                      data-zoom
+                      aria-label="Zoom: admin files"
+                    >
+                      <img
+                        src="../assets/breachify/admin-files.webp"
+                        width="1920"
+                        height="1428"
+                        loading="lazy"
+                        alt="Breachify design: admin files, with placeholder data"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </figure>
+            </section>
+            <section id="passkeys" class="sec">
+              <h2>A key for one file</h2>
+              <p>
+                “Passkey” has a specific local meaning in these screens: a
+                time-limited, download-limited key for a file. It is not the
+                passwordless sign-in standard. The full key is shown once after
+                generation, then represented by a masked identifier in the table
+                <button
+                  type="button"
+                  class="ref"
+                  data-for="shot-passkeys"
+                  data-n="1"
+                >
+                  1</button
+                >. Expiry and a download allowance
+                <button
+                  type="button"
+                  class="ref"
+                  data-for="shot-passkeys"
+                  data-n="2"
+                >
+                  2
+                </button>
+                constrain its use, while Revoke
+                <button
+                  type="button"
+                  class="ref"
+                  data-for="shot-passkeys"
+                  data-n="4"
+                >
+                  4
+                </button>
+                is intended to stop further downloads immediately. The demo
+                exposes those transitions with fictional keys. It models the
+                workflow in the browser; a real service must enforce every limit
+                on the server.
+              </p>
+              <figure class="shot" id="shot-passkeys" data-reveal>
+                <div class="shot__frame">
+                  <button
+                    type="button"
+                    class="zoomable"
+                    data-zoom
+                    aria-label="Zoom: admin passkeys"
+                  >
+                    <img
+                      src="../assets/breachify/admin-passkeys.webp"
+                      width="1920"
+                      height="1428"
+                      loading="lazy"
+                      alt="Breachify design: admin passkeys, with placeholder data"
+                    />
+                  </button>
+                  <ol class="spots">
+                    <li class="spot" data-n="1" style="--x: 25%; --y: 38.6%">
+                      <button
+                        type="button"
+                        class="spot__dot"
+                        aria-describedby="shot-passkeys-1"
+                      >
+                        <span aria-hidden="true">1</span
+                        ><span class="sr-only"
+                          >Callout 1: A masked identifier</span
+                        ></button
+                      ><span
+                        class="spot__tip"
+                        role="tooltip"
+                        id="shot-passkeys-1"
+                        ><b>A masked identifier</b>The full value is revealed
+                        only at creation.</span
+                      >
+                    </li>
+                    <li class="spot" data-n="2" style="--x: 67.4%; --y: 38.6%">
+                      <button
+                        type="button"
+                        class="spot__dot"
+                        aria-describedby="shot-passkeys-2"
+                      >
+                        <span aria-hidden="true">2</span
+                        ><span class="sr-only"
+                          >Callout 2: A download allowance</span
+                        ></button
+                      ><span
+                        class="spot__tip"
+                        role="tooltip"
+                        id="shot-passkeys-2"
+                        ><b>A download allowance</b>Usage is counted against a
+                        fixed limit.</span
+                      >
+                    </li>
+                    <li class="spot" data-n="3" style="--x: 74.4%; --y: 55.9%">
+                      <button
+                        type="button"
+                        class="spot__dot"
+                        aria-describedby="shot-passkeys-3"
+                      >
+                        <span aria-hidden="true">3</span
+                        ><span class="sr-only"
+                          >Callout 3: Explicit states</span
+                        ></button
+                      ><span
+                        class="spot__tip"
+                        role="tooltip"
+                        id="shot-passkeys-3"
+                        ><b>Explicit states</b>Active, expired and revoked are
+                        distinct outcomes.</span
+                      >
+                    </li>
+                    <li class="spot" data-n="4" style="--x: 83.7%; --y: 38.6%">
+                      <button
+                        type="button"
+                        class="spot__dot"
+                        aria-describedby="shot-passkeys-4"
+                      >
+                        <span aria-hidden="true">4</span
+                        ><span class="sr-only"
+                          >Callout 4: Revoke access</span
+                        ></button
+                      ><span
+                        class="spot__tip"
+                        role="tooltip"
+                        id="shot-passkeys-4"
+                        ><b>Revoke access</b>The proposed action prevents
+                        further downloads.</span
+                      >
+                    </li>
+                    <li class="spot" data-n="5" style="--x: 46%; --y: 77.5%">
+                      <button
+                        type="button"
+                        class="spot__dot"
+                        aria-describedby="shot-passkeys-5"
+                      >
+                        <span aria-hidden="true">5</span
+                        ><span class="sr-only"
+                          >Callout 5: Create a key</span
+                        ></button
+                      ><span
+                        class="spot__tip"
+                        role="tooltip"
+                        id="shot-passkeys-5"
+                        ><b>Create a key</b>File, duration and allowance define
+                        its scope.</span
+                      >
+                    </li>
+                    <li class="spot" data-n="6" style="--x: 84%; --y: 79.2%">
+                      <button
+                        type="button"
+                        class="spot__dot"
+                        aria-describedby="shot-passkeys-6"
+                      >
+                        <span aria-hidden="true">6</span
+                        ><span class="sr-only"
+                          >Callout 6: State the rules</span
+                        ></button
+                      ><span
+                        class="spot__tip"
+                        role="tooltip"
+                        id="shot-passkeys-6"
+                        ><b>State the rules</b>The one-time reveal and
+                        revocation behaviour are explained.</span
+                      >
+                    </li>
+                  </ol>
+                </div>
+              </figure>
+              <figure
+                class="demo"
+                data-demo="passkey"
+                data-reveal
+                aria-label="Live demo: A key for one file, shown once"
+              >
+                <div class="demo__bar">
+                  <span class="demo__k">Try it</span
+                  ><span class="demo__t">A key for one file, shown once</span
+                  ><span class="demo__tag">Sample data</span
+                  ><button type="button" class="demo__reset">↻ Reset</button>
+                </div>
+                <div class="demo__body bfui">
+                  <p class="demo__fallback">This live demo needs JavaScript.</p>
+                </div>
+              </figure>
+            </section>
+            <section id="ai-operations" class="sec">
+              <p class="kicker">The intelligence layer</p>
+              <h2>Operating the intelligence layer</h2>
+              <p>
+                The group and channel model also supplies a boundary for AI
+                retrieval. In the proposed architecture, every indexed record
+                carries its group, source channel and access metadata. Retrieval
+                filters by the requesting user’s permissions before selecting
+                evidence; a model is never asked to decide whether a user is
+                allowed to see a record. Derived features, cached summaries and
+                exported assessments need the same scope. If access changes or a
+                source expires under retention rules, the derived index and
+                cached material need corresponding invalidation. The interface’s
+                permission-denied state is therefore part of the intelligence
+                workflow, not merely an administrative error page.
+              </p>
+              <p>
+                Each assessment should be reproducible from a versioned evidence
+                snapshot, parser and feature definitions, ranking model or rule
+                version, and the generative model and prompt configuration. The
+                audit trail records what was supplied, which sources were cited
+                and which human decision followed, while avoiding unnecessary
+                retention of secret values. Drift monitoring can identify
+                changing field distributions, source coverage or
+                analyst-confirmation rates. A model release should be compared
+                against the previous version on a fixed evaluation set and
+                reviewed before wider rollout. Search ranking, explanatory
+                drafting and response execution remain distinct permissions; the
+                proposed AI does not autonomously revoke sessions or declare a
+                case resolved.
+              </p>
+            </section>
+            <section id="next" class="sec sec--conclusion">
+              <h2>What comes next</h2>
+              <p>
+                The strongest path is already visible: an organisation leads to
+                a population, a device, an evidence category and an individual
+                cookie. The administration model gives that path a commercial
+                and access-control context. The next design work is to complete
+                the states around it: loading, failure, confirmation and
+                permission denied; alerts that are still noted as work in
+                progress; the Documents page already named in navigation; and
+                the result behind Analyze with AI. The APK tab variations also
+                need one consistent treatment. These are concrete boundaries of
+                the current design, and the next opportunities to make the
+                workspace dependable.
+              </p>
+            </section>
+            <div class="continue" data-continue></div>
+          </article>
+        </div>
+      </main>
+      <footer class="foot">
+        <nav class="foot__nav">
+          <a href="../index.html">Home</a>
+          <a href="../breachify/">Breachify</a>
+          <a href="../index.html#about">About</a>
+        </nav>
+        <p class="foot__copy">© 2026 Hamza Lotfi · intelotfi</p>
+      </footer>
+    </div>
+
+    <div class="zoom" id="zoom" aria-hidden="true" inert>
+      <canvas class="zoom__gl"></canvas>
+      <img class="zoom__fallback" alt="" />
+      <button type="button" class="zoom__close" aria-label="Close">
+        <span></span><span></span>
+      </button>
+      <p class="zoom__caption">
+        <span class="zoom__index"></span><span class="zoom__name"></span
+        ><span class="zoom__hint"
+          >scroll to zoom · drag to pan · double-click to toggle</span
+        >
+      </p>
+    </div>
+
+    <nav class="dock" data-dock aria-label="Chapter navigation"></nav>
+
+    <script src="../breachify/ui.js?v=20261014d"></script>
+    <script src="blog.js?v=20261014d"></script>
+    <script src="bf.js?v=20261014d"></script>
+    <script src="../breachify/records.js?v=20261014d"></script>
+    <script src="../breachify/demos.js?v=20261014d"></script>
+    <script src="../breachify/ai.js?v=20261014d"></script>
+  </body>
+</html>
