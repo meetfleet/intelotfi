@@ -23,22 +23,22 @@
       });
     </script>
     <title>Antercept: the map and the machinery | Hamza Lotfi</title>
-    <meta name="description" content="Capability 3 of Antercept: geolocation, IPs, phone-data views and the infrastructure — servers, domains, providers — that runs a security-awareness programme at scale." />
+    <meta name="description" content="Chapter 3 of the Antercept case study: geolocation as a training heatmap, IP intelligence, phone-data views, and the infrastructure — servers, domains, providers, proxies — that runs a security-awareness programme at scale." />
     <meta name="author" content="Hamza Lotfi" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="https://intelotfi.com/blog/the-map.html" />
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="intelotfi · Hamza Lotfi" />
     <meta property="og:title" content="Antercept: the map and the machinery | Hamza Lotfi" />
-    <meta property="og:description" content="How Antercept runs an awareness operation: geolocation, IPs, and the infrastructure behind it." />
+    <meta property="og:description" content="Running the operation: the map of exposure and the infrastructure behind a programme at scale." />
     <meta property="og:url" content="https://intelotfi.com/blog/the-map.html" />
     <meta property="og:image" content="https://intelotfi.com/assets/antercept/cover-3.webp" />
     <link rel="icon" href="../assets/icon.svg" type="image/svg+xml" />
     <link rel="preload" href="../fonts/AllianceNo2-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="../assets/antercept/cover-3.webp" as="image" fetchpriority="high" />
     <link rel="stylesheet" href="blog.css?v=202610132334" />
-    <link rel="stylesheet" href="../antercept/ui.css?v=20261014a" />
-    <link rel="stylesheet" href="bf.css?v=20261014a" />
+    <link rel="stylesheet" href="bf.css?v=20261014b" />
+    <link rel="stylesheet" href="antercept-chapters.css?v=20261014b" />
     <noscript>
       <style>body [data-reveal] { opacity: 1 !important; transform: none !important; filter: none !important; }</style>
     </noscript>
@@ -53,90 +53,318 @@
           <span class="logo__text">intelotfi</span><span class="logo__cursor" aria-hidden="true"></span>
         </a>
         <nav class="chapnav" data-chapnav aria-label="Chapters">
-          <a href="../antercept/" class="chapnav__fallback">All capabilities</a>
+          <a href="../antercept/" class="chapnav__fallback">All chapters</a>
         </nav>
       </header>
 
       <main>
         <section class="intro">
-          <p class="eyebrow" data-reveal>Antercept · Capability 03</p>
+          <p class="eyebrow" data-reveal>Featured deep dive · Antercept 03</p>
           <h1 class="title" data-reveal data-split>The map and the machinery</h1>
           <p class="chapter" data-reveal>
-            <span class="chapter__num">Capability III</span>Geolocation, IPs and the infrastructure
-            that runs a programme at scale
+            <span class="chapter__num">Chapter III</span>Running the operation: the map of
+            exposure, and the infrastructure that carries a programme at scale
           </p>
           <dl class="meta" data-reveal>
-            <div class="meta__cell"><dt>Published</dt><dd><time datetime="2026-10-14">Wed 14 Oct 2026</time></dd></div>
-            <div class="meta__cell"><dt>Topic</dt><dd>Operations</dd></div>
-            <div class="meta__cell"><dt>Framing</dt><dd>Authorized testing</dd></div>
+            <div class="meta__cell">
+              <dt>Published</dt>
+              <dd><time datetime="2026-10-14">Wed 14 Oct 2026</time></dd>
+            </div>
+            <div class="meta__cell meta__cell--time">
+              <dt>Reading time</dt>
+              <dd><span id="reading-time">34</span><small>min</small></dd>
+            </div>
+            <div class="meta__cell">
+              <dt>Figures</dt>
+              <dd id="figure-count">8</dd>
+            </div>
+            <div class="meta__cell">
+              <dt>Framing</dt>
+              <dd>Authorized testing</dd>
+            </div>
           </dl>
         </section>
 
         <figure class="cover" data-reveal>
           <img src="../assets/antercept/cover-3.webp" width="1280" height="800"
-            alt="Geolocation, infrastructure and the operations map" />
+            alt="Geolocation, infrastructure and the operations map in Antercept" />
           <figcaption class="cover__card">
-            <b>The machinery.</b> The servers, domains and providers that turn a single test into a
-            programme.
+            <b>The machinery.</b> The map of where exposure concentrates, and the servers,
+            domains and providers that turn a single test into a programme.
           </figcaption>
         </figure>
 
         <article class="article" id="article">
-          <section class="sec">
-          <p class="kicker">Operations</p>
-          <p class="lead" data-reveal>
-            A single awareness email is easy. Running a programme — many campaigns, many audiences,
-            over months — is an infrastructure problem. Antercept's third job is to manage that
-            machinery so the security team can focus on the result.
-          </p>
 
-          <h2 data-reveal>The map</h2>
-          <p data-reveal>
-            Geolocation and IP views place each interaction on a map: where a target opened a message,
-            where a click came from, which office or region is most exposed. For an awareness programme,
-            the map is a heat chart of where to train next.
-          </p>
-
-          <h2 data-reveal>The machinery</h2>
-          <p data-reveal>
-            Behind the map sit the servers that host the test pages, the domains that carry the
-            campaign, and the providers that deliver email and SMS. Antercept manages them as one
-            inventory, so a campaign can be stood up, run, and torn down cleanly.
-          </p>
-
-          <h2 data-reveal>One console, end to end</h2>
-          <p data-reveal>
-            From the first template to the final report, every module — Phisher, Cookies, Credentials,
-            Locater, IPs, Extracter, Data, Templates, Servers, Domains, Users and Settings — lives in one
-            console. That is what makes Antercept a platform rather than a tool.
-          </p>
-
-          <aside class="note" aria-label="About the data" data-reveal>
-            <span class="note__icon" aria-hidden="true">ⓘ</span>
-            <div>
-              <span class="note__k">About the data</span>
-              <p>
-                All locations, IPs, servers and domains referenced here are fictional sample data for
-                an authorized-testing demonstration. No real location is tracked and no real
-                infrastructure is operated from this page.
-              </p>
-            </div>
-          </aside>
+          <!-- 1 -->
+          <section id="scale" class="sec">
+            <p class="kicker">Running the operation</p>
+            <h2>One email is easy; a programme is infrastructure</h2>
+            <p class="lead">
+              Sending a single awareness email is trivial. Running a programme — many campaigns, many
+              audiences, across offices and months, with evidence that holds up to scrutiny — is an
+              infrastructure problem. Antercept’s third capability is the unglamorous one that makes the
+              other two usable at scale: the map that shows where exposure concentrates, and the
+              machinery that stands a campaign up and tears it down cleanly.
+            </p>
+            <aside class="note" aria-label="About the data">
+              <span class="note__icon" aria-hidden="true">ⓘ</span>
+              <div>
+                <span class="note__k">About the data</span>
+                <p>
+                  Every location, IP, server, domain and provider in this chapter is fictional sample
+                  data for an authorized-testing demonstration. Antercept operates only within a scope a
+                  real programme is authorized to test; nothing here tracks a real location or runs real
+                  infrastructure.
+                </p>
+              </div>
+            </aside>
           </section>
-        </article>
 
-        <nav class="continue" aria-label="Continue">
-          <a class="continue__item" href="../antercept/#console">
-            <span class="continue__k">Try it · Console</span>
-            <span class="continue__t">Run the operation</span>
-          </a>
-          <a class="continue__item" href="the-catch.html">
-            <span class="continue__k">Back · Capability II</span>
-            <span class="continue__t">Managing what a click reveals</span>
-          </a>
-        </nav>
+          <!-- 2 -->
+          <section id="geo" class="sec">
+            <p class="part">Part 1 · The map</p>
+            <h2>Geolocation as a training heatmap</h2>
+            <p>
+              When each interaction is placed on a map, a programme gains a sense it never had from a
+              spreadsheet: <em>where</em> it is exposed. One office clicks more than another; one region
+              reports faster than the rest; a new location lights up after a reorganisation. For an
+              awareness team, the map is not surveillance of people — it is a heatmap of where to train
+              next, read at the level of sites and regions rather than individuals.
+            </p>
+            <figure class="fig" data-reveal>
+              <svg class="acfig" viewBox="0 0 720 260" role="img" aria-label="A stylised map with clusters of interactions over several cities, sized by exposure, with one high cluster highlighted">
+                <rect class="acfig__bg" x="0" y="0" width="720" height="260" rx="14" />
+                <text class="acfig__title" x="28" y="38">Where exposure concentrates</text>
+                <!-- abstract landmass grid -->
+                <g stroke="#ffffff10" stroke-width="1">
+                  <line x1="40" y1="70" x2="680" y2="70"/><line x1="40" y1="120" x2="680" y2="120"/>
+                  <line x1="40" y1="170" x2="680" y2="170"/><line x1="40" y1="220" x2="680" y2="220"/>
+                  <line x1="140" y1="56" x2="140" y2="236"/><line x1="280" y1="56" x2="280" y2="236"/>
+                  <line x1="420" y1="56" x2="420" y2="236"/><line x1="560" y1="56" x2="560" y2="236"/>
+                </g>
+                <!-- clusters -->
+                <circle cx="180" cy="120" r="26" fill="#7c4dff33" stroke="#9e7bff"/><text class="acfig__lvs" x="180" y="124">Lisbon</text>
+                <circle cx="330" cy="150" r="38" fill="#ff5c7233" stroke="#ff5c72"/><text class="acfig__lvs" x="330" y="154">Casablanca</text>
+                <circle cx="470" cy="100" r="18" fill="#7c4dff33" stroke="#9e7bff"/><text class="acfig__lvs" x="470" y="104">Berlin</text>
+                <circle cx="580" cy="180" r="22" fill="#7c4dff33" stroke="#9e7bff"/><text class="acfig__lvs" x="580" y="184">Dubai</text>
+                <text class="acfig__foot" x="28" y="252">Bubble size is exposure. The red cluster is where the next training should go.</text>
+              </svg>
+            </figure>
+            <p>
+              The map’s honesty depends on resolution. Antercept deliberately reads geolocation at low
+              precision — a city, a region, an office — because the goal is to find a <em>pattern</em>,
+              not a person’s doorstep. Precise tracking of an individual would be both ethically wrong for
+              an awareness programme and, in most jurisdictions, unlawful. The map is coarse on purpose.
+            </p>
+          </section>
+
+          <!-- 3 -->
+          <section id="ip" class="sec">
+            <h2>IP intelligence, with its limits stated</h2>
+            <p>
+              An IP address is the crudest geolocator there is, and it is tempting to over-read it.
+              Antercept treats an IP as a weak signal: useful for spotting that a cluster of clicks came
+              from one network, or that an interaction arrived through a VPN or proxy, but never as proof
+              of exactly who or where. The IPs-and-locations module pairs each address with a confidence
+              and a caveat, because evidence that overstates itself is worse than no evidence.
+            </p>
+            <figure class="fig" data-reveal>
+              <svg class="acfig" viewBox="0 0 720 210" role="img" aria-label="An IP record with a coarse location, a network, and an explicit low-confidence caveat, plus a note that a VPN or proxy breaks the link">
+                <rect class="acfig__bg" x="0" y="0" width="720" height="210" rx="14" />
+                <text class="acfig__title" x="28" y="38">An IP is a weak signal, labelled as one</text>
+                <rect class="acfig__mail" x="28" y="56" width="664" height="92" rx="10"/>
+                <text class="acfig__eq" x="46" y="90">203.0.113.x</text>
+                <text class="acfig__s" x="46" y="114">network: Example Telecom · region: approximate · confidence: low</text>
+                <text class="acfig__s" x="46" y="136">a VPN or proxy relocates this entirely — treat as a hint, not a fact</text>
+                <text class="acfig__foot" x="28" y="178">Antercept pairs every address with a caveat so the evidence cannot be over-read.</text>
+              </svg>
+            </figure>
+            <p>
+              Stating limits is itself a design choice, and a rare one in this category. A tool built to
+              impress buys credibility by sounding certain; a tool built for a defensible programme buys
+              it by being right about what it does not know. Antercept’s evidence is more useful precisely
+              because it refuses to claim more than it can support.
+            </p>
+          </section>
+
+          <!-- 4 -->
+          <section id="phone" class="sec">
+            <h2>Phone-data views, framed as design</h2>
+            <p>
+              The product’s phone-extraction modules — Extracter and Data / Backups — represent the most
+              invasive end of the capability spectrum, and the place where framing matters most. In an
+              authorized mobile-security assessment, with the device owner’s consent, an examiner may
+              review backups and app data to show what a lost or compromised phone would expose. Antercept
+              presents these as a <em>design</em>: the views, the organisation, the evidence structure —
+              not an operational extraction tool, and nothing that runs against a real device here.
+            </p>
+            <figure class="fig" data-reveal>
+              <svg class="acfig" viewBox="0 0 720 220" role="img" aria-label="Phone-data views shown as organised categories — messages, app data, backups — each labelled as a consented, authorized assessment view">
+                <rect class="acfig__bg" x="0" y="0" width="720" height="220" rx="14" />
+                <text class="acfig__title" x="28" y="38">Phone-data views, as an organising design</text>
+                <g class="acfig__stage" transform="translate(28,64)"><rect width="200" height="56" rx="9"/><text x="100" y="26">Messages</text><text class="acfig__s" x="100" y="44">conversation metadata</text></g>
+                <g class="acfig__stage" transform="translate(260,64)"><rect width="200" height="56" rx="9"/><text x="100" y="26">App data</text><text class="acfig__s" x="100" y="44">which apps, how used</text></g>
+                <g class="acfig__stage" transform="translate(492,64)"><rect width="200" height="56" rx="9"/><text x="100" y="26">Backups</text><text class="acfig__s" x="100" y="44">what a backup exposes</text></g>
+                <text class="acfig__foot" x="28" y="158">Shown with consent, for an authorized assessment, to teach what a lost phone reveals.</text>
+                <text class="acfig__foot" x="28" y="182">Presented here as interface design only — no extraction runs, on any device.</text>
+              </svg>
+            </figure>
+            <blockquote>The invasive capability is the one that most needs its boundary drawn in ink.</blockquote>
+          </section>
+
+          <!-- 5 -->
+          <section id="infra" class="sec">
+            <p class="part">Part 2 · The machinery</p>
+            <h2>Servers, domains and the delivery chain</h2>
+            <p>
+              Behind every campaign sits infrastructure: the servers that host the test pages, the domains
+              that carry the campaign, and the providers that deliver email and SMS. Antercept manages
+              these as one inventory so an operator can compose a campaign from known-good parts — pick a
+              server, attach a reserved domain, choose a delivery provider — and retire them cleanly when
+              the exercise ends. The delivery chain is the difference between a one-off and a programme.
+            </p>
+            <figure class="fig" data-reveal>
+              <svg class="acfig" viewBox="0 0 720 220" role="img" aria-label="The delivery chain: template to server to domain to provider to inbox, managed as one inventory">
+                <rect class="acfig__bg" x="0" y="0" width="720" height="220" rx="14" />
+                <defs>
+                  <marker id="acarrow3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0 0L10 5L0 10z" fill="#7c4dff" />
+                  </marker>
+                </defs>
+                <text class="acfig__title" x="28" y="38">The managed delivery chain</text>
+                <g class="acfig__stage" transform="translate(28,80)"><rect width="110" height="52" rx="9"/><text x="55" y="31">Template</text></g>
+                <g class="acfig__stage" transform="translate(168,80)"><rect width="110" height="52" rx="9"/><text x="55" y="31">Server</text></g>
+                <g class="acfig__stage" transform="translate(308,80)"><rect width="110" height="52" rx="9"/><text x="55" y="31">Domain</text></g>
+                <g class="acfig__stage" transform="translate(448,80)"><rect width="110" height="52" rx="9"/><text x="55" y="31">Provider</text></g>
+                <g class="acfig__stage acfig__stage--out" transform="translate(588,80)"><rect width="104" height="52" rx="9"/><text x="52" y="31">Inbox</text></g>
+                <path class="acfig__arrow" style="marker-end:url(#acarrow3)" d="M140 106h24"/>
+                <path class="acfig__arrow" style="marker-end:url(#acarrow3)" d="M280 106h24"/>
+                <path class="acfig__arrow" style="marker-end:url(#acarrow3)" d="M420 106h24"/>
+                <path class="acfig__arrow" style="marker-end:url(#acarrow3)" d="M560 106h24"/>
+                <text class="acfig__foot" x="28" y="176">Compose from known-good parts; retire them when the exercise ends.</text>
+              </svg>
+            </figure>
+            <p>
+              Managing the chain as inventory is also what makes an exercise auditable. Every campaign can
+              be traced to the exact server, domain and provider it used, which is what a client’s security
+              and legal teams need to confirm the programme stayed inside its authorized scope. The
+              machinery is boring on purpose; boring is what holds up under review.
+            </p>
+          </section>
+
+          <!-- 6 -->
+          <section id="proxy" class="sec">
+            <h2>Proxies, and why routing is deliberate</h2>
+            <p>
+              The components library includes a proxy toggle — on or off — and it is a small switch with a
+              large meaning. Routing a campaign’s traffic through a proxy changes how it reaches targets and
+              how it appears to the networks it crosses. In an authorized exercise this is used to mirror the
+              conditions a real attacker would create, so the test is realistic; it is a parameter of the
+              engagement, set with the client, not a trick played on anyone.
+            </p>
+            <figure class="fig" data-reveal>
+              <svg class="acfig" viewBox="0 0 720 200" role="img" aria-label="Two routing paths: direct, and through a proxy, each a deliberate engagement setting">
+                <rect class="acfig__bg" x="0" y="0" width="720" height="200" rx="14" />
+                <text class="acfig__title" x="28" y="38">Routing is an engagement setting</text>
+                <!-- direct -->
+                <g class="acfig__stage" transform="translate(40,70)"><rect width="90" height="44" rx="9"/><text x="45" y="27">Antercept</text></g>
+                <g class="acfig__stage" transform="translate(300,70)"><rect width="90" height="44" rx="9"/><text x="45" y="27">Target</text></g>
+                <path class="acfig__axis" d="M130 92 H 300" stroke="#9e7bff" stroke-width="1.6"/>
+                <text class="acfig__s" x="200" y="84">without proxy — direct</text>
+                <!-- proxied -->
+                <g class="acfig__stage" transform="translate(40,140)"><rect width="90" height="44" rx="9"/><text x="45" y="27">Antercept</text></g>
+                <g class="acfig__stage" transform="translate(170,140)"><rect width="90" height="44" rx="9"/><text x="45" y="27">Proxy</text></g>
+                <g class="acfig__stage" transform="translate(430,140)"><rect width="90" height="44" rx="9"/><text x="45" y="27">Target</text></g>
+                <path class="acfig__axis" d="M130 162 H 170 M260 162 H 430" stroke="#9e7bff" stroke-width="1.6"/>
+                <text class="acfig__s" x="330" y="154">with proxy — realistic conditions, set with the client</text>
+              </svg>
+            </figure>
+          </section>
+
+          <!-- 7 -->
+          <section id="modules" class="sec">
+            <p class="part">Part 3 · One console</p>
+            <h2>Thirteen modules, one operation</h2>
+            <p>
+              From the first template to the final report, every part of the programme lives in one console.
+              The sidebar is the whole operation at a glance: Dashboard; the Phishing group of Phisher,
+              Cookies and Credentials; the Geolocation group of Locater and IPs; the Phone-Extraction group
+              of Extracter and Data; the Infrastructure group of Templates, Servers and Domains; and the
+              Settings group of User Management and Settings. That single surface is what makes Antercept a
+              platform rather than a drawer of tools.
+            </p>
+            <figure class="fig" data-reveal>
+              <svg class="acfig" viewBox="0 0 720 300" role="img" aria-label="The thirteen modules grouped into Phishing, Geolocation, Phone Extraction, Infrastructure and Settings">
+                <rect class="acfig__bg" x="0" y="0" width="720" height="300" rx="14" />
+                <text class="acfig__title" x="28" y="38">The whole operation, one sidebar</text>
+                <!-- group columns -->
+                <text class="acfig__chk" x="40" y="72">PHISHING</text>
+                <text class="acfig__body" x="40" y="96">Phisher</text><text class="acfig__body" x="40" y="118">Cookies</text><text class="acfig__body" x="40" y="140">Credentials</text>
+                <text class="acfig__chk" x="200" y="72">GEOLOCATION</text>
+                <text class="acfig__body" x="200" y="96">Locater</text><text class="acfig__body" x="200" y="118">IPs / Locations</text>
+                <text class="acfig__chk" x="380" y="72">PHONE</text>
+                <text class="acfig__body" x="380" y="96">Extracter</text><text class="acfig__body" x="380" y="118">Data / Backups</text>
+                <text class="acfig__chk" x="540" y="72">INFRASTRUCTURE</text>
+                <text class="acfig__body" x="540" y="96">Templates</text><text class="acfig__body" x="540" y="118">Servers</text><text class="acfig__body" x="540" y="140">Domain Names</text>
+                <text class="acfig__chk" x="40" y="196">SETTINGS</text>
+                <text class="acfig__body" x="40" y="220">User Management</text><text class="acfig__body" x="40" y="242">Settings</text>
+                <text class="acfig__chk" x="300" y="196">DASHBOARD</text>
+                <text class="acfig__body" x="300" y="220">the programme at a glance</text>
+                <text class="acfig__foot" x="28" y="278">One surface, end to end — compose, run, measure, report, resolve.</text>
+              </svg>
+            </figure>
+            <p>
+              A single console is not a convenience; it is what lets an operation stay coherent. When the
+              lure, the evidence, the map and the infrastructure share one home, a security lead can move
+              from “who clicked” to “where they are” to “which campaign and server it came from” without
+              leaving the page — and can hand the whole chain to an auditor as one artefact.
+            </p>
+          </section>
+
+          <!-- 8 -->
+          <section id="conclusion" class="sec sec--conclusion">
+            <h2>Conclusion: the AI runs it, the team reads the result</h2>
+            <p>
+              Across three chapters, Antercept’s shape is clear. The first capability builds the lure and
+              predicts the click. The second turns the click into measurable evidence of exposure. The
+              third runs the whole thing — the map of where to train next, and the machinery that carries a
+              programme at scale and survives an audit. The through-line is the same promise the product
+              page makes: the AI runs the operation, and the team reads the result.
+            </p>
+            <p>
+              What keeps all of it defensible is the boundary drawn in every chapter — fictional data,
+              authorized scope, stated limits, and a human who approves before anything runs. A tool this
+              capable is only responsible if the restraint is designed in as carefully as the capability.
+            </p>
+            <aside class="note" aria-label="Scope reminder">
+              <span class="note__icon" aria-hidden="true">ⓘ</span>
+              <div>
+                <span class="note__k">Scope reminder</span>
+                <p>
+                  Antercept is built for authorized security-awareness testing and red-team engagements.
+                  Every location, IP, server, domain and provider in this chapter is fictional sample data.
+                  No real location is tracked and no real infrastructure is operated from this page.
+                </p>
+              </div>
+            </aside>
+          </section>
+
+          <div class="continue" data-continue></div>
+        </article>
       </main>
+
+      <footer class="foot">
+        <nav class="foot__nav">
+          <a href="../antercept/">Antercept</a>
+          <a href="../">Home</a>
+          <a href="../#contact">Contact</a>
+        </nav>
+        <p class="foot__copy">© 2026 Hamza Lotfi · intelotfi</p>
+      </footer>
     </div>
+
+    <nav class="dock" data-dock aria-label="Chapter navigation"></nav>
 
     <script src="blog.js?v=202610132334"></script>
   </body>

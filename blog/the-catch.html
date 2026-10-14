@@ -23,23 +23,22 @@
       });
     </script>
     <title>Antercept: managing what a click reveals | Hamza Lotfi</title>
-    <meta name="description" content="Capability 2 of Antercept: how a controlled awareness test turns a click into evidence — sessions, cookies and credentials — organised for the security team." />
+    <meta name="description" content="Chapter 2 of the Antercept case study: how a controlled awareness click becomes evidence — the anatomy of a session cookie, credential capture, the exposure timeline, and a transparent per-target risk score." />
     <meta name="author" content="Hamza Lotfi" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="https://intelotfi.com/blog/the-catch.html" />
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="intelotfi · Hamza Lotfi" />
     <meta property="og:title" content="Antercept: managing what a click reveals | Hamza Lotfi" />
-    <meta property="og:description" content="How Antercept organises the evidence a controlled awareness test produces." />
+    <meta property="og:description" content="The science of exposure: sessions, cookies and credentials, organised as evidence a security team can act on." />
     <meta property="og:url" content="https://intelotfi.com/blog/the-catch.html" />
     <meta property="og:image" content="https://intelotfi.com/assets/antercept/cover-2.webp" />
     <link rel="icon" href="../assets/icon.svg" type="image/svg+xml" />
     <link rel="preload" href="../fonts/AllianceNo2-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="../assets/antercept/cover-2.webp" as="image" fetchpriority="high" />
     <link rel="stylesheet" href="blog.css?v=202610132334" />
-    <link rel="stylesheet" href="../antercept/ui.css?v=20261014a" />
-    <link rel="stylesheet" href="bf.css?v=20261014a" />
-    <link rel="stylesheet" href="../antercept/console.css?v=20261014a" />
+    <link rel="stylesheet" href="bf.css?v=20261014b" />
+    <link rel="stylesheet" href="antercept-chapters.css?v=20261014b" />
     <noscript>
       <style>body [data-reveal] { opacity: 1 !important; transform: none !important; filter: none !important; }</style>
     </noscript>
@@ -54,22 +53,35 @@
           <span class="logo__text">intelotfi</span><span class="logo__cursor" aria-hidden="true"></span>
         </a>
         <nav class="chapnav" data-chapnav aria-label="Chapters">
-          <a href="../antercept/" class="chapnav__fallback">All capabilities</a>
+          <a href="../antercept/" class="chapnav__fallback">All chapters</a>
         </nav>
       </header>
 
       <main>
         <section class="intro">
-          <p class="eyebrow" data-reveal>Antercept · Capability 02</p>
+          <p class="eyebrow" data-reveal>Featured deep dive · Antercept 02</p>
           <h1 class="title" data-reveal data-split>Managing what a click reveals</h1>
           <p class="chapter" data-reveal>
-            <span class="chapter__num">Capability II</span>Sessions, cookies and credentials,
-            organised as evidence of exposure
+            <span class="chapter__num">Chapter II</span>The science of exposure: sessions,
+            cookies and credentials, turned into evidence a security team can act on
           </p>
           <dl class="meta" data-reveal>
-            <div class="meta__cell"><dt>Published</dt><dd><time datetime="2026-10-14">Wed 14 Oct 2026</time></dd></div>
-            <div class="meta__cell"><dt>Topic</dt><dd>Evidence design</dd></div>
-            <div class="meta__cell"><dt>Framing</dt><dd>Authorized testing</dd></div>
+            <div class="meta__cell">
+              <dt>Published</dt>
+              <dd><time datetime="2026-10-14">Wed 14 Oct 2026</time></dd>
+            </div>
+            <div class="meta__cell meta__cell--time">
+              <dt>Reading time</dt>
+              <dd><span id="reading-time">30</span><small>min</small></dd>
+            </div>
+            <div class="meta__cell">
+              <dt>Figures</dt>
+              <dd id="figure-count">8</dd>
+            </div>
+            <div class="meta__cell">
+              <dt>Framing</dt>
+              <dd>Authorized testing</dd>
+            </div>
           </dl>
         </section>
 
@@ -78,72 +90,286 @@
             alt="Captured sessions, cookies and credentials organised as exposure evidence" />
           <figcaption class="cover__card">
             <b>The catch.</b> In a controlled test, a click becomes evidence — handled so a
-            security team can act on it.
+            security team can measure exposure, not just anecdote.
           </figcaption>
         </figure>
 
         <article class="article" id="article">
-          <section class="sec">
-          <p class="kicker">Evidence design</p>
-          <p class="lead" data-reveal>
-            When a target clicks a simulated lure, the test has already taught its lesson. What
-            Antercept does next is turn that moment into clear evidence of exposure — the artefact
-            a security team hands to leadership.
-          </p>
 
-          <h2 data-reveal>A click, as evidence</h2>
-          <p data-reveal>
-            In an authorized awareness test, an interaction yields a session marker, a cookie, or a
-            submitted credential. Antercept records each as evidence against the target's record, with
-            the time and the source, so the exposure is measurable rather than anecdotal.
-          </p>
-
-          <h2 data-reveal>Reading the console</h2>
-          <p data-reveal>
-            The operator console on the project page shows this directly: open a target to see its
-            device, its city, the evidence its interaction produced, and a risk score that rises with
-            exposure and resets when the test is resolved.
-          </p>
-
-          <p data-reveal>
-            <a href="../antercept/#console">Open the live console →</a>
-          </p>
-
-          <h2 data-reveal>Resolving the test</h2>
-          <p data-reveal>
-            Evidence is only useful if it leads somewhere. Each target can be marked resolved once the
-            lesson is delivered, moving it to a reported state and closing the loop — the measure of a
-            successful awareness programme is how quickly that happens.
-          </p>
-
-          <aside class="note" aria-label="About the data" data-reveal>
-            <span class="note__icon" aria-hidden="true">ⓘ</span>
-            <div>
-              <span class="note__k">About the data</span>
-              <p>
-                All sessions, cookies, credentials and locations referenced here are fictional sample
-                data. Nothing is captured from a real person, and the console performs no real action.
-              </p>
-            </div>
-          </aside>
+          <!-- 1 -->
+          <section id="after-click" class="sec">
+            <p class="kicker">The science of exposure</p>
+            <h2>What a click actually yields</h2>
+            <p class="lead">
+              The moment a target clicks a simulated lure, the awareness test has already done its
+              teaching. What matters next is engineering: turning that click into evidence precise
+              enough that a security team can say not “some people are careless” but “these accounts,
+              on these devices, were exposed in these specific ways, and here is the timeline.”
+            </p>
+            <p>
+              In an authorized exercise, an interaction can surface three kinds of artefact: a
+              <b>session</b> (proof that a browser reached the test page and, in a real attack, might
+              have carried a live login), a <b>cookie</b> (the token a browser would have offered a
+              real site), and a <b>credential</b> (what a person typed into a form). Antercept’s second
+              capability is to capture these cleanly, label them as evidence, and never let them become
+              anything more than a lesson.
+            </p>
+            <aside class="note" aria-label="About the data">
+              <span class="note__icon" aria-hidden="true">ⓘ</span>
+              <div>
+                <span class="note__k">About the data</span>
+                <p>
+                  Every session, cookie, credential, device and location in this chapter is fictional
+                  sample data. In Antercept these artefacts are evidence of exposure within an
+                  authorized test; nothing is captured from a real person and no real account is
+                  accessed.
+                </p>
+              </div>
+            </aside>
           </section>
-        </article>
 
-        <nav class="continue" aria-label="Continue">
-          <a class="continue__item" href="the-map.html">
-            <span class="continue__k">Next · Capability III</span>
-            <span class="continue__t">The map and the machinery</span>
-          </a>
-          <a class="continue__item" href="the-lure.html">
-            <span class="continue__k">Back · Capability I</span>
-            <span class="continue__t">The AI that builds the lure</span>
-          </a>
-        </nav>
+          <!-- 2 -->
+          <section id="cookie-anatomy" class="sec">
+            <p class="part">Part 1 · The artefacts</p>
+            <h2>The anatomy of a session cookie</h2>
+            <p>
+              To understand why a stolen cookie matters, you have to read one. A session cookie is a
+              small key a site hands your browser after you log in, so that it need not ask for your
+              password on every click. It has a name, a value, a domain it belongs to, an expiry, and a
+              set of flags — <code>Secure</code>, <code>HttpOnly</code>, <code>SameSite</code> — that
+              govern when the browser will send it. In an awareness context, a captured cookie is the
+              single clearest way to show a person what “staying logged in” actually means.
+            </p>
+            <figure class="fig" data-reveal>
+              <svg class="acfig" viewBox="0 0 720 240" role="img" aria-label="The parts of a session cookie: name, value, domain, expiry, and the Secure, HttpOnly and SameSite flags">
+                <rect class="acfig__bg" x="0" y="0" width="720" height="240" rx="14" />
+                <text class="acfig__title" x="28" y="38">Reading a session cookie</text>
+                <rect class="acfig__mail" x="28" y="56" width="664" height="100" rx="10"/>
+                <text class="acfig__eq" x="46" y="92">sid = a9f3…e71b</text>
+                <text class="acfig__s" x="46" y="116">domain: mail.contoso.example   ·   expires: in 14 days</text>
+                <text class="acfig__s" x="46" y="138">flags: Secure · HttpOnly · SameSite=Lax</text>
+                <g transform="translate(28,172)">
+                  <text class="acfig__k" x="0" y="0">name + value → the key itself</text>
+                  <text class="acfig__k" x="0" y="24">domain + expiry → where and how long it is accepted</text>
+                  <text class="acfig__k" x="0" y="48">flags → when the browser is willing to send it</text>
+                </g>
+              </svg>
+            </figure>
+            <p>
+              The teaching point Antercept draws from this is precise and non-alarmist: an unexpired
+              cookie proves a browser <em>held</em> a token, not that a server would still accept it.
+              Sessions get revoked, tokens get rotated, flags like <code>HttpOnly</code> keep scripts
+              from reading them at all. Antercept’s evidence language reflects that carefully — it says
+              a session is “unexpired,” never “valid,” because the difference is the whole lesson about
+              why logging out and rotating sessions matters.
+            </p>
+          </section>
+
+          <!-- 3 -->
+          <section id="credential" class="sec">
+            <h2>A credential, as evidence</h2>
+            <p>
+              The most sobering artefact is a credential: the username and password a person typed into
+              a form that looked, for a moment, like the real thing. In a criminal operation this is the
+              crown jewel. In an authorized test it is the most powerful teaching moment there is —
+              provided it is handled as evidence of a behaviour, never as a usable secret. Antercept
+              records that a credential <em>was entered</em>, by whom, and when, and treats the secret
+              itself as something to be reported and reset, not retained.
+            </p>
+            <figure class="fig" data-reveal>
+              <svg class="acfig" viewBox="0 0 720 210" role="img" aria-label="A credential entry as an evidence record: who entered it, when, from where, and the mandated response of report and reset">
+                <rect class="acfig__bg" x="0" y="0" width="720" height="210" rx="14" />
+                <text class="acfig__title" x="28" y="38">A credential entry becomes an evidence record</text>
+                <g class="acfig__stage" transform="translate(28,64)"><rect width="150" height="56" rx="9"/><text x="75" y="26">Who</text><text class="acfig__s" x="75" y="44">target id · dept</text></g>
+                <g class="acfig__stage" transform="translate(198,64)"><rect width="150" height="56" rx="9"/><text x="75" y="26">When</text><text class="acfig__s" x="75" y="44">timestamp</text></g>
+                <g class="acfig__stage" transform="translate(368,64)"><rect width="150" height="56" rx="9"/><text x="75" y="26">Where</text><text class="acfig__s" x="75" y="44">source · city</text></g>
+                <g class="acfig__stage acfig__stage--out" transform="translate(538,64)"><rect width="154" height="56" rx="9"/><text x="77" y="26">Response</text><text class="acfig__s" x="77" y="44">report · reset</text></g>
+                <text class="acfig__foot" x="28" y="158">The secret is never the asset. The behaviour — that it was entered at all — is.</text>
+                <text class="acfig__foot" x="28" y="182">Mandated outcome: the person is taught, the account is reset, the record is closed.</text>
+              </svg>
+            </figure>
+            <blockquote>In an awareness test, the password is not a prize. The keystroke is the lesson.</blockquote>
+          </section>
+
+          <!-- 4 -->
+          <section id="timeline" class="sec">
+            <p class="part">Part 2 · The structure</p>
+            <h2>The exposure timeline</h2>
+            <p>
+              Isolated artefacts are anecdotes; a sequence is evidence. Antercept assembles each target’s
+              interaction into an <b>exposure timeline</b>: the message was delivered, then opened, then
+              clicked, then a credential was entered — or, in the healthy case, it was reported. The
+              timeline is what converts a scatter of events into a story a security lead can hand upward,
+              and it is the backbone of every target record in the console.
+            </p>
+            <figure class="fig" data-reveal>
+              <svg class="acfig" viewBox="0 0 720 200" role="img" aria-label="An exposure timeline from delivered to opened to clicked to credential entered, with a branch to reported">
+                <rect class="acfig__bg" x="0" y="0" width="720" height="200" rx="14" />
+                <text class="acfig__title" x="28" y="38">One target's exposure timeline</text>
+                <line class="acfig__axis" x1="60" y1="96" x2="660" y2="96"/>
+                <g><circle class="acfig__dot" cx="100" cy="96" r="7"/><text class="acfig__lv" x="100" y="128">delivered</text></g>
+                <g><circle class="acfig__dot" cx="250" cy="96" r="7"/><text class="acfig__lv" x="250" y="128">opened</text></g>
+                <g><circle class="acfig__dot" cx="400" cy="96" r="7"/><text class="acfig__lv" x="400" y="128">clicked</text></g>
+                <g><circle class="acfig__dot" cx="550" cy="96" r="7"/><text class="acfig__lv" x="550" y="128">credential</text></g>
+                <!-- healthy branch -->
+                <path class="acfig__line acfig__line--report" d="M400 96 C 460 60 520 60 600 60"/>
+                <circle class="acfig__dot" cx="600" cy="60" r="6" style="fill:#3ad29f"/>
+                <text class="acfig__lgd acfig__lgd--report" x="560" y="48">reported</text>
+              </svg>
+            </figure>
+            <p>
+              The branch matters as much as the main line. A target who reaches “clicked” and then
+              reports has produced the outcome the programme wants. By modelling reporting as a first-class
+              branch of the timeline rather than an afterthought, Antercept keeps the healthy path as
+              visible as the exposed one — and makes it countable.
+            </p>
+          </section>
+
+          <!-- 5 -->
+          <section id="risk" class="sec">
+            <h2>A transparent per-target risk score</h2>
+            <p>
+              Every target carries a risk score from 0 to 100. The temptation is to make it a black box;
+              Antercept resists it. The score is a readable sum: the furthest point reached on the
+              timeline sets a base, recency raises it, repeated exposure across campaigns raises it
+              further, and a report lowers it sharply. A security lead can always answer the question a
+              score must be able to answer — <em>why is this number what it is?</em>
+            </p>
+            <figure class="fig" data-reveal>
+              <svg class="acfig" viewBox="0 0 720 230" role="img" aria-label="Risk score as a readable sum of a timeline base, a recency term, a repetition term, and a report reduction">
+                <rect class="acfig__bg" x="0" y="0" width="720" height="230" rx="14" />
+                <text class="acfig__title" x="28" y="38">How a target's risk score is built</text>
+                <text class="acfig__eq" x="28" y="82">risk = base(timeline) + recency + repetition − report</text>
+                <g transform="translate(28,110)">
+                  <text class="acfig__k" x="0" y="0">base — pending 24 · opened 38 · clicked 62</text>
+                  <text class="acfig__k" x="0" y="26">recency — a fresh click weighs more than an old one</text>
+                  <text class="acfig__k" x="0" y="52">repetition — exposed in more than one campaign</text>
+                  <text class="acfig__k acfig__k--neg" x="0" y="78">report — reaching out drops the score toward safe</text>
+                </g>
+                <!-- a small meter -->
+                <rect x="470" y="150" width="220" height="10" rx="5" fill="#ffffff14"/>
+                <rect x="470" y="150" width="140" height="10" rx="5" fill="#9e7bff"/>
+                <text class="acfig__s" x="470" y="180">a clicked, recent, repeat target sits high</text>
+              </svg>
+            </figure>
+            <p>
+              Scores like this are not predictions about a person’s character; they are a triage tool.
+              They answer “who needs attention first,” and they reset when the test is resolved, because
+              a risk score that never comes down is just a scarlet letter. Antercept’s score is designed
+              to be earned, acted on, and then cleared.
+            </p>
+          </section>
+
+          <!-- 6 -->
+          <section id="correlation" class="sec">
+            <h2>Correlating evidence across a target</h2>
+            <p>
+              A single person may appear in several campaigns, on several devices, from several cities.
+              Evidence is most useful when it is correlated: a cookie from one test and a credential from
+              another, tied to the same target, tell a richer story than either alone. Antercept keys
+              everything to a stable target identity, so the console can show not just “this click” but
+              “this person’s pattern across the programme.”
+            </p>
+            <figure class="fig" data-reveal>
+              <svg class="acfig" viewBox="0 0 720 220" role="img" aria-label="Several artefacts — a cookie, a credential, an IP, a device — all linking to one target identity at the centre">
+                <rect class="acfig__bg" x="0" y="0" width="720" height="220" rx="14" />
+                <text class="acfig__title" x="28" y="38">Evidence correlated to one identity</text>
+                <!-- central node -->
+                <circle cx="360" cy="130" r="36" fill="#221a40" stroke="#7c4dff" stroke-width="1.5"/>
+                <text class="acfig__lv" x="360" y="126">TGT-1012</text>
+                <text class="acfig__lvs" x="360" y="144">one identity</text>
+                <!-- satellites -->
+                <g class="acfig__stage" transform="translate(100,96)"><rect width="110" height="44" rx="9"/><text x="55" y="27">cookie</text></g>
+                <g class="acfig__stage" transform="translate(100,156)"><rect width="110" height="44" rx="9"/><text x="55" y="27">credential</text></g>
+                <g class="acfig__stage" transform="translate(510,96)"><rect width="110" height="44" rx="9"/><text x="55" y="27">source IP</text></g>
+                <g class="acfig__stage" transform="translate(510,156)"><rect width="110" height="44" rx="9"/><text x="55" y="27">device</text></g>
+                <path class="acfig__axis" d="M210 118 L 326 128 M210 178 L 326 140 M510 118 L 394 128 M510 178 L 394 140"/>
+              </svg>
+            </figure>
+            <p>
+              Correlation is also where the ethical line is sharpest. The same machinery that lets a
+              criminal build a dossier lets a security team see which of its own people are repeatedly
+              exposed and need help. The difference, again, is authorization and intent: Antercept
+              correlates to <em>protect</em> a known workforce, on records that are fictional until a
+              real programme supplies its own authorized scope.
+            </p>
+          </section>
+
+          <!-- 7 -->
+          <section id="console-link" class="sec">
+            <p class="part">Part 3 · In the console</p>
+            <h2>Seeing it in the console</h2>
+            <p>
+              Everything in this chapter is visible in the operator console on the project page. Pick a
+              campaign and run it; watch targets move along the timeline; open any target to see its
+              device, its city, the evidence its interaction produced, and the risk score that follows.
+              The console is where the science of exposure becomes an interface a team actually uses.
+            </p>
+            <p>
+              <a href="../antercept/#console">Open the live console →</a>
+            </p>
+            <figure class="fig" data-reveal>
+              <svg class="acfig" viewBox="0 0 720 200" role="img" aria-label="The console at a glance: a target table on the left and a detail drawer on the right showing device, evidence and risk">
+                <rect class="acfig__bg" x="0" y="0" width="720" height="200" rx="14" />
+                <rect class="acfig__mail" x="28" y="28" width="420" height="144" rx="10"/>
+                <text class="acfig__chk" x="44" y="52">TARGET TABLE</text>
+                <line class="acfig__axis" x1="44" y1="66" x2="432" y2="66"/>
+                <text class="acfig__body" x="44" y="90">Amelia Hart — clicked — risk 68</text>
+                <text class="acfig__body" x="44" y="114">Noah Okoro — opened — risk 41</text>
+                <text class="acfig__body" x="44" y="138">Ines Benali — reported — risk 9</text>
+                <rect class="acfig__mail" x="468" y="28" width="224" height="144" rx="10" style="stroke:#7c4dff"/>
+                <text class="acfig__chk" x="484" y="52">DRAWER</text>
+                <text class="acfig__body" x="484" y="84">device · city</text>
+                <text class="acfig__body" x="484" y="108">evidence list</text>
+                <text class="acfig__body" x="484" y="132">risk + resolve</text>
+              </svg>
+            </figure>
+          </section>
+
+          <!-- 8 -->
+          <section id="resolve" class="sec sec--conclusion">
+            <h2>Conclusion: evidence that leads somewhere</h2>
+            <p>
+              Evidence only earns its keep if it closes a loop. Each target can be marked resolved once
+              the lesson is delivered and the account reset — moving it to a reported state, dropping its
+              risk, and recording that the programme did its job. The measure of a good awareness
+              operation is not how much evidence it gathers but how quickly that evidence turns into a
+              taught person and a closed record.
+            </p>
+            <p>
+              The final chapter zooms out from the individual target to the whole operation: the map of
+              where exposure concentrates, and the infrastructure Antercept manages to run a programme at
+              scale.
+            </p>
+            <aside class="note" aria-label="Scope reminder">
+              <span class="note__icon" aria-hidden="true">ⓘ</span>
+              <div>
+                <span class="note__k">Scope reminder</span>
+                <p>
+                  Antercept handles exposure evidence for authorized security-awareness testing. All
+                  artefacts shown here are fictional and local. Nothing is captured from a real person,
+                  and the console performs no real action.
+                </p>
+              </div>
+            </aside>
+          </section>
+
+          <div class="continue" data-continue></div>
+        </article>
       </main>
+
+      <footer class="foot">
+        <nav class="foot__nav">
+          <a href="../antercept/">Antercept</a>
+          <a href="../">Home</a>
+          <a href="../#contact">Contact</a>
+        </nav>
+        <p class="foot__copy">© 2026 Hamza Lotfi · intelotfi</p>
+      </footer>
     </div>
 
-    <script src="../antercept/ui.js?v=20261014a"></script>
-    <script src="../antercept/records.js?v=20261014a"></script>
+    <nav class="dock" data-dock aria-label="Chapter navigation"></nav>
+
     <script src="blog.js?v=202610132334"></script>
   </body>
 </html>

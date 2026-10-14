@@ -53,22 +53,30 @@ note, as Breachify's do.
 - `/antercept/`: project overview, chapter cards, interactive console + AI labs,
   design scope. Owns its own CSS/JS (no dependency on the Breachify kit).
 - Long-form chapters live in `blog/` with `data-series="antercept"` (reuses the
-  blog shell + bf.* annotation machinery, violet accent):
-  - `blog/the-lure.html` — Chapter I · the phishing craft: templates, the AI
-    template studio, the campaign outcome model, awareness framing.
-  - `blog/the-catch.html` — Chapter II · what a click yields: cookies,
-    credentials, sessions, and the evidence design (shown as design).
-  - `blog/the-map.html` — Chapter III · geolocation, IPs, phone extraction and
-    the infrastructure (servers, domains) that runs a campaign.
+  blog shell + bf.* machinery, violet accent, registered in blog.js `SERIES` so
+  the chapter switcher, dock and continue block auto-build). Each is a massive
+  deep-dive (8–9 sections) with inline-SVG figures styled by
+  `blog/antercept-chapters.css` (the `.acfig` classes):
+  - `blog/the-lure.html` — Chapter I · the craft of the lure: six persuasion
+    levers, the AI composition pipeline, clause assembly, difficulty, per-channel
+    composition, and a transparent logistic click/report model.
+  - `blog/the-catch.html` — Chapter II · the science of exposure: cookie anatomy,
+    credential-as-evidence, the exposure timeline, the risk-score model, and
+    correlation to one identity.
+  - `blog/the-map.html` — Chapter III · running the operation: geolocation as a
+    training heatmap, IP intelligence with stated limits, phone-data views (as
+    design), the managed delivery chain, proxies, and the thirteen-module console.
 
 ## Code (antercept/)
 
 - `page.css` — project overview styling (dark/violet).
 - `ui.css` / `ui.js` — the product UI kit miniature (sidebar, cards, tables).
 - `records.js` — fictional sample data: targets, campaigns, templates, events.
-- `console.css` / `console.js` — the interactive operator console miniature.
-- `labs.css` / `labs.js` — the two AI labs: phishing-template studio (explains
-  why a lure works) and the campaign outcome predictor (transparent model).
+- `console.css` / `console.js` — the one interactive simulator: the operator
+  console miniature (campaign selector, live target table, run simulation,
+  target drawer with evidence + risk, resolve). The two AI labs were removed; the
+  template-studio and outcome-model ideas now live as prose + inline-SVG figures
+  in Chapter I instead of a separate widget.
 
 No build step, no runtime dependency, no network calls. Deterministic, local.
 
