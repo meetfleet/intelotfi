@@ -97,3 +97,109 @@
   /* chapters render on the blog's light paper regardless of OS theme, so the
      figures keep their dark panels; nothing to override here. */
 }
+
+/* ===========================================================================
+   Antercept chapters · live simulators (.acsim) and real-screenshot shots
+   =========================================================================== */
+.acsim {
+  margin: clamp(26px, 3vw, 40px) 0;
+  background: #0c0c12;
+  border: 1px solid #ffffff16;
+  border-radius: 16px;
+  padding: clamp(16px, 2vw, 24px);
+  color: #e7e7ee;
+  font-family: Alliance, Arial, sans-serif;
+}
+.acsim__head {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: 8px 18px; margin-bottom: 16px;
+}
+.acsim__k {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #b79bff;
+}
+.acsim__k i { width: 7px; height: 7px; border-radius: 50%; background: #7c4dff; box-shadow: 0 0 10px 1px #7c4dff; animation: acsim-pulse 2s ease-in-out infinite; }
+@keyframes acsim-pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+.acsim__note { font-size: 12px; color: #5c5c6a; }
+.acsim__fk { font-size: 12px; color: #8a8a98; letter-spacing: 0.03em; }
+.acsim__muted { color: #8a8a98; font-size: 13.5px; line-height: 1.6; }
+
+/* lure composer */
+.acsim__lure { display: grid; grid-template-columns: minmax(0,0.85fr) minmax(0,1.15fr); gap: clamp(14px,2vw,26px); }
+@media (max-width: 760px){ .acsim__lure { grid-template-columns: 1fr; } }
+.acsim__controls { display: grid; gap: 14px; align-content: start; }
+.acsim__field { display: grid; gap: 7px; }
+.acsim__sel {
+  background: #15151e; color: #e7e7ee; border: 1px solid #ffffff1c; border-radius: 9px;
+  padding: 9px 12px; font-size: 14px;
+}
+.acsim__chips { display: flex; flex-wrap: wrap; gap: 7px; }
+.acsim__chip {
+  padding: 7px 12px; border-radius: 999px; border: 1px solid #ffffff1c; background: #ffffff09;
+  color: #8a8a98; font-size: 13px; cursor: pointer; transition: all .2s;
+}
+.acsim__chip:hover { border-color: #ffffff38; color: #e7e7ee; }
+.acsim__chip.is-on { background: rgba(124,77,255,.16); border-color: #7c4dff; color: #b79bff; }
+.acsim__mail { background: #15151e; border: 1px solid #ffffff1c; border-radius: 12px; overflow: hidden; }
+.acsim__bar { display: flex; align-items: center; gap: 8px; padding: 9px 13px; border-bottom: 1px solid #ffffff14; color: #8a8a98; font-size: 12.5px; }
+.acsim__dot { width: 9px; height: 9px; border-radius: 50%; background: #ffffff24; }
+.acsim__body { padding: 16px; font-size: 14px; line-height: 1.6; color: #c7c7d4; }
+.acsim__body p { margin: 0 0 10px; }
+.acsim__from { color: #6a6a78; font-size: 12.5px; }
+.acsim__subj { color: #ece9ff; font-size: 15.5px; }
+.acsim__lever { border-bottom: 1.5px dotted #7c4dff; color: #e9e4ff; cursor: help; position: relative; }
+.acsim__lever[data-why]:hover::after, .acsim__lever[data-why]:focus::after {
+  content: attr(data-why); position: absolute; left: 0; bottom: 130%; width: max-content; max-width: 230px;
+  background: #1c1530; color: #e7e2ff; border: 1px solid #7c4dff; border-radius: 8px; padding: 7px 10px;
+  font-size: 12px; line-height: 1.45; z-index: 6; box-shadow: 0 10px 30px rgba(0,0,0,.5);
+}
+.acsim__cta { display: inline-block; margin-top: 6px; padding: 9px 16px; border-radius: 8px; background: #7c4dff; color: #fff; font-size: 13.5px; }
+.acsim__why { margin-top: 14px; }
+.acsim__whyrow { display: grid; grid-template-columns: 110px 1fr; gap: 12px; padding: 9px 0; border-top: 1px solid #ffffff0c; font-size: 13px; }
+.acsim__whyrow b { font-weight: 400; color: #b79bff; }
+.acsim__whyrow span { color: #8a8a98; line-height: 1.5; }
+
+/* timeline */
+.acsim__track { display: flex; gap: 6px; }
+.acsim__node {
+  flex: 1; text-align: center; font-size: 12px; color: #6a6a78; padding-top: 22px; position: relative;
+}
+.acsim__node span { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 14px; height: 14px; border-radius: 50%; background: #2a2a36; border: 2px solid #3a3a48; }
+.acsim__node::before { content: ""; position: absolute; top: 6px; left: -50%; width: 100%; height: 2px; background: #2a2a36; z-index: -1; }
+.acsim__node:first-child::before { display: none; }
+.acsim__node.is-done span, .acsim__node.is-now span { background: #7c4dff; border-color: #9e7bff; }
+.acsim__node.is-now { color: #ece9ff; }
+.acsim__node.is-safe span { background: #3ad29f; border-color: #3ad29f; }
+.acsim__tlpanel { margin-top: 18px; display: grid; gap: 14px; }
+.acsim__evt { background: #15151e; border: 1px solid #ffffff1c; border-radius: 10px; padding: 14px 16px; font-size: 14px; color: #d4d4de; }
+.acsim__risk { display: flex; align-items: center; gap: 12px; }
+.acsim__meter { flex: 1; height: 8px; border-radius: 99px; background: #ffffff14; overflow: hidden; }
+.acsim__meter i { display: block; height: 100%; border-radius: 99px; transition: width .5s cubic-bezier(.16,1,.3,1); }
+.acsim__risk b { font-weight: 400; font-size: 18px; min-width: 2ch; }
+.acsim__ctrls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 16px; }
+.acsim__btn {
+  padding: 9px 15px; border-radius: 10px; border: 1px solid #ffffff1c; background: #ffffff09; color: #e7e7ee;
+  font-size: 13.5px; cursor: pointer; transition: all .2s;
+}
+.acsim__btn:hover:not([disabled]) { background: #ffffff14; }
+.acsim__btn[disabled] { opacity: .45; cursor: not-allowed; }
+.acsim__btn--primary { background: #7c4dff; border-color: #7c4dff; color: #fff; }
+.acsim__btn--primary:hover:not([disabled]) { background: #9e7bff; border-color: #9e7bff; }
+.acsim__legend { font-size: 12px; color: #6a6a78; }
+
+/* map */
+.acsim__map { background: #0a0a10; border: 1px solid #ffffff14; border-radius: 12px; overflow: hidden; }
+.acsim__mapsvg { width: 100%; height: 320px; display: block; }
+.acsim__grid { stroke: #ffffff10; stroke-width: .2; }
+.acsim__bubble { fill: rgba(124,77,255,.28); stroke: #9e7bff; stroke-width: .3; transition: r .25s ease; }
+.acsim__bubble.is-hot { fill: rgba(255,92,114,.3); stroke: #ff5c72; }
+.acsim__city { fill: #8a8a98; font-size: 2.4px; text-anchor: middle; font-family: Alliance, Arial, sans-serif; }
+
+/* real screenshots embedded as .shot already styled by bf.css; just ensure dark frame fits */
+.article .shot img { background: #0a0a10; }
+
+@media (prefers-reduced-motion: reduce) {
+  .acsim__k i { animation: none; }
+  .acsim__meter i, .acsim__bubble { transition: none; }
+}

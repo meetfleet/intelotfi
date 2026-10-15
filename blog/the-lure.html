@@ -225,6 +225,31 @@
               it, a forecast.
             </p>
             <blockquote>The studio does not emit a message; it emits a message with its own X-ray.</blockquote>
+
+            <!-- real product screenshot: the template builder -->
+            <figure class="shot" id="shot-template" data-reveal>
+              <div class="shot__frame">
+                <button type="button" class="zoomable" data-zoom aria-label="Zoom: the Antercept template builder">
+                  <img src="../assets/antercept/screen-template.webp" width="1600" height="1000" loading="lazy"
+                    alt="Antercept's template builder: a Parameters panel with Link Address and Fetch Data, Favicon, Title, Description and an OG Data editor, beside the full module sidebar" />
+                </button>
+                <ol class="spots">
+                  <li class="spot" data-n="1" style="--x: 9%; --y: 15%">
+                    <button type="button" class="spot__dot" aria-describedby="shot-template-1"><span aria-hidden="true">1</span><span class="sr-only">Callout 1</span></button>
+                    <span class="spot__tip" role="tooltip" id="shot-template-1"><b>The whole operation</b>Thirteen modules in one sidebar — Phisher through Settings.</span>
+                  </li>
+                  <li class="spot" data-n="2" style="--x: 50%; --y: 26%">
+                    <button type="button" class="spot__dot" aria-describedby="shot-template-2"><span aria-hidden="true">2</span><span class="sr-only">Callout 2</span></button>
+                    <span class="spot__tip" role="tooltip" id="shot-template-2"><b>Fetch, don’t forge</b>The builder pulls a real page’s metadata so the fictional clone matches its look.</span>
+                  </li>
+                  <li class="spot" data-n="3" style="--x: 72%; --y: 9%">
+                    <button type="button" class="spot__dot" aria-describedby="shot-template-3"><span aria-hidden="true">3</span><span class="sr-only">Callout 3</span></button>
+                    <span class="spot__tip" role="tooltip" id="shot-template-3"><b>Provide automatically</b>The AI fills title, description and OG data, which an operator can still edit.</span>
+                  </li>
+                </ol>
+              </div>
+              <figcaption>The real template builder, exported from the Antercept design. Tap to zoom; tap a dot for the detail.</figcaption>
+            </figure>
           </section>
 
           <!-- ============ 4. Clause assembly, worked ============ -->
@@ -259,6 +284,14 @@
               <em>constrainable</em>. A programme can forbid certain levers for a vulnerable audience,
               require the fictional brand to never resemble a real one, or cap difficulty. The same
               structure that makes the lure convincing makes it governable.
+            </p>
+
+            <!-- live simulator: the lure composer -->
+            <div class="acsim" data-sim="lure" role="region" aria-label="Interactive lure composer with fictional data"></div>
+            <p>
+              Change the brand, toggle the levers, and the lure re-composes — with every persuasion
+              span dotted and explained on hover. This is the teaching surface: not a message, but a
+              message you can take apart.
             </p>
           </section>
 
@@ -454,6 +487,16 @@
 
     <nav class="dock" data-dock aria-label="Chapter navigation"></nav>
 
+    <div class="zoom" id="zoom" aria-hidden="true" inert>
+      <canvas class="zoom__gl"></canvas>
+      <img class="zoom__fallback" alt="" />
+      <button type="button" class="zoom__close" aria-label="Close"><span></span><span></span></button>
+      <p class="zoom__caption">
+        <span class="zoom__index"></span><span class="zoom__name"></span><span class="zoom__hint">scroll to zoom · drag to pan · double-click to toggle</span>
+      </p>
+    </div>
+
     <script src="blog.js?v=202610132334"></script>
+    <script src="antercept-chapters.js?v=20261014b"></script>
   </body>
 </html>

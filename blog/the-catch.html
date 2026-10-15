@@ -189,6 +189,31 @@
               </svg>
             </figure>
             <blockquote>In an awareness test, the password is not a prize. The keystroke is the lesson.</blockquote>
+
+            <!-- real product screenshot: the credentials evidence view -->
+            <figure class="shot" id="shot-creds" data-reveal>
+              <div class="shot__frame">
+                <button type="button" class="zoomable" data-zoom aria-label="Zoom: the Antercept credentials evidence view">
+                  <img src="../assets/antercept/screen-credentials.webp" width="1600" height="1000" loading="lazy"
+                    alt="Antercept's Credentials view: a table of captured evidence by target, with type, time, status pills and a per-target risk meter" />
+                </button>
+                <ol class="spots">
+                  <li class="spot" data-n="1" style="--x: 48%; --y: 24%">
+                    <button type="button" class="spot__dot" aria-describedby="shot-creds-1"><span aria-hidden="true">1</span><span class="sr-only">Callout 1</span></button>
+                    <span class="spot__tip" role="tooltip" id="shot-creds-1"><b>Evidence, not trophies</b>Each row is an artefact of exposure — a cookie, a credential, a report.</span>
+                  </li>
+                  <li class="spot" data-n="2" style="--x: 74%; --y: 36%">
+                    <button type="button" class="spot__dot" aria-describedby="shot-creds-2"><span aria-hidden="true">2</span><span class="sr-only">Callout 2</span></button>
+                    <span class="spot__tip" role="tooltip" id="shot-creds-2"><b>“Unexpired”, never “valid”</b>The wording is deliberate: a held token is not a proven-working one.</span>
+                  </li>
+                  <li class="spot" data-n="3" style="--x: 90%; --y: 48%">
+                    <button type="button" class="spot__dot" aria-describedby="shot-creds-3"><span aria-hidden="true">3</span><span class="sr-only">Callout 3</span></button>
+                    <span class="spot__tip" role="tooltip" id="shot-creds-3"><b>Risk you can read</b>Every target carries a score that rises with exposure and resets on report.</span>
+                  </li>
+                </ol>
+              </div>
+              <figcaption>The Credentials evidence view, composed from the real Antercept sidebar and design system. Tap to zoom.</figcaption>
+            </figure>
           </section>
 
           <!-- 4 -->
@@ -222,6 +247,14 @@
               reports has produced the outcome the programme wants. By modelling reporting as a first-class
               branch of the timeline rather than an afterthought, Antercept keeps the healthy path as
               visible as the exposed one — and makes it countable.
+            </p>
+
+            <!-- live simulator: the exposure timeline -->
+            <div class="acsim" data-sim="timeline" role="region" aria-label="Interactive exposure timeline with fictional data"></div>
+            <p>
+              Step a single fictional target forward through the timeline and watch the risk score
+              climb with each stage — then drop sharply the moment the target reports. The number is a
+              triage tool, not a verdict; it is designed to be earned, acted on, and cleared.
             </p>
           </section>
 
@@ -370,6 +403,16 @@
 
     <nav class="dock" data-dock aria-label="Chapter navigation"></nav>
 
+    <div class="zoom" id="zoom" aria-hidden="true" inert>
+      <canvas class="zoom__gl"></canvas>
+      <img class="zoom__fallback" alt="" />
+      <button type="button" class="zoom__close" aria-label="Close"><span></span><span></span></button>
+      <p class="zoom__caption">
+        <span class="zoom__index"></span><span class="zoom__name"></span><span class="zoom__hint">scroll to zoom · drag to pan · double-click to toggle</span>
+      </p>
+    </div>
+
     <script src="blog.js?v=202610132334"></script>
+    <script src="antercept-chapters.js?v=20261014b"></script>
   </body>
 </html>

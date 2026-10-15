@@ -67,6 +67,29 @@ note, as Breachify's do.
     training heatmap, IP intelligence with stated limits, phone-data views (as
     design), the managed delivery chain, proxies, and the thirteen-module console.
 
+## Screenshots and per-chapter simulators
+
+Real frames were exported from Figma (`download_assets`, 2x PNG) and saved under
+`assets/antercept/`: `screen-login.webp` (real login), `screen-template.webp`
+(real sidebar + real template-builder panel composited), `screen-targets.webp`
+(real sidebar + real Mobile/Desktop target tiles), `screen-credentials.webp`
+(real sidebar + an evidence table drawn in the design system). The three chapter
+covers are rebuilt from these real screens.
+
+Each chapter embeds one real screenshot as an annotated, zoomable `.shot` figure
+(dots + tooltips, driven by the ported spot logic in `blog/antercept-chapters.js`;
+the zoom lightbox is blog.js's own), and one live simulator via `data-sim`:
+- Ch I `the-lure.html` — screenshot: template builder; simulator: **lure composer**
+  (toggle levers, the annotated email re-composes live).
+- Ch II `the-catch.html` — screenshot: credentials evidence view; simulator:
+  **exposure timeline** (step a target, watch the risk score climb then reset).
+- Ch III `the-map.html` — screenshot: target selection; simulator: **campaign map**
+  (run it, city bubbles grow by exposure, the hottest turns red).
+
+`blog/antercept-chapters.js` (spots + the three simulators) and
+`blog/antercept-chapters.css` (figures + `.acsim` styles) carry all of this; no
+breachify dependency.
+
 ## Code (antercept/)
 
 - `page.css` — project overview styling (dark/violet).
