@@ -38,7 +38,7 @@
     <link rel="preload" href="../assets/antercept/cover-2.webp" as="image" fetchpriority="high" />
     <link rel="stylesheet" href="blog.css?v=202610132334" />
     <link rel="stylesheet" href="bf.css?v=20261015a" />
-    <link rel="stylesheet" href="antercept-chapters.css?v=20261015a" />
+    <link rel="stylesheet" href="antercept-chapters.css?v=20261015b" />
     <noscript>
       <style>body [data-reveal] { opacity: 1 !important; transform: none !important; filter: none !important; }</style>
     </noscript>
@@ -95,6 +95,7 @@
         </figure>
 
         <article class="article" id="article">
+          <aside class="ac-concept-note"><strong>About this case study.</strong> Product screens document the interface design. AI capabilities are proposed product concepts; interactive examples use local, illustrative rules and fictional data.</aside>
 
           <!-- 1 -->
           <section id="after-click" class="sec">
@@ -385,6 +386,23 @@
           </section>
 
           <!-- 8 -->
+<section id="infection-forecast" class="sec">
+ <p class="part">Product direction · Proposed AI capability</p>
+ <h2>Predicting infection status without confusing it with evidence</h2>
+ <p class="lead">An infection-status assistant could help an operator decide which simulated endpoint result needs review first. The prediction would sit beside the observed evidence, with a visible explanation of what is still unknown.</p>
+ <p>In an authorized exercise, the proposed model would combine the event sequence, endpoint protection signals, delivery result and time since the last observation. It would estimate the likely exercise outcome: blocked, execution observed, or unresolved. A click alone would never count as confirmation of an infection.</p>
+ <figure><img src="../assets/antercept/screen-infection.webp" width="1600" height="1153" loading="lazy" alt="Antercept infection-session design with session details and an activity panel" /><figcaption>The existing infection-session design is the context for this proposal. The AI status assistant described here is a proposed extension, not a feature demonstrated by this screenshot. Screen content is placeholder design data.</figcaption></figure>
+ <h3>Two layers in one result</h3>
+ <p><strong>Observed:</strong> the timestamped events the system actually received. <strong>Estimated:</strong> the model’s likely outcome, uncertainty and contributing signals. A stale heartbeat or missing endpoint event would lower confidence and could cause the assistant to abstain. “No evidence received” would remain distinct from “blocked.”</p>
+ <p>For example, a fictional result might read: “Status unresolved. Link interaction observed; endpoint confirmation missing. Review the endpoint record.” The operator would confirm the result or leave it unresolved, with that decision preserved in the audit trail.</p>
+ <h3>How I would validate it</h3>
+ <p>Training labels would come from operator-verified exercise outcomes. Evaluation would split by campaign and time to reduce leakage, then measure calibration, false negatives and the share of cases that require abstention. The product would expose the model version and observation window beside each estimate. These are design assumptions; this case study does not report a trained infection model or measured performance.</p>
+ </section>
+ <section id="evidence-library" class="sec">
+ <h2>Keep the evidence inspectable</h2>
+ <p>An AI summary is useful only when the underlying record is easy to inspect. The evidence view keeps the operation and session context together so the reviewer can trace a conclusion back to an observation.</p>
+ <figure><img src="../assets/antercept/screen-cookies.webp" width="1600" height="1145" loading="lazy" alt="Antercept cookie evidence table grouped by operation" /><figcaption>The cookie evidence interface, shown with placeholder design content. Proposed summaries would reference these records rather than replace them.</figcaption></figure>
+ </section>
           <section id="resolve" class="sec sec--conclusion">
             <h2>Conclusion: evidence that leads somewhere</h2>
             <p>

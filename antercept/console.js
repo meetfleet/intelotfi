@@ -11,15 +11,6 @@
   var el = ACUI.el;
   var DATA = ANTERCEPT_DATA;
 
-  var NAV = [
-    { group: "", items: [["dashboard", "Dashboard", true]] },
-    { group: "Phishing", items: [["phisher", "Phisher"], ["cookie", "Cookies"], ["key", "Credentials"]] },
-    { group: "Geolocation", items: [["locate", "Locater"], ["net", "IPs / Locations"]] },
-    { group: "Phone extraction", items: [["extract", "Extracter"], ["data", "Data / Backups"]] },
-    { group: "Infrastructure", items: [["template", "Templates"], ["server", "Servers"], ["domain", "Domain Names"]] },
-    { group: "Settings", items: [["users", "User Management"], ["settings", "Settings"]] }
-  ];
-
   var QUEST = ["pick", "run", "open", "evidence", "resolve"];
 
   function build(root) {
@@ -33,22 +24,6 @@
     var active = campaigns[0];
     var done = {};
 
-    // ---- sidebar
-    var side = el("aside.ac-side");
-    var brand = el("div.ac-side__brand");
-    brand.innerHTML = '<svg viewBox="0 0 40 28" fill="none"><circle cx="15" cy="15" r="9.2" stroke="currentColor" stroke-width="1.8"/><path d="M24.4 15a9.2 9.2 0 1 1-6.2-8.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M24.2 6.3c2.6-.2 5 .1 6.7 1.4 2.2 1.7 2 4.2.2 5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>antercept</span>';
-    side.appendChild(brand);
-    NAV.forEach(function (sec) {
-      if (sec.group) side.appendChild(el("p.ac-side__group", { text: sec.group }));
-      var ul = el("ul.ac-nav");
-      sec.items.forEach(function (it) {
-        var li = el("li", null, [ACUI.icon(it[0]), document.createTextNode(it[1])]);
-        if (it[2]) li.classList.add("is-active");
-        ul.appendChild(li);
-      });
-      side.appendChild(ul);
-    });
-
     // ---- main
     var main = el("div.ac-main");
 
@@ -58,7 +33,9 @@
       var b = el("button.ac-chip", { type: "button", text: c.name });
       if (c === active) b.classList.add("is-on");
       b.addEventListener("click", function () {
+        if (running) return;
         active = c;
+        runBtn.textContent = c.hasRun ? "Replay campaign" : "Run campaign";
         camps.querySelectorAll(".ac-chip").forEach(function (x) { x.classList.remove("is-on"); });
         b.classList.add("is-on");
         mark("pick");
@@ -83,7 +60,7 @@
     wrap.appendChild(drawer);
     main.appendChild(wrap);
 
-    var shell = el("div.ac-shell", null, [side, main]);
+    var shell = el("div.ac-shell", null, [main]);
     root.appendChild(shell);
 
     // ---- quest tracker
@@ -134,13 +111,17 @@
       active.targets.forEach(function (t) {
         var tr = el("tr", { "data-id": t.id });
         tr.appendChild(el("td", null, [
-          el("div", { text: t.name }),
+          (function () {
+            var button = el("button.ac-target", { type: "button", text: t.name, "aria-label": "Inspect " + t.name });
+            button.addEventListener("click", function (event) { event.stopPropagation(); if (!running) openDrawer(t, tr); });
+            return button;
+          })(),
           el("div.ac-mono", { text: t.id })
         ]));
         tr.appendChild(el("td", { text: t.dept }));
         tr.appendChild(el("td", null, [ACUI.pill(t.status)]));
         tr.appendChild(el("td", null, [ACUI.risk(t.risk)]));
-        tr.addEventListener("click", function () { openDrawer(t, tr); });
+        tr.addEventListener("click", function () { if (!running) openDrawer(t, tr); });
         tbody.appendChild(tr);
       });
       table.appendChild(tbody);
@@ -187,10 +168,11 @@
       drawer.appendChild(ev);
       if (items.length) mark("evidence");
 
-      if (t.status !== "reported") {
+      if (!t.resolved) {
         var resolve = el("button.ac-btn.ac-btn--primary", { type: "button", text: "Mark test resolved", style: "margin-top:14px;width:100%;justify-content:center" });
         resolve.addEventListener("click", function () {
-          t.status = "reported";
+          t.resolved = true;
+          t.risk = 0;
           mark("resolve");
           renderStats();
           renderTable();
@@ -198,6 +180,7 @@
         });
         drawer.appendChild(resolve);
       }
+      if (t.resolved) drawer.appendChild(el("p", { text: "Test resolved · evidence retained" }));
       drawer.appendChild(el("p.ac-drawer__note", { text: "Simulated evidence from a controlled awareness test. No real session, credential or location is represented." }));
       drawer.classList.add("is-open");
       drawer.setAttribute("aria-hidden", "false");
@@ -208,30 +191,48 @@
       tablewrap.querySelectorAll("tr").forEach(function (x) { x.classList.remove("is-open"); });
     }
 
-    // ---- run simulation: advance a few pending targets forward
+    // Replays start with a clean cohort; a run stays bound to its campaign.
     var running = false;
+    var runStatus = el("p.ac-run-status", { "aria-live": "polite", text: "Sample campaign ready. Run it, then inspect a target." });
+    main.appendChild(runStatus);
     runBtn.addEventListener("click", function () {
       if (running) return;
+      mark("pick");
       mark("run");
       running = true;
+      var campaign = active;
+      campaign.hasRun = true;
+      closeDrawer();
+      campaign.targets.forEach(function (t) { t.status = "pending"; t.risk = 0; t.resolved = false; });
       runBtn.textContent = "Running…";
       runBtn.disabled = true;
-      var pending = active.targets.filter(function (t) { return t.status === "pending"; });
+      camps.querySelectorAll("button").forEach(function (b) { b.disabled = true; });
+      renderAll();
       var i = 0;
+      var opening = true;
+      runStatus.textContent = "Simulating opens and responses…";
       var timer = setInterval(function () {
-        if (i >= pending.length) {
+        var t = campaign.targets[i];
+        if (opening) {
+          t.status = "opened";
+          t.risk = 35;
+        } else {
+          // Illustrative outcomes, not a trained model or real infection verdict.
+          t.status = i % 3 === 0 ? "clicked" : i % 3 === 1 ? "reported" : "opened";
+          t.risk = t.status === "clicked" ? 72 : t.status === "reported" ? 8 : 35;
+          i++;
+        }
+        opening = !opening;
+        renderAll();
+        if (i >= campaign.targets.length) {
           clearInterval(timer);
           running = false;
-          runBtn.textContent = "Run campaign";
+          runBtn.textContent = "Replay campaign";
           runBtn.disabled = false;
-          return;
+          camps.querySelectorAll("button").forEach(function (b) { b.disabled = false; });
+          runStatus.textContent = "Simulation complete. Inspect a target to review evidence and resolve the test.";
         }
-        var t = pending[i++];
-        // deterministic-ish outcome from the target's own risk
-        t.status = t.risk > 55 ? "clicked" : t.risk > 30 ? "opened" : "reported";
-        renderStats();
-        renderTable();
-      }, 160);
+      }, 100);
     });
 
     function renderAll() { renderStats(); renderTable(); closeDrawer(); }

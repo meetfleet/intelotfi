@@ -203,3 +203,5 @@
   .acsim__k i { animation: none; }
   .acsim__meter i, .acsim__bubble { transition: none; }
 }
+
+.ac-concept-note { margin: 32px 0 48px; padding: 20px 24px; border-left: 3px solid #8060ab; background: #f4f1f8; color: #57515f; font-size: 15px; line-height: 1.7; }

@@ -171,3 +171,16 @@
   background: var(--ac-soft);
 }
 .ac-quest li.is-done span { color: var(--ac-bright); }
+
+.ac-target { padding: 3px 0; border: 0; background: none; color: inherit; text-align: left; cursor: pointer; text-decoration: underline; text-decoration-color: #9e7bff60; text-underline-offset: 4px; }
+.ac-run-status { padding: 16px 0 0; color: #a6a1b4; font-size: 13px; line-height: 1.5; }
+.ac-chip { border: 1px solid #ffffff26; border-radius: 7px; padding: 9px 11px; background: #15151d; color: #aaa6b7; cursor: pointer; font-size: 12px; }
+.ac-chip.is-on { background: #7c4dff24; border-color: #9e7bff; color: #d5c7ff; }
+.ac-chip:disabled { cursor: wait; opacity: .65; }
+.ac-console .ac-main { min-width: 0; overflow: hidden; }
+.ac-drawer { visibility: hidden; }
+.ac-drawer.is-open { visibility: visible; }
+.ac-quest { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.ac-quest li.is-done { background: #e3dcf1; color: #493565; border-color: #b5a0d4; }
+.ac-quest li.is-done span { color: #654791; }
+@media(max-width:760px) { .ac-quest { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ac-table { min-width: 440px; } }
