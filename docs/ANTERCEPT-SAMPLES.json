@@ -1,0 +1,643 @@
+{
+  "fictional": true,
+  "purpose": "authorised security-awareness simulation",
+  "riskMeaning": "Illustrative display values, not model predictions.",
+  "locationMeaning": "Fictional office labels, not live geolocation.",
+  "brands": [
+    {
+      "id": "folionest",
+      "name": "FolioNest",
+      "kind": "training",
+      "tone": "workplace"
+    },
+    {
+      "id": "ledgerbloom",
+      "name": "LedgerBloom",
+      "kind": "training",
+      "tone": "workplace"
+    },
+    {
+      "id": "peopleharbour",
+      "name": "PeopleHarbour",
+      "kind": "training",
+      "tone": "workplace"
+    },
+    {
+      "id": "cloudwren",
+      "name": "CloudWren",
+      "kind": "training",
+      "tone": "workplace"
+    },
+    {
+      "id": "parcelfern",
+      "name": "ParcelFern",
+      "kind": "training",
+      "tone": "workplace"
+    },
+    {
+      "id": "helphollow",
+      "name": "HelpHollow",
+      "kind": "training",
+      "tone": "workplace"
+    },
+    {
+      "id": "gathermint",
+      "name": "GatherMint",
+      "kind": "training",
+      "tone": "workplace"
+    },
+    {
+      "id": "gatewillow",
+      "name": "GateWillow",
+      "kind": "training",
+      "tone": "workplace"
+    }
+  ],
+  "targets": [
+    {
+      "id": "TGT-1001",
+      "name": "Mira Fenwick",
+      "email": "mira.fenwick@kestrel.example",
+      "organisation": "Kestrel Works",
+      "dept": "Operations",
+      "device": "Desktop",
+      "city": "North Quay",
+      "status": "pending",
+      "risk": 24,
+      "template": "t1"
+    },
+    {
+      "id": "TGT-1002",
+      "name": "Arlen Voss",
+      "email": "arlen.voss@kestrel.example",
+      "organisation": "Kestrel Works",
+      "dept": "Finance",
+      "device": "Laptop",
+      "city": "Willow Court",
+      "status": "opened",
+      "risk": 38,
+      "template": "t2"
+    },
+    {
+      "id": "TGT-1003",
+      "name": "Nessa Calder",
+      "email": "nessa.calder@kestrel.example",
+      "organisation": "Kestrel Works",
+      "dept": "People",
+      "device": "Mobile",
+      "city": "North Quay",
+      "status": "clicked",
+      "risk": 68,
+      "template": "t3"
+    },
+    {
+      "id": "TGT-1004",
+      "name": "Tobin Vale",
+      "email": "tobin.vale@kestrel.example",
+      "organisation": "Kestrel Works",
+      "dept": "Engineering",
+      "device": "Desktop",
+      "city": "Willow Court",
+      "status": "reported",
+      "risk": 12,
+      "template": "t4"
+    },
+    {
+      "id": "TGT-1005",
+      "name": "Elara Mott",
+      "email": "elara.mott@kestrel.example",
+      "organisation": "Kestrel Works",
+      "dept": "Sales",
+      "device": "Laptop",
+      "city": "North Quay",
+      "status": "pending",
+      "risk": 24,
+      "template": "t5"
+    },
+    {
+      "id": "TGT-1006",
+      "name": "Corin Ashby",
+      "email": "corin.ashby@kestrel.example",
+      "organisation": "Kestrel Works",
+      "dept": "Support",
+      "device": "Mobile",
+      "city": "Willow Court",
+      "status": "opened",
+      "risk": 38,
+      "template": "t6"
+    },
+    {
+      "id": "TGT-1007",
+      "name": "Sela Orwick",
+      "email": "sela.orwick@kestrel.example",
+      "organisation": "Kestrel Works",
+      "dept": "Operations",
+      "device": "Desktop",
+      "city": "North Quay",
+      "status": "clicked",
+      "risk": 68,
+      "template": "t7"
+    },
+    {
+      "id": "TGT-1008",
+      "name": "Darin Pell",
+      "email": "darin.pell@kestrel.example",
+      "organisation": "Kestrel Works",
+      "dept": "Finance",
+      "device": "Laptop",
+      "city": "Willow Court",
+      "status": "reported",
+      "risk": 12,
+      "template": "t8"
+    },
+    {
+      "id": "TGT-1009",
+      "name": "Iona Merrow",
+      "email": "iona.merrow@lumen.example",
+      "organisation": "Lumen Grove",
+      "dept": "Operations",
+      "device": "Mobile",
+      "city": "Glass Harbour",
+      "status": "pending",
+      "risk": 24,
+      "template": "t1"
+    },
+    {
+      "id": "TGT-1010",
+      "name": "Bren Talwick",
+      "email": "bren.talwick@lumen.example",
+      "organisation": "Lumen Grove",
+      "dept": "Finance",
+      "device": "Desktop",
+      "city": "Orchard House",
+      "status": "opened",
+      "risk": 38,
+      "template": "t2"
+    },
+    {
+      "id": "TGT-1011",
+      "name": "Lyra Denholm",
+      "email": "lyra.denholm@lumen.example",
+      "organisation": "Lumen Grove",
+      "dept": "People",
+      "device": "Laptop",
+      "city": "Glass Harbour",
+      "status": "clicked",
+      "risk": 68,
+      "template": "t3"
+    },
+    {
+      "id": "TGT-1012",
+      "name": "Oren Mossley",
+      "email": "oren.mossley@lumen.example",
+      "organisation": "Lumen Grove",
+      "dept": "Engineering",
+      "device": "Mobile",
+      "city": "Orchard House",
+      "status": "reported",
+      "risk": 12,
+      "template": "t4"
+    },
+    {
+      "id": "TGT-1013",
+      "name": "Tessa Brindle",
+      "email": "tessa.brindle@lumen.example",
+      "organisation": "Lumen Grove",
+      "dept": "Sales",
+      "device": "Desktop",
+      "city": "Glass Harbour",
+      "status": "pending",
+      "risk": 24,
+      "template": "t5"
+    },
+    {
+      "id": "TGT-1014",
+      "name": "Kellan Rooke",
+      "email": "kellan.rooke@lumen.example",
+      "organisation": "Lumen Grove",
+      "dept": "Support",
+      "device": "Laptop",
+      "city": "Orchard House",
+      "status": "opened",
+      "risk": 38,
+      "template": "t6"
+    },
+    {
+      "id": "TGT-1015",
+      "name": "Veya Hartwell",
+      "email": "veya.hartwell@lumen.example",
+      "organisation": "Lumen Grove",
+      "dept": "Operations",
+      "device": "Mobile",
+      "city": "Glass Harbour",
+      "status": "clicked",
+      "risk": 68,
+      "template": "t7"
+    },
+    {
+      "id": "TGT-1016",
+      "name": "Nolan Firth",
+      "email": "nolan.firth@lumen.example",
+      "organisation": "Lumen Grove",
+      "dept": "Finance",
+      "device": "Desktop",
+      "city": "Orchard House",
+      "status": "reported",
+      "risk": 12,
+      "template": "t8"
+    },
+    {
+      "id": "TGT-1017",
+      "name": "Aven Roswick",
+      "email": "aven.roswick@northstar.example",
+      "organisation": "Northstar Loom",
+      "dept": "Operations",
+      "device": "Laptop",
+      "city": "Copper Yard",
+      "status": "pending",
+      "risk": 24,
+      "template": "t1"
+    },
+    {
+      "id": "TGT-1018",
+      "name": "Maeve Corren",
+      "email": "maeve.corren@northstar.example",
+      "organisation": "Northstar Loom",
+      "dept": "Finance",
+      "device": "Mobile",
+      "city": "Elm Passage",
+      "status": "opened",
+      "risk": 38,
+      "template": "t2"
+    },
+    {
+      "id": "TGT-1019",
+      "name": "Dorian Wrenlow",
+      "email": "dorian.wrenlow@northstar.example",
+      "organisation": "Northstar Loom",
+      "dept": "People",
+      "device": "Desktop",
+      "city": "Copper Yard",
+      "status": "clicked",
+      "risk": 68,
+      "template": "t3"
+    },
+    {
+      "id": "TGT-1020",
+      "name": "Fia Bellwick",
+      "email": "fia.bellwick@northstar.example",
+      "organisation": "Northstar Loom",
+      "dept": "Engineering",
+      "device": "Laptop",
+      "city": "Elm Passage",
+      "status": "reported",
+      "risk": 12,
+      "template": "t4"
+    },
+    {
+      "id": "TGT-1021",
+      "name": "Ronan Evers",
+      "email": "ronan.evers@northstar.example",
+      "organisation": "Northstar Loom",
+      "dept": "Sales",
+      "device": "Mobile",
+      "city": "Copper Yard",
+      "status": "pending",
+      "risk": 24,
+      "template": "t5"
+    },
+    {
+      "id": "TGT-1022",
+      "name": "Esme Thornell",
+      "email": "esme.thornell@northstar.example",
+      "organisation": "Northstar Loom",
+      "dept": "Support",
+      "device": "Desktop",
+      "city": "Elm Passage",
+      "status": "opened",
+      "risk": 38,
+      "template": "t6"
+    },
+    {
+      "id": "TGT-1023",
+      "name": "Callen Mire",
+      "email": "callen.mire@northstar.example",
+      "organisation": "Northstar Loom",
+      "dept": "Operations",
+      "device": "Laptop",
+      "city": "Copper Yard",
+      "status": "clicked",
+      "risk": 68,
+      "template": "t7"
+    },
+    {
+      "id": "TGT-1024",
+      "name": "Zara Fenlow",
+      "email": "zara.fenlow@northstar.example",
+      "organisation": "Northstar Loom",
+      "dept": "Finance",
+      "device": "Mobile",
+      "city": "Elm Passage",
+      "status": "reported",
+      "risk": 12,
+      "template": "t8"
+    },
+    {
+      "id": "TGT-1025",
+      "name": "Levin Briar",
+      "email": "levin.briar@orbit.example",
+      "organisation": "Orbit Meadow",
+      "dept": "Operations",
+      "device": "Desktop",
+      "city": "Lantern Square",
+      "status": "pending",
+      "risk": 24,
+      "template": "t1"
+    },
+    {
+      "id": "TGT-1026",
+      "name": "Anya Marden",
+      "email": "anya.marden@orbit.example",
+      "organisation": "Orbit Meadow",
+      "dept": "Finance",
+      "device": "Laptop",
+      "city": "Fern Exchange",
+      "status": "opened",
+      "risk": 38,
+      "template": "t2"
+    },
+    {
+      "id": "TGT-1027",
+      "name": "Ciro Halden",
+      "email": "ciro.halden@orbit.example",
+      "organisation": "Orbit Meadow",
+      "dept": "People",
+      "device": "Mobile",
+      "city": "Lantern Square",
+      "status": "clicked",
+      "risk": 68,
+      "template": "t3"
+    },
+    {
+      "id": "TGT-1028",
+      "name": "Nira Oswell",
+      "email": "nira.oswell@orbit.example",
+      "organisation": "Orbit Meadow",
+      "dept": "Engineering",
+      "device": "Desktop",
+      "city": "Fern Exchange",
+      "status": "reported",
+      "risk": 12,
+      "template": "t4"
+    },
+    {
+      "id": "TGT-1029",
+      "name": "Ewan Trelley",
+      "email": "ewan.trelley@orbit.example",
+      "organisation": "Orbit Meadow",
+      "dept": "Sales",
+      "device": "Laptop",
+      "city": "Lantern Square",
+      "status": "pending",
+      "risk": 24,
+      "template": "t5"
+    },
+    {
+      "id": "TGT-1030",
+      "name": "Liora Beckett",
+      "email": "liora.beckett@orbit.example",
+      "organisation": "Orbit Meadow",
+      "dept": "Support",
+      "device": "Mobile",
+      "city": "Fern Exchange",
+      "status": "opened",
+      "risk": 38,
+      "template": "t6"
+    },
+    {
+      "id": "TGT-1031",
+      "name": "Perrin Dovell",
+      "email": "perrin.dovell@orbit.example",
+      "organisation": "Orbit Meadow",
+      "dept": "Operations",
+      "device": "Desktop",
+      "city": "Lantern Square",
+      "status": "clicked",
+      "risk": 68,
+      "template": "t7"
+    },
+    {
+      "id": "TGT-1032",
+      "name": "Suri Wexley",
+      "email": "suri.wexley@orbit.example",
+      "organisation": "Orbit Meadow",
+      "dept": "Finance",
+      "device": "Laptop",
+      "city": "Fern Exchange",
+      "status": "reported",
+      "risk": 12,
+      "template": "t8"
+    },
+    {
+      "id": "TGT-1033",
+      "name": "Alin Farrow",
+      "email": "alin.farrow@cedar.example",
+      "organisation": "Cedar Arc",
+      "dept": "Operations",
+      "device": "Mobile",
+      "city": "Silver Walk",
+      "status": "pending",
+      "risk": 24,
+      "template": "t1"
+    },
+    {
+      "id": "TGT-1034",
+      "name": "Rhea Morland",
+      "email": "rhea.morland@cedar.example",
+      "organisation": "Cedar Arc",
+      "dept": "Finance",
+      "device": "Desktop",
+      "city": "Birch Landing",
+      "status": "opened",
+      "risk": 38,
+      "template": "t2"
+    },
+    {
+      "id": "TGT-1035",
+      "name": "Torin Aster",
+      "email": "torin.aster@cedar.example",
+      "organisation": "Cedar Arc",
+      "dept": "People",
+      "device": "Laptop",
+      "city": "Silver Walk",
+      "status": "clicked",
+      "risk": 68,
+      "template": "t3"
+    },
+    {
+      "id": "TGT-1036",
+      "name": "Maren Quill",
+      "email": "maren.quill@cedar.example",
+      "organisation": "Cedar Arc",
+      "dept": "Engineering",
+      "device": "Mobile",
+      "city": "Birch Landing",
+      "status": "reported",
+      "risk": 12,
+      "template": "t4"
+    },
+    {
+      "id": "TGT-1037",
+      "name": "Idris Mellor",
+      "email": "idris.mellor@cedar.example",
+      "organisation": "Cedar Arc",
+      "dept": "Sales",
+      "device": "Desktop",
+      "city": "Silver Walk",
+      "status": "pending",
+      "risk": 24,
+      "template": "t5"
+    },
+    {
+      "id": "TGT-1038",
+      "name": "Celia Renshaw",
+      "email": "celia.renshaw@cedar.example",
+      "organisation": "Cedar Arc",
+      "dept": "Support",
+      "device": "Laptop",
+      "city": "Birch Landing",
+      "status": "opened",
+      "risk": 38,
+      "template": "t6"
+    },
+    {
+      "id": "TGT-1039",
+      "name": "Oswin Valecrest",
+      "email": "oswin.valecrest@cedar.example",
+      "organisation": "Cedar Arc",
+      "dept": "Operations",
+      "device": "Mobile",
+      "city": "Silver Walk",
+      "status": "clicked",
+      "risk": 68,
+      "template": "t7"
+    },
+    {
+      "id": "TGT-1040",
+      "name": "Talia Norwick",
+      "email": "talia.norwick@cedar.example",
+      "organisation": "Cedar Arc",
+      "dept": "Finance",
+      "device": "Desktop",
+      "city": "Birch Landing",
+      "status": "reported",
+      "risk": 12,
+      "template": "t8"
+    }
+  ],
+  "templates": [
+    {
+      "id": "t1",
+      "name": "The handbook update",
+      "brand": "folionest",
+      "channel": "email",
+      "difficulty": 1,
+      "pretext": "A revised internal handbook is shared for review.",
+      "levers": [
+        "familiarity",
+        "authority"
+      ],
+      "learningObjective": "Verify an unexpected document-sharing request."
+    },
+    {
+      "id": "t2",
+      "name": "The expense review",
+      "brand": "ledgerbloom",
+      "channel": "email",
+      "difficulty": 2,
+      "pretext": "An expense summary is presented for confirmation.",
+      "levers": [
+        "authority",
+        "urgency"
+      ],
+      "learningObjective": "Check a financial request through a known channel."
+    },
+    {
+      "id": "t3",
+      "name": "The workplace reminder",
+      "brand": "peopleharbour",
+      "channel": "sms",
+      "difficulty": 2,
+      "pretext": "A workplace-policy acknowledgement is announced by text.",
+      "levers": [
+        "familiarity",
+        "authority"
+      ],
+      "learningObjective": "Question an unexpected change of communication channel."
+    },
+    {
+      "id": "t4",
+      "name": "The shared workspace",
+      "brand": "cloudwren",
+      "channel": "email",
+      "difficulty": 2,
+      "pretext": "A workspace invitation arrives during a fictional team handover.",
+      "levers": [
+        "familiarity"
+      ],
+      "learningObjective": "Confirm the origin of an unfamiliar workspace invitation."
+    },
+    {
+      "id": "t5",
+      "name": "The delivery notice",
+      "brand": "parcelfern",
+      "channel": "sms",
+      "difficulty": 1,
+      "pretext": "A fictional office delivery prompts a review of its details.",
+      "levers": [
+        "urgency",
+        "familiarity"
+      ],
+      "learningObjective": "Inspect an unexpected message before following its link."
+    },
+    {
+      "id": "t6",
+      "name": "The support follow-up",
+      "brand": "helphollow",
+      "channel": "email",
+      "difficulty": 3,
+      "pretext": "A fictional service desk requests confirmation of a resolved issue.",
+      "levers": [
+        "authority",
+        "familiarity"
+      ],
+      "learningObjective": "Check whether a support request matches a known interaction."
+    },
+    {
+      "id": "t7",
+      "name": "The meeting change",
+      "brand": "gathermint",
+      "channel": "email",
+      "difficulty": 2,
+      "pretext": "A fictional planning meeting moves to a different workspace.",
+      "levers": [
+        "urgency",
+        "familiarity"
+      ],
+      "learningObjective": "Verify an unexpected destination change."
+    },
+    {
+      "id": "t8",
+      "name": "The access reminder",
+      "brand": "gatewillow",
+      "channel": "sms",
+      "difficulty": 3,
+      "pretext": "A fictional workplace-access review is announced by text.",
+      "levers": [
+        "authority",
+        "urgency"
+      ],
+      "learningObjective": "Use a known access-management route instead of an unsolicited link."
+    }
+  ]
+}

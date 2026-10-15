@@ -37,8 +37,8 @@
     <link rel="preload" href="../fonts/AllianceNo2-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="../assets/antercept/cover-3.webp" as="image" fetchpriority="high" />
     <link rel="stylesheet" href="blog.css?v=202610132334" />
-    <link rel="stylesheet" href="bf.css?v=20261014b" />
-    <link rel="stylesheet" href="antercept-chapters.css?v=20261014b" />
+    <link rel="stylesheet" href="bf.css?v=20261015a" />
+    <link rel="stylesheet" href="antercept-chapters.css?v=20261015a" />
     <noscript>
       <style>body [data-reveal] { opacity: 1 !important; transform: none !important; filter: none !important; }</style>
     </noscript>
@@ -260,29 +260,54 @@
               machinery is boring on purpose; boring is what holds up under review.
             </p>
 
-            <!-- real product screenshot: target device selection -->
-            <figure class="shot" id="shot-targets" data-reveal>
+            <!-- real product screenshot: locater operations -->
+            <figure class="shot" id="shot-locater" data-reveal>
               <div class="shot__frame">
-                <button type="button" class="zoomable" data-zoom aria-label="Zoom: the Antercept target-device selection screen">
-                  <img src="../assets/antercept/screen-targets.webp" width="1600" height="1000" loading="lazy"
-                    alt="Antercept's Phisher target-selection screen: Mobile and Desktop device tiles, with Mobile selected, beside the full module sidebar" />
+                <button type="button" class="zoomable" data-zoom aria-label="Zoom: the Antercept Locater operations screen">
+                  <img src="../assets/antercept/screen-locater.webp" width="1600" height="1180" loading="lazy"
+                    alt="Antercept's Locater Operations: a grid of geolocation operations with status and target counts, beside the module sidebar" />
                 </button>
                 <ol class="spots">
-                  <li class="spot" data-n="1" style="--x: 35%; --y: 30%">
-                    <button type="button" class="spot__dot" aria-describedby="shot-targets-1"><span aria-hidden="true">1</span><span class="sr-only">Callout 1</span></button>
-                    <span class="spot__tip" role="tooltip" id="shot-targets-1"><b>Device shapes the lure</b>A mobile campaign is composed for a lock-screen, not an inbox.</span>
+                  <li class="spot" data-n="1" style="--x: 40%; --y: 28%">
+                    <button type="button" class="spot__dot" aria-describedby="shot-locater-1"><span aria-hidden="true">1</span><span class="sr-only">Callout 1</span></button>
+                    <span class="spot__tip" role="tooltip" id="shot-locater-1"><b>Operations, by audience</b>Each card is a scoped operation with a target count and a status.</span>
                   </li>
-                  <li class="spot" data-n="2" style="--x: 63%; --y: 30%">
-                    <button type="button" class="spot__dot" aria-describedby="shot-targets-2"><span aria-hidden="true">2</span><span class="sr-only">Callout 2</span></button>
-                    <span class="spot__tip" role="tooltip" id="shot-targets-2"><b>One flow, two contexts</b>Desktop and mobile share a pipeline but diverge in delivery.</span>
+                  <li class="spot" data-n="2" style="--x: 71%; --y: 20%">
+                    <button type="button" class="spot__dot" aria-describedby="shot-locater-2"><span aria-hidden="true">2</span><span class="sr-only">Callout 2</span></button>
+                    <span class="spot__tip" role="tooltip" id="shot-locater-2"><b>Scheduled or ongoing</b>The same lifecycle as a campaign, so geolocation fits the awareness programme.</span>
                   </li>
                   <li class="spot" data-n="3" style="--x: 6%; --y: 12%">
-                    <button type="button" class="spot__dot" aria-describedby="shot-targets-3"><span aria-hidden="true">3</span><span class="sr-only">Callout 3</span></button>
-                    <span class="spot__tip" role="tooltip" id="shot-targets-3"><b>Always the same shell</b>Every module hangs off one sidebar, so the operation stays coherent.</span>
+                    <button type="button" class="spot__dot" aria-describedby="shot-locater-3"><span aria-hidden="true">3</span><span class="sr-only">Callout 3</span></button>
+                    <span class="spot__tip" role="tooltip" id="shot-locater-3"><b>Always the same shell</b>Every module hangs off one sidebar, so the operation stays coherent.</span>
                   </li>
                 </ol>
               </div>
-              <figcaption>The Phisher target-selection screen, exported from the Antercept design. Tap to zoom.</figcaption>
+              <figcaption>The real Locater Operations screen, exported from the Antercept design. Tap to zoom.</figcaption>
+            </figure>
+
+            <!-- real product screenshot: the dashboard -->
+            <figure class="shot" id="shot-dashboard" data-reveal>
+              <div class="shot__frame">
+                <button type="button" class="zoomable" data-zoom aria-label="Zoom: the Antercept dashboard">
+                  <img src="../assets/antercept/screen-dashboard.webp" width="1600" height="1180" loading="lazy"
+                    alt="Antercept's dashboard: totals for Locaters, Extracters and Phishing, an infrastructure summary, template counts, SMS and email summaries, and a live activity feed" />
+                </button>
+                <ol class="spots">
+                  <li class="spot" data-n="1" style="--x: 30%; --y: 22%">
+                    <button type="button" class="spot__dot" aria-describedby="shot-dashboard-1"><span aria-hidden="true">1</span><span class="sr-only">Callout 1</span></button>
+                    <span class="spot__tip" role="tooltip" id="shot-dashboard-1"><b>The whole programme</b>Locaters, Extracters and Phishing campaigns, counted at a glance.</span>
+                  </li>
+                  <li class="spot" data-n="2" style="--x: 40%; --y: 55%">
+                    <button type="button" class="spot__dot" aria-describedby="shot-dashboard-2"><span aria-hidden="true">2</span><span class="sr-only">Callout 2</span></button>
+                    <span class="spot__tip" role="tooltip" id="shot-dashboard-2"><b>Infrastructure summary</b>Browsers, emulators, desktops and VPNs — the machinery behind the operation.</span>
+                  </li>
+                  <li class="spot" data-n="3" style="--x: 85%; --y: 42%">
+                    <button type="button" class="spot__dot" aria-describedby="shot-dashboard-3"><span aria-hidden="true">3</span><span class="sr-only">Callout 3</span></button>
+                    <span class="spot__tip" role="tooltip" id="shot-dashboard-3"><b>SMS and email</b>Credit, sent and scheduled messages — the delivery the programme depends on.</span>
+                  </li>
+                </ol>
+              </div>
+              <figcaption>The real Antercept dashboard — the whole operation in one view. Tap to zoom.</figcaption>
             </figure>
           </section>
 
@@ -409,6 +434,6 @@
     </div>
 
     <script src="blog.js?v=202610132334"></script>
-    <script src="antercept-chapters.js?v=20261014b"></script>
+    <script src="antercept-chapters.js?v=20261015a"></script>
   </body>
 </html>

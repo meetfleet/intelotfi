@@ -37,8 +37,8 @@
     <link rel="preload" href="../fonts/AllianceNo2-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="../assets/antercept/cover-2.webp" as="image" fetchpriority="high" />
     <link rel="stylesheet" href="blog.css?v=202610132334" />
-    <link rel="stylesheet" href="bf.css?v=20261014b" />
-    <link rel="stylesheet" href="antercept-chapters.css?v=20261014b" />
+    <link rel="stylesheet" href="bf.css?v=20261015a" />
+    <link rel="stylesheet" href="antercept-chapters.css?v=20261015a" />
     <noscript>
       <style>body [data-reveal] { opacity: 1 !important; transform: none !important; filter: none !important; }</style>
     </noscript>
@@ -190,29 +190,54 @@
             </figure>
             <blockquote>In an awareness test, the password is not a prize. The keystroke is the lesson.</blockquote>
 
-            <!-- real product screenshot: the credentials evidence view -->
+            <!-- real product screenshot: the credentials view -->
             <figure class="shot" id="shot-creds" data-reveal>
               <div class="shot__frame">
-                <button type="button" class="zoomable" data-zoom aria-label="Zoom: the Antercept credentials evidence view">
-                  <img src="../assets/antercept/screen-credentials.webp" width="1600" height="1000" loading="lazy"
-                    alt="Antercept's Credentials view: a table of captured evidence by target, with type, time, status pills and a per-target risk meter" />
+                <button type="button" class="zoomable" data-zoom aria-label="Zoom: the Antercept credentials view">
+                  <img src="../assets/antercept/screen-credentials.webp" width="1600" height="1180" loading="lazy"
+                    alt="Antercept's Credentials screen: a table of captured credentials by operation, with target, password, login, link and date columns, beside the module sidebar" />
                 </button>
                 <ol class="spots">
-                  <li class="spot" data-n="1" style="--x: 48%; --y: 24%">
+                  <li class="spot" data-n="1" style="--x: 14%; --y: 22%">
                     <button type="button" class="spot__dot" aria-describedby="shot-creds-1"><span aria-hidden="true">1</span><span class="sr-only">Callout 1</span></button>
-                    <span class="spot__tip" role="tooltip" id="shot-creds-1"><b>Evidence, not trophies</b>Each row is an artefact of exposure — a cookie, a credential, a report.</span>
+                    <span class="spot__tip" role="tooltip" id="shot-creds-1"><b>By operation</b>Every captured credential is tied to the campaign that produced it.</span>
                   </li>
-                  <li class="spot" data-n="2" style="--x: 74%; --y: 36%">
+                  <li class="spot" data-n="2" style="--x: 34%; --y: 22%">
                     <button type="button" class="spot__dot" aria-describedby="shot-creds-2"><span aria-hidden="true">2</span><span class="sr-only">Callout 2</span></button>
-                    <span class="spot__tip" role="tooltip" id="shot-creds-2"><b>“Unexpired”, never “valid”</b>The wording is deliberate: a held token is not a proven-working one.</span>
+                    <span class="spot__tip" role="tooltip" id="shot-creds-2"><b>The target</b>The person reached — an email or a phone number from the campaign list.</span>
                   </li>
-                  <li class="spot" data-n="3" style="--x: 90%; --y: 48%">
+                  <li class="spot" data-n="3" style="--x: 64%; --y: 22%">
                     <button type="button" class="spot__dot" aria-describedby="shot-creds-3"><span aria-hidden="true">3</span><span class="sr-only">Callout 3</span></button>
-                    <span class="spot__tip" role="tooltip" id="shot-creds-3"><b>Risk you can read</b>Every target carries a score that rises with exposure and resets on report.</span>
+                    <span class="spot__tip" role="tooltip" id="shot-creds-3"><b>Where it was entered</b>The link the credential was submitted to, with the time it happened.</span>
                   </li>
                 </ol>
               </div>
-              <figcaption>The Credentials evidence view, composed from the real Antercept sidebar and design system. Tap to zoom.</figcaption>
+              <figcaption>The real Credentials screen — captured logins tied to each operation. In an authorized test, this is the evidence that proves exposure. Tap to zoom.</figcaption>
+            </figure>
+
+            <!-- real product screenshot: the live operation view -->
+            <figure class="shot" id="shot-operation" data-reveal>
+              <div class="shot__frame">
+                <button type="button" class="zoomable" data-zoom aria-label="Zoom: the Antercept operation view with a live session">
+                  <img src="../assets/antercept/screen-operation.webp" width="1600" height="1267" loading="lazy"
+                    alt="Antercept's Operation View: an ongoing operation with hours, cookies and credentials counts, a live session of the target's desktop, and a Kill Session dialog" />
+                </button>
+                <ol class="spots">
+                  <li class="spot" data-n="1" style="--x: 30%; --y: 22%">
+                    <button type="button" class="spot__dot" aria-describedby="shot-operation-1"><span aria-hidden="true">1</span><span class="sr-only">Callout 1</span></button>
+                    <span class="spot__tip" role="tooltip" id="shot-operation-1"><b>The yield, counted</b>Hours open, cookies and credentials — the measure of one operation’s exposure.</span>
+                  </li>
+                  <li class="spot" data-n="2" style="--x: 55%; --y: 52%">
+                    <button type="button" class="spot__dot" aria-describedby="shot-operation-2"><span aria-hidden="true">2</span><span class="sr-only">Callout 2</span></button>
+                    <span class="spot__tip" role="tooltip" id="shot-operation-2"><b>The live session</b>What a real compromise can reach — which is exactly why a controlled test teaches so much.</span>
+                  </li>
+                  <li class="spot" data-n="3" style="--x: 80%; --y: 8%">
+                    <button type="button" class="spot__dot" aria-describedby="shot-operation-3"><span aria-hidden="true">3</span><span class="sr-only">Callout 3</span></button>
+                    <span class="spot__tip" role="tooltip" id="shot-operation-3"><b>Terminate and delete</b>An authorized exercise ends cleanly: the session is killed and the operation closed.</span>
+                  </li>
+                </ol>
+              </div>
+              <figcaption>The real Operation View, with a live session and a Kill-Session confirmation. This is the sharpest end of the product — and the clearest lesson in a controlled test. Tap to zoom.</figcaption>
             </figure>
           </section>
 
@@ -413,6 +438,6 @@
     </div>
 
     <script src="blog.js?v=202610132334"></script>
-    <script src="antercept-chapters.js?v=20261014b"></script>
+    <script src="antercept-chapters.js?v=20261015a"></script>
   </body>
 </html>
