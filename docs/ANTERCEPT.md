@@ -114,3 +114,21 @@ No build step, no runtime dependency, no network calls. Deterministic, local.
 Static only (per project rule: no local server, user checks live site). Run
 `node --check` on each JS file; validate HTML by inspection; confirm no real
 operational code exists. Commit per edit, push once at the end.
+
+## Target lab update · 15 October 2026
+
+The overview now leads with `phone.js` / `phone.css`: a connected target journey
+with an Android-inspired phone, SMS country picker, scenario preview and session
+inspector. Morocco, Israel, United States, Germany, Ethiopia, UAE, Qatar and
+France use their calling prefixes with masked, non-dialable sample numbers.
+Country and scenario changes reset the exercise; reset cancels pending delivery.
+
+Reserve → deliver → read → visit → sample interaction or report → resolve.
+The inspector has Activity, Device and AI insight tabs. Location and documentation
+IP addresses are preset fixtures, not geolocation. Infection status stays unknown
+without endpoint evidence. The AI tab uses deterministic illustrative copy, not a
+trained model. All actions stay in browser memory; no SMS or device APIs are used.
+
+The prior cohort simulator remains under an expandable section. Regression checks
+run with `npm run test:antercept`, including both phone paths, cancellation,
+country filtering, keyboard tabs, responsive widths and absence of external calls.
