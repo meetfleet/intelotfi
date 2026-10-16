@@ -2855,3 +2855,6 @@ html.cf-lock { overflow: hidden; }
 /* One professional focus, with supporting disciplines below it. */
 .role--context { font-size: .58em; letter-spacing: 0; color: #cbc5c0; }
 @media (max-width: 768px) { .role--context { font-size: .55em; } }
+
+/* A single statement replaces the hero job titles. */
+.role--statement { white-space: normal; max-width: min(20ch, calc(100vw - var(--gutter) * 2)); line-height: 1.25; }
