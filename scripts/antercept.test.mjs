@@ -49,44 +49,62 @@ page.on('pageerror',e=>errors.push(e.message));
 page.on('response',r=>{if(r.url().startsWith(base) && r.status()>=400)errors.push(r.url());});
 try {
  await page.goto(base + 'antercept/');
- assert.equal(await page.locator('.ac-gallery').count(),0);
- assert.equal(await page.locator('.ac-chapter').count(),3);
+ assert.equal(await page.locator('.bf-story-list li').count(),3);
+ assert.equal(await page.locator('[data-console]').count(),0);
+ assert.equal(await page.locator('.bf-logo').count(),2);
+ for(const logo of await page.locator('.bf-logo').all()) {
+  assert.equal((await logo.innerText()).trim(),'intelotfi');
+  assert.equal(await logo.getAttribute('href'),'../');
+ }
  const lab=page.locator('[data-target-lab]');
  const action=name=>lab.locator(`[data-action="${name}"]`);
  const localRequests=[];
  page.on('request',r=>localRequests.push(r.url()));
+ assert.equal(await lab.getAttribute('data-stage'),'0');
+ assert.ok(await lab.locator('.tl-device-stage').isHidden());
+ await lab.locator('.tg-country summary').click();
  await lab.getByRole('button',{name:'Israel +972'}).click();
  assert.match(await lab.locator('[data-number]').innerText(),/972/);
  await lab.locator('#tl-scenario').selectOption('workspace');
  await action('deliver').click();
- await action('deliver').click();
  await lab.locator('.tl-notification').waitFor();
+ assert.equal(await lab.getAttribute('data-stage'),'1');
+ assert.ok(await lab.locator('.tl-setup').isHidden());
+ assert.ok(await action('result').isDisabled());
  await action('read').click();
  await action('visit').click();
  await action('submit').click();
- await lab.getByRole('tab',{name:'AI insight'}).click();
- assert.ok(await lab.getByText('Review recommended',{exact:true}).isVisible());
- assert.ok(await lab.getByText('Unknown',{exact:true}).isVisible());
+ await action('result').click();
+ assert.equal(await lab.getAttribute('data-stage'),'2');
+ assert.match(await lab.locator('[data-session-status]').innerText(),/continued/);
+ assert.ok(await lab.getByText('What this means',{exact:true}).isVisible());
+ await lab.locator('.tg-history summary').click();
+ assert.equal(await lab.locator('.tl-timeline li').count(),4);
  await action('resolve').click();
- assert.equal(await lab.locator('[data-session-status]').innerText(),'Resolved');
- await lab.getByRole('tab',{name:'Activity',exact:true}).click();
- assert.equal(await lab.locator('.tl-timeline li').count(),6);
+ assert.equal(await lab.locator('[data-session-status]').innerText(),'Exercise finished');
+ assert.ok(await action('resolve').isDisabled());
+ await lab.screenshot({path:'/tmp/antercept-guide-result.png'});
  await action('reset').click();
- assert.equal(await lab.locator('.tl-timeline li').count(),0);
  await lab.getByRole('button',{name:'Morocco +212'}).click();
- await action('deliver').click();
  await action('deliver').click();
  await lab.locator('.tl-notification').waitFor();
  await action('read').click();
  await action('report').click();
- assert.ok(await lab.getByText('Good catch.',{exact:true}).isVisible());
- await lab.getByRole('tab',{name:'Device',exact:true}).click();
- assert.ok(await lab.locator('.tl-location-art').getByText('Casablanca',{exact:true}).isVisible());
- await action('resolve').click();
+ await action('result').click();
+ assert.match(await lab.locator('[data-session-status]').innerText(),/reported/);
+ assert.match(await lab.locator('.tg-result-copy').innerText(),/instead of following/);
+ await action('return').click();
+ assert.equal(await lab.getAttribute('data-stage'),'1');
  await action('reset').click();
- // Reset cancels delivery instead of leaking a notification into the next exercise.
- await action('deliver').click(); await action('deliver').click(); await action('reset').click();
- await page.waitForTimeout(650);
+ await action('deliver').click();
+ await lab.locator('.tl-notification').waitFor();
+ await action('read').click(); await action('visit').click(); await action('report').click();
+ await action('result').click();
+ assert.match(await lab.locator('.tg-result-copy').innerText(),/followed the link, then reported/);
+ await action('reset').click();
+ await action('deliver').click(); await action('reset').click();
+ await page.waitForTimeout(500);
+ assert.equal(await lab.getAttribute('data-stage'),'0');
  assert.equal(await lab.locator('.tl-notification').count(),0);
  await lab.locator('.tl-search').fill('972');
  assert.equal(await lab.locator('.tl-country').count(),1);
@@ -94,47 +112,22 @@ try {
  assert.ok(await lab.getByText('No matching countries.',{exact:true}).isVisible());
  await lab.locator('.tl-search').fill('');
  assert.equal(await lab.locator('.tl-country').count(),8);
- assert.ok(localRequests.every(url=>url.startsWith(base)), 'phone must not contact external services');
- await lab.getByRole('tab',{name:'Activity',exact:true}).click();
- await page.keyboard.press('ArrowRight');
- assert.equal(await lab.getByRole('tab',{name:'Device',exact:true}).getAttribute('aria-selected'),'true');
- await lab.getByRole('tab',{name:'Activity',exact:true}).click();
- await lab.screenshot({path:'/tmp/antercept-phone-desktop.png'});
- for(const width of [320,390,768,1024]) {
+ assert.ok(localRequests.every(url=>url.startsWith(base)), 'no external demo requests');
+ await lab.locator('.tg-country summary').click();
+ for(const width of [320,390,768,1440]) {
   await page.setViewportSize({width,height:900});
+  await action('reset').click();
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`setup overflow at ${width}`);
+  await action('deliver').focus(); await page.keyboard.press('Enter');
+  await lab.locator('.tl-notification').waitFor();
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`phone overflow at ${width}`);
+  if(width===1440)await lab.screenshot({path:'/tmp/antercept-guide-phone.png'});
+  await action('read').click(); await action('report').click(); await action('result').click();
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`result overflow at ${width}`);
  }
- await page.setViewportSize({width:390,height:900});
- await action('deliver').click(); await action('deliver').click();
- await lab.locator('.tl-notification').waitFor();
- await action('read').click(); await action('visit').click(); await action('submit').click();
- await lab.screenshot({path:'/tmp/antercept-phone-mobile.png'});
- await page.setViewportSize({width:1440,height:1000});
- await page.locator('.ac-cohort summary').click();
- const run=page.getByRole('button',{name:'Run campaign',exact:true});
- await run.click();
- assert.equal(await page.locator('.ac-chip:disabled').count(),3);
- await page.getByRole('button',{name:'Replay campaign',exact:true}).waitFor();
- assert.ok(await page.locator('tbody .ac-pill--clicked').count()>0);
- const target=page.locator('tbody tr').first();
- const initial=await target.locator('.ac-pill').innerText();
- await target.getByRole('button').click();
- await page.getByRole('button',{name:'Mark test resolved'}).click();
- assert.equal(await page.locator('tbody tr').first().locator('.ac-pill').innerText(),initial);
- assert.ok(await page.getByText('Test resolved · evidence retained').isVisible());
- await page.getByRole('button',{name:'Close',exact:true}).click();
- await page.getByRole('button',{name:'Replay campaign',exact:true}).click();
- await page.getByRole('button',{name:'Replay campaign',exact:true}).waitFor();
- await page.locator('.ac-chip').nth(1).click();
- assert.equal(await page.locator('tbody tr').count(),14);
- await page.getByRole('button',{name:'Run campaign',exact:true}).click();
- await page.getByRole('button',{name:'Replay campaign',exact:true}).waitFor();
- await page.evaluate(()=>document.activeElement?.blur());
+ await action('reset').click();
+ await page.locator('img').evaluateAll(async imgs=>{imgs.forEach(i=>i.loading='eager');await Promise.all(imgs.map(i=>i.decode()));});
  await page.screenshot({path:'/tmp/antercept-desktop.png',fullPage:true});
- for(const width of [390,768]){
-  await page.setViewportSize({width,height:844});
-  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`overflow at ${width}`);
- }
  await page.setViewportSize({width:390,height:844});
  await page.screenshot({path:'/tmp/antercept-mobile.png',fullPage:true});
  for(const name of ['the-lure','the-catch','the-map']){
@@ -144,5 +137,5 @@ try {
   assert.ok(await page.evaluate(()=>[...document.images].filter(i=>i.complete && i.getAttribute("src")).every(i=>i.naturalWidth>0)));
  }
  assert.deepEqual(errors,[]);
- console.log('PASS: phone journey, 8 countries, SMS delivery, report branch, AI insight, reset cancellation, keyboard tabs, no network calls, chapter layout, run, replay, campaign isolation, evidence, resolution, responsive widths, blog simulators and assets.');
+ console.log('PASS: intelotfi branding, guided steps, both phone paths, combined click/report history, cancellation, eight countries, keyboard, four widths, blogs, assets and no external requests.');
 } finally {await browser.close(); server.close();}

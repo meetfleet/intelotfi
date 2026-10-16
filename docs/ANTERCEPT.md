@@ -132,3 +132,14 @@ trained model. All actions stay in browser memory; no SMS or device APIs are use
 The prior cohort simulator remains under an expandable section. Regression checks
 run with `npm run test:antercept`, including both phone paths, cancellation,
 country filtering, keyboard tabs, responsive widths and absence of external calls.
+
+## Guided overview · 16 October 2026
+
+The page now shares intelotfi’s header/footer branding and editorial layout with
+Breachify. `guide.css` adapts the phone into three progressive steps: choose a
+message, try it, understand the result. Country selection remains available,
+including Morocco and Israel; showing the message on the phone is one action.
+
+The former reservation step, inspector tabs and secondary cohort console are no
+longer presented on the overview. The result explains actions taken and a learning
+point, with the event history available on demand. Blogs remain unchanged.

@@ -6,10 +6,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
-    <title>Antercept | Product design & AI concepts · Hamza Lotfi</title>
+    <title>Antercept | Hamza Lotfi · intelotfi</title>
     <meta
       name="description"
-      content="Antercept portfolio case study: three chapters on security-awareness product design, evidence workflows and proposed AI capabilities, with an interactive campaign simulator."
+      content="Antercept helps teams practise spotting suspicious messages. Try a guided phone demo and explore the product design by Hamza Lotfi."
     />
     <meta name="author" content="Hamza Lotfi" />
     <meta name="theme-color" content="#070709" />
@@ -17,11 +17,11 @@
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="Antercept: product design, evidence and explainable AI"
+      content="Antercept: practise spotting suspicious messages"
     />
     <meta
       property="og:description"
-      content="Explore the interface design, evidence workflows and proposed AI capabilities behind Antercept."
+      content="Choose a sample message, try it on a phone, and understand the result of a controlled awareness exercise."
     />
     <meta property="og:url" content="https://intelotfi.com/antercept/" />
     <meta
@@ -33,7 +33,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Antercept: product design, evidence and explainable AI"
+      content="Antercept: practise spotting suspicious messages"
     />
     <meta
       name="twitter:description"
@@ -51,10 +51,10 @@
       type="font/woff2"
       crossorigin
     />
-    <link rel="stylesheet" href="page.css?v=20261015b" />
-    <link rel="stylesheet" href="ui.css?v=20261015b" />
-    <link rel="stylesheet" href="console.css?v=20261015b" />
-    <link rel="stylesheet" href="phone.css?v=20261015c" />
+    <link rel="stylesheet" href="../breachify/page.css?v=20261016a" />
+    <link rel="stylesheet" href="../breachify/overview.css?v=20261016a" />
+    <link rel="stylesheet" href="phone.css?v=20261016a" />
+    <link rel="stylesheet" href="guide.css?v=20261016a" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -74,221 +74,16 @@
     </script>
   </head>
   <body>
-    <a class="skip" href="#chapters">Skip to the capabilities</a>
-    <div class="ac-band">
-      <header class="ac-top">
-        <a class="ac-logo" href="../" aria-label="intelotfi, home">
-          <svg viewBox="0 0 40 28" fill="none" aria-hidden="true">
-            <circle cx="15" cy="15" r="9.2" stroke="currentColor" stroke-width="1.8" />
-            <path d="M24.4 15a9.2 9.2 0 1 1-6.2-8.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-            <path d="M24.2 6.3c2.6-.2 5 .1 6.7 1.4 2.2 1.7 2 4.2.2 5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-          </svg>
-          antercept
-        </a>
-        <nav aria-label="Main navigation">
-          <a href="../#projects">All work</a>
-          <a href="#console">Simulator</a>
-          <a href="../#contact">Let’s talk <span aria-hidden="true">↗</span></a>
-        </nav>
-      </header>
-      <section class="ac-hero" aria-labelledby="project-title">
-        <div>
-          <p class="ac-eyebrow">Antercept · the full case study</p>
-          <h1 id="project-title">Understand exposure.<br /><em>Before it spreads.</em></h1>
-        </div>
-        <div class="ac-hero-copy"><p>A security-awareness platform, explored through product design, evidence and explainable AI.</p><p class="ac-hero-sub">The decisions behind the interface. Three chapters on building a campaign, understanding its results and keeping the operation in view.</p><a class="ac-link" href="#chapters">Explore the case study <span aria-hidden="true">↓</span></a></div>
-      </section>
-      <div class="ac-strip">
-        <span>By Hamza Lotfi</span>
-        <span>Product design · security · AI</span>
-        <span>3 chapters · 1 interactive demo</span>
-      </div>
-    </div>
-
+    <a class="skip" href="#console">Skip to the guided demo</a>
+    <div class="bf-band"><header class="bf-top"><a class="bf-logo" href="../" aria-label="intelotfi, home">intelotfi<span aria-hidden="true"></span></a><nav aria-label="Main navigation"><a href="../#projects">All work</a><a href="#console">Try the demo</a><a href="../#contact">Let’s talk ↗</a></nav></header>
+    <section class="bf-hero" aria-labelledby="project-title"><div><p class="bf-eyebrow">Antercept · Security-awareness training</p><h1 id="project-title">Would you<br /><em>trust this text?</em></h1></div><div class="bf-hero-copy"><p>Antercept helps teams practise spotting suspicious messages before a real attack happens.</p><p class="bf-hero-sub">Create a controlled phishing exercise—a fake message used for training. See whether people open it, follow its link, or report it, then use the results to explain what to look for next time.</p><a class="bf-link" href="#console">Try a sample message <span aria-hidden="true">↓</span></a></div></section>
+    <div class="bf-strip"><span>Product design by Hamza Lotfi</span><span>Choose a message → try it → learn from the result</span></div></div>
     <main>
-      <!-- ============ CAPABILITY CHAPTERS ============ -->
-      <section class="ac-section" id="chapters" aria-labelledby="chapters-title">
-        <div class="ac-wrap">
-          <div class="ac-section-head">
-            <div>
-              <p class="ac-eyebrow">Inside the work</p>
-              <h2 id="chapters-title">One product.<br />Three perspectives.</h2>
-            </div>
-            <p>
-              Explore the product screens, the reasoning behind each workflow, and proposed AI capabilities — from assisted composition to infection-status forecasting.
-            </p>
-          </div>
-          <ol class="ac-chapters">
-            <li class="ac-chapter">
-              <a
-                class="ac-chapter-image"
-                href="../blog/the-lure.html"
-                aria-label="Read: how the AI builds the lure"
-              >
-                <img
-                  src="../assets/antercept/cover-1.webp"
-                  width="1280"
-                  height="800"
-                  alt="The template studio composing a phishing-awareness lure"
-                />
-                <span class="ac-chapter-index">I</span>
-              </a>
-              <div class="ac-chapter-body">
-                <p class="ac-eyebrow">Chapter 01 · Design & intelligence</p>
-                <h3>
-                  <a href="../blog/the-lure.html">The AI that builds the lure</a>
-                </h3>
-                <p>
-                  From brand context to a reviewed awareness template. The studio design, persuasion cues, and a proposed AI forecast with its assumptions exposed.
-                </p>
-                <div class="ac-proof">
-                  <span><b>AI</b>template studio</span>
-                  <span><b>2</b>channels · email &amp; SMS</span>
-                  <span><b>Forecast</b>assumptions & outcomes</span>
-                </div>
-                <a class="ac-read" href="../blog/the-lure.html"
-                  >Read the chapter <span aria-hidden="true">↗</span></a
-                >
-              </div>
-            </li>
-            <li class="ac-chapter">
-              <a
-                class="ac-chapter-image"
-                href="../blog/the-catch.html"
-                aria-label="Read: managing what a click reveals"
-              >
-                <img
-                  src="../assets/antercept/cover-2.webp"
-                  width="1280"
-                  height="800"
-                  loading="lazy"
-                  alt="Captured sessions, cookies and credentials organised as exposure evidence"
-                />
-                <span class="ac-chapter-index">II</span>
-              </a>
-              <div class="ac-chapter-body">
-                <p class="ac-eyebrow">Chapter 02 · Evidence & prediction</p>
-                <h3>
-                  <a href="../blog/the-catch.html">Managing what a click reveals</a>
-                </h3>
-                <p>
-                  Turn scattered signals into an exposure timeline. Evidence interfaces, explainable risk, and a proposed model for predicting infection status in a controlled exercise.
-                </p>
-                <div class="ac-proof">
-                  <span><b>3</b>evidence types</span>
-                  <span><b>1</b>exposure timeline</span>
-                  <span><b>Proposed AI</b>status prediction</span>
-                </div>
-                <a class="ac-read" href="../blog/the-catch.html"
-                  >Read the chapter <span aria-hidden="true">↗</span></a
-                >
-              </div>
-            </li>
-            <li class="ac-chapter">
-              <a
-                class="ac-chapter-image"
-                href="../blog/the-map.html"
-                aria-label="Read: running the operation"
-              >
-                <img
-                  src="../assets/antercept/cover-3.webp"
-                  width="1280"
-                  height="800"
-                  loading="lazy"
-                  alt="Geolocation, infrastructure and the operations map"
-                />
-                <span class="ac-chapter-index">III</span>
-              </a>
-              <div class="ac-chapter-body">
-                <p class="ac-eyebrow">Chapter 03 · Systems & operations</p>
-                <h3>
-                  <a href="../blog/the-map.html">The map and the machinery</a>
-                </h3>
-                <p>
-                  Geolocation, IPs and device views on one side; the servers,
-                  domains and providers Antercept manages on the other. The
-                  infrastructure that runs an awareness programme at scale.
-                </p>
-                <div class="ac-proof">
-                  <span><b>6</b>operations modules</span>
-                  <span><b>1</b>live map</span>
-                  <span><b>managed</b>infrastructure</span>
-                </div>
-                <a class="ac-read" href="../blog/the-map.html"
-                  >Read the chapter <span aria-hidden="true">↗</span></a
-                >
-              </div>
-            </li>
-          </ol>
-        </div>
-      </section>
-
-      <!-- ============ LIVE CONSOLE ============ -->
-      <section class="ac-section ac-console-section" id="console" aria-labelledby="console-title">
-        <div class="ac-wrap">
-          <div class="ac-section-head">
-            <div>
-              <p class="ac-eyebrow">Try the workflow</p>
-              <h2 id="console-title">One message.<br />Every decision matters.</h2>
-            </div>
-            <div>
-              <p>
-                Choose an SMS destination, deliver a sample message, and step into the target’s phone. Every tap connects to a timeline, device context and an explainable AI concept.
-              </p>
-              <p class="ac-fine">
-                Everything here is fictional sample data and runs locally in your
-                browser. The phone is an interactive design simulation; no SMS is sent and no real device is accessed.
-              </p>
-            </div>
-          </div>
-          <div class="tl" data-target-lab aria-label="Interactive target lab"><p class="ac-fallback">Enable JavaScript to explore the interactive phone.</p></div>
-          <details class="ac-cohort"><summary>Explore the full campaign cohort <span>Targets · evidence · resolution</span></summary>
-          <div
-            class="ac-console"
-            data-console
-            role="region"
-            aria-label="Antercept console with sample data"
-          >
-            <p class="ac-fallback">
-              Enable JavaScript to open the console. The capabilities remain
-              described in the chapters above.
-            </p>
-          </div>
-          </details>
-        </div>
-      </section>
-
-      <section class="ac-closing">
-        <div class="ac-wrap">
-          <p class="ac-eyebrow">Designing for a clearer decision</p>
-          <h2>Complex systems.<br />Considered interfaces.</h2>
-          <a class="ac-link" href="../#contact"
-            >Build something with me <span aria-hidden="true">↗</span></a
-          >
-        </div>
-      </section>
-    </main>
-
-    <footer class="ac-footer">
-      <a class="ac-logo" href="../">
-        <svg viewBox="0 0 40 28" fill="none" aria-hidden="true">
-          <circle cx="15" cy="15" r="9.2" stroke="currentColor" stroke-width="1.8" />
-          <path d="M24.4 15a9.2 9.2 0 1 1-6.2-8.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-          <path d="M24.2 6.3c2.6-.2 5 .1 6.7 1.4 2.2 1.7 2 4.2.2 5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-        </svg>
-        antercept
-      </a>
-      <nav aria-label="Footer">
-        <a href="../">Home</a>
-        <a href="../breachify/">Breachify</a>
-        <a href="../#about">About</a>
-      </nav>
-      <span>© 2026 Hamza Lotfi</span>
-    </footer>
-
-    <script src="ui.js?v=20261015b"></script>
-    <script src="records.js?v=20261015b"></script>
-    <script src="console.js?v=20261015b"></script>
-    <script src="phone.js?v=20261015c"></script>
+      <section class="bf-section" aria-labelledby="overview-title"><div class="bf-section-head"><div><p class="bf-eyebrow">The idea, in a minute</p><h2 id="overview-title">A safe rehearsal.<br />A useful lesson.</h2></div><p>A convincing message can catch anyone off guard. Antercept brings the exercise and its results together, so the team can understand what happened.</p></div><ol class="bf-simple-steps"><li><span>01 / PREPARE</span><h3>Choose a realistic message.</h3><p>A delivery update, a workspace invitation, or a payroll notice. Give the exercise a clear learning goal.</p></li><li><span>02 / TRY</span><h3>See it from the recipient’s side.</h3><p>Would they open the link or report the message? In this demo, you make that choice on the phone.</p></li><li><span>03 / LEARN</span><h3>Explain the result.</h3><p>Review the actions taken and the clues in the message. Use them to guide the follow-up conversation.</p></li></ol></section>
+      <section class="bf-section bf-guided-section" id="console" aria-labelledby="console-title"><div class="bf-section-head"><div><p class="bf-eyebrow">Try it yourself · about a minute</p><h2 id="console-title">One text.<br />Your decision.</h2></div><p>Choose a sample message, open it on the phone, and see what your actions tell the team.</p></div><div class="tl" data-target-lab role="region" aria-label="Guided Antercept phone demonstration"><p class="bg-fallback">Enable JavaScript to try the phone. The three steps above explain the exercise.</p></div><p class="bf-demo-note">Fictional people and messages, running in your browser. No SMS is sent, no credentials are collected, and no real device is accessed.</p></section>
+      <section class="bf-section bf-plain" aria-labelledby="ai-title"><div><p class="bf-eyebrow">Help the team understand</p><h2 id="ai-title">Explain the click.<br />Don’t just count it.</h2></div><div class="bf-plain-copy"><p>A useful result explains the behaviour: the message created urgency, the recipient followed its link, or they recognised something suspicious and reported it.</p><p>The proposed AI assistant would help draft reviewed training messages and summarise these patterns. This demo uses written explanations, not a live AI model. A click alone cannot tell you whether a device is infected.</p><a class="bf-link" href="../blog/the-catch.html#infection-forecast">Explore the AI concept ↗</a></div></section>
+      <section class="bf-section" id="chapters" aria-labelledby="chapters-title"><div class="bf-section-head"><div><p class="bf-eyebrow">Go deeper, when you’re ready</p><h2 id="chapters-title">Behind the product.</h2></div><p>The detailed interfaces, product decisions and AI concepts live in these three portfolio chapters.</p></div><ol class="bf-story-list"><li><a class="bf-story-image" href="../blog/the-lure.html" tabindex="-1" aria-hidden="true"><img src="../assets/antercept/cover-1.webp" width="1280" height="800" alt="" loading="lazy" /></a><div><p class="bf-eyebrow">Chapter 01</p><h3><a href="../blog/the-lure.html">Design the training message</a></h3><p>The template studio, the choices that make a message convincing, and how an AI assistant could help.</p><a class="bf-read" href="../blog/the-lure.html">Read the chapter ↗</a></div></li><li><a class="bf-story-image" href="../blog/the-catch.html" tabindex="-1" aria-hidden="true"><img src="../assets/antercept/cover-2.webp" width="1280" height="800" alt="" loading="lazy" /></a><div><p class="bf-eyebrow">Chapter 02</p><h3><a href="../blog/the-catch.html">Understand the response</a></h3><p>How the interface connects a person’s actions to a clear result, with evidence and its limits.</p><a class="bf-read" href="../blog/the-catch.html">Read the chapter ↗</a></div></li><li><a class="bf-story-image" href="../blog/the-map.html" tabindex="-1" aria-hidden="true"><img src="../assets/antercept/cover-3.webp" width="1280" height="800" alt="" loading="lazy" /></a><div><p class="bf-eyebrow">Chapter 03</p><h3><a href="../blog/the-map.html">Manage the exercise</a></h3><p>The systems and workflows that keep an awareness programme organised.</p><a class="bf-read" href="../blog/the-map.html">Read the chapter ↗</a></div></li></ol></section><section class="bf-closing"><p class="bf-eyebrow">Antercept · A product design case study</p><h2>Practise the decision.<br />Learn from the result.</h2><a class="bf-link" href="../#contact">Build something with me ↗</a></section></main>
+    <footer class="bf-footer"><a class="bf-logo" href="../" aria-label="intelotfi, home">intelotfi<span aria-hidden="true"></span></a><nav aria-label="Footer"><a href="../">Home</a><a href="../breachify/">Breachify</a><a href="../meetfleet/">Meetfleet</a></nav><span>© 2026 Hamza Lotfi</span></footer>
+    <script src="phone.js?v=20261016a"></script>
   </body>
 </html>
