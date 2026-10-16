@@ -24,11 +24,12 @@ function start(canvas) {
     cameraSpeed: 0.3,
     gridX: 600,
     gridY: 300,
-    shellColor: "#3388ff",
+    // monochrome: one neutral grey, the shading comes from pulse and per-trail brightness
+    shellColor: "#8a8a8a",
     pulseSpeed: 4.89,
     gridGap: 0.23,
     gridOpacity: 1.0,
-    plasmaColor: "#38cdff",
+    plasmaColor: "#ffffff",
     bloomStrength: 0.5,
     lineThickness: 0.005,
     trailCount: 80,
@@ -116,14 +117,13 @@ function start(canvas) {
     }`;
 
   const trails = [];
-  const plasma = new THREE.Color(CFG.plasmaColor);
   for (let i = 0; i < CFG.trailCount; i++) {
     const mat = new THREE.ShaderMaterial({
       vertexShader: VERT,
       fragmentShader: TRAIL_FRAG,
       uniforms: {
         uTime: { value: 0 },
-        uColor: { value: plasma },
+        uColor: { value: new THREE.Color(CFG.plasmaColor).multiplyScalar(0.3 + Math.random() * 0.7) },
         uSpeed: { value: 0.1 + Math.random() * 0.3 },
         uSpeedMult: { value: CFG.speedMult },
         uLength: { value: 0.1 + Math.random() * 0.2 },
