@@ -2570,6 +2570,8 @@ html.cf-lock { overflow: hidden; }
   border-radius: clamp(10px, 1vw, 16px);
   background: #17171a;
 }
+/* dark project art needs an edge against the dark page: a barely-visible outline */
+.project--wide .project__cover { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15); }
 .project__cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .project__body { display: flex; flex-direction: column; min-width: 0; }
