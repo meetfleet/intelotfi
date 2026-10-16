@@ -5,6 +5,8 @@
 .bf-simple-steps li>span,.bf-plain-copy .bf-link,.bf-story-list .bf-read { color:#79548e; }
 .bf-guided-section { background:#f1eef3; }
 .bf-story-image { background:#151418; }
+/* the chapter banners carry their title on the left: crop from the right */
+.bf-story-image img { object-position:0% 50%; }
 .tl { font-family:Alliance,Arial,sans-serif; }
 .tl h4 { font-weight:400; }
 .tl-top strong { font-size:16px; }
