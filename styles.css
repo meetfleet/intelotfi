@@ -2851,3 +2851,7 @@ html.cf-lock { overflow: hidden; }
 .work--end { padding-top: clamp(16px, 3.6vw, 72px); }
 .work--end .work__band { padding-top: clamp(32px, 4vw, 72px); }
 .work--end .subject { margin-top: 0; }
+
+/* One professional focus, with supporting disciplines below it. */
+.role--context { font-size: .58em; letter-spacing: 0; color: #cbc5c0; }
+@media (max-width: 768px) { .role--context { font-size: .55em; } }

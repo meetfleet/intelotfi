@@ -255,7 +255,7 @@ function showPair(next) {
 }
 
 function scheduleCycle(delay = HOLD) {
-  if (!pairs.length) return;
+  if (pairs.length < 2) return;
   clearTimeout(cycleTimer);
   cycleTimer = setTimeout(() => {
     const paused = hoveredRole !== -1 || body.classList.contains("menu-open") || document.hidden;
