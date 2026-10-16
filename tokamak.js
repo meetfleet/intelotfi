@@ -21,6 +21,7 @@ function start(canvas) {
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const CFG = {
+    timeScale: 0.5,   // whole animation (flight, pulse, trails) runs at half speed
     cameraSpeed: 0.3,
     gridX: 600,
     gridY: 300,
@@ -173,7 +174,7 @@ function start(canvas) {
 
   function tick(now) {
     if (!running) return;
-    const dt = Math.min((now - last) / 1000, 1 / 30);
+    const dt = Math.min((now - last) / 1000, 1 / 30) * CFG.timeScale;
     last = now;
     time += dt;
     angle += CFG.cameraSpeed * dt;
