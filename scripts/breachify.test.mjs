@@ -112,193 +112,62 @@ const download = async (button) => {
 };
 try {
   await visit("breachify/");
-  await page.locator("[data-console]").scrollIntoViewIfNeeded();
-  await page.locator("#console-query").waitFor();
-  for (const invalid of [
-    "intelotfi.com",
-    "example.com",
-    "kestrel.example.evil.com",
-    "<img src=x onerror=alert(1)>",
-    "https://kestrel.example",
-    "bad .example",
-  ]) {
-    await page.locator("#console-query").fill(invalid);
-    await page.getByRole("button", { name: "Search", exact: true }).click();
-    check(
-      (await text(page.locator(".con-message"))).includes(
-        "only knows sample companies",
-      ),
-      "rejects non-sample query " + invalid,
-    );
-    check(
-      (await page.locator(".con-main [role=tab]").count()) === 0,
-      "invalid search never creates results",
-    );
-  }
-  await page.locator("#console-query").fill("kestrel.example");
-  await page.locator("#console-query").press("Enter");
-  await page.locator("#con-tab-0").waitFor();
-  check(
-    (await text(page.locator(".con-populations"))).includes("188"),
-    "Kestrel keeps specified sample counts",
-  );
-  await page.locator('[data-month="2"]').click();
-  check(
-    (await text(page.locator("[data-chart-readout]"))).includes("Mar 2026"),
-    "chart month works",
-  );
-  await page.locator("#con-tab-1").click();
-  const firstId = await text(page.locator(".dm-drill-open b").first());
-  await page.locator(".dm-drill-open").first().click();
-  check(
-    (await page
-      .locator(".dm-drill-open")
-      .first()
-      .getAttribute("aria-expanded")) === "true",
-    "record disclosure expands",
-  );
-  await page
-    .getByRole("tab", { name: "Corporate credentials", exact: true })
-    .click();
-  check(
-    (await text(page.locator(".dm-drill-credential"))).includes(
-      "sso.kestrel.example",
-    ),
-    "corporate evidence renders",
-  );
-  await page
-    .getByRole("tab", { name: "Domains with sensitive cookies" })
-    .click();
-  await page.locator('[data-domain="0"]').click();
-  check(
-    (await page
-      .locator(".dm-drill-cookies:visible .dm-drill-cookie")
-      .count()) === 12,
-    "nested cookie count matches records",
-  );
-  await page.locator('[data-domain="0"]').press("Escape");
-  check(
-    (await page.locator(".dm-drill-cookies:visible").count()) === 0,
-    "Escape closes cookie level",
-  );
-  await page.locator('[data-domain="0"]').click();
-  await page.locator("[data-resolve]").first().click();
-  check(
-    (await page.locator(".dm-drill-device").count()) === 5,
-    "resolve removes row from unresolved",
-  );
-  check(
-    await page.evaluate(() => document.activeElement.tagName !== "BODY"),
-    "resolve keeps keyboard focus",
-  );
-  await page.getByRole("button", { name: "Undo", exact: true }).click();
-  check(
-    (await page.locator(".dm-drill-device").count()) === 6,
-    "undo restores device",
-  );
-  await page.locator('[data-export="credentials"]').click();
-  await page.getByRole("button", { name: "Download", exact: true }).waitFor();
-  const credentials = await download(
-    page.getByRole("button", { name: "Download", exact: true }),
-  );
-  check(
-    credentials.includes("family,ip,compromised"),
-    "credential export has proper schema",
-  );
-  check(
-    (await page.locator("[data-quest] .is-done").count()) === 6,
-    "whole quest completes",
-  );
-  await page.locator("[data-all]").click();
-  check(
-    (await text(page.locator(".dm-drill-list"))).includes("Nothing unresolved"),
-    "resolve all empties visible queue",
-  );
-  await page.locator('[data-filter="1"]').click();
-  check(
-    (await page.locator(".dm-drill-device").count()) === 6,
-    "resolved filter shows records",
-  );
-  await page.locator('[data-filter="0"]').click();
-  await page.locator('[data-page="2"]').click();
-  check(
-    (await page.locator(".dm-drill-device").count()) === 6,
-    "second page populated",
-  );
-  await page.locator('[data-page="1"]').click();
-  check(
-    (await page.locator(".dm-drill-device").count()) === 0,
-    "resolution persists across pagination",
-  );
-  await page.locator('[data-filter="1"]').click();
-  await page.locator("[data-resolve]").first().click();
-  await page.locator('[data-filter="0"]').click();
-  check(
-    (await text(page.locator(".dm-drill-open b").first())) === firstId,
-    "seeded first page survives pagination",
-  );
-  await page.locator("[data-refresh]").click();
-  check(
-    (await text(page.locator(".dm-drill-open b").first())) === firstId,
-    "refresh deterministic",
-  );
-  for (const i of [2, 3]) {
-    await page.locator(`#con-tab-${i}`).click();
-    check(
-      (await page.locator(".con-table:visible tbody tr").count()) === 6,
-      "credential tab " + i,
-    );
-    await page.locator("[data-table-export]:visible").click();
-    await page.getByRole("button", { name: "Download", exact: true }).waitFor();
-    await download(page.getByRole("button", { name: "Download", exact: true }));
-  }
-  await page.locator("#con-tab-4").click();
-  check(
-    (await page.locator(".con-external").count()) === 5,
-    "external domains tab",
-  );
-  await page.locator("#con-tab-5").click();
-  await page.locator("[data-expand-assets]").click();
-  check(await page.locator("#con-resources").isVisible(), "asset group opens");
-  await page.locator('[data-assets="users"]').click();
-  check(
-    (await text(page.locator(".con-assets-banner"))).includes("147"),
-    "asset population changes",
-  );
-  await page.locator("[data-assets-export]").click();
-  await page.getByRole("button", { name: "Download", exact: true }).waitFor();
-  const assets = await download(
-    page.getByRole("button", { name: "Download", exact: true }),
-  );
-  check(assets.includes("users"), "asset export follows selected population");
-  await page.locator("#con-tab-0").click();
-  await page.locator("#con-tab-0").focus();
-  await page.keyboard.press("ArrowRight");
-  check(
-    (await page.locator("#con-tab-1").getAttribute("aria-selected")) === "true",
-    "keyboard changes console tabs",
-  );
-  await page.locator('[data-nav="7"]').click();
-  check(
-    (await text(page.locator(".con-toasts"))).includes("not drawn yet"),
-    "Documents explains unfinished design",
-  );
-  await page.locator("[data-back]").click();
-  await page.locator('[data-query="com.kestrel.mobile"]').click();
-  await page.locator("#con-tab-1").click();
-  await page.locator(".dm-drill-open").first().click();
-  await page
-    .getByRole("tab", { name: "Corporate credentials", exact: true })
-    .click();
-  check(
-    (await text(page.locator(".dm-drill-credential"))).includes(
-      "@kestrel.example",
-    ),
-    "Android sample maps to reserved domain",
-  );
-  console.log(
-    "Console: search boundaries, tabs, hierarchy, resolve/undo, pages, exports and quest passed.",
-  );
+  const guide = page.locator('[data-breach-guide]');
+  const action = name => guide.locator(`[data-guide-action="${name}"]`);
+  check(await guide.locator('[data-guide-step="1"]').isDisabled(), 'later steps unavailable before choosing');
+  check((await guide.locator('[data-company]').count()) === 3, 'three fixed fictional examples');
+  const requests = [];
+  const trackRequest = r => requests.push(r.url());
+  page.on('request', trackRequest);
+  await action('show').click();
+  check((await guide.locator('[data-finding]').count()) === 3, 'sample results include three findings');
+  check((await text(guide)).includes('2 employees affected'), 'related findings count people correctly');
+  await guide.locator('.bg-source summary').click();
+  check((await text(guide.locator('.bg-source'))).includes('maya@kestrel.example'), 'source supports the selected finding');
+  await guide.locator('[data-finding="1"]').click();
+  check((await text(guide.locator('.bg-explanation'))).includes('Jules Morgan'), 'selecting finding updates explanation');
+  await guide.locator('[data-finding="2"]').click();
+  check((await text(guide.locator('.bg-unknown'))).includes('does not prove'), 'device finding preserves uncertainty');
+  await guide.locator('[data-finding="0"]').click();
+  await guide.screenshot({path:'/tmp/breachify-guided-results.png'});
+  await action('plan').click();
+  check((await guide.locator('input:checked').count()) === 3, 'response plan starts with all proposed actions');
+  await guide.locator('[data-include="KW-02"]').uncheck();
+  const report = await download(action('download'));
+  check(report.includes('maya@kestrel.example') && !report.includes('jules@kestrel.example'), 'download respects selected actions');
+  check(report.includes('Status: proposed, not completed'), 'report does not claim real remediation');
+  check(report.includes('Unknown:'), 'report preserves evidence limits');
+  await action('results').click();
+  await action('plan').click();
+  check((await guide.locator('input:checked').count()) === 2, 'plan selection survives review and return');
+  await guide.locator('[data-include="KW-01"]').uncheck();
+  await guide.locator('[data-include="KW-03"]').uncheck();
+  check(await action('download').isDisabled(), 'empty plan cannot be downloaded');
+  await action('another').click();
+  await guide.locator('[data-company="harbor"]').click();
+  await action('show').click();
+  check((await text(guide)).includes('1 employee affected'), 'second company has its own findings');
+  await action('plan').click();
+  const harbor = await download(action('download'));
+  check(harbor.includes('harbor.example') && !harbor.includes('kestrel.example'), 'no previous company data leaks into export');
+  await action('another').click();
+  await guide.locator('[data-company="northstar"]').click();
+  await action('show').click();
+  check((await text(guide)).includes('No matches in this sample.'), 'empty sample has a useful explanation');
+  check((await text(guide)).includes('does not guarantee'), 'no-match result does not imply safety');
+  check(await guide.locator('[data-guide-step="2"]').isDisabled(), 'empty sample cannot create a finding plan');
+  await action('restart').click();
+  check((await guide.locator('[data-company="kestrel"]').getAttribute('aria-pressed')) === 'true', 'reset restores initial sample');
+  check(await guide.locator('[data-guide-step="1"]').isDisabled(), 'reset clears progress');
+  await guide.locator('[data-company="harbor"]').focus();
+  await page.keyboard.press('Enter');
+  check((await guide.locator('[data-company="harbor"]').getAttribute('aria-pressed')) === 'true', 'company selection works with keyboard');
+  await action('show').focus();
+  await page.keyboard.press('Enter');
+  check(await guide.locator('.bg-heading').evaluate(el => el === document.activeElement), 'step change places keyboard focus at heading');
+  check(requests.every(url=>url.startsWith(base)||url.startsWith('blob:')), 'guided interaction makes no external requests');
+  page.off('request',trackRequest);
+  console.log('Guided overview: sample choices, explanations, evidence, plan selection, exports, reset, empty state and keyboard passed.');
   await visit("blog/outside-in.html");
   let d = await demo("two-clocks");
   await d.locator(".dm-clock-row").first().click();
@@ -671,20 +540,11 @@ try {
   }
   await page.setViewportSize({ width: 320, height: 900 });
   await visit("breachify/");
-  await page.locator("[data-console]").scrollIntoViewIfNeeded();
-  await page.locator('[data-query="kestrel.example"]').click();
-  await page.locator("#con-tab-1").click();
-  await page.locator(".dm-drill-open").first().click();
-  await page
-    .getByRole("tab", { name: "Domains with sensitive cookies" })
-    .click();
-  await page.locator('[data-domain="0"]').click();
-  check(
-    await page.evaluate(
-      () => document.documentElement.scrollWidth <= innerWidth + 1,
-    ),
-    "expanded console fits 320px",
-  );
+  await page.locator('[data-guide-action="show"]').click();
+  await page.locator('.bg-source summary').click();
+  check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'expanded finding fits 320px');
+  await page.locator('[data-guide-action="plan"]').click();
+  check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'response plan fits 320px');
   // All chapter links must resolve, including generated dock/continue navigation.
   for (const path of [
     "breachify/",
@@ -723,6 +583,10 @@ try {
   await mkdir(resolve(root, "test-results"), { recursive: true });
   await page.setViewportSize({ width: 1440, height: 1000 });
   await visit("breachify/");
+  await page.locator('img').evaluateAll(async images => {
+    images.forEach(image => { image.loading = 'eager'; });
+    await Promise.all(images.map(image => image.decode()));
+  });
   await page.screenshot({
     path: resolve(root, "test-results/breachify-desktop.png"),
     fullPage: true,

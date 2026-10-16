@@ -9,7 +9,7 @@
     <title>Breachify | Hamza Lotfi · intelotfi</title>
     <meta
       name="description"
-      content="Breachify by Hamza Lotfi: AI threat intelligence, explainable risk assessment, evidence pipelines and interactive cybersecurity product design."
+      content="Breachify helps security teams understand exposed accounts and decide what to do next. Explore a guided sample investigation and the product design by Hamza Lotfi."
     />
     <meta name="author" content="Hamza Lotfi" />
     <meta name="theme-color" content="#141415" />
@@ -17,11 +17,11 @@
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
-      content="Breachify: follow the evidence | Hamza Lotfi"
+      content="Breachify: understand what leaked | Hamza Lotfi"
     />
     <meta
       property="og:description"
-      content="From a domain to a single cookie. Three chapters and a working miniature of a cybersecurity intelligence workspace."
+      content="See which accounts were exposed, understand the risk, and prepare a response plan. Try the guided demo with fictional company data."
     />
     <meta property="og:url" content="https://intelotfi.com/breachify/" />
     <meta
@@ -37,7 +37,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Breachify: follow the evidence | Hamza Lotfi"
+      content="Breachify: understand what leaked | Hamza Lotfi"
     />
     <meta
       name="twitter:description"
@@ -55,15 +55,13 @@
       type="font/woff2"
       crossorigin
     />
-    <link rel="stylesheet" href="page.css?v=20261014d" />
-    <link rel="stylesheet" href="ui.css?v=20261014d" />
-    <link rel="stylesheet" href="demos.css?v=20261014d" />
-    <link rel="stylesheet" href="console.css?v=20261014d" />
+    <link rel="stylesheet" href="page.css?v=20261016a" />
+    <link rel="stylesheet" href="overview.css?v=20261016a" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "CreativeWork",
-        "name": "Breachify: follow the evidence",
+        "name": "Breachify: understand what leaked",
         "url": "https://intelotfi.com/breachify/",
         "description": "A cybersecurity intelligence platform design case study with fictional interactive demonstrations.",
         "image": "https://intelotfi.com/assets/og-breachify-1.jpg",
@@ -76,344 +74,46 @@
         "datePublished": "2026-10-14"
       }
     </script>
-    <link rel="stylesheet" href="ai.css?v=20261014d" />
   </head>
   <body>
-    <a class="skip" href="#chapters">Skip to chapters</a>
+    <a class="skip" href="#console">Skip to the guided demo</a>
     <div class="bf-band">
       <header class="bf-top">
-        <a class="bf-logo" href="../" aria-label="intelotfi, home"
-          >intelotfi<span aria-hidden="true"></span
-        ></a>
-        <nav aria-label="Main navigation">
-          <a href="../#projects">All work</a><a href="../#about">About</a
-          ><a href="../#contact"
-            >Let’s talk <span aria-hidden="true">↗</span></a
-          >
-        </nav>
+        <a class="bf-logo" href="../" aria-label="intelotfi, home">intelotfi<span aria-hidden="true"></span></a>
+        <nav aria-label="Main navigation"><a href="../#projects">All work</a><a href="#console">Try the demo</a><a href="../#contact">Let’s talk ↗</a></nav>
       </header>
       <section class="bf-hero" aria-labelledby="project-title">
-        <div>
-          <p class="bf-eyebrow">Breachify · A product design case study</p>
-          <h1 id="project-title">Follow the<br /><em>evidence.</em></h1>
-        </div>
-        <div class="bf-hero-copy">
-          <p>
-            Breachify is a security tool that checks whether your data, or a
-            company’s, has leaked, and how serious the leak is.
-          </p>
-          <p class="bf-hero-sub">
-            Individuals get a personal plan to answer one question: has my
-            information been breached? Companies go further. They enter their
-            web domain, and Breachify lists the devices and accounts exposed
-            under it, traces the trail back to where the leak started, and
-            shows the saved login cookie an attacker could reuse. Every result
-            explains the risk and what to do next.
-          </p>
-          <a class="bf-link" href="#console"
-            >Try an investigation <span aria-hidden="true">↓</span></a
-          >
-        </div>
+        <div><p class="bf-eyebrow">Breachify · Security, made understandable</p><h1 id="project-title">What leaked?<br /><em>What next?</em></h1></div>
+        <div class="bf-hero-copy"><p>Breachify helps security teams find exposed accounts and understand what needs attention.</p><p class="bf-hero-sub">Start with a company’s website address. See the employee logins and saved sign-ins found in breach records, understand why they matter, and prepare the next steps.</p><a class="bf-link" href="#console">See how it works <span aria-hidden="true">↓</span></a></div>
       </section>
-      <div class="bf-strip">
-        <span>Designed by Hamza Lotfi</span
-        ><span>Desktop intelligence platform</span
-        ><span>03 chapters · 11 live demos</span>
-      </div>
+      <div class="bf-strip"><span>Product design by Hamza Lotfi</span><span>Exposed accounts → explained findings → response plan</span></div>
     </div>
     <main>
-      <section
-        class="bf-section"
-        id="chapters"
-        aria-labelledby="chapters-title"
-      >
-        <div class="bf-section-head">
-          <div>
-            <p class="bf-eyebrow">The case study</p>
-            <h2 id="chapters-title">Three ways in.</h2>
-          </div>
-          <p>
-            Read the design, inspect the original screens, and try the decisions
-            for yourself.
-          </p>
-        </div>
-        <ol class="bf-chapters">
-          <li class="bf-chapter">
-            <a
-              class="bf-chapter-image"
-              href="../blog/outside-in.html"
-              aria-label="Read chapter I: The investigation"
-              ><img
-                src="../assets/breachify/cover-1-tile.webp"
-                width="1280"
-                height="800"
-                alt="A domain investigation and open cookie evidence, arranged over a dark grid"
-              /><span class="bf-chapter-index">I</span
-              ><span class="bf-peek"
-                ><span>Inside this chapter</span
-                ><b>Analytics → Domain → Device → Cookie</b
-                ><span>Two clocks · device drilldown · AI risk assessment</span
-                ><span class="bf-peek-arrow" aria-hidden="true">↗</span></span
-              ></a
-            >
-            <div class="bf-chapter-body">
-              <p class="bf-eyebrow">Chapter I · The investigation</p>
-              <h3>
-                <a href="../blog/outside-in.html"
-                  >Reading a breach from the outside in</a
-                >
-              </h3>
-              <p>
-                From the global picture to the record that matters, with every
-                level still in reach.
-              </p>
-              <div class="bf-proof">
-                <span><b>7</b>screens</span
-                ><span><b>6</b>investigation tabs</span
-                ><span><b>4</b>levels of evidence</span>
-              </div>
-              <a class="bf-read" href="../blog/outside-in.html"
-                >Read chapter <span aria-hidden="true">↗</span></a
-              >
-            </div>
-          </li>
-          <li class="bf-chapter">
-            <a
-              class="bf-chapter-image"
-              href="../blog/beyond-the-password.html"
-              aria-label="Read chapter II: Evidence beyond logins"
-              ><img
-                src="../assets/breachify/cover-2-tile.webp"
-                width="1280"
-                height="800"
-                loading="lazy"
-                alt="Session-cookie cards and raw access logs in the Breachify design"
-              /><span class="bf-chapter-index">II</span
-              ><span class="bf-peek"
-                ><span>Inside this chapter</span
-                ><b>Sessions → Applications → Raw logs</b
-                ><span>Sessions · logs · data pipeline · model evaluation</span
-                ><span class="bf-peek-arrow" aria-hidden="true">↗</span></span
-              ></a
-            >
-            <div class="bf-chapter-body">
-              <p class="bf-eyebrow">Chapter II · Evidence beyond logins</p>
-              <h3>
-                <a href="../blog/beyond-the-password.html"
-                  >Beyond the password</a
-                >
-              </h3>
-              <p>
-                Sessions that may already be signed in, apps without website
-                URLs, and the evidence underneath.
-              </p>
-              <div class="bf-proof">
-                <span><b>7</b>screens</span
-                ><span><b>4</b>live explanations</span
-                ><span><b>1</b>evidence trail</span>
-              </div>
-              <a class="bf-read" href="../blog/beyond-the-password.html"
-                >Read chapter <span aria-hidden="true">↗</span></a
-              >
-            </div>
-          </li>
-          <li class="bf-chapter">
-            <a
-              class="bf-chapter-image"
-              href="../blog/machinery.html"
-              aria-label="Read chapter III: Running the service"
-              ><img
-                src="../assets/breachify/cover-3-tile.webp"
-                width="1280"
-                height="800"
-                loading="lazy"
-                alt="File-access keys and export management in Breachify"
-              /><span class="bf-chapter-index">III</span
-              ><span class="bf-peek"
-                ><span>Inside this chapter</span
-                ><b>Companies → Commerce → Access</b
-                ><span>Exports · admin model · pricing · file keys</span
-                ><span class="bf-peek-arrow" aria-hidden="true">↗</span></span
-              ></a
-            >
-            <div class="bf-chapter-body">
-              <p class="bf-eyebrow">Chapter III · Running the service</p>
-              <h3>
-                <a href="../blog/machinery.html"
-                  >The machinery behind the intelligence</a
-                >
-              </h3>
-              <p>
-                The companies, subscriptions and access rules that turn an
-                investigation tool into a service.
-              </p>
-              <div class="bf-proof">
-                <span><b>11</b>screens</span><span><b>7</b>admin sections</span
-                ><span><b>300k</b>export limit</span>
-              </div>
-              <a class="bf-read" href="../blog/machinery.html"
-                >Read chapter <span aria-hidden="true">↗</span></a
-              >
-            </div>
-          </li>
+      <section class="bf-section bf-explainer" aria-labelledby="overview-title">
+        <div class="bf-section-head"><div><p class="bf-eyebrow">The idea, in a minute</p><h2 id="overview-title">A leak is a starting point.<br />You need the next step.</h2></div><p>A list of stolen data can be hard to act on. Breachify connects each finding to an account, explains the concern, and keeps the evidence close.</p></div>
+        <ol class="bf-simple-steps">
+          <li><span>01 / FIND</span><h3>Which accounts are exposed?</h3><p>Look up a company’s domain—the address after the @ in its work email.</p></li>
+          <li><span>02 / UNDERSTAND</span><h3>What could someone access?</h3><p>See whether the record contains a password, a saved sign-in, or signs of an affected computer.</p></li>
+          <li><span>03 / RESPOND</span><h3>What should the team review?</h3><p>Prepare a clear list of follow-up actions, with the supporting records attached.</p></li>
         </ol>
       </section>
-      <section
-        class="bf-section bf-intelligence"
-        id="intelligence"
-        aria-labelledby="intelligence-title"
-      >
-        <div class="bf-section-head">
-          <div>
-            <p class="bf-eyebrow">AI · data science · risk assessment</p>
-            <h2 id="intelligence-title">
-              From a raw log<br />to a reasoned decision.
-            </h2>
-          </div>
-          <p>
-            A hybrid intelligence architecture: structured evidence, entity
-            correlation, explainable ranking, and an AI analyst that cites its
-            sources.
-          </p>
-        </div>
-        <p class="bf-ai-lede">
-          A score is only useful when you can question it. Change the evidence
-          below, inspect each contribution, and follow the possible attack path.
-          Unknown inputs produce a range; the analyst brief distinguishes
-          observations from hypotheses. This is the proposed intelligence layer,
-          demonstrated with an explicit local model.
-        </p>
-        <div class="bf-ai-links">
-          <a class="bf-link" href="../blog/outside-in.html#risk-model"
-            >Explore the risk model <span aria-hidden="true">↗</span></a
-          ><a
-            class="bf-link"
-            href="../blog/beyond-the-password.html#data-science"
-            >Inside the data pipeline <span aria-hidden="true">↗</span></a
-          >
-        </div>
-        <div
-          class="bfui bf-ai-lab"
-          data-ai-lab
-          role="region"
-          aria-label="Interactive proposed risk assessment with sample data"
-        >
-          <p class="console__fallback">
-            Enable JavaScript to explore the assessment. The risk model and data
-            pipeline are also explained in the chapters.
-          </p>
-        </div>
+      <section class="bf-section bf-guided-section" id="console" aria-labelledby="console-title">
+        <div class="bf-section-head"><div><p class="bf-eyebrow">Try it yourself · about a minute</p><h2 id="console-title">You’ve got a finding.<br />Make sense of it.</h2></div><p>Choose a fictional company, open a finding, and build a response plan. No setup or security background needed.</p></div>
+        <div class="bg" data-breach-guide role="region" aria-label="Guided Breachify demonstration"><p class="bg-fallback">Enable JavaScript to try the guided demo. The three steps above explain how Breachify works.</p></div>
+        <p class="bf-demo-note">Fictional records, processed in your browser. This demo does not search real breaches, access accounts, or change security settings.</p>
       </section>
-      <section
-        class="bf-section bf-lab"
-        id="console"
-        aria-labelledby="console-title"
-      >
-        <div class="bf-section-head">
-          <div>
-            <p class="bf-eyebrow">A working miniature</p>
-            <h2 id="console-title">Your turn to<br />follow the thread.</h2>
-          </div>
-          <div>
-            <p>
-              Search a sample company. Open an employee’s device. Find its
-              cookies, mark it resolved, and export the evidence.
-            </p>
-            <p class="bf-fine">
-              Everything here is fictional and runs locally in your browser.
-              This is an interactive design demonstration, not a live breach
-              lookup.
-            </p>
-          </div>
-        </div>
-        <div class="console" data-console>
-          <div
-            class="console__app bfui"
-            dir="ltr"
-            role="region"
-            aria-label="Breachify console with sample data"
-          >
-            <p class="console__fallback">
-              Enable JavaScript to try the console. The chapters and original
-              design screens remain available above.
-            </p>
-          </div>
-        </div>
-        <div class="bf-quest-head">
-          <span>Try the whole path</span
-          ><span data-quest-count aria-live="polite">0 / 6</span>
-        </div>
-        <ol class="quest" data-quest aria-label="Try the whole path">
-          <li data-step="search"><span>01</span>Search a domain</li>
-          <li data-step="employees"><span>02</span>Open employees</li>
-          <li data-step="expand"><span>03</span>Expand a device</li>
-          <li data-step="cookies"><span>04</span>Find its cookies</li>
-          <li data-step="resolve"><span>05</span>Resolve a record</li>
-          <li data-step="export"><span>06</span>Prepare an export</li>
-        </ol>
+      <section class="bf-section bf-plain" id="intelligence" aria-labelledby="plain-title">
+        <div><p class="bf-eyebrow">Less decoding. More understanding.</p><h2 id="plain-title">The result should<br />explain itself.</h2></div>
+        <div class="bf-plain-copy"><p>“A session cookie was exposed” means little on its own. “A saved sign-in may let someone access this account without typing its password” tells you why to pay attention.</p><p>That’s the role of the proposed AI assistant: turn technical records into a short explanation, point to the evidence, and state what is still unknown. The demo uses written sample explanations to show that experience.</p><a class="bf-link" href="../blog/outside-in.html#risk-model">Read the technical approach <span aria-hidden="true">↗</span></a></div>
       </section>
-      <section class="bf-section bf-ledger" aria-labelledby="ledger-title">
-        <div class="bf-section-head">
-          <div>
-            <p class="bf-eyebrow">Design scope</p>
-            <h2 id="ledger-title">What is here.<br />What comes next.</h2>
-          </div>
-          <p>
-            A clear boundary between the product design, this interactive case
-            study, and the work still to draw.
-          </p>
-        </div>
-        <dl class="bf-ledger-grid">
-          <div>
-            <dt>In the design</dt>
-            <dd>
-              25 original screens across investigation, company setup and
-              administration. One shared shell, with orange for action and
-              place.
-            </dd>
-          </div>
-          <div>
-            <dt>In this case study</dt>
-            <dd>
-              Annotated screens, three long-form chapters, eleven interactive
-              demos and a searchable miniature with made-up records.
-            </dd>
-          </div>
-          <div>
-            <dt>Next in the product</dt>
-            <dd>
-              Loading and failure states, confirmations, permission boundaries,
-              alerts, Documents, and the result behind “Analyze with AI”.
-            </dd>
-          </div>
-        </dl>
-        <p class="bf-data-note">
-          All identities, credentials, figures and prices in the original
-          screens are placeholder design content. They are not verified security
-          findings or published commercial offers.
-        </p>
+      <section class="bf-section" id="chapters" aria-labelledby="chapters-title">
+        <div class="bf-section-head"><div><p class="bf-eyebrow">Go deeper, when you’re ready</p><h2 id="chapters-title">Behind the product.</h2></div><p>The original screens and detailed design decisions live in these three portfolio chapters.</p></div>
+        <ol class="bf-story-list">
+<li><a class="bf-story-image" href="../blog/outside-in.html" tabindex="-1" aria-hidden="true"><img src="../assets/breachify/cover-1-tile.webp" alt="" width="1280" height="800" loading="lazy" /></a><div><p class="bf-eyebrow">Chapter 01</p><h3><a href="../blog/outside-in.html">Find the affected accounts</a></h3><p>How the search leads from a company to an employee’s account, with the original product screens.</p><a class="bf-read" href="../blog/outside-in.html">Read the chapter ↗</a></div></li><li><a class="bf-story-image" href="../blog/beyond-the-password.html" tabindex="-1" aria-hidden="true"><img src="../assets/breachify/cover-2-tile.webp" alt="" width="1280" height="800" loading="lazy" /></a><div><p class="bf-eyebrow">Chapter 02</p><h3><a href="../blog/beyond-the-password.html">Understand what was exposed</a></h3><p>Why passwords are only part of the picture, and how saved sign-ins and device records fit together.</p><a class="bf-read" href="../blog/beyond-the-password.html">Read the chapter ↗</a></div></li><li><a class="bf-story-image" href="../blog/machinery.html" tabindex="-1" aria-hidden="true"><img src="../assets/breachify/cover-3-tile.webp" alt="" width="1280" height="800" loading="lazy" /></a><div><p class="bf-eyebrow">Chapter 03</p><h3><a href="../blog/machinery.html">Run the service</a></h3><p>The company setup, subscriptions and access controls behind the investigation experience.</p><a class="bf-read" href="../blog/machinery.html">Read the chapter ↗</a></div></li></ol>
       </section>
-      <section class="bf-closing">
-        <p class="bf-eyebrow">From the whole picture to one detail</p>
-        <h2>Complex evidence.<br />A clear next step.</h2>
-        <a class="bf-link" href="../#contact"
-          >Build something with me <span aria-hidden="true">↗</span></a
-        >
-      </section>
+      <section class="bf-closing"><p class="bf-eyebrow">Breachify · A product design case study</p><h2>Know what happened.<br />Know where to start.</h2><a class="bf-link" href="../#contact">Build something with me <span aria-hidden="true">↗</span></a></section>
     </main>
-    <footer class="bf-footer">
-      <a class="bf-logo" href="../"
-        >intelotfi<span aria-hidden="true"></span
-      ></a>
-      <nav aria-label="Footer">
-        <a href="../">Home</a><a href="../meetfleet/">Meetfleet</a
-        ><a href="../#about">About</a>
-      </nav>
-      <span>© 2026 Hamza Lotfi</span>
-    </footer>
-    <script src="ui.js?v=20261014d"></script>
-    <script src="records.js?v=20261014d"></script>
-    <script src="console.js?v=20261014d"></script>
-    <script src="ai.js?v=20261014d"></script>
+    <footer class="bf-footer"><a class="bf-logo" href="../">intelotfi<span aria-hidden="true"></span></a><nav aria-label="Footer"><a href="../">Home</a><a href="../meetfleet/">Meetfleet</a><a href="../antercept/">Antercept</a></nav><span>© 2026 Hamza Lotfi</span></footer>
+    <script src="overview.js?v=20261016a"></script>
   </body>
 </html>
