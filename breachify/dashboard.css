@@ -107,3 +107,12 @@
  .bg-evidence-label { gap:10px; }
  .bg-bottom { padding:16px; }
 }
+.bf-audiences { max-width:1600px; margin:auto; padding:0 clamp(22px,5vw,90px) 80px; display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+.bf-audiences article { border:1px solid #e3dfd8; border-radius:12px; padding:30px; background:#faf9f6; }
+.bf-audiences h2 { font-size:clamp(25px,2.7vw,38px); letter-spacing:-.035em; margin:18px 0; line-height:1.15; }
+.bf-audiences article>p:not(.bf-eyebrow) { font-size:15px; color:#746e67; line-height:1.8; }
+.bf-audiences .bf-link { margin-top:24px; }
+.bg-audience { display:flex; gap:6px; padding:5px; width:fit-content; max-width:100%; margin-top:25px; border:1px solid #ffffff12; border-radius:8px; background:#222223; }
+.bg-audience button { color:#a6a6ac; border:1px solid transparent; border-radius:5px; padding:11px 20px; background:transparent; font-size:12px; }
+.bg-audience button[aria-pressed=true] { color:#ee9867; border-color:#c25a2060; background:#c25a201a; }
+@media(max-width:760px) { .bf-audiences { grid-template-columns:1fr; padding-bottom:50px; } .bf-audiences article { padding:24px; } .bg-audience { width:100%; } .bg-audience button { flex:1; padding-inline:10px; } }

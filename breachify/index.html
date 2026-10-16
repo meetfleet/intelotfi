@@ -9,7 +9,7 @@
     <title>Breachify | Hamza Lotfi · intelotfi</title>
     <meta
       name="description"
-      content="Breachify helps security teams understand exposed accounts and decide what to do next. Explore a guided sample investigation and the product design by Hamza Lotfi."
+      content="Breachify helps individuals and companies find exposed data, including in dark-web sources, and understand what to do next. Explore a guided sample investigation and the product design by Hamza Lotfi."
     />
     <meta name="author" content="Hamza Lotfi" />
     <meta name="theme-color" content="#141415" />
@@ -21,7 +21,7 @@
     />
     <meta
       property="og:description"
-      content="See which accounts were exposed, understand the risk, and prepare a response plan. Try the guided demo with fictional company data."
+      content="See which accounts were exposed, understand the risk, and prepare a response plan. Try the guided demo with fictional personal and company data."
     />
     <meta property="og:url" content="https://intelotfi.com/breachify/" />
     <meta
@@ -57,7 +57,7 @@
     />
     <link rel="stylesheet" href="page.css?v=20261016a" />
     <link rel="stylesheet" href="overview.css?v=20261016a" />
-    <link rel="stylesheet" href="dashboard.css?v=20261016b" />
+    <link rel="stylesheet" href="dashboard.css?v=20261016personal" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -85,7 +85,7 @@
       </header>
       <section class="bf-hero" aria-labelledby="project-title">
         <div><p class="bf-eyebrow">Breachify · Security, made understandable</p><h1 id="project-title">What leaked?<br /><em>What next?</em></h1></div>
-        <div class="bf-hero-copy"><p>Breachify helps security teams find exposed accounts and understand what needs attention.</p><p class="bf-hero-sub">Start with a company’s website address. See the employee logins and saved sign-ins found in breach records, understand why they matter, and prepare the next steps.</p><a class="bf-link" href="#console">See how it works <span aria-hidden="true">↓</span></a></div>
+        <div class="bf-hero-copy"><p>Find out whether your personal data—or your company’s—has been exposed.</p><p class="bf-hero-sub">Breachify offers personal and company plans to check for leaked data, including in dark-web sources. See what was found, understand the risk, and decide what to do next.</p><a class="bf-link" href="#console">See how it works <span aria-hidden="true">↓</span></a></div>
       </section>
       <div class="bf-strip"><span>Product design by Hamza Lotfi</span><span>Exposed accounts → explained findings → response plan</span></div>
     </div>
@@ -93,15 +93,16 @@
       <section class="bf-section bf-explainer" aria-labelledby="overview-title">
         <div class="bf-section-head"><div><p class="bf-eyebrow">The idea, in a minute</p><h2 id="overview-title">A leak is a starting point.<br />You need the next step.</h2></div><p>A list of stolen data can be hard to act on. Breachify connects each finding to an account, explains the concern, and keeps the evidence close.</p></div>
         <ol class="bf-simple-steps">
-          <li><span>01 / FIND</span><h3>Which accounts are exposed?</h3><p>Look up a company’s domain—the address after the @ in its work email.</p></li>
-          <li><span>02 / UNDERSTAND</span><h3>What could someone access?</h3><p>See whether the record contains a password, a saved sign-in, or signs of an affected computer.</p></li>
-          <li><span>03 / RESPOND</span><h3>What should the team review?</h3><p>Prepare a clear list of follow-up actions, with the supporting records attached.</p></li>
+          <li><span>01 / FIND</span><h3>Which accounts are exposed?</h3><p>Check your own email with a personal plan, or investigate a company’s domain with a company plan.</p></li>
+          <li><span>02 / UNDERSTAND</span><h3>What could someone access?</h3><p>See whether your contact details, passwords or saved sign-ins appear in breach records or dark-web sources.</p></li>
+          <li><span>03 / RESPOND</span><h3>What should you do next?</h3><p>Prepare a clear list of follow-up actions, with the supporting records attached.</p></li>
         </ol>
       </section>
+      <section class="bf-audiences" aria-label="Personal and company plans"><article><p class="bf-eyebrow">Personal plans</p><h2>Is my data out there?</h2><p>Check for personal information and account details exposed in breaches and dark-web sources. Understand the finding and the steps you can take yourself.</p><a class="bf-link" href="#console" data-demo-audience="personal">Try the personal example ↓</a></article><article><p class="bf-eyebrow">Company plans</p><h2>Which accounts need attention?</h2><p>Search across a company’s domain, connect exposed employee accounts to their records, and prepare a response for the security team.</p><a class="bf-link" href="#console" data-demo-audience="company">Try the company example ↓</a></article></section>
       <section class="bf-section bf-guided-section" id="console" aria-labelledby="console-title">
-        <div class="bf-section-head"><div><p class="bf-eyebrow">Try it yourself · about a minute</p><h2 id="console-title">You’ve got a finding.<br />Make sense of it.</h2></div><p>Choose a fictional company, open a finding, and build a response plan. No setup or security background needed.</p></div>
+        <div class="bf-section-head"><div><p class="bf-eyebrow">Try it yourself · about a minute</p><h2 id="console-title">You’ve got a finding.<br />Make sense of it.</h2></div><p>Try a personal or company example, open a finding, and build a response plan. No setup or security background needed.</p></div>
         <div class="bg" data-breach-guide role="region" aria-label="Guided Breachify demonstration"><p class="bg-fallback">Enable JavaScript to try the guided demo. The three steps above explain how Breachify works.</p></div>
-        <p class="bf-demo-note">Fictional records, processed in your browser. This demo does not search real breaches, access accounts, or change security settings.</p>
+        <p class="bf-demo-note">Fictional records, processed in your browser. This demo does not search real breaches or the dark web, access accounts, or change security settings.</p>
       </section>
       <section class="bf-section bf-plain" id="intelligence" aria-labelledby="plain-title">
         <div><p class="bf-eyebrow">Less decoding. More understanding.</p><h2 id="plain-title">The result should<br />explain itself.</h2></div>
@@ -116,6 +117,6 @@
     </main>
     <footer class="bf-footer"><a class="bf-logo" href="../">intelotfi<span aria-hidden="true"></span></a><nav aria-label="Footer"><a href="../">Home</a><a href="../meetfleet/">Meetfleet</a><a href="../antercept/">Antercept</a></nav><span>© 2026 Hamza Lotfi</span></footer>
     <script src="ui.js?v=20261016b"></script>
-    <script src="overview.js?v=20261016b"></script>
+    <script src="overview.js?v=20261016personal"></script>
   </body>
 </html>
