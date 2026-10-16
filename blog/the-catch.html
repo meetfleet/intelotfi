@@ -203,17 +203,76 @@
               <figcaption>The real Credentials screen — captured logins tied to each operation. In an authorized test, this is the evidence that proves exposure. Tap to zoom.</figcaption>
             </figure>
 
-            <!-- real product screenshot: the live operation view -->
-            <figure class="shot" id="shot-operation" data-reveal>
-              <div class="shot__frame">
-                <button type="button" class="zoomable" data-zoom aria-label="Zoom: the Antercept operation view with a live session">
-                  <img src="../assets/antercept/screen-operation.webp" width="1600" height="1267" loading="lazy"
-                    alt="Antercept's Operation View: an ongoing operation with hours, cookies and credentials counts, a live session of the target's desktop, and a Kill Session dialog" />
-                </button>
+            <h3>The end of an operation is containment, not a window</h3>
+            <p>
+              It is tempting to imagine the climax of a test as an operator leaning toward a live
+              feed, watching a target move around their own machine. That is the wrong picture, and
+              Antercept is built to make it impossible to hold. A phishing-awareness exercise never
+              reaches into a person’s device, never streams their screen, never watches their
+              keystrokes on their own desktop. What it observes is far narrower and far more useful:
+              what crossed the boundary of the <em>test page</em> — the request that arrived, the
+              token a browser would have offered, the characters typed into a form that was never
+              real. Everything else is out of scope by design.
+            </p>
+            <p>
+              So the “operation view” is not a surveillance panel; it is a <b>close-out</b>. When an
+              interaction completes, the capture window ends, the artefacts are frozen as evidence,
+              and the only remaining controls are the ones that make exposure safe: revoke whatever
+              token was demonstrated, flag the account for a reset, and notify the person. The scheme
+              below is the whole of it — four things recorded on the page, four things done in
+              response, and a hard line between them.
+            </p>
 
-              </div>
-              <figcaption>The real Operation View, with a live session and a Kill-Session confirmation. This is the sharpest end of the product — and the clearest lesson in a controlled test. Tap to zoom.</figcaption>
+            <figure class="fig" data-reveal>
+              <svg class="acfig" viewBox="0 0 720 360" role="img" aria-label="The close-out of an operation: four artefacts recorded at the test page boundary — request, token, credential, timing — each mapped to a containment response: logged, revoked, reset, reported. A boundary line marks that nothing is observed on the person's own device.">
+                <rect class="acfig__bg" x="0" y="0" width="720" height="360" rx="14" />
+                <defs>
+                  <marker id="acarrowc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M0 0L10 5L0 10z" fill="#7c4dff" />
+                  </marker>
+                </defs>
+                <text class="acfig__title" x="28" y="38">Close-out of an interaction</text>
+                <text class="acfig__s" x="28" y="58">Recorded at the test-page boundary — never on the person’s device</text>
+
+                <!-- column headers -->
+                <text class="acfig__k" x="118" y="88" style="text-anchor:middle">What the page saw</text>
+                <text class="acfig__k" x="602" y="88" style="text-anchor:middle">Mandated response</text>
+
+                <!-- rows: artefact -> response -->
+                <g class="acfig__stage" transform="translate(28,104)"><rect width="180" height="46" rx="9"/><text x="90" y="22">Request</text><text class="acfig__s" x="90" y="38">a browser reached the page</text></g>
+                <g class="acfig__stage acfig__stage--out" transform="translate(512,104)"><rect width="180" height="46" rx="9"/><text x="90" y="22">Logged</text><text class="acfig__s" x="90" y="38">timestamped, scoped</text></g>
+                <path class="acfig__arrow" style="marker-end:url(#acarrowc)" d="M300 127h120"/>
+
+                <g class="acfig__stage" transform="translate(28,162)"><rect width="180" height="46" rx="9"/><text x="90" y="22">Token</text><text class="acfig__s" x="90" y="38">a cookie it would have offered</text></g>
+                <g class="acfig__stage acfig__stage--out" transform="translate(512,162)"><rect width="180" height="46" rx="9"/><text x="90" y="22">Revoked</text><text class="acfig__s" x="90" y="38">session invalidated</text></g>
+                <path class="acfig__arrow" style="marker-end:url(#acarrowc)" d="M300 185h120"/>
+
+                <g class="acfig__stage" transform="translate(28,220)"><rect width="180" height="46" rx="9"/><text x="90" y="22">Credential</text><text class="acfig__s" x="90" y="38">characters typed into a form</text></g>
+                <g class="acfig__stage acfig__stage--out" transform="translate(512,220)"><rect width="180" height="46" rx="9"/><text x="90" y="22">Reset</text><text class="acfig__s" x="90" y="38">password rotated, not kept</text></g>
+                <path class="acfig__arrow" style="marker-end:url(#acarrowc)" d="M300 243h120"/>
+
+                <g class="acfig__stage" transform="translate(28,278)"><rect width="180" height="46" rx="9"/><text x="90" y="22">Timing</text><text class="acfig__s" x="90" y="38">when it happened</text></g>
+                <g class="acfig__stage acfig__stage--out" transform="translate(512,278)"><rect width="180" height="46" rx="9"/><text x="90" y="22">Reported</text><text class="acfig__s" x="90" y="38">person told, record closed</text></g>
+                <path class="acfig__arrow" style="marker-end:url(#acarrowc)" d="M300 301h120"/>
+
+                <!-- the boundary line -->
+                <line x1="360" y1="100" x2="360" y2="316" stroke="#7c4dff" stroke-width="1.4" stroke-dasharray="4 5" opacity="0.7"/>
+                <text class="acfig__s" x="360" y="334" style="text-anchor:middle">boundary of the test · nothing beyond it is observed</text>
+              </svg>
             </figure>
+
+            <p>
+              Read the figure as a promise about what is <em>absent</em> as much as what is present.
+              There is no live feed, no file tree, no view of the person’s own apps, no keystroke
+              stream from their machine — because none of that teaches awareness, and all of it would
+              turn an exercise into intrusion. The four responses on the right are the real “action”:
+              the moment an artefact is recorded, the clock starts on making it harmless. A
+              demonstrated token is revoked so it can never be replayed; a typed password is scheduled
+              for reset and is never retained as a usable secret; the person is told what happened and
+              the record is closed. That close-out is the actual end of an operation — the point where
+              a lesson is banked and the organisation is measurably safer than it was an hour before.
+            </p>
+            <blockquote>A test that could keep watching has already stopped being a test. The win condition is a revoked token and a reset password, not a window into someone’s desk.</blockquote>
           </section>
 
           <!-- 4 -->
