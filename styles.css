@@ -2550,7 +2550,6 @@ html.cf-lock { overflow: hidden; }
   text-transform: uppercase;
   color: var(--body);
 }
-.projects__eyebrow::before { content: ""; width: 0.6em; height: 0.6em; border-radius: 50%; background: var(--red); box-shadow: 0 0 12px rgba(255, 73, 76, 0.8); }
 
 .projects__title {
   font-size: clamp(48px, 6.4vw, 132px);
@@ -2605,7 +2604,6 @@ html.cf-lock { overflow: hidden; }
 .project--wide .project__desc { max-width: 28em; margin-top: clamp(14px, 1.4vw, 22px); font-size: clamp(15px, 1.15vw, 20px); }
 
 .project__tag { display: inline-flex; align-items: center; gap: 0.6em; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; }
-.project__tag::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--red); box-shadow: 0 0 10px rgba(255, 73, 76, 0.8); }
 
 .project__facts { margin-top: clamp(20px, 2.2vw, 36px); }
 .project__facts > div:first-child { border-top: 1px solid var(--hair); }
