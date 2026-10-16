@@ -72,7 +72,8 @@ ul { list-style: none; }
 }
 
 .hero__bg img,
-.hero__gl {
+.hero__gl,
+.hero__tokamak {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -106,6 +107,13 @@ ul { list-style: none; }
 /* once WebGL is running, the canvas replaces the <img> */
 .has-gl .hero__gl { opacity: 1; }
 .has-gl .hero__bg img { visibility: hidden; }
+
+/* tokamak animation: fades in at half strength so the hero text reads over it */
+.hero__tokamak {
+  opacity: 0;
+  transition: opacity 1.6s var(--expo-out);
+}
+.hero__tokamak.is-on { opacity: 0.5; }
 
 .hero__vignette {
   position: absolute;
@@ -228,7 +236,7 @@ ul { list-style: none; }
   font-size: clamp(22px, 2vw, 44px);
   letter-spacing: -0.015em;
   line-height: 1.15;
-  color: var(--ink);
+  color: var(--white);
   will-change: transform;
 }
 
@@ -1728,12 +1736,10 @@ ul { list-style: none; }
   .hero { height: calc(100svh - var(--frame) * 2); }
   .hero__bg img { object-position: 50% 50%; }
 
-  /* the titles sit on the dark side of the portrait photo, so they turn white */
   .roles {
     top: auto;
     bottom: 42vh;
     font-size: 22px;
-    color: var(--white);
   }
 
   .manifesto {
