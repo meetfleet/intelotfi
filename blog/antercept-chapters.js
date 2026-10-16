@@ -16,49 +16,6 @@
     return n;
   }
 
-  /* ---------------- annotated screenshots (.shot / .spot) ----------------
-     Self-contained port of the breachify spot logic, so the chapters need no
-     breachify UI dependency. The zoom lightbox itself is handled by blog.js. */
-  (function spots() {
-    var all = [].slice.call(document.querySelectorAll(".spot"));
-    function closeAll(except) {
-      all.forEach(function (s) {
-        if (s === except) return;
-        s.classList.remove("is-open");
-        var d = s.querySelector(".spot__dot");
-        if (d) d.setAttribute("aria-expanded", "false");
-      });
-    }
-    if ("IntersectionObserver" in window) {
-      var io = new IntersectionObserver(function (es) {
-        es.forEach(function (e) { e.target.classList.toggle("is-in-view", e.isIntersecting); });
-      });
-      document.querySelectorAll(".shot").forEach(function (s) { io.observe(s); });
-    }
-    all.forEach(function (spot, i) {
-      var x = parseFloat(spot.style.getPropertyValue("--x"));
-      var y = parseFloat(spot.style.getPropertyValue("--y"));
-      if (y < 24) spot.classList.add("is-below");
-      if (x < 35) spot.classList.add("is-start");
-      else if (x > 65) spot.classList.add("is-end");
-      spot.style.setProperty("--n", spot.dataset.n ? Number(spot.dataset.n) - 1 : i);
-      var dot = spot.querySelector(".spot__dot");
-      if (!dot) return;
-      dot.setAttribute("aria-expanded", "false");
-      dot.addEventListener("click", function (e) {
-        e.stopPropagation();
-        var open = !spot.classList.contains("is-open");
-        closeAll(spot);
-        spot.classList.toggle("is-open", open);
-        dot.setAttribute("aria-expanded", String(open));
-      });
-    });
-    if (all.length) {
-      document.addEventListener("click", function (e) { if (!e.target.closest(".spot")) closeAll(); });
-      addEventListener("keydown", function (e) { if (e.key === "Escape") closeAll(); });
-    }
-  })();
-
   /* ---------------- Ch I · the lure composer ---------------- */
   var LEVERS = {
     authority: { label: "Authority", why: "Looks like someone who can instruct you. Verify the sender, not the logo." },

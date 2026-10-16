@@ -221,17 +221,8 @@ try {
     page.url().endsWith("outside-in.html"),
     "arrow key does not navigate chapter",
   );
-  const dot = page.locator("#shot-shell .spot__dot").first();
-  await dot.click();
-  check(
-    (await dot.getAttribute("aria-expanded")) === "true",
-    "annotation opens",
-  );
-  await page.keyboard.press("Escape");
-  check(
-    (await dot.getAttribute("aria-expanded")) === "false",
-    "annotation escapes",
-  );
+  check(await page.locator('.spots, .spot, .ref[data-for]').count() === 0, 'screenshot annotations removed');
+  check(await page.locator('.shot img').count() > 0, 'product screenshots preserved');
   check(
     (await page.locator("[data-scrolly].is-on").count()) === 0,
     "reduced motion disables pinned scroll",

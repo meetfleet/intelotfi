@@ -1,4 +1,4 @@
-/* ---------- Breachify chapters: annotated screens, flows, the scroller, live demos ----------
+/* ---------- Breachify chapters: screens, flows, the scroller, live demos ----------
    Loaded after blog.js on the three Breachify chapters, with ../breachify/ui.js
    before it. Demos register with BF.demo(name, init) anywhere in this file or
    in later scripts; they boot once the page has parsed, each the first time it
@@ -8,65 +8,6 @@ window.BF = (() => {
   const U = window.BFUI;
   const reduce = U.reduceMotion;
   const registry = new Map();
-
-  /* ---------- Annotated screens ---------- */
-
-  const spots = [...document.querySelectorAll(".spot")];
-  const closeSpots = (except) => spots.forEach((s) => {
-    if (s === except) return;
-    s.classList.remove("is-open");
-    s.querySelector(".spot__dot")?.setAttribute("aria-expanded", "false");
-  });
-
-  const shotObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => entry.target.classList.toggle("is-in-view", entry.isIntersecting));
-  });
-  document.querySelectorAll(".shot").forEach(shot => shotObserver.observe(shot));
-
-  spots.forEach((spot, i) => {
-    const x = parseFloat(spot.style.getPropertyValue("--x"));
-    const y = parseFloat(spot.style.getPropertyValue("--y"));
-    // tips open away from the nearest edges of the screen
-    if (y < 24) spot.classList.add("is-below");
-    if (x < 35) spot.classList.add("is-start");
-    else if (x > 65) spot.classList.add("is-end");
-    spot.style.setProperty("--n", spot.dataset.n ? Number(spot.dataset.n) - 1 : i);
-    const dot = spot.querySelector(".spot__dot");
-    if (!dot) return;
-    dot.setAttribute("aria-expanded", "false");
-    dot.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const open = !spot.classList.contains("is-open");
-      closeSpots(spot);
-      spot.classList.toggle("is-open", open);
-      dot.setAttribute("aria-expanded", String(open));
-    });
-  });
-  if (spots.length) {
-    document.addEventListener("click", (e) => { if (!e.target.closest(".spot")) closeSpots(); });
-    addEventListener("keydown", (e) => { if (e.key === "Escape") closeSpots(); });
-  }
-
-  // <button class="ref" data-for="shot-id" data-n="2"> in the prose answers to callout 2
-  document.querySelectorAll(".ref[data-for][data-n]").forEach((ref) => {
-    const spot = document.querySelector(`#${CSS.escape(ref.dataset.for)} .spot[data-n="${ref.dataset.n}"]`);
-    if (!spot) return;
-    ref.setAttribute("aria-label", `Show callout ${ref.dataset.n} on the screen`);
-    const on = () => spot.classList.add("is-flash");
-    const off = () => spot.classList.remove("is-flash");
-    ref.addEventListener("pointerenter", on);
-    ref.addEventListener("pointerleave", off);
-    ref.addEventListener("focus", on);
-    ref.addEventListener("blur", off);
-    ref.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const r = spot.getBoundingClientRect();
-      if (r.top < 80 || r.bottom > innerHeight - 80) spot.scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" });
-      closeSpots(spot);
-      spot.classList.add("is-open");
-      spot.querySelector(".spot__dot")?.setAttribute("aria-expanded", "true");
-    });
-  });
 
   /* ---------- Flows: tabs over a stage of screens ---------- */
 

@@ -133,6 +133,8 @@ try {
  for(const name of ['the-lure','the-catch','the-map']){
   await page.goto(`${base}blog/${name}.html`);
   assert.equal(await page.locator('.ac-concept-note').count(),1);
+  assert.equal(await page.locator('.spots, .spot, .ref[data-for]').count(),0);
+  assert.ok(await page.locator('.shot img').count()>0);
   assert.ok(await page.locator('[data-sim] button').count()>0);
   assert.ok(await page.evaluate(()=>[...document.images].filter(i=>i.complete && i.getAttribute("src")).every(i=>i.naturalWidth>0)));
  }

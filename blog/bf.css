@@ -82,114 +82,10 @@ body[data-series="antercept"] {
 }
 .article .note p, .note p { margin-top: 6px; font-size: 14.5px; line-height: 1.6; color: var(--body); }
 
-/* ---------- Annotated screens: numbered callouts on the real design ---------- */
+/* ---------- Product screenshots ---------- */
 
 .shot { position: relative; margin: clamp(28px, 3vw, 44px) 0; }
 .shot__frame { position: relative; }
-
-.spots { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; pointer-events: none; }
-.spot { position: absolute; left: var(--x); top: var(--y); width: 0; height: 0; pointer-events: auto; z-index: 1; }
-.spot.is-open, .spot:hover { z-index: 3; }
-
-.spot__dot {
-  position: absolute;
-  left: -14px;
-  top: -14px;
-  display: grid;
-  place-items: center;
-  width: 28px;
-  height: 28px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: var(--red);
-  color: #fff;
-  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 11.5px;
-  line-height: 1;
-  cursor: pointer;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.92), 0 8px 20px rgba(0, 0, 0, 0.4);
-  transition: transform 0.6s var(--spring, var(--expo-out)), background-color 0.3s;
-  -webkit-tap-highlight-color: transparent;
-}
-/* a slow ring that says "there is something here" without shouting */
-.spot__dot::before {
-  content: "";
-  position: absolute;
-  inset: -3px;
-  border-radius: 50%;
-  border: 2px solid var(--red);
-  opacity: 0;
-  animation: spot-ring 2.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-  animation-delay: calc(var(--n, 0) * 0.35s);
-}
-@keyframes spot-ring { 0% { transform: scale(0.9); opacity: 0.8; } 70%, 100% { transform: scale(1.9); opacity: 0; } }
-.spot__dot:hover, .spot.is-open .spot__dot, .spot.is-flash .spot__dot { transform: scale(1.14); }
-.spot__dot:focus-visible { outline: 2px solid var(--navy); outline-offset: 4px; }
-
-.spot__tip {
-  position: absolute;
-  left: 0;
-  bottom: 22px;
-  width: max-content;
-  max-width: min(300px, 62vw);
-  padding: 11px 13px 12px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.97);
-  color: var(--ink);
-  font-size: 13.5px;
-  line-height: 1.45;
-  letter-spacing: -0.005em;
-  box-shadow: 0 22px 48px -16px rgba(9, 9, 11, 0.55), 0 0 0 1px rgba(29, 33, 66, 0.08);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: translate(-50%, 8px) scale(0.97);
-  transform-origin: 50% 100%;
-  transition: opacity 0.25s, transform 0.5s var(--expo-out), visibility 0s linear 0.25s;
-}
-.spot__tip b { display: block; margin-bottom: 3px; font-weight: 400; color: var(--navy); }
-.spot.is-below .spot__tip { bottom: auto; top: 22px; transform-origin: 50% 0; transform: translate(-50%, -8px) scale(0.97); }
-.spot.is-start .spot__tip { transform: translate(-22px, 8px) scale(0.97); transform-origin: 0 100%; }
-.spot.is-end .spot__tip { transform: translate(calc(-100% + 22px), 8px) scale(0.97); transform-origin: 100% 100%; }
-.spot.is-below.is-start .spot__tip { transform: translate(-22px, -8px) scale(0.97); }
-.spot.is-below.is-end .spot__tip { transform: translate(calc(-100% + 22px), -8px) scale(0.97); }
-
-@media (hover: hover) {
-  .spot:hover .spot__tip { opacity: 1; visibility: visible; transition: opacity 0.25s, transform 0.5s var(--expo-out), visibility 0s; }
-}
-.spot.is-open .spot__tip,
-.spot__dot:focus-visible + .spot__tip { opacity: 1; visibility: visible; transition: opacity 0.25s, transform 0.5s var(--expo-out), visibility 0s; }
-.spot:hover .spot__tip, .spot.is-open .spot__tip, .spot__dot:focus-visible + .spot__tip { transform: translate(-50%, 0) scale(1); }
-.spot.is-start:hover .spot__tip, .spot.is-start.is-open .spot__tip, .spot.is-start .spot__dot:focus-visible + .spot__tip { transform: translate(-22px, 0) scale(1); }
-.spot.is-end:hover .spot__tip, .spot.is-end.is-open .spot__tip, .spot.is-end .spot__dot:focus-visible + .spot__tip { transform: translate(calc(-100% + 22px), 0) scale(1); }
-
-/* inline references in the prose: hover one and its callout answers */
-.ref {
-  display: inline-grid;
-  place-items: center;
-  min-width: 1.45em;
-  height: 1.45em;
-  margin: 0 0.1em;
-  padding: 0 0.3em;
-  border: 0;
-  border-radius: 999px;
-  background: rgba(184, 84, 29, 0.12);
-  color: var(--red);
-  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.68em;
-  line-height: 1;
-  vertical-align: 0.18em;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-}
-.ref:hover, .ref:focus-visible { background: var(--red); color: #fff; outline: none; }
-
-@media (max-width: 768px) {
-  .spot__dot { left: -11px; top: -11px; width: 22px; height: 22px; font-size: 10px; box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.92), 0 6px 14px rgba(0, 0, 0, 0.4); }
-  .spot__tip { font-size: 13px; bottom: 18px; }
-  .spot.is-below .spot__tip { top: 18px; }
-}
 
 /* ---------- Flows: one figure, several screens, in order ---------- */
 
@@ -404,10 +300,6 @@ body[data-series="antercept"] {
   .demo__body { padding: 12px; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .spot__dot::before { animation: none; }
-}
-
 /* view transitions: the chapter covers morph with the tiles on /breachify/ */
 [data-series="breachify"] .cover img { background: #060912; }
 
@@ -415,8 +307,6 @@ body[data-series="antercept"] {
   .flow *, .demo *, .shot *, .scrolly * { animation: none !important; transition: none !important; }
 }
 
-.spot__dot::before { animation-play-state: paused; }
-.shot.is-in-view .spot__dot::before { animation-play-state: running; }
 /* Keep the chapter switcher inside the smallest supported viewport. */
 @media (max-width: 360px) {
   [data-series="breachify"] .chapnav__home span {

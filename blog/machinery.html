@@ -144,7 +144,7 @@
     />
     <link rel="stylesheet" href="blog.css?v=202610132334" />
     <link rel="stylesheet" href="../breachify/ui.css?v=20261014d" />
-    <link rel="stylesheet" href="bf.css?v=20261014d" />
+    <link rel="stylesheet" href="bf.css?v=20261016clean" />
     <link rel="stylesheet" href="../breachify/demos.css?v=20261014d" />
     <!-- instant navigation: pages you are about to open are pre-rendered on hover (Chromium) -->
     <script type="speculationrules">
@@ -179,9 +179,7 @@
         .flow__panel[hidden] {
           display: block;
         }
-        .flow__tabs,
-        .spots,
-        .ref {
+        .flow__tabs {
           display: none;
         }
         .zoomable {
@@ -394,25 +392,11 @@
                 notification addresses, registering another user and copying an
                 API key. The registration form includes company, domains and
                 apps
-                <button
-                  type="button"
-                  class="ref"
-                  data-for="shot-settings"
-                  data-n="3"
-                >
-                  3</button
-                >, suggesting access scoped to assets rather than a single
+                , suggesting access scoped to assets rather than a single
                 unrestricted account. The permission model is not fully drawn
                 yet, so these fields should be understood as an intent that
                 needs explicit enforcement rules. The truncated API-key field
-                <button
-                  type="button"
-                  class="ref"
-                  data-for="shot-settings"
-                  data-n="4"
-                >
-                  4
-                </button>
+
                 belongs to the same boundary: an interface can shorten a value
                 visually, but lifecycle, rotation and authorisation must be
                 defined behind the control.
@@ -433,80 +417,7 @@
                       alt="Breachify design: settings, with placeholder data"
                     />
                   </button>
-                  <ol class="spots">
-                    <li class="spot" data-n="1" style="--x: 33%; --y: 30%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-settings-1"
-                      >
-                        <span aria-hidden="true">1</span
-                        ><span class="sr-only"
-                          >Callout 1: Account identity</span
-                        ></button
-                      ><span
-                        class="spot__tip"
-                        role="tooltip"
-                        id="shot-settings-1"
-                        ><b>Account identity</b>The current user has a distinct
-                        information card.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="2" style="--x: 41.8%; --y: 52.4%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-settings-2"
-                      >
-                        <span aria-hidden="true">2</span
-                        ><span class="sr-only"
-                          >Callout 2: Notification addresses</span
-                        ></button
-                      ><span
-                        class="spot__tip"
-                        role="tooltip"
-                        id="shot-settings-2"
-                        ><b>Notification addresses</b>An address and removal
-                        control manage the delivery target.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="3" style="--x: 58%; --y: 54%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-settings-3"
-                      >
-                        <span aria-hidden="true">3</span
-                        ><span class="sr-only"
-                          >Callout 3: Register within a scope</span
-                        ></button
-                      ><span
-                        class="spot__tip"
-                        role="tooltip"
-                        id="shot-settings-3"
-                        ><b>Register within a scope</b>Company, domains and apps
-                        appear in the registration form.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="4" style="--x: 92.4%; --y: 27.3%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-settings-4"
-                      >
-                        <span aria-hidden="true">4</span
-                        ><span class="sr-only"
-                          >Callout 4: API access</span
-                        ></button
-                      ><span
-                        class="spot__tip"
-                        role="tooltip"
-                        id="shot-settings-4"
-                        ><b>API access</b>The field shortens the sample value
-                        and offers a copy action.</span
-                      >
-                    </li>
-                  </ol>
+
                 </div>
               </figure>
             </section>
@@ -518,25 +429,11 @@
                 hour, with shorter periods reducing preparation time. When
                 ready, the ZIP appears in the account area and an email
                 announces it. The Zip Files panel
-                <button
-                  type="button"
-                  class="ref"
-                  data-for="shot-exports"
-                  data-n="1"
-                >
-                  1
-                </button>
+
                 makes a second boundary explicit: exports stop at 300,000
                 results, with an API route for additional history. Created and
                 expiry dates
-                <button
-                  type="button"
-                  class="ref"
-                  data-for="shot-exports"
-                  data-n="3"
-                >
-                  3
-                </button>
+
                 then describe a retrieval window. The demo accelerates that
                 lifecycle and downloads only five fictional CSV rows, not a full
                 archive.
@@ -557,80 +454,7 @@
                       alt="Breachify design: zip exports, with placeholder data"
                     />
                   </button>
-                  <ol class="spots">
-                    <li class="spot" data-n="1" style="--x: 20%; --y: 25%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-exports-1"
-                      >
-                        <span aria-hidden="true">1</span
-                        ><span class="sr-only"
-                          >Callout 1: The export boundary</span
-                        ></button
-                      ><span
-                        class="spot__tip"
-                        role="tooltip"
-                        id="shot-exports-1"
-                        ><b>The export boundary</b>The notice sets a
-                        300,000-result limit.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="2" style="--x: 90%; --y: 26%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-exports-2"
-                      >
-                        <span aria-hidden="true">2</span
-                        ><span class="sr-only"
-                          >Callout 2: Latest request</span
-                        ></button
-                      ><span
-                        class="spot__tip"
-                        role="tooltip"
-                        id="shot-exports-2"
-                        ><b>Latest request</b>A returning user can find the
-                        newest export.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="3" style="--x: 54%; --y: 66%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-exports-3"
-                      >
-                        <span aria-hidden="true">3</span
-                        ><span class="sr-only"
-                          >Callout 3: A retrieval window</span
-                        ></button
-                      ><span
-                        class="spot__tip"
-                        role="tooltip"
-                        id="shot-exports-3"
-                        ><b>A retrieval window</b>Each archive has created and
-                        expiry dates.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="4" style="--x: 94%; --y: 66%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-exports-4"
-                      >
-                        <span aria-hidden="true">4</span
-                        ><span class="sr-only"
-                          >Callout 4: Download</span
-                        ></button
-                      ><span
-                        class="spot__tip"
-                        role="tooltip"
-                        id="shot-exports-4"
-                        ><b>Download</b>The available file has a direct
-                        retrieval action.</span
-                      >
-                    </li>
-                  </ol>
+
                 </div>
               </figure>
               <figure
@@ -687,24 +511,10 @@
                 A group joins people to a plan and to information channels. In
                 the table, the owner, member count, assigned plan and channel
                 count are visible together
-                <button
-                  type="button"
-                  class="ref"
-                  data-for="shot-groups"
-                  data-n="3"
-                >
-                  3</button
-                >. Status is separate: the sample includes an archived Sandbox
+                . Status is separate: the sample includes an archived Sandbox
                 group, which should remain distinguishable from active
                 customers. The Create Group panel
-                <button
-                  type="button"
-                  class="ref"
-                  data-for="shot-groups"
-                  data-n="4"
-                >
-                  4
-                </button>
+
                 asks for a name, owner and plan, while the overview card
                 summarises the collection. This makes the group a useful
                 junction in the model, but the exact effect of archiving on
@@ -727,83 +537,7 @@
                       alt="Breachify design: admin groups, with placeholder data"
                     />
                   </button>
-                  <ol class="spots">
-                    <li class="spot" data-n="1" style="--x: 29%; --y: 16.5%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-groups-1"
-                      >
-                        <span aria-hidden="true">1</span
-                        ><span class="sr-only"
-                          >Callout 1: Explain the object</span
-                        ></button
-                      ><span class="spot__tip" role="tooltip" id="shot-groups-1"
-                        ><b>Explain the object</b>The breadcrumb and description
-                        establish the current task.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="2" style="--x: 52%; --y: 21.5%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-groups-2"
-                      >
-                        <span aria-hidden="true">2</span
-                        ><span class="sr-only"
-                          >Callout 2: Seven sections</span
-                        ></button
-                      ><span class="spot__tip" role="tooltip" id="shot-groups-2"
-                        ><b>Seven sections</b>The same admin navigation appears
-                        throughout.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="3" style="--x: 55%; --y: 38.6%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-groups-3"
-                      >
-                        <span aria-hidden="true">3</span
-                        ><span class="sr-only"
-                          >Callout 3: One group, several relationships</span
-                        ></button
-                      ><span class="spot__tip" role="tooltip" id="shot-groups-3"
-                        ><b>One group, several relationships</b>Plan, members
-                        and channels stay visible together.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="4" style="--x: 46%; --y: 78%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-groups-4"
-                      >
-                        <span aria-hidden="true">4</span
-                        ><span class="sr-only"
-                          >Callout 4: Create a group</span
-                        ></button
-                      ><span class="spot__tip" role="tooltip" id="shot-groups-4"
-                        ><b>Create a group</b>Name, owner and plan define the
-                        initial assignment.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="5" style="--x: 82%; --y: 77%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-groups-5"
-                      >
-                        <span aria-hidden="true">5</span
-                        ><span class="sr-only"
-                          >Callout 5: A collection summary</span
-                        ></button
-                      ><span class="spot__tip" role="tooltip" id="shot-groups-5"
-                        ><b>A collection summary</b>Overview counts refer to
-                        sample design data.</span
-                      >
-                    </li>
-                  </ol>
+
                 </div>
               </figure>
             </section>
@@ -1051,31 +785,10 @@
                 time-limited, download-limited key for a file. It is not the
                 passwordless sign-in standard. The full key is shown once after
                 generation, then represented by a masked identifier in the table
-                <button
-                  type="button"
-                  class="ref"
-                  data-for="shot-passkeys"
-                  data-n="1"
-                >
-                  1</button
-                >. Expiry and a download allowance
-                <button
-                  type="button"
-                  class="ref"
-                  data-for="shot-passkeys"
-                  data-n="2"
-                >
-                  2
-                </button>
+                . Expiry and a download allowance
+
                 constrain its use, while Revoke
-                <button
-                  type="button"
-                  class="ref"
-                  data-for="shot-passkeys"
-                  data-n="4"
-                >
-                  4
-                </button>
+
                 is intended to stop further downloads immediately. The demo
                 exposes those transitions with fictional keys. It models the
                 workflow in the browser; a real service must enforce every limit
@@ -1097,116 +810,7 @@
                       alt="Breachify design: admin passkeys, with placeholder data"
                     />
                   </button>
-                  <ol class="spots">
-                    <li class="spot" data-n="1" style="--x: 25%; --y: 38.6%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-passkeys-1"
-                      >
-                        <span aria-hidden="true">1</span
-                        ><span class="sr-only"
-                          >Callout 1: A masked identifier</span
-                        ></button
-                      ><span
-                        class="spot__tip"
-                        role="tooltip"
-                        id="shot-passkeys-1"
-                        ><b>A masked identifier</b>The full value is revealed
-                        only at creation.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="2" style="--x: 67.4%; --y: 38.6%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-passkeys-2"
-                      >
-                        <span aria-hidden="true">2</span
-                        ><span class="sr-only"
-                          >Callout 2: A download allowance</span
-                        ></button
-                      ><span
-                        class="spot__tip"
-                        role="tooltip"
-                        id="shot-passkeys-2"
-                        ><b>A download allowance</b>Usage is counted against a
-                        fixed limit.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="3" style="--x: 74.4%; --y: 55.9%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-passkeys-3"
-                      >
-                        <span aria-hidden="true">3</span
-                        ><span class="sr-only"
-                          >Callout 3: Explicit states</span
-                        ></button
-                      ><span
-                        class="spot__tip"
-                        role="tooltip"
-                        id="shot-passkeys-3"
-                        ><b>Explicit states</b>Active, expired and revoked are
-                        distinct outcomes.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="4" style="--x: 83.7%; --y: 38.6%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-passkeys-4"
-                      >
-                        <span aria-hidden="true">4</span
-                        ><span class="sr-only"
-                          >Callout 4: Revoke access</span
-                        ></button
-                      ><span
-                        class="spot__tip"
-                        role="tooltip"
-                        id="shot-passkeys-4"
-                        ><b>Revoke access</b>The proposed action prevents
-                        further downloads.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="5" style="--x: 46%; --y: 77.5%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-passkeys-5"
-                      >
-                        <span aria-hidden="true">5</span
-                        ><span class="sr-only"
-                          >Callout 5: Create a key</span
-                        ></button
-                      ><span
-                        class="spot__tip"
-                        role="tooltip"
-                        id="shot-passkeys-5"
-                        ><b>Create a key</b>File, duration and allowance define
-                        its scope.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="6" style="--x: 84%; --y: 79.2%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-passkeys-6"
-                      >
-                        <span aria-hidden="true">6</span
-                        ><span class="sr-only"
-                          >Callout 6: State the rules</span
-                        ></button
-                      ><span
-                        class="spot__tip"
-                        role="tooltip"
-                        id="shot-passkeys-6"
-                        ><b>State the rules</b>The one-time reveal and
-                        revocation behaviour are explained.</span
-                      >
-                    </li>
-                  </ol>
+
                 </div>
               </figure>
               <figure
@@ -1306,7 +910,7 @@
 
     <script src="../breachify/ui.js?v=20261014d"></script>
     <script src="blog.js?v=20261014d"></script>
-    <script src="bf.js?v=20261014d"></script>
+    <script src="bf.js?v=20261016clean"></script>
     <script src="../breachify/records.js?v=20261014d"></script>
     <script src="../breachify/demos.js?v=20261014d"></script>
     <script src="../breachify/ai.js?v=20261014d"></script>

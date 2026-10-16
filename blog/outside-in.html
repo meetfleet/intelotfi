@@ -141,7 +141,7 @@
     />
     <link rel="stylesheet" href="blog.css?v=202610132334" />
     <link rel="stylesheet" href="../breachify/ui.css?v=20261014d" />
-    <link rel="stylesheet" href="bf.css?v=20261014d" />
+    <link rel="stylesheet" href="bf.css?v=20261016clean" />
     <link rel="stylesheet" href="../breachify/demos.css?v=20261014d" />
     <!-- instant navigation: pages you are about to open are pre-rendered on hover (Chromium) -->
     <script type="speculationrules">
@@ -176,9 +176,7 @@
         .flow__panel[hidden] {
           display: block;
         }
-        .flow__tabs,
-        .spots,
-        .ref {
+        .flow__tabs {
           display: none;
         }
         .zoomable {
@@ -318,92 +316,17 @@
                       alt="Breachify design: domain search, with placeholder data"
                     />
                   </button>
-                  <ol class="spots">
-                    <li class="spot" data-n="1" style="--x: 10%; --y: 42%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-shell-2"
-                      >
-                        <span aria-hidden="true">1</span
-                        ><span class="sr-only"
-                          >Callout 1: Nine destinations</span
-                        ></button
-                      ><span class="spot__tip" role="tooltip" id="shot-shell-2"
-                        ><b>Nine destinations</b>Investigation, organisation and
-                        administration share one shell.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="2" style="--x: 3%; --y: 27%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-shell-3"
-                      >
-                        <span aria-hidden="true">2</span
-                        ><span class="sr-only"
-                          >Callout 2: Your current place</span
-                        ></button
-                      ><span class="spot__tip" role="tooltip" id="shot-shell-3"
-                        ><b>Your current place</b>Orange distinguishes the
-                        active destination.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="3" style="--x: 41%; --y: 24%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-shell-4"
-                      >
-                        <span aria-hidden="true">3</span
-                        ><span class="sr-only"
-                          >Callout 3: One starting action</span
-                        ></button
-                      ><span class="spot__tip" role="tooltip" id="shot-shell-4"
-                        ><b>One starting action</b>Enter a domain or identifier,
-                        then search.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="4" style="--x: 45%; --y: 41%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-shell-5"
-                      >
-                        <span aria-hidden="true">4</span
-                        ><span class="sr-only"
-                          >Callout 4: A shorter return trip</span
-                        ></button
-                      ><span class="spot__tip" role="tooltip" id="shot-shell-5"
-                        ><b>A shorter return trip</b>History chips bring
-                        previous investigations back into reach.</span
-                      >
-                    </li>
-                  </ol>
+
                 </div>
               </figure>
               <p>
                 The shared shell does a quiet but necessary job: it keeps place
                 and action distinct from evidence. Near-black surfaces recede;
                 charcoal cards group related facts. The sidebar
-                <button
-                  type="button"
-                  class="ref"
-                  data-for="shot-shell"
-                  data-n="1"
-                >
-                  1
-                </button>
+
                 stays available while the main panel changes, and orange marks
                 the active destination
-                <button
-                  type="button"
-                  class="ref"
-                  data-for="shot-shell"
-                  data-n="2"
-                >
-                  2
-                </button>
+
                 as well as the next primary action. Blue is reserved for
                 secondary controls and charts. Red, yellow and green describe
                 risk or state. That restraint matters in a workspace where a
@@ -441,110 +364,12 @@
                       alt="Breachify design: analytics, with placeholder data"
                     />
                   </button>
-                  <ol class="spots">
-                    <li class="spot" data-n="1" style="--x: 36%; --y: 28.2%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-analytics-1"
-                      >
-                        <span aria-hidden="true">1</span
-                        ><span class="sr-only"
-                          >Callout 1: Filter the timeline</span
-                        ></button
-                      ><span
-                        class="spot__tip"
-                        role="tooltip"
-                        id="shot-analytics-1"
-                        ><b>Filter the timeline</b>Country, industry and time
-                        frame narrow the collection.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="2" style="--x: 40%; --y: 52%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-analytics-2"
-                      >
-                        <span aria-hidden="true">2</span
-                        ><span class="sr-only"
-                          >Callout 2: Activity over time</span
-                        ></button
-                      ><span
-                        class="spot__tip"
-                        role="tooltip"
-                        id="shot-analytics-2"
-                        ><b>Activity over time</b>The chart proposes a temporal
-                        view of compromised computers.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="3" style="--x: 37%; --y: 77%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-analytics-3"
-                      >
-                        <span aria-hidden="true">3</span
-                        ><span class="sr-only"
-                          >Callout 3: Organisations</span
-                        ></button
-                      ><span
-                        class="spot__tip"
-                        role="tooltip"
-                        id="shot-analytics-3"
-                        ><b>Organisations</b>Placeholder identities are
-                        deliberately blurred for publication.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="4" style="--x: 78%; --y: 44%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-analytics-4"
-                      >
-                        <span aria-hidden="true">4</span
-                        ><span class="sr-only"
-                          >Callout 4: Password strength</span
-                        ></button
-                      ><span
-                        class="spot__tip"
-                        role="tooltip"
-                        id="shot-analytics-4"
-                        ><b>Password strength</b>The same filters return beside
-                        credential-quality categories.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="5" style="--x: 80%; --y: 78%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-analytics-5"
-                      >
-                        <span aria-hidden="true">5</span
-                        ><span class="sr-only"
-                          >Callout 5: Stealer families</span
-                        ></button
-                      ><span
-                        class="spot__tip"
-                        role="tooltip"
-                        id="shot-analytics-5"
-                        ><b>Stealer families</b>A second grouping looks at the
-                        malware behind the records.</span
-                      >
-                    </li>
-                  </ol>
+
                 </div>
               </figure>
               <p>
                 The repeated filters
-                <button
-                  type="button"
-                  class="ref"
-                  data-for="shot-analytics"
-                  data-n="1"
-                >
-                  1
-                </button>
+
                 make comparison possible in the proposed workflow, but the
                 values in this frame are illustrative. The strength bars do not
                 form a coherent distribution totalling 100%, and some malware
@@ -560,26 +385,12 @@
               <p>
                 The domain search screen concentrates on one decision: what to
                 investigate. The input and orange button
-                <button
-                  type="button"
-                  class="ref"
-                  data-for="shot-shell"
-                  data-n="3"
-                >
-                  3
-                </button>
+
                 sit above a large quiet area, rather than competing with an
                 empty results table. “Compromised Domain Users” supplies a scale
                 cue; the screen’s 1,898,596 is a sample count. Search-history
                 chips
-                <button
-                  type="button"
-                  class="ref"
-                  data-for="shot-shell"
-                  data-n="4"
-                >
-                  4
-                </button>
+
                 mix domains with Android package names. That suggests a common
                 entry pattern for identifiers an organisation owns, although the
                 design still needs to make the accepted input types explicit.
@@ -797,23 +608,9 @@
                 A device row brings the evidence back to a particular machine:
                 stealer identifier, malware family, IP address, path and dates.
                 Expanding the row
-                <button
-                  type="button"
-                  class="ref"
-                  data-for="shot-record"
-                  data-n="1"
-                >
-                  1
-                </button>
+
                 opens the next level in place. Evidence pills
-                <button
-                  type="button"
-                  class="ref"
-                  data-for="shot-record"
-                  data-n="2"
-                >
-                  2
-                </button>
+
                 separate profile facts, corporate credentials and domains with
                 sensitive cookies. A domain then opens into individual cookie
                 records. The reader can go deeper without abandoning the
@@ -838,98 +635,7 @@
                       alt="Breachify design: domain thirdparty, with placeholder data"
                     />
                   </button>
-                  <ol class="spots">
-                    <li class="spot" data-n="1" style="--x: 23.6%; --y: 37.5%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-record-1"
-                      >
-                        <span aria-hidden="true">1</span
-                        ><span class="sr-only"
-                          >Callout 1: Open the device</span
-                        ></button
-                      ><span class="spot__tip" role="tooltip" id="shot-record-1"
-                        ><b>Open the device</b>The chevron expands evidence
-                        inside the results list.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="2" style="--x: 38.8%; --y: 43.6%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-record-2"
-                      >
-                        <span aria-hidden="true">2</span
-                        ><span class="sr-only"
-                          >Callout 2: Choose evidence</span
-                        ></button
-                      ><span class="spot__tip" role="tooltip" id="shot-record-2"
-                        ><b>Choose evidence</b>Profile, credentials and cookie
-                        domains are separate levels.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="3" style="--x: 49%; --y: 56.6%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-record-3"
-                      >
-                        <span aria-hidden="true">3</span
-                        ><span class="sr-only"
-                          >Callout 3: Choose a domain</span
-                        ></button
-                      ><span class="spot__tip" role="tooltip" id="shot-record-3"
-                        ><b>Choose a domain</b>A count and validity date precede
-                        the individual records.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="4" style="--x: 48%; --y: 63.5%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-record-4"
-                      >
-                        <span aria-hidden="true">4</span
-                        ><span class="sr-only"
-                          >Callout 4: Inspect a cookie</span
-                        ></button
-                      ><span class="spot__tip" role="tooltip" id="shot-record-4"
-                        ><b>Inspect a cookie</b>URL, name, masked value and
-                        expiry are the final level.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="5" style="--x: 89.1%; --y: 37.5%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-record-5"
-                      >
-                        <span aria-hidden="true">5</span
-                        ><span class="sr-only"
-                          >Callout 5: Track resolution</span
-                        ></button
-                      ><span class="spot__tip" role="tooltip" id="shot-record-5"
-                        ><b>Track resolution</b>Each device has a
-                        resolution-state control.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="6" style="--x: 49%; --y: 26.5%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-record-6"
-                      >
-                        <span aria-hidden="true">6</span
-                        ><span class="sr-only"
-                          >Callout 6: Act on the list</span
-                        ></button
-                      ><span class="spot__tip" role="tooltip" id="shot-record-6"
-                        ><b>Act on the list</b>Exports and resolution filters
-                        stay in the toolbar.</span
-                      >
-                    </li>
-                  </ol>
+
                 </div>
               </figure>
               <figure
@@ -959,23 +665,9 @@
               <p>
                 Reviewing a record is different from handling its exposure. The
                 design proposes a switch on each device
-                <button
-                  type="button"
-                  class="ref"
-                  data-for="shot-record"
-                  data-n="5"
-                >
-                  5</button
-                >, an Unresolved or Resolved filter, and a Resolve All action in
+                , an Unresolved or Resolved filter, and a Resolve All action in
                 the toolbar
-                <button
-                  type="button"
-                  class="ref"
-                  data-for="shot-record"
-                  data-n="6"
-                >
-                  6</button
-                >. Together they create a working queue rather than an endless
+                . Together they create a working queue rather than an endless
                 archive. A resolution marker records the team’s judgement;
                 flipping it does not disinfect a computer or revoke a session.
                 The miniature makes that distinction visible through an undoable
@@ -1134,25 +826,11 @@
               <p>
                 Where the overview summarises exposure, Assets Discovery lists
                 the resources behind it. Employee and compromised-user pills
-                <button
-                  type="button"
-                  class="ref"
-                  data-for="shot-assets"
-                  data-n="1"
-                >
-                  1
-                </button>
+
                 preserve the same population split as the charts. A total-URLs
                 banner offers a bulk export, while each domain group offers its
                 own export and View All action
-                <button
-                  type="button"
-                  class="ref"
-                  data-for="shot-assets"
-                  data-n="3"
-                >
-                  3</button
-                >. Occurrence counts help distinguish repeated resources from
+                . Occurrence counts help distinguish repeated resources from
                 isolated ones without turning frequency into a severity score.
                 Pagination keeps the inventory bounded. Android-style resource
                 identifiers appear alongside the domain grouping, carrying the
@@ -1174,83 +852,7 @@
                       alt="Breachify design: domain assets, with placeholder data"
                     />
                   </button>
-                  <ol class="spots">
-                    <li class="spot" data-n="1" style="--x: 31%; --y: 28%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-assets-1"
-                      >
-                        <span aria-hidden="true">1</span
-                        ><span class="sr-only"
-                          >Callout 1: Whose assets?</span
-                        ></button
-                      ><span class="spot__tip" role="tooltip" id="shot-assets-1"
-                        ><b>Whose assets?</b>Switch between employees and
-                        compromised users.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="2" style="--x: 47%; --y: 37%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-assets-2"
-                      >
-                        <span aria-hidden="true">2</span
-                        ><span class="sr-only"
-                          >Callout 2: The whole inventory</span
-                        ></button
-                      ><span class="spot__tip" role="tooltip" id="shot-assets-2"
-                        ><b>The whole inventory</b>A total and an export
-                        describe the current collection.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="3" style="--x: 87%; --y: 46%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-assets-3"
-                      >
-                        <span aria-hidden="true">3</span
-                        ><span class="sr-only"
-                          >Callout 3: Open a group</span
-                        ></button
-                      ><span class="spot__tip" role="tooltip" id="shot-assets-3"
-                        ><b>Open a group</b>View All reveals the resources
-                        belonging to a domain.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="4" style="--x: 89%; --y: 55%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-assets-4"
-                      >
-                        <span aria-hidden="true">4</span
-                        ><span class="sr-only"
-                          >Callout 4: Occurrences</span
-                        ></button
-                      ><span class="spot__tip" role="tooltip" id="shot-assets-4"
-                        ><b>Occurrences</b>Frequency describes how often this
-                        resource appears.</span
-                      >
-                    </li>
-                    <li class="spot" data-n="5" style="--x: 87%; --y: 89%">
-                      <button
-                        type="button"
-                        class="spot__dot"
-                        aria-describedby="shot-assets-5"
-                      >
-                        <span aria-hidden="true">5</span
-                        ><span class="sr-only"
-                          >Callout 5: More resources</span
-                        ></button
-                      ><span class="spot__tip" role="tooltip" id="shot-assets-5"
-                        ><b>More resources</b>Pagination bounds a potentially
-                        long inventory.</span
-                      >
-                    </li>
-                  </ol>
+
                 </div>
               </figure>
             </section>
@@ -1303,7 +905,7 @@
 
     <script src="../breachify/ui.js?v=20261014d"></script>
     <script src="blog.js?v=20261014d"></script>
-    <script src="bf.js?v=20261014d"></script>
+    <script src="bf.js?v=20261016clean"></script>
     <script src="../breachify/records.js?v=20261014d"></script>
     <script src="../breachify/demos.js?v=20261014d"></script>
     <script src="../breachify/ai.js?v=20261014d"></script>
