@@ -100,6 +100,93 @@ const spy = new IntersectionObserver((entries) => {
 
 sections.forEach((s) => spy.observe(s));
 
+/* ---------- Lens: a glass loupe over dense diagrams ---------- */
+// Hover with a mouse, or touch and hold then drag on a phone. The centre of
+// the glass always shows the point under the pointer; near the screen edge
+// the glass slides inward so it never leaves the viewport, and on touch it
+// rides above the finger so the finger never covers it.
+
+document.querySelectorAll("[data-lens]").forEach((fig) => {
+  const img = fig.querySelector("img");
+  if (!img) return;
+  img.draggable = false;
+  const fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
+  fig.insertAdjacentHTML("beforeend", `
+    <div class="lens__glass" aria-hidden="true"><div class="lens__body"><div class="lens__view"><span class="lens__reticle"></span></div><span class="lens__mag"></span></div></div>
+    <p class="lens__hint" aria-hidden="true">${fine ? "Hover to magnify" : "Touch and hold to magnify"}</p>`);
+  const glass = fig.querySelector(".lens__glass");
+  const view = fig.querySelector(".lens__view");
+  const mag = fig.querySelector(".lens__mag");
+  let on = false, lift = false, zoom = 1, frame = 0, px = 0, py = 0;
+
+  function show() {
+    if (!img.complete || !img.naturalWidth) return false;
+    // near native scale on a wide column, closer in on a phone
+    zoom = Math.min(6, Math.max(2.5, (img.naturalWidth * 0.75) / img.offsetWidth));
+    view.style.backgroundImage = `url("${img.currentSrc || img.src}")`;
+    mag.textContent = `${zoom.toFixed(1)}×`;
+    on = true;
+    place();                                   // in position before it fades in
+    fig.classList.add("is-on");
+    return true;
+  }
+
+  function hide() { on = false; lift = false; fig.classList.remove("is-on"); }
+
+  function place() {
+    frame = 0;
+    if (!on) return;
+    const r = img.getBoundingClientRect();
+    let x = px - r.left, y = py - r.top;
+    if (x < 0 || y < 0 || x > r.width || y > r.height) {
+      // a scroll can carry the image out from under a still mouse
+      if (!lift) { hide(); return; }
+      x = Math.min(r.width, Math.max(0, x));
+      y = Math.min(r.height, Math.max(0, y));
+    }
+    const w = glass.offsetWidth, h = glass.offsetHeight, gap = 32;
+    const cx = Math.min(document.documentElement.clientWidth - w / 2 - 8, Math.max(w / 2 + 8, px));
+    const cy = !lift ? py : py - h / 2 - gap < 8 ? py + h / 2 + gap : py - h / 2 - gap;
+    glass.style.transform = `translate3d(${cx - r.left - w / 2}px, ${cy - r.top - h / 2}px, 0)`;
+    view.style.backgroundSize = `${r.width * zoom}px ${r.height * zoom}px`;
+    view.style.backgroundPosition = `${view.clientWidth / 2 - x * zoom}px ${view.clientHeight / 2 - y * zoom}px`;
+  }
+
+  const queue = () => { if (!frame) frame = requestAnimationFrame(place); };
+
+  // mouse and pen
+  img.addEventListener("pointermove", (e) => {
+    if (e.pointerType === "touch") return;
+    px = e.clientX; py = e.clientY;
+    if (on) queue(); else show();
+  });
+  img.addEventListener("pointerleave", (e) => { if (e.pointerType !== "touch") hide(); });
+  addEventListener("scroll", () => { if (on) queue(); }, { passive: true });
+
+  // touch: a short hold turns the lens on, so a plain swipe still scrolls the page
+  let hold = 0, sx = 0, sy = 0;
+  const cancelHold = () => { clearTimeout(hold); hold = 0; };
+  img.addEventListener("touchstart", (e) => {
+    cancelHold();
+    if (e.touches.length !== 1) { if (lift) hide(); return; }
+    sx = px = e.touches[0].clientX; sy = py = e.touches[0].clientY;
+    hold = setTimeout(() => { hold = 0; lift = true; if (!show()) lift = false; }, 220);
+  }, { passive: true });
+  img.addEventListener("touchmove", (e) => {
+    const t = e.touches[0];
+    if (lift) {
+      if (!e.cancelable) { hide(); return; }   // the page is already scrolling
+      e.preventDefault();
+      px = t.clientX; py = t.clientY;
+      queue();
+    } else if (hold && Math.hypot(t.clientX - sx, t.clientY - sy) > 10) cancelHold();
+  }, { passive: false });
+  const end = () => { cancelHold(); if (lift) hide(); };
+  img.addEventListener("touchend", end);
+  img.addEventListener("touchcancel", end);
+  img.addEventListener("contextmenu", (e) => { if (lift || hold) e.preventDefault(); });
+});
+
 /* ---------- Devices: WebGL zoom ---------- */
 
 document.querySelectorAll(".device").forEach((el, i) => el.style.setProperty("--i", i));
