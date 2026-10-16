@@ -1,0 +1,109 @@
+/* Simulator skin follows the original Breachify dashboard. Scoped here so
+   the editorial overview and other projects keep their own appearance. */
+.bg { --db-bg:#141415; --db-panel:#181819; --db-card:#222223; --db-raised:#303032; --db-line:#ffffff12; --db-text:#f2f2f3; --db-dim:#a6a6ac; --db-orange:#c25a20; color:var(--db-text); background:var(--db-bg); border-color:#333336; border-radius:16px; font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; font-size:13px; color-scheme:dark; }
+.bg-top { margin:12px 12px 0; border-radius:10px; padding:20px 25px; background:var(--db-panel); }
+.bg-brand { font-weight:300; font-size:25px; letter-spacing:.03em; }
+.bg-brand svg { width:25px; height:30px; }
+.bg-brand>span { color:var(--db-dim); font-size:11px; font-weight:400; }
+.bg-sample { background:#c25a2012; color:#ed9765; border-color:#c25a203b; }
+.bg-workspace { display:grid; grid-template-columns:180px minmax(0,1fr); gap:15px; padding:15px 12px 12px; }
+.bg-main { min-width:0; background:var(--db-panel); border-radius:10px; overflow:hidden; }
+.bg-progress { display:flex; flex-direction:column; align-self:stretch; gap:10px; padding:18px 0; border:0; border-radius:10px; background:var(--db-panel); }
+.bg-progress button { display:flex; flex-direction:row; align-items:center; gap:12px; border:0; border-left:3px solid transparent; padding:19px 15px; min-height:75px; color:var(--db-dim); background:none; font-size:12px; line-height:1.5; }
+.bg-progress button[aria-current] { border-left-color:var(--db-orange); background:#ffffff02; color:#ee8c52; }
+.bg-progress button:hover:not(:disabled) { background:#ffffff05; }
+.bg-progress button>span:first-child { color:inherit; }
+.bg-nav-icon svg { width:17px; height:17px; }
+.bg-progress small { display:block; font:9px/1.8 ui-monospace,monospace; color:#76767d; letter-spacing:.06em; }
+.bg-progress button[aria-current] small { color:#a76d48; }
+.bg-progress b { display:none; }
+.bg-content { padding:30px; min-height:490px; }
+.bg-heading { font-size:clamp(24px,2.2vw,33px); line-height:1.2; font-weight:500; letter-spacing:-.035em; }
+.bg-kicker { color:#cc895e; font-size:9px; }
+.bg-intro>p:last-child,.bg-result-head p:last-child { color:var(--db-dim); font-size:13px; }
+.bg-company-grid { gap:12px; }
+.bg-company { color:var(--db-text); background:var(--db-card); border:1px solid var(--db-line); border-radius:10px; grid-template-columns:32px 1fr 12px; gap:10px; padding:20px 15px; }
+.bg-company[aria-pressed=true] { background:#2c2c2d; border-color:#c25a2099; box-shadow:none; }
+.bg-company:hover { background:#2c2c2d; }
+.bg-company-icon { width:32px; height:34px; background:#343436; color:#bcbcc2; border-radius:7px; font-size:18px; }
+.bg-company[aria-pressed=true] .bg-company-icon { background:#c25a2024; color:#ed9564; }
+.bg-company-title { font-size:13px; }
+.bg-company-title small,.bg-company-description { color:#a6a6ac; }
+.bg-radio { border-color:#6c6c73; }
+.bg-company[aria-pressed=true] .bg-radio { border-color:var(--db-orange); }
+.bg-start-row,.bg-navigation { border-color:var(--db-line); }
+.bg-start-row>p,.bg-navigation>span { color:#93939b; }
+.bg-start-row strong { color:#c5c5cb; }
+.bg-start-row p>span { color:#ec925b; }
+.bg-primary { background:var(--db-orange); border-color:var(--db-orange); color:white; border-radius:7px; font-size:12px!important; }
+.bg-primary:hover:not(:disabled) { background:#d8692b; }
+.bg-secondary { background:#242425; color:#d3d3d9; border-color:#ffffff1f; }
+.bg-secondary:hover { background:#303032; }
+.bg-bottom { background:#1c1c1d; border-color:var(--db-line); color:#93939b; }
+.bg-bottom>button { color:#dc8b59; }
+.bg-count { color:#8c8c94; }
+.bg-count b { color:#d77c43; }
+.bg-metrics { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin:0 0 25px; }
+.bg-metrics>div { display:flex; flex-direction:column; gap:13px; padding:18px 20px; border:1px solid var(--db-line); border-radius:10px; background:var(--db-card); }
+.bg-metrics span { color:#a6a6ac; font-size:11px; line-height:1.5; }
+.bg-metrics strong { font-weight:400; font-size:32px; }
+.bg-result-head { margin-bottom:24px; }
+.bg-findings { gap:18px; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); }
+.bg-finding { background:var(--db-card); border-color:var(--db-line); color:var(--db-text); padding:19px 14px; }
+.bg-finding[aria-pressed=true] { background:#303032; border-color:#c25a2099; }
+.bg-finding-symbol { background:#ffffff09; color:#acacb3; }
+.bg-finding[aria-pressed=true] .bg-finding-symbol { color:#ed925b; background:#c25a201a; }
+.bg-finding small { color:#c28a65; }
+.bg-finding strong { font-size:15px; line-height:1.4; }
+.bg-finding>span>span,.bg-list-hint { color:#96969e; }
+.bg-finding>b { color:#cc8554; }
+.bg-explanation { background:var(--db-card); border-color:var(--db-line); padding:24px; }
+.bg-evidence-label>span { color:#ee9867; background:#c25a2026; }
+.bg-evidence-label small { color:#8d8d95; }
+.bg-explanation h4 { color:#f2f2f3; font-size:25px; }
+.bg-person { color:#a6a6ac; }
+.bg-explanation h5 { color:#e1e1e6; }
+.bg-meaning p,.bg-next p { color:#b2b2ba; font-size:13px; }
+.bg-next { background:#5b86fd0d; border:1px solid #5b86fd26; }
+.bg-next h5 { color:#90acfa; }
+.bg-unknown { color:#96969e; }
+.bg-unknown strong { color:#d1b584; }
+.bg-source,.bg-source dl>div { border-color:#ffffff16; }
+.bg-source { color:#a9a9b1; }
+.bg-source summary { color:#d2d2d8; }
+.bg-plan-grid { gap:20px; }
+.bg-action { background:var(--db-card); border-color:var(--db-line); }
+.bg-action:has(input:checked) { background:#29292a; border-color:#c25a2070; }
+.bg-action input { accent-color:var(--db-orange); }
+.bg-action span>span { color:#b0b0b8; }
+.bg-action small { color:#919199; }
+.bg-handover { background:var(--db-card); border:1px solid var(--db-line); color:var(--db-text); }
+.bg-handover .bg-kicker { color:#d18c5d; }
+.bg-handover>p,.bg-handover ul,.bg-download-note { color:#a6a6ac; }
+.bg-plan-note { color:#96969e; }
+.bg-plan-note strong { color:#ccccd3; }
+.bg-empty-symbol { background:#57c48c16; color:#75c69b; }
+.bg-empty>p:not(.bg-kicker) { color:#a6a6ac; }
+.bg-empty-note { background:var(--db-card); color:#a6a6ac; border:1px solid var(--db-line); }
+.bg-empty-note strong { color:#d1b584; }
+@media(max-width:1100px) { .bg-company-grid { grid-template-columns:1fr; } .bg-company { grid-template-columns:32px 1fr 15px; } .bg-company-description { margin:0; } .bg-workspace { grid-template-columns:155px minmax(0,1fr); gap:10px; } .bg-content { padding:24px; } }
+@media(max-width:900px) { .bg-findings,.bg-plan-grid { grid-template-columns:1fr; } }
+@media(max-width:760px) {
+ .bg-workspace { display:block; padding:10px; }
+ .bg-top { margin:10px 10px 0; padding:16px; }
+ .bg-brand { font-size:21px; }
+ .bg-progress { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0; padding:0; margin-bottom:10px; }
+ .bg-progress button { flex-direction:column; align-items:start; gap:8px; padding:12px 10px; min-height:0; border:0; border-bottom:2px solid transparent; font-size:10px; }
+ .bg-progress button[aria-current] { border-bottom-color:var(--db-orange); }
+ .bg-progress small { display:none; }
+ .bg-nav-icon svg { width:15px; height:15px; }
+ .bg-content { padding:22px 16px; min-height:0; }
+ .bg-heading { font-size:25px; }
+ .bg-metrics { gap:8px; }
+ .bg-metrics>div { padding:12px 10px; gap:8px; }
+ .bg-metrics span { font-size:9px; }
+ .bg-metrics strong { font-size:25px; }
+ .bg-explanation { padding:20px 16px; }
+ .bg-evidence-label { gap:10px; }
+ .bg-bottom { padding:16px; }
+}
