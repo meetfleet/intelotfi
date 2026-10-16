@@ -142,6 +142,29 @@ function start(canvas) {
     trails.push(mat);
   }
 
+  /* ---------- Pointer steering ----------
+     The mouse gently "directs" the tunnel: moving it tilts the camera's gaze
+     and, on the side you point to, the plasma energises (faster, brighter).
+     Everything is eased, recentres when the pointer leaves, and is skipped
+     entirely under reduced-motion. */
+  const pointer = { x: 0, y: 0, tx: 0, ty: 0, energy: 0, tEnergy: 0 };
+  const basePulse = CFG.pulseSpeed;
+  const baseSpeedMult = trails.map((m) => m.uniforms.uSpeedMult.value);
+
+  if (!reduceMotion) {
+    const hero = canvas.closest(".hero") || canvas;
+    const onMove = (e) => {
+      const r = hero.getBoundingClientRect();
+      if (!r.width || !r.height) return;
+      pointer.tx = ((e.clientX - r.left) / r.width) * 2 - 1;   // -1..1
+      pointer.ty = ((e.clientY - r.top) / r.height) * 2 - 1;
+      pointer.tEnergy = 1;
+      if (!running) sync();
+    };
+    hero.addEventListener("pointermove", onMove, { passive: true });
+    hero.addEventListener("pointerleave", () => { pointer.tx = 0; pointer.ty = 0; pointer.tEnergy = 0; });
+  }
+
   /* ---------- Camera flight + render ---------- */
 
   const R = 10;
@@ -149,10 +172,26 @@ function start(canvas) {
   let angle = 0;
 
   function render() {
+    // ease the pointer toward its target so motion glides
+    pointer.x += (pointer.tx - pointer.x) * 0.06;
+    pointer.y += (pointer.ty - pointer.y) * 0.06;
+    pointer.energy += (pointer.tEnergy - pointer.energy) * 0.04;
+
     camera.position.set(Math.cos(angle) * R, Math.sin(angle) * R, 0.5);
-    camera.lookAt(Math.cos(angle + 0.1) * R, Math.sin(angle + 0.1) * R, 0);
+    // look slightly ahead, nudged by the pointer so the tunnel leans toward it
+    const look = new THREE.Vector3(Math.cos(angle + 0.1) * R, Math.sin(angle + 0.1) * R, 0);
+    camera.lookAt(look);
+    camera.rotation.z += pointer.x * 0.12 * (0.4 + pointer.energy);
+    camera.rotation.x += -pointer.y * 0.08 * (0.4 + pointer.energy);
+
+    // energise the plasma: faster trails and a brighter pulse near the cursor
     shell.uniforms.uTime.value = time;
-    for (const m of trails) m.uniforms.uTime.value = time;
+    shell.uniforms.uPulseSpeed.value = basePulse * (1 + pointer.energy * 0.6);
+    for (let i = 0; i < trails.length; i++) {
+      const m = trails[i];
+      m.uniforms.uTime.value = time;
+      m.uniforms.uSpeedMult.value = baseSpeedMult[i] * (1 + pointer.energy * 1.2);
+    }
     composer.render();
   }
 
