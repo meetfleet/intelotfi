@@ -627,6 +627,10 @@ ul { list-style: none; }
   color: var(--body);
 }
 
+/* a case study page names the live product next to its lede */
+.work__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: clamp(20px, 2vw, 32px); }
+.work__actions .project__cta:hover svg { transform: translate(2px, -2px); }
+
 /* ---- the subject strip: what all three chapters are about ---- */
 
 .subject {

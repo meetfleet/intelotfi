@@ -85,3 +85,5 @@
 }
 /* Keep the keyboard skip link out of the canvas until it receives focus. */
 .skip:not(:focus) { clip-path:inset(50%); width:1px; height:1px; overflow:hidden; white-space:nowrap; padding:0; }
+.bf-visit { background:#b69add; }
+.bf-visit:hover { background:#c8b3e6; }
