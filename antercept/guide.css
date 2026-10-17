@@ -7,6 +7,8 @@
 .bf-story-image { background:#151418; }
 /* the chapter banners carry their title on the left: crop from the right */
 .bf-story-image img { object-position:0% 50%; }
+/* the strip keeps one line now; the shared mobile rule would hide it */
+.bf-strip span:only-child { display:inline; }
 .tl { font-family:Alliance,Arial,sans-serif; }
 .tl h4 { font-weight:400; }
 .tl-top strong { font-size:16px; }
