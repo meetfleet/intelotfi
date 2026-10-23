@@ -346,7 +346,7 @@
           ];
           U.download(
             "kestrel.example-sample-export.csv",
-            "# Sample data from the Breachify case study\n" + U.csv(rows),
+            "# Sample data from Breachify\n" + U.csv(rows),
           );
           done = true;
           download.textContent = "Downloaded · download again";

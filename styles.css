@@ -627,7 +627,7 @@ ul { list-style: none; }
   color: var(--body);
 }
 
-/* a case study page names the live product next to its lede */
+/* a product overview page names the live product next to its lede */
 .work__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: clamp(20px, 2vw, 32px); }
 .work__actions .project__cta:hover svg { transform: translate(2px, -2px); }
 
@@ -2752,7 +2752,7 @@ html.cf-lock { overflow: hidden; }
 }
 
 
-/* ---------- /meetfleet: the case study as its own page ----------
+/* ---------- /meetfleet: the product overview as its own page ----------
    The dark band opens the page, so it carries the top bar and a little more
    headroom; the menu and contact are the home page's own. */
 .work--page { padding-top: 0; }

@@ -151,7 +151,7 @@
     const exportRows = (kind, rows) => {
       const filename = `${domain()}-${kind}.csv`;
       const csv =
-        "# Sample data from the Breachify case study (intelotfi.com/breachify). Fictional.\n" +
+        "# Sample data from Breachify (intelotfi.com/breachify). Fictional.\n" +
         U.csv(rows);
       U.toast(toasts, {
         title: "Preparing a sample export",
@@ -323,7 +323,7 @@
         }
         U.toast(toasts, {
           title: link
-            ? `${name} is covered in the case study.`
+            ? `${name} is covered in the product breakdown.`
             : "Documents is in the navigation, but its page is not drawn yet.",
           action: link ? "Read chapter" : "",
           timeout: link ? 0 : 4200,

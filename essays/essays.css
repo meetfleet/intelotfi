@@ -7,7 +7,7 @@ body { visibility: visible; }
   font-display: swap;
 }
 
-/* Essays: a lighter, editorial voice than the case studies. Cool paper, one
+/* Essays: a lighter, editorial voice than the product deep dives. Cool paper, one
    blue accent, a serif italic for maths. Values taken from the Figma frames. */
 :root {
   --paper: #f2f4f6;

@@ -23,7 +23,7 @@
       });
     </script>
     <title>Antercept: managing what a click reveals | Hamza Lotfi</title>
-    <meta name="description" content="Chapter 2 of the Antercept case study: how a controlled awareness click becomes evidence — the anatomy of a session cookie, credential capture, the exposure timeline, and a transparent per-target risk score." />
+    <meta name="description" content="Chapter 2 of Antercept: how a controlled awareness click becomes evidence — the anatomy of a session cookie, credential capture, the exposure timeline, and a transparent per-target risk score." />
     <meta name="author" content="Hamza Lotfi" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="https://intelotfi.com/blog/the-catch.html" />
@@ -95,7 +95,7 @@
         </figure>
 
         <article class="article" id="article">
-          <aside class="ac-concept-note"><strong>About this case study.</strong> Product screens document the interface design. AI capabilities are proposed product concepts; interactive examples use local, illustrative rules and fictional data.</aside>
+          <aside class="ac-concept-note"><strong>About this deep dive.</strong> Product screens document the interface design. AI capabilities are proposed product concepts; interactive examples use local, illustrative rules and fictional data.</aside>
 
           <!-- 1 -->
           <section id="after-click" class="sec">
@@ -429,7 +429,7 @@
  <p><strong>Observed:</strong> the timestamped events the system actually received. <strong>Estimated:</strong> the model’s likely outcome, uncertainty and contributing signals. A stale heartbeat or missing endpoint event would lower confidence and could cause the assistant to abstain. “No evidence received” would remain distinct from “blocked.”</p>
  <p>For example, a fictional result might read: “Status unresolved. Link interaction observed; endpoint confirmation missing. Review the endpoint record.” The operator would confirm the result or leave it unresolved, with that decision preserved in the audit trail.</p>
  <h3>How I would validate it</h3>
- <p>Training labels would come from operator-verified exercise outcomes. Evaluation would split by campaign and time to reduce leakage, then measure calibration, false negatives and the share of cases that require abstention. The product would expose the model version and observation window beside each estimate. These are design assumptions; this case study does not report a trained infection model or measured performance.</p>
+ <p>Training labels would come from operator-verified exercise outcomes. Evaluation would split by campaign and time to reduce leakage, then measure calibration, false negatives and the share of cases that require abstention. The product would expose the model version and observation window beside each estimate. These are design assumptions; this chapter does not report a trained infection model or measured performance.</p>
  </section>
  <section id="evidence-library" class="sec">
  <h2>Keep the evidence inspectable</h2>

@@ -1,7 +1,7 @@
-# Antercept case study
+# Antercept product overview
 
 Built 14 October 2026, after Breachify. The most ambitious of the three project
-pages. Framed as a **product page**, not a design case study: Antercept is an
+pages. Framed as a **product page**: Antercept is an
 **AI-driven platform that builds, manages and runs** security-awareness /
 red-team operations. The page speaks as the product — what its AI does, how it
 composes templates, predicts outcomes, and runs campaigns.
@@ -106,7 +106,7 @@ No build step, no runtime dependency, no network calls. Deterministic, local.
 ## Home + i18n
 
 `index.html` antercept row changes from "coming soon / visit site" to a real
-"Read the case study" link to `/antercept/`, in EN/FR/AR. Cover image unchanged
+"Explore Antercept" link to `/antercept/`, in EN/FR/AR. Cover image unchanged
 (the Final-set red mark tile) unless replaced.
 
 ## Verification
