@@ -92,13 +92,20 @@ a:focus-visible {
   letter-spacing: -1.5px;
   display: inline-flex;
   align-items: baseline;
-  gap: 4px;
 }
 .bf-logo > span {
-  width: 4px;
-  height: 19px;
-  background: #c46330;
+  /* Unified brand mark: the wide underscore "_" used site-wide; only the colour differs per page. */
   display: inline-block;
+  width: 0.42em;
+  height: 0.1em;
+  margin-inline-start: 0.12em;
+  background: #c46330;
+  transform: translateY(0.06em);
+  animation: breathe 2.4s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.15; }
 }
 .bf-top nav,
 .bf-footer nav {
