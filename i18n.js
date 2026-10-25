@@ -64,6 +64,12 @@ const STRINGS = {
     "projects.cta.soon": "Coming soon",
     "projects.cta.visit": "Visit the site",
     "projects.more": "Also built",
+    "pp.nav.work": "All work",
+    "pp.nav.demo": "Try the demo",
+    "pp.nav.talk": "Let’s talk ↗",
+    "pp.read.chapter": "Read the chapter ↗",
+    "pp.cta.build": "Build something with me ↗",
+    "pp.footer.home": "Home",
     "projects.f.field": "Field",
     "projects.f.ai": "Core",
     "projects.f.site": "Site",
@@ -419,6 +425,12 @@ const STRINGS = {
     "projects.cta.soon": "Bientôt",
     "projects.cta.visit": "Voir le site",
     "projects.more": "Aussi construits",
+    "pp.nav.work": "Tous les projets",
+    "pp.nav.demo": "Essayer la démo",
+    "pp.nav.talk": "Discutons ↗",
+    "pp.read.chapter": "Lire le chapitre ↗",
+    "pp.cta.build": "Construisons ensemble ↗",
+    "pp.footer.home": "Accueil",
     "projects.f.field": "Domaine",
     "projects.f.ai": "Cœur",
     "projects.f.site": "Site",
@@ -774,6 +786,12 @@ const STRINGS = {
     "projects.cta.soon": "قريبًا",
     "projects.cta.visit": "زيارة الموقع",
     "projects.more": "بنيت أيضًا",
+    "pp.nav.work": "كل الأعمال",
+    "pp.nav.demo": "جرّب العرض",
+    "pp.nav.talk": "لنتحدّث ↗",
+    "pp.read.chapter": "اقرأ الفصل ↗",
+    "pp.cta.build": "لنصنع شيئًا معًا ↗",
+    "pp.footer.home": "الرئيسية",
     "projects.f.field": "المجال",
     "projects.f.ai": "الجوهر",
     "projects.f.site": "الموقع",
@@ -1113,9 +1131,14 @@ const i18n = (() => {
   function apply() {
     const root = document.documentElement;
     root.lang = lang;
-    root.dir = LANGS[lang].dir;
-    // a page can name its own title key on <html data-title-key>; the home page uses meta.title
-    document.title = t(root.dataset.titleKey || "meta.title");
+    // Only flip text direction on pages whose layout is RTL-ready and translated
+    // (the home page and meetfleet opt in with <html data-i18n-dir>). Blog, essay
+    // and project pages keep LTR until their prose is translated, so English copy
+    // is never force-mirrored into a broken RTL layout.
+    if ("i18nDir" in root.dataset) root.dir = LANGS[lang].dir;
+    // A page opts into a translated <title> with <html data-title-key="...">.
+    // Pages without it (blogs, essays, project pages) keep their own <title>.
+    if (root.dataset.titleKey) document.title = t(root.dataset.titleKey);
 
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       el.textContent = t(el.dataset.i18n);
@@ -1156,3 +1179,6 @@ const i18n = (() => {
     onChange: (fn) => listeners.push(fn),
   };
 })();
+
+/* expose for the shared language switcher (assets/langswitch.js) */
+try { window.i18n = i18n; } catch (e) {}
