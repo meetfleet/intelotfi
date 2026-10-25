@@ -61,6 +61,7 @@ ul { list-style: none; }
   min-height: 560px;
   overflow: hidden;
   isolation: isolate;
+  border-radius: clamp(20px, 2.2vw, 36px);
   background: var(--black);
   color: var(--white);
 }
@@ -506,14 +507,26 @@ ul { list-style: none; }
   color: var(--navy);
 }
 
-.about__lede {
+.about__body {
   grid-area: lede;
   max-width: 40em;
   padding-top: 0.6em;
+}
+
+.about__role {
+  margin-bottom: clamp(14px, 1.2vw, 20px);
+  color: var(--accent);
+}
+
+.about__lede {
   font-size: clamp(14px, 0.95vw, 18px);
   line-height: 1.68;
   letter-spacing: 0.005em;
   color: var(--body);
+}
+
+.about__lede--2 {
+  margin-top: 1.1em;
 }
 
 .stats {
