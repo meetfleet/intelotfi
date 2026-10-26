@@ -2590,6 +2590,78 @@ html.cf-lock { overflow: hidden; }
 .project--wide .project__cover { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15); }
 .project__cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
+/* ---- feature covers: the project's mark over a wheel of colour that turns with the scroll ----
+   Drawn on an 800 × 450 artboard; --u is one artboard unit. The twelve circles are windows onto a
+   colour field that stays put, so whichever one passes under the mark wears the project's --hue.
+   main.js drives --spin (the turn), --lit (a circle sits under the mark) and --lean. */
+.orbit {
+  --u: calc(100cqw / 800);
+  --spin: 0deg;
+  --lit: 1;
+  --lean: 0deg;
+  --wheel: var(--hue) 0deg 10deg, #6e6bff 52deg, #9f53ff 90deg, #ff5170 270deg, #bbff78 312deg, var(--hue) 350deg;
+  position: relative;
+  container-type: inline-size;
+  isolation: isolate;
+  background: #000;
+}
+.orbit > * { position: absolute; pointer-events: none; }
+.orbit__glow {
+  left: calc(var(--u) * 150);
+  top: calc(var(--u) * 190.5);
+  width: calc(var(--u) * 500);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: conic-gradient(from 90deg, #9f53ff, #ff5170 179deg, #f2be58 225deg, var(--hue) 270deg, #6e6bff 316deg, #9f53ff);
+  opacity: 0.3;
+  filter: blur(calc(var(--u) * 125));
+  rotate: calc(var(--spin) * -0.5);
+  will-change: rotate;
+}
+/* the mark's own light: blooms each time a circle lines up beneath it */
+.orbit__halo {
+  left: calc(var(--u) * 220);
+  top: calc(var(--u) * 85);
+  width: calc(var(--u) * 360);
+  height: calc(var(--u) * 300);
+  background: radial-gradient(closest-side, var(--hue), transparent);
+  opacity: calc(var(--lit) * 0.45);
+  scale: calc(0.85 + var(--lit) * 0.15);
+}
+.orbit__ring { left: 50%; top: calc(var(--u) * 558.3); rotate: var(--spin); will-change: rotate; }
+.orbit__ring i {
+  --a: 0deg;
+  position: absolute;
+  left: calc(var(--u) * -50);
+  top: calc(var(--u) * -250);
+  width: calc(var(--u) * 100);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform-origin: 50% calc(var(--u) * 250);
+  rotate: var(--a);
+  /* counter-turned by its own angle, so the colour stays fixed while the circle moves through it */
+  background: conic-gradient(from calc(0deg - var(--a) - var(--spin)) at 50% calc(var(--u) * 250), var(--wheel));
+}
+.orbit__ring i:nth-child(2) { --a: 30deg; }
+.orbit__ring i:nth-child(3) { --a: 60deg; }
+.orbit__ring i:nth-child(4) { --a: 90deg; }
+.orbit__ring i:nth-child(5) { --a: 120deg; }
+.orbit__ring i:nth-child(6) { --a: 150deg; }
+.orbit__ring i:nth-child(7) { --a: 180deg; }
+.orbit__ring i:nth-child(8) { --a: 210deg; }
+.orbit__ring i:nth-child(9) { --a: 240deg; }
+.orbit__ring i:nth-child(10) { --a: 270deg; }
+.orbit__ring i:nth-child(11) { --a: 300deg; }
+.orbit__ring i:nth-child(12) { --a: 330deg; }
+.orbit .orbit__mark {
+  left: calc(var(--u) * 317.5);
+  top: calc(var(--u) * 122.7);
+  width: calc(var(--u) * 165);
+  height: auto;
+  rotate: var(--lean);
+  scale: calc(1 + var(--lit) * 0.04);
+}
+
 .project__body { display: flex; flex-direction: column; min-width: 0; }
 .project__top { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
 .project__n { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; color: var(--muted); }

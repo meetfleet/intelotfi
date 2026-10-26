@@ -1113,6 +1113,63 @@ if (!("onpagereveal" in window)) {
   queue();
 })();
 
+/* ---------- Project covers: the wheel turns with the scroll ----------
+   Each feature cover rests in its drawn pose when it sits mid-screen and turns
+   clockwise as the page scrolls down, easing behind the scroll like a flywheel.
+   Each time a circle lines up under the mark, the mark lights up in the project's
+   colour; it leans into the turn while the wheel is moving. Hovering a project
+   steps the wheel on by one circle. */
+
+(() => {
+  const covers = [...document.querySelectorAll(".orbit")].map((el) => ({ el, spin: 0, lean: 0, push: 0, seen: false, snap: true }));
+  if (!covers.length) return;
+  const RATE = 0.14 * AMP;   // degrees of turn per pixel scrolled
+  const STEP = 30;           // twelve circles, one every 30°
+
+  let raf = 0;
+  const tick = () => {
+    raf = 0;
+    let moving = false;
+    // measure every cover before writing to any, so the writes never force a layout
+    const live = covers.filter((c) => c.seen).map((c) => [c, c.el.getBoundingClientRect()]);
+    for (const [c, r] of live) {
+      const target = (innerHeight / 2 - r.top - r.height / 2) * RATE + c.push;
+      // a cover that just came into view starts where the scroll says, so only scrolling turns it
+      const d = c.snap ? 0 : target - c.spin;
+      if (c.snap) { c.spin = target; c.snap = false; }
+      const step = Math.abs(d) < 0.02 ? d : d * 0.12;
+      c.spin += step;
+      c.lean += ((reduceMotion ? 0 : Math.max(-6, Math.min(6, step * 1.5))) - c.lean) * 0.15;
+      if (Math.abs(c.lean) < 0.01) c.lean = 0;
+      const lit = ((1 + Math.cos((c.spin / STEP) * 2 * Math.PI)) / 2) ** 2;
+      c.el.style.setProperty("--spin", `${c.spin.toFixed(2)}deg`);
+      c.el.style.setProperty("--lean", `${c.lean.toFixed(2)}deg`);
+      c.el.style.setProperty("--lit", lit.toFixed(3));
+      if (step !== d || c.lean) moving = true;
+    }
+    if (moving) raf = requestAnimationFrame(tick);
+  };
+  const queue = () => { if (!raf) raf = requestAnimationFrame(tick); };
+
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      const c = covers.find((x) => x.el === e.target);
+      c.seen = e.isIntersecting;
+      if (!c.seen) c.snap = true;
+    }
+    queue();
+  }, { rootMargin: "120px 0px" });
+  for (const c of covers) {
+    io.observe(c.el);
+    if (!finePointer) continue;
+    const row = c.el.closest(".project");
+    row.addEventListener("pointerenter", () => { c.push = STEP; queue(); });
+    row.addEventListener("pointerleave", () => { c.push = 0; queue(); });
+  }
+  addEventListener("scroll", queue, { passive: true });
+  addEventListener("resize", queue);
+})();
+
 /* ---------- Meetfleet page: chapter peeks load their figures on first hover ---------- */
 
 document.querySelectorAll(".post").forEach((post) => {
