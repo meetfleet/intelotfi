@@ -1115,16 +1115,21 @@ if (!("onpagereveal" in window)) {
 
 /* ---------- Project covers: the wheel turns with the scroll ----------
    Each feature cover rests in its drawn pose when it sits mid-screen and turns
-   clockwise as the page scrolls down, easing behind the scroll like a flywheel.
-   Each time a circle lines up under the mark, the mark lights up in the project's
-   colour; it leans into the turn while the wheel is moving. Hovering a project
-   steps the wheel on by one circle. */
+   slowly as the page scrolls, about one circle over its whole time on screen,
+   easing behind the scroll like a heavy flywheel. Each cover keeps its own pace
+   and direction (data-turn), so the column never spins in lockstep. The layers
+   drift apart for depth: the glow lags, the mark runs a little ahead. Each time
+   a circle lines up under the mark, the mark lights up in the project's colour.
+   Hovering a project steps its wheel on by one circle. */
 
 (() => {
-  const covers = [...document.querySelectorAll(".orbit")].map((el) => ({ el, spin: 0, lean: 0, push: 0, seen: false, snap: true }));
+  const covers = [...document.querySelectorAll(".orbit")].map((el) => ({
+    el, turn: +el.dataset.turn || 1, spin: 0, drift: 0, lean: 0, push: 0, seen: false, snap: true,
+  }));
   if (!covers.length) return;
-  const RATE = 0.14 * AMP;   // degrees of turn per pixel scrolled
+  const RATE = 0.045 * AMP;  // degrees of turn per pixel scrolled, before each cover's own pace
   const STEP = 30;           // twelve circles, one every 30°
+  const EASE = 0.07;         // share of the gap closed each frame: low, so the wheel feels heavy
 
   let raf = 0;
   const tick = () => {
@@ -1133,19 +1138,24 @@ if (!("onpagereveal" in window)) {
     // measure every cover before writing to any, so the writes never force a layout
     const live = covers.filter((c) => c.seen).map((c) => [c, c.el.getBoundingClientRect()]);
     for (const [c, r] of live) {
-      const target = (innerHeight / 2 - r.top - r.height / 2) * RATE + c.push;
-      // a cover that just came into view starts where the scroll says, so only scrolling turns it
-      const d = c.snap ? 0 : target - c.spin;
-      if (c.snap) { c.spin = target; c.snap = false; }
-      const step = Math.abs(d) < 0.02 ? d : d * 0.12;
+      const off = r.top + r.height / 2 - innerHeight / 2;   // how far the cover sits below mid-screen
+      const spinTo = -off * RATE * c.turn + c.push;
+      const driftTo = Math.max(-1, Math.min(1, off / (innerHeight / 2 + r.height / 2)));
+      // a cover that just came into view starts where the scroll says, so only scrolling moves it
+      if (c.snap) { c.spin = spinTo; c.drift = driftTo; c.snap = false; }
+      const ds = spinTo - c.spin, dd = driftTo - c.drift;
+      const step = Math.abs(ds) < 0.01 ? ds : ds * EASE;
       c.spin += step;
-      c.lean += ((reduceMotion ? 0 : Math.max(-6, Math.min(6, step * 1.5))) - c.lean) * 0.15;
+      c.drift += Math.abs(dd) < 0.001 ? dd : dd * EASE;
+      // the mark only leans on a quick scroll, and never far
+      c.lean += ((reduceMotion ? 0 : Math.max(-3, Math.min(3, step * 2.5))) - c.lean) * 0.1;
       if (Math.abs(c.lean) < 0.01) c.lean = 0;
       const lit = ((1 + Math.cos((c.spin / STEP) * 2 * Math.PI)) / 2) ** 2;
       c.el.style.setProperty("--spin", `${c.spin.toFixed(2)}deg`);
+      c.el.style.setProperty("--drift", c.drift.toFixed(4));
       c.el.style.setProperty("--lean", `${c.lean.toFixed(2)}deg`);
       c.el.style.setProperty("--lit", lit.toFixed(3));
-      if (step !== d || c.lean) moving = true;
+      if (Math.abs(ds) >= 0.01 || Math.abs(dd) >= 0.001 || c.lean) moving = true;
     }
     if (moving) raf = requestAnimationFrame(tick);
   };
@@ -1163,7 +1173,7 @@ if (!("onpagereveal" in window)) {
     io.observe(c.el);
     if (!finePointer) continue;
     const row = c.el.closest(".project");
-    row.addEventListener("pointerenter", () => { c.push = STEP; queue(); });
+    row.addEventListener("pointerenter", () => { c.push = STEP * Math.sign(c.turn); queue(); });
     row.addEventListener("pointerleave", () => { c.push = 0; queue(); });
   }
   addEventListener("scroll", queue, { passive: true });

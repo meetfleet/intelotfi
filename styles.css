@@ -2593,10 +2593,12 @@ html.cf-lock { overflow: hidden; }
 /* ---- feature covers: the project's mark over a wheel of colour that turns with the scroll ----
    Drawn on an 800 × 450 artboard; --u is one artboard unit. The twelve circles are windows onto a
    colour field that stays put, so whichever one passes under the mark wears the project's --hue.
-   main.js drives --spin (the turn), --lit (a circle sits under the mark) and --lean. */
+   main.js drives --spin (the turn), --drift (1 below mid-screen, -1 above, for the parallax),
+   --lit (a circle sits under the mark) and --lean. */
 .orbit {
   --u: calc(100cqw / 800);
   --spin: 0deg;
+  --drift: 0;
   --lit: 1;
   --lean: 0deg;
   --wheel: var(--hue) 0deg 10deg, #6e6bff 52deg, #9f53ff 90deg, #ff5170 270deg, #bbff78 312deg, var(--hue) 350deg;
@@ -2615,8 +2617,10 @@ html.cf-lock { overflow: hidden; }
   background: conic-gradient(from 90deg, #9f53ff, #ff5170 179deg, #f2be58 225deg, var(--hue) 270deg, #6e6bff 316deg, #9f53ff);
   opacity: 0.3;
   filter: blur(calc(var(--u) * 125));
+  /* the far layer: lags behind the scroll */
+  translate: 0 calc(var(--drift) * var(--u) * -36);
   rotate: calc(var(--spin) * -0.5);
-  will-change: rotate;
+  will-change: translate, rotate;
 }
 /* the mark's own light: blooms each time a circle lines up beneath it */
 .orbit__halo {
@@ -2626,6 +2630,7 @@ html.cf-lock { overflow: hidden; }
   height: calc(var(--u) * 300);
   background: radial-gradient(closest-side, var(--hue), transparent);
   opacity: calc(var(--lit) * 0.45);
+  translate: 0 calc(var(--drift) * var(--u) * 14);
   scale: calc(0.85 + var(--lit) * 0.15);
 }
 .orbit__ring { left: 50%; top: calc(var(--u) * 558.3); rotate: var(--spin); will-change: rotate; }
@@ -2658,6 +2663,8 @@ html.cf-lock { overflow: hidden; }
   top: calc(var(--u) * 122.7);
   width: calc(var(--u) * 165);
   height: auto;
+  /* the near layer: runs a little ahead of the scroll */
+  translate: 0 calc(var(--drift) * var(--u) * 14);
   rotate: var(--lean);
   scale: calc(1 + var(--lit) * 0.04);
 }
