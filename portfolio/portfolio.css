@@ -240,6 +240,16 @@ a.pf-card__media:hover video { scale: 1.03; }
   --cs-glow-b: rgba(15, 202, 255, 0.06);
 }
 
+/* Flatfile: deep navy, with the brand's indigo light, coral and peach */
+.cs--flatfile {
+  --cs-accent: #f06d58;
+  --cs-deep: #ffd8b8;
+  --cs-sheet: #0b1126;
+  --cs-media: #111a38;
+  --cs-glow-a: rgba(60, 45, 201, 0.36);
+  --cs-glow-b: rgba(240, 109, 88, 0.08);
+}
+
 /* the band's light takes the client's colour */
 .cs .work__band::before {
   background:
@@ -317,6 +327,11 @@ a.pf-card__media:hover video { scale: 1.03; }
 .cs-facts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: clamp(24px, 3vw, 56px); margin-top: clamp(36px, 4vw, 64px); padding-top: clamp(24px, 2.4vw, 40px); border-top: 1px solid var(--cs-rule); }
 .cs-outcome { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-content: start; }
 .cs-facts h4 { font-family: var(--mono); font-size: 11px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cs-muted); }
+/* three headline figures take a full row of their own, above the details */
+.cs-facts--wide { grid-template-columns: 1fr; }
+.cs-facts--wide .cs-outcome { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.cs-facts--wide .cs-info { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.cs-outcome p { margin-top: 8px; font-size: 14px; color: var(--cs-muted); }
 .cs-outcome strong { display: block; margin-top: 10px; font-size: clamp(40px, 4.2vw, 80px); font-weight: 300; line-height: 1; letter-spacing: -0.04em; color: var(--cs-ink); }
 .cs-info { display: grid; gap: 22px; }
 .cs-info p, .cs-info li { margin-top: 6px; font-size: 15px; line-height: 1.5; color: var(--cs-ink); }
@@ -333,6 +348,11 @@ a.pf-card__media:hover video { scale: 1.03; }
   letter-spacing: -0.02em;
   color: var(--cs-ink);
 }
+
+/* a longer opening: two paragraphs, a size down */
+.cs-statement--long { max-width: 38em; font-size: clamp(19px, 1.65vw, 30px); line-height: 1.45; }
+.cs-statement p + p { margin-top: 0.9em; }
+.cs-statement a, .cs-sec__body > p a { background: linear-gradient(var(--cs-accent), var(--cs-accent)) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; }
 
 .cs-gallery { display: grid; gap: clamp(8px, 1vw, 16px); }
 
