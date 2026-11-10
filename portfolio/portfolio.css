@@ -1,0 +1,351 @@
+/* ===========================================================================
+   Portfolio · client work
+   /portfolio picks a project on the Option Wheel; each project then has its own
+   case-study page. Sits on top of the site's styles.css (top bar, menu, contact).
+   =========================================================================== */
+
+/* ---------- Option Wheel (React Bits OptionWheel, JS-CSS) ---------- */
+
+.option-wheel {
+  --ow-text-color: #a6a6a6;
+  --ow-active-color: #ffffff;
+  --ow-font-size: 3rem;
+  --ow-inset: 80px;
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  outline: none;
+}
+
+.option-wheel--dragging {
+  cursor: grabbing;
+}
+
+/* Each option is absolutely centered, then offset along the curve by the
+   rAF loop through transform/opacity/filter, so everything stays in step. */
+.option-wheel__item {
+  position: absolute;
+  top: 50%;
+  left: var(--ow-inset);
+  white-space: nowrap;
+  font-size: var(--ow-font-size);
+  line-height: 1;
+  font-weight: 300;
+  transform-origin: left center;
+  cursor: pointer;
+  will-change: transform, opacity, filter;
+  /* --ow-p goes 0 -> 1 as an option approaches the middle of the wheel */
+  color: color-mix(in srgb, var(--ow-active-color) calc(var(--ow-p, 0) * 100%), var(--ow-text-color));
+}
+
+.option-wheel--right .option-wheel__item {
+  left: auto;
+  right: var(--ow-inset);
+  transform-origin: right center;
+}
+
+.option-wheel__item--selected {
+  font-weight: 400;
+}
+
+/* ---------- shared ---------- */
+
+.pf, .cs { --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace; }
+
+/* ---------- /portfolio ---------- */
+
+.pf .work__band {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100svh - var(--frame) * 2);
+}
+
+.pf__head { position: relative; display: flex; justify-content: space-between; align-items: baseline; gap: 24px; }
+.pf__head .work__eyebrow { margin-bottom: 0; }
+.pf__count { font-family: var(--mono); font-size: clamp(12px, 0.85vw, 15px); letter-spacing: 0.08em; color: var(--body); direction: ltr; }
+.pf__count b { font-weight: 400; color: #fff; }
+
+.pf__stage {
+  position: relative;
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(28px, 4.4vw, 88px);
+  margin-top: clamp(12px, 2vw, 36px);
+}
+
+.pf__wheel {
+  --ow-font-size: clamp(48px, 6.4vw, 128px);
+  /* the curve carries the outer options about 0.4em to the left: give them that room,
+     and pull the wheel back by the same amount so the middle option lines up with the eyebrow */
+  --ow-inset: 0.45em;
+  --ow-text-color: #4a4b55;
+  --ow-active-color: #ffffff;
+  height: clamp(380px, 64svh, 760px);
+  margin-left: -0.45em;
+  font-size: var(--ow-font-size);
+  letter-spacing: -0.045em;
+  direction: ltr; /* project names are Latin in every language */
+  /* the far options dissolve into the band instead of being cut at the edge */
+  -webkit-mask-image: linear-gradient(transparent, #000 16%, #000 84%, transparent);
+  mask-image: linear-gradient(transparent, #000 16%, #000 84%, transparent);
+}
+/* in Arabic the wheel hangs from the right edge and curls away to the right */
+.pf__wheel.option-wheel--right { margin-left: 0; margin-right: -0.45em; }
+.pf__wheel:focus-visible { outline: 1px solid rgba(255, 255, 255, 0.4); outline-offset: 6px; border-radius: 12px; }
+
+.pf__previews { display: grid; }
+
+.pf-card {
+  grid-area: 1 / 1;
+  opacity: 0;
+  translate: 0 18px;
+  filter: blur(6px);
+  pointer-events: none;
+  transition: opacity 0.5s var(--expo-out), translate 0.9s var(--expo-out), filter 0.6s var(--expo-out);
+}
+.pf-card.is-active { opacity: 1; translate: none; filter: none; pointer-events: auto; transition-delay: 0.08s; }
+
+.pf-card__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: clamp(10px, 1vw, 16px);
+  background: #17171a;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+.pf-card__media video, .pf-card__media img { display: block; width: 100%; height: 100%; object-fit: cover; transition: scale 1.2s var(--expo-out); }
+a.pf-card__media:hover video { scale: 1.03; }
+
+/* a project still being written up: its name, quietly, on a tinted plate */
+.pf-card__media--soon {
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(70% 90% at 100% 0%, color-mix(in srgb, var(--accent) 34%, transparent), transparent 70%),
+    radial-gradient(60% 70% at 0% 100%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%),
+    #111114;
+}
+.pf-card__ghost { font-size: clamp(40px, 5vw, 96px); font-weight: 300; letter-spacing: -0.045em; color: rgba(255, 255, 255, 0.16); direction: ltr; }
+.pf-card__chip {
+  position: absolute;
+  inset-inline-start: 16px;
+  bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(8px);
+}
+.pf-card__chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pf-pulse 2.4s ease-in-out infinite; }
+@keyframes pf-pulse { 50% { opacity: 0.3; } }
+
+.pf-card__k {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  margin-top: clamp(18px, 1.8vw, 28px);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--body);
+}
+.pf-card__k::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+.pf-card__title { margin-top: 12px; font-size: clamp(22px, 1.9vw, 36px); font-weight: 300; line-height: 1.15; letter-spacing: -0.02em; color: #fff; }
+.pf-card__desc { max-width: 34em; margin-top: 12px; font-size: clamp(14px, 1vw, 17px); line-height: 1.6; color: var(--body); }
+.pf-card__facts { display: flex; flex-wrap: wrap; gap: 10px clamp(20px, 2.4vw, 40px); margin-top: clamp(16px, 1.6vw, 24px); }
+.pf-card__facts dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #6f707d; }
+.pf-card__facts dd { margin-top: 4px; font-size: 14px; color: #e6e6ea; }
+.pf-card .project__cta { margin-top: clamp(18px, 1.8vw, 28px); }
+.pf-card .project__cta svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.6s var(--expo-out); }
+.pf-card .project__cta:hover svg { transform: translateX(3px); }
+[dir="rtl"] .pf-card .project__cta svg { scale: -1 1; }
+
+.pf__hint {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: clamp(16px, 2vw, 32px);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6f707d;
+}
+.pf__hint svg { width: 14px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.3; }
+.pf__hint svg line { animation: pf-scroll 1.8s var(--expo-out) infinite; }
+@keyframes pf-scroll { from { translate: 0 -2px; opacity: 1; } to { translate: 0 4px; opacity: 0; } }
+
+:root[lang="ar"] .pf__count, :root[lang="ar"] .pf-card__k, :root[lang="ar"] .pf-card__facts dt, :root[lang="ar"] .pf__hint, :root[lang="ar"] .pf-card__chip { font-family: inherit; letter-spacing: 0; }
+
+@media (max-width: 860px) {
+  .pf__stage { grid-template-columns: 1fr; align-items: start; }
+  .pf__wheel { --ow-font-size: clamp(40px, 12vw, 88px); height: clamp(260px, 44svh, 420px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf__hint svg line, .pf-card__chip::before { animation: none; }
+}
+
+/* ---------- case study ----------
+   The dark band opens with the title and the film; the story then runs on a
+   pale sheet in the client's own greys, teals and forest green. */
+
+.cs {
+  --cs-ink: #203233;
+  --cs-soft: #4a5a5b;
+  --cs-muted: #7c8a8b;
+  --cs-rule: rgba(32, 50, 51, 0.12);
+  --cs-accent: #00beaa;
+  --cs-deep: #007f78;
+  --cs-sheet: #f4f4f4;
+}
+
+/* the band's light takes the client's colour */
+.cs .work__band::before {
+  background:
+    radial-gradient(80% 60% at 100% 0%, rgba(0, 190, 170, 0.18), transparent 60%),
+    radial-gradient(60% 40% at 0% 100%, rgba(255, 176, 24, 0.07), transparent 60%);
+}
+.cs .logo__cursor { background: var(--cs-accent); }
+
+.cs__hero { position: relative; }
+.cs__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: clamp(20px, 2.4vw, 40px);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--body);
+  transition: color 0.3s;
+}
+.cs__back:hover { color: #fff; }
+.cs__back svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.6s var(--expo-out); }
+.cs__back:hover svg { transform: translateX(-3px); }
+[dir="rtl"] .cs__back svg { scale: -1 1; }
+
+.cs .work__title { direction: ltr; text-align: start; }
+.cs__intro { display: flex; justify-content: space-between; align-items: flex-end; gap: clamp(20px, 4vw, 80px); margin-top: clamp(18px, 2vw, 32px); }
+.cs__intro .work__lede { margin: 0; color: #c9cdd0; }
+.cs__tags { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; max-width: 34em; }
+.cs__tags li { padding: 7px 12px; border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 999px; font-size: 13px; color: #d6d8dc; }
+
+.cs-media { margin: 0; overflow: hidden; border-radius: clamp(10px, 1.2vw, 20px); background: #e6e8e8; }
+.cs-media video, .cs-media img { display: block; width: 100%; height: auto; }
+.cs-media--hero { position: relative; margin-top: clamp(32px, 4vw, 72px); background: #111; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1); }
+
+.cs__sheet {
+  --tuck: clamp(28px, 3vw, 56px);
+  position: relative;
+  z-index: 1;
+  margin: calc(var(--tuck) * -1) clamp(10px, 1.6vw, 28px) 0;
+  padding: calc(var(--tuck) + clamp(8px, 1vw, 20px)) clamp(18px, 3.6vw, 72px) clamp(40px, 5vw, 96px);
+  background: var(--cs-sheet);
+  border-radius: 0 0 clamp(20px, 2.2vw, 40px) clamp(20px, 2.2vw, 40px);
+  color: var(--cs-ink);
+}
+
+.cs-sec {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.3fr);
+  gap: clamp(20px, 5vw, 100px);
+  padding-block: clamp(48px, 6vw, 120px);
+}
+.cs-sec + .cs-sec, .cs-gallery + .cs-sec { border-top: 1px solid var(--cs-rule); }
+.cs-sec__h {
+  align-self: start;
+  position: sticky;
+  top: clamp(24px, 3vw, 48px);
+  font-size: clamp(34px, 3.6vw, 68px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.cs-sec__h small { display: block; margin-bottom: 14px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; color: var(--cs-deep); }
+.cs-sec__body { max-width: 46em; }
+.cs-sec__body p, .cs-list li { font-size: clamp(16px, 1.22vw, 21px); line-height: 1.62; color: var(--cs-soft); }
+.cs-sec__body p + p, .cs-sec__body p + .cs-list, .cs-list + p { margin-top: 1.2em; }
+.cs-sec__body h3 { margin-top: clamp(32px, 3vw, 52px); margin-bottom: 0.6em; font-size: clamp(20px, 1.6vw, 28px); font-weight: 400; letter-spacing: -0.015em; color: var(--cs-ink); }
+.cs-sec__body h3 + p { margin-top: 0; }
+.cs-list li { position: relative; padding-inline-start: 1.6em; }
+.cs-list li + li { margin-top: 0.8em; }
+.cs-list li::before { content: ""; position: absolute; inset-inline-start: 0.2em; top: 0.68em; width: 7px; height: 7px; border-radius: 50%; background: var(--cs-accent); }
+
+/* the facts beside the story: two headline figures, then services, stack and site */
+.cs-facts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: clamp(24px, 3vw, 56px); margin-top: clamp(36px, 4vw, 64px); padding-top: clamp(24px, 2.4vw, 40px); border-top: 1px solid var(--cs-rule); }
+.cs-outcome { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-content: start; }
+.cs-facts h4 { font-family: var(--mono); font-size: 11px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cs-muted); }
+.cs-outcome strong { display: block; margin-top: 10px; font-size: clamp(40px, 4.2vw, 80px); font-weight: 300; line-height: 1; letter-spacing: -0.04em; color: var(--cs-ink); }
+.cs-info { display: grid; gap: 22px; }
+.cs-info p, .cs-info li { margin-top: 6px; font-size: 15px; line-height: 1.5; color: var(--cs-ink); }
+.cs-info ul { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.cs-info a { color: var(--cs-deep); background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; }
+
+.cs-statement {
+  max-width: 30em;
+  padding-block: clamp(40px, 5vw, 96px) clamp(40px, 5vw, 88px);
+  margin-inline-start: auto;
+  font-size: clamp(22px, 2.3vw, 42px);
+  font-weight: 300;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--cs-ink);
+}
+
+.cs-gallery { display: grid; gap: clamp(8px, 1vw, 16px); }
+
+.cs-quote { margin: 0; }
+.cs-quote p { font-size: clamp(22px, 2.2vw, 40px); font-weight: 300; line-height: 1.35; letter-spacing: -0.02em; color: var(--cs-ink); text-indent: -0.42em; }
+.cs-quote footer { display: flex; align-items: center; gap: 16px; margin-top: clamp(28px, 3vw, 48px); }
+.cs-quote img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; }
+.cs-quote cite { font-style: normal; font-size: 16px; color: var(--cs-ink); }
+.cs-quote cite span { display: block; margin-top: 4px; font-size: 14px; color: var(--cs-muted); }
+
+/* the way on: the next project, and the way back to the wheel */
+.cs-next {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 24px;
+  margin-top: clamp(24px, 3vw, 48px);
+  padding-top: clamp(32px, 4vw, 64px);
+  border-top: 1px solid var(--cs-rule);
+}
+.cs-next__k { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cs-muted); }
+.cs-next__name { display: inline-flex; align-items: baseline; gap: 0.3em; margin-top: 10px; font-size: clamp(56px, 8vw, 168px); font-weight: 300; line-height: 0.92; letter-spacing: -0.045em; color: var(--cs-ink); direction: ltr; transition: color 0.4s; }
+.cs-next__name small { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cs-muted); }
+.cs-next__name:hover { color: var(--cs-deep); }
+.cs-next__all { display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px 12px 18px; border-radius: 8px; background: var(--cs-ink); color: #fff; font-size: 14px; transition: background-color 0.4s; }
+.cs-next__all:hover { background: var(--cs-deep); }
+.cs-next__all svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+[dir="rtl"] .cs-next__all svg { scale: -1 1; }
+
+:root[lang="ar"] .cs__back, :root[lang="ar"] .cs-next__k, :root[lang="ar"] .cs-facts h4 { font-family: inherit; letter-spacing: 0; }
+
+@media (max-width: 900px) {
+  .cs__intro { flex-direction: column; align-items: flex-start; }
+  .cs__tags { justify-content: flex-start; }
+  .cs-sec { grid-template-columns: 1fr; }
+  .cs-sec__h { position: static; }
+  .cs-facts { grid-template-columns: 1fr; }
+  .cs-next { grid-template-columns: 1fr; align-items: start; }
+}
