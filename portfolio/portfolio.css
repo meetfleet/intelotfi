@@ -215,13 +215,36 @@ a.pf-card__media:hover video { scale: 1.03; }
   --cs-accent: #00beaa;
   --cs-deep: #007f78;
   --cs-sheet: #f4f4f4;
+  --cs-media: #e6e8e8;
+  --cs-on-ink: #fff;
+  --cs-glow-a: rgba(0, 190, 170, 0.18);
+  --cs-glow-b: rgba(255, 176, 24, 0.07);
+}
+
+/* an all-dark case study: the sheet goes dark with the band (the frame and footer follow below) */
+.cs--dark {
+  --cs-ink: #eef1f0;
+  --cs-soft: #9ba5a2;
+  --cs-muted: #6c7673;
+  --cs-rule: rgba(255, 255, 255, 0.1);
+  --cs-sheet: #0f1211;
+  --cs-media: #141716;
+  --cs-on-ink: #070808;
+}
+
+/* Source Network: near-black, with the brand's green and cyan */
+.cs--source {
+  --cs-accent: #04b14e;
+  --cs-deep: #2fd572;
+  --cs-glow-a: rgba(4, 177, 78, 0.2);
+  --cs-glow-b: rgba(15, 202, 255, 0.06);
 }
 
 /* the band's light takes the client's colour */
 .cs .work__band::before {
   background:
-    radial-gradient(80% 60% at 100% 0%, rgba(0, 190, 170, 0.18), transparent 60%),
-    radial-gradient(60% 40% at 0% 100%, rgba(255, 176, 24, 0.07), transparent 60%);
+    radial-gradient(80% 60% at 100% 0%, var(--cs-glow-a), transparent 60%),
+    radial-gradient(60% 40% at 0% 100%, var(--cs-glow-b), transparent 60%);
 }
 .cs .logo__cursor { background: var(--cs-accent); }
 
@@ -249,7 +272,7 @@ a.pf-card__media:hover video { scale: 1.03; }
 .cs__tags { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; max-width: 34em; }
 .cs__tags li { padding: 7px 12px; border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 999px; font-size: 13px; color: #d6d8dc; }
 
-.cs-media { margin: 0; overflow: hidden; border-radius: clamp(10px, 1.2vw, 20px); background: #e6e8e8; }
+.cs-media { margin: 0; overflow: hidden; border-radius: clamp(10px, 1.2vw, 20px); background: var(--cs-media); }
 .cs-media video, .cs-media img { display: block; width: 100%; height: auto; }
 .cs-media--hero { position: relative; margin-top: clamp(32px, 4vw, 72px); background: #111; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1); }
 
@@ -334,12 +357,41 @@ a.pf-card__media:hover video { scale: 1.03; }
 .cs-next__name { display: inline-flex; align-items: baseline; gap: 0.3em; margin-top: 10px; font-size: clamp(56px, 8vw, 168px); font-weight: 300; line-height: 0.92; letter-spacing: -0.045em; color: var(--cs-ink); direction: ltr; transition: color 0.4s; }
 .cs-next__name small { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cs-muted); }
 .cs-next__name:hover { color: var(--cs-deep); }
-.cs-next__all { display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px 12px 18px; border-radius: 8px; background: var(--cs-ink); color: #fff; font-size: 14px; transition: background-color 0.4s; }
+.cs-next__all { display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px 12px 18px; border-radius: 8px; background: var(--cs-ink); color: var(--cs-on-ink); font-size: 14px; transition: background-color 0.4s; }
 .cs-next__all:hover { background: var(--cs-deep); }
 .cs-next__all svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 [dir="rtl"] .cs-next__all svg { scale: -1 1; }
 
+/* a gallery with no story between its films gets a quiet label under each one */
+.cs-media figcaption {
+  padding: 12px 2px 2px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cs-muted);
+  background: var(--cs-sheet);
+}
+.cs-media figcaption b { margin-inline-end: 0.8em; font-weight: 400; color: var(--cs-deep); }
+.cs-media:has(figcaption) { border-radius: 0; background: none; }
+.cs-media:has(figcaption) > :is(video, img) { border-radius: clamp(10px, 1.2vw, 20px); background: var(--cs-media); }
+
 :root[lang="ar"] .cs__back, :root[lang="ar"] .cs-next__k, :root[lang="ar"] .cs-facts h4 { font-family: inherit; letter-spacing: 0; }
+
+/* ---------- an all-dark page: the frame around the band, the footer and the back-to-top button ---------- */
+
+body.page--dark { background: #060707; }
+.page--dark .contact {
+  --navy: #eef1f0;
+  --body: #8f9996;
+  --muted: #6c7673;
+  --line: rgba(255, 255, 255, 0.12);
+}
+.page--dark .cta { color: #060707; }
+.page--dark .channel:hover { background: rgba(255, 255, 255, 0.04); }
+.page--dark .contact__mark { -webkit-text-stroke-color: rgba(255, 255, 255, 0.16); }
+.page--dark #to-top { background: #eef1f0; color: #060707; }
+.page--dark #to-top:hover { background: #fff; }
 
 @media (max-width: 900px) {
   .cs__intro { flex-direction: column; align-items: flex-start; }
