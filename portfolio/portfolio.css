@@ -250,6 +250,16 @@ a.pf-card__media:hover video { scale: 1.03; }
   --cs-glow-b: rgba(240, 109, 88, 0.08);
 }
 
+/* Gamaya: field green from the product, with the warm light of the satellite maps */
+.cs--gamaya {
+  --cs-accent: #34a862;
+  --cs-deep: #8fd19e;
+  --cs-sheet: #0d110e;
+  --cs-media: #131814;
+  --cs-glow-a: rgba(42, 146, 84, 0.26);
+  --cs-glow-b: rgba(196, 160, 96, 0.09);
+}
+
 /* the band's light takes the client's colour */
 .cs .work__band::before {
   background:
@@ -395,6 +405,62 @@ a.pf-card__media:hover video { scale: 1.03; }
 .cs-media figcaption b { margin-inline-end: 0.8em; font-weight: 400; color: var(--cs-deep); }
 .cs-media:has(figcaption) { border-radius: 0; background: none; }
 .cs-media:has(figcaption) > :is(video, img) { border-radius: clamp(10px, 1.2vw, 20px); background: var(--cs-media); }
+
+/* ---- chapters: a product told feature by feature, the words held beside their screens ---- */
+.cs-chapter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+  align-items: start;
+  gap: clamp(24px, 4.4vw, 88px);
+  padding-block: clamp(40px, 5vw, 96px);
+  border-top: 1px solid var(--cs-rule);
+}
+.cs-chapter--flip .cs-chapter__text { order: 2; }
+/* the text stays in view while its screens scroll past */
+.cs-chapter__text { position: sticky; top: clamp(24px, 3vw, 48px); }
+.cs-chapter h2 { font-size: clamp(24px, 2.2vw, 42px); font-weight: 300; line-height: 1.12; letter-spacing: -0.025em; color: var(--cs-ink); }
+.cs-chapter h2 small { display: block; margin-bottom: 14px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; color: var(--cs-deep); }
+.cs-chapter p, .cs-chapter li { font-size: clamp(15px, 1.12vw, 19px); line-height: 1.62; color: var(--cs-soft); }
+.cs-chapter__text > * + *, .cs-chapter__body > * + * { margin-top: 1em; }
+.cs-chapter__text > h2 + * { margin-top: 1.2em; }
+.cs-chapter strong, .cs-statement strong { font-weight: 400; color: var(--cs-ink); }
+.cs-chapter__media { display: grid; gap: clamp(10px, 1.2vw, 20px); }
+/* a sentence that introduces a screen sits above it */
+.cs-chapter__media .cs-media figcaption { order: -1; padding: 0 2px 12px; font-family: inherit; font-size: clamp(14px, 1vw, 17px); letter-spacing: 0; text-transform: none; line-height: 1.55; color: var(--cs-soft); }
+.cs-chapter__media .cs-media:has(figcaption) { display: flex; flex-direction: column; }
+/* a chapter that is all words: its title on the left, its text on the right */
+.cs-chapter--plain .cs-chapter__body { max-width: 40em; }
+
+/* two tiles of the same height: the brand on its own plate, and the film */
+.cs-duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(8px, 1vw, 16px); padding-bottom: clamp(32px, 4vw, 72px); }
+.cs-duo .cs-media { position: relative; aspect-ratio: 16 / 9; }
+.cs-duo .cs-media > :is(img, video) { width: 100%; height: 100%; object-fit: cover; }
+.cs-duo .cs-media--plate { background: #fff; }
+.cs-duo .cs-media--plate img { object-fit: contain; padding: 8%; }
+.cs-watch {
+  position: absolute;
+  inset-inline-start: 14px;
+  bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px 9px 10px;
+  border-radius: 999px;
+  background: rgba(8, 10, 9, 0.62);
+  color: #fff;
+  font-size: 13px;
+  backdrop-filter: blur(10px);
+  transition: background-color 0.3s;
+}
+.cs-watch:hover { background: var(--cs-accent); }
+.cs-watch svg { width: 18px; height: 18px; }
+
+@media (max-width: 900px) {
+  .cs-chapter { grid-template-columns: 1fr; }
+  .cs-chapter--flip .cs-chapter__text { order: 0; }
+  .cs-chapter__text { position: static; }
+  .cs-duo { grid-template-columns: 1fr; }
+}
 
 :root[lang="ar"] .cs__back, :root[lang="ar"] .cs-next__k, :root[lang="ar"] .cs-facts h4 { font-family: inherit; letter-spacing: 0; }
 
