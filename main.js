@@ -341,7 +341,7 @@ i18n.onChange(() => splitEls.forEach(splitWords));
 const stats = [...document.querySelectorAll(".stat")];
 stats.forEach((el, i) => el.style.setProperty("--i", i));
 document.querySelectorAll(".post").forEach((el, i) => el.style.setProperty("--i", i));
-[".result", ".index__row", ".channels > li", ".essay"].forEach((sel) => setIndex(document.querySelectorAll(sel)));
+[".result", ".index__row", ".channels > li", ".essay", ".preai__card"].forEach((sel) => setIndex(document.querySelectorAll(sel)));
 
 const fmtCount = (el, n) => {
   const pad = Number(el.dataset.pad || 0);
@@ -1179,6 +1179,23 @@ if (!("onpagereveal" in window)) {
   addEventListener("scroll", queue, { passive: true });
   addEventListener("resize", queue);
 })();
+
+/* ---------- Portfolio tiles: a tile's film plays while the pointer rests on it ----------
+   The films carry preload="none", so nothing downloads until a tile is hovered. */
+
+if (finePointer && !reduceMotion) {
+  document.querySelectorAll(".preai__card").forEach((card) => {
+    const video = card.querySelector("video");
+    if (!video) return;
+    card.addEventListener("pointerenter", () => {
+      video.play().then(() => { if (card.matches(":hover")) card.classList.add("is-playing"); }).catch(() => {});
+    });
+    card.addEventListener("pointerleave", () => {
+      card.classList.remove("is-playing");
+      video.pause();
+    });
+  });
+}
 
 /* ---------- Meetfleet page: chapter peeks load their figures on first hover ---------- */
 

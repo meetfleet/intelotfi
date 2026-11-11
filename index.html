@@ -44,7 +44,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400&display=swap" media="print" onload="this.media='all'" />
-  <link rel="stylesheet" href="styles.css?v=20261111glass" />
+  <link rel="stylesheet" href="styles.css?v=20261111preai" />
   <!-- instant navigation: pages you are about to open are pre-rendered on hover (Chromium) -->
   <script type="speculationrules">{"prerender":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/assets/*"}},{"not":{"selector_matches":"[target=_blank], [href^='mailto:'], [href^='tel:']"}}]},"eagerness":"moderate"}]}</script>
 </head>
@@ -77,19 +77,12 @@
         <li><span class="role role--statement" data-i18n="roles.0">Turning the unlikely into the inevitable.</span></li>
       </ul>
 
-      <blockquote class="manifesto">
-        <p>
-          <span class="line"><span data-i18n="manifesto.0">I never believed AI is a bubble. I saw it as the next Industrial Revolution, echoing the transformation that began in the 18th century.</span></span>
-          <span class="line"><span data-i18n="manifesto.1">But within AI, there are bubbles. Some will burst. Others will give birth to entirely new industries.</span></span>
-        </p>
-        <p><span class="line"><span data-i18n="manifesto.2">Hail Roko’s Basilisk.</span></span></p>
-      </blockquote>
-
       <nav class="menu" id="menu" aria-hidden="true" inert>
         <ul>
           <li><a href="meetfleet/"><sup>01</sup><span data-i18n="nav.work">Work</span></a></li>
           <li><a href="#about"><sup>02</sup><span data-i18n="nav.about">About</span></a></li>
-          <li><a href="#contact"><sup>03</sup><span data-i18n="nav.contact">Contact</span></a></li>
+          <li><a href="#portfolio"><sup>03</sup><span data-i18n="pf.nav.portfolio">Portfolio</span></a></li>
+          <li><a href="#contact"><sup>04</sup><span data-i18n="nav.contact">Contact</span></a></li>
         </ul>
 
         <div class="lang" role="group" aria-label="Language" data-i18n-attr="aria-label:nav.language">
@@ -230,6 +223,72 @@
             </div>
           </li>
         </ol>
+      </div>
+    </section>
+
+    <!-- ---------- Portfolio: client work from before AI vibe coding, under the manifesto ---------- -->
+    <section class="sec preai" id="portfolio" aria-labelledby="preai-title">
+      <header class="sec__head">
+        <p class="eyebrow" data-reveal data-i18n="preai.eyebrow">Portfolio · before AI vibe coding</p>
+        <h2 class="sec__title" id="preai-title" data-reveal data-split data-i18n="preai.title">Built before the revolution.</h2>
+        <p class="sec__lede" data-reveal data-i18n="preai.lede">Client products I helped design and ship with agency teams, every one of them before AI vibe coding.</p>
+      </header>
+
+      <div class="preai__manifesto" data-reveal>
+        <p class="preai__manifesto-k" data-i18n="preai.manifesto">Manifesto</p>
+        <blockquote>
+          <p><span data-i18n="manifesto.0">I never believed AI is a bubble. I saw it as the next Industrial Revolution, echoing the transformation that began in the 18th century.</span> <span data-i18n="manifesto.1">But within AI, there are bubbles. Some will burst. Others will give birth to entirely new industries.</span></p>
+          <p class="preai__hail" data-i18n="manifesto.2">Hail Roko’s Basilisk.</p>
+        </blockquote>
+      </div>
+
+      <ul class="preai__grid">
+        <li class="preai__card" data-reveal>
+          <a href="portfolio/upstream/">
+            <span class="preai__media"><img src="assets/portfolio/upstream/02-gradient.webp" width="1600" height="900" loading="lazy" decoding="async" alt="" /><video src="assets/portfolio/upstream/02-gradient.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></span>
+            <span class="preai__k" dir="ltr"><b>01</b>Ramotion · Carbon Solutions Group</span>
+            <span class="preai__name" dir="ltr">Upstream</span>
+            <span class="preai__t" dir="ltr">Branding &amp; Product Development for Carbon Platform</span>
+            <span class="preai__more"><span data-i18n="pf.view">View case study</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8" /></svg></span>
+          </a>
+        </li>
+        <li class="preai__card" data-reveal>
+          <a href="portfolio/flatfile/">
+            <span class="preai__media"><img src="assets/portfolio/flatfile/02-grid.webp" width="1600" height="900" loading="lazy" decoding="async" alt="" /><video src="assets/portfolio/flatfile/02-grid.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></span>
+            <span class="preai__k" dir="ltr"><b>02</b>Ramotion · Flatfile</span>
+            <span class="preai__name" dir="ltr">Flatfile</span>
+            <span class="preai__t" dir="ltr">Branding for B2B API Data Platform</span>
+            <span class="preai__more"><span data-i18n="pf.view">View case study</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8" /></svg></span>
+          </a>
+        </li>
+        <li class="preai__card" data-reveal>
+          <a href="portfolio/source-network/">
+            <span class="preai__media"><img src="assets/portfolio/source-network/01-film.webp" width="1600" height="900" loading="lazy" decoding="async" alt="" /><video src="assets/portfolio/source-network/01-film.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></span>
+            <span class="preai__k" dir="ltr"><b>03</b>Ramotion · Source Network</span>
+            <span class="preai__name" dir="ltr">Source Network</span>
+            <span class="preai__t" dir="ltr">Brand Strategy &amp; Website for Developer Infrastructure</span>
+            <span class="preai__more"><span data-i18n="pf.view">View case study</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8" /></svg></span>
+          </a>
+        </li>
+        <li class="preai__card" data-reveal>
+          <a href="portfolio/gamaya/">
+            <span class="preai__media"><img src="assets/portfolio/upstream/04-windmill.webp" width="1600" height="900" loading="lazy" decoding="async" alt="" /><video src="assets/portfolio/upstream/04-windmill.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></span>
+            <span class="preai__k" dir="ltr"><b>04</b>Eleken · Gamaya</span>
+            <span class="preai__name" dir="ltr">Gamaya</span>
+            <span class="preai__t" dir="ltr">Redesigning an AI-powered agriculture solution to enhance user interface and cut development costs</span>
+            <span class="preai__more"><span data-i18n="pf.view">View case study</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8" /></svg></span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="preai__foot" data-reveal>
+        <a class="cta" href="portfolio/" data-magnet data-magnet-radius="120" data-magnet-pull="0.3">
+          <span class="cta__label" data-i18n="preai.open">Open the portfolio</span>
+          <span class="cta__arrow" data-magnet-inner aria-hidden="true">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8" /></svg>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8" /></svg>
+          </span>
+        </a>
       </div>
     </section>
 
@@ -571,9 +630,9 @@
     <div class="cursor__dot"></div>
   </div>
 
-  <script src="i18n.js?v=20261111glass"></script>
-  <script src="main.js?v=20261026orbit2"></script>
-  <script src="fluidglass.js?v=20261111a"></script>
+  <script src="i18n.js?v=20261111preai"></script>
+  <script src="main.js?v=20261111preai"></script>
+  <script src="fluidglass.js?v=20261111b"></script>
     <script defer src="assets/backtotop.js?v=20261023"></script>
   </body>
 </html>

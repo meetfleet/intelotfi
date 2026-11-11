@@ -1194,6 +1194,67 @@ ul { list-style: none; }
   .essays { grid-template-columns: 1fr; }
 }
 
+/* ---------- Portfolio: client work from before AI vibe coding, under the manifesto ---------- */
+
+.preai__manifesto {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.6fr);
+  column-gap: clamp(24px, 5vw, 100px);
+  margin-top: clamp(40px, 4.6vw, 88px);
+  padding-top: clamp(24px, 2.4vw, 40px);
+  border-top: 1px solid var(--line);
+}
+.preai__manifesto-k { padding-top: 0.7em; font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.preai__manifesto blockquote p { max-width: 27em; font-size: clamp(22px, 2.3vw, 44px); font-weight: 300; line-height: 1.24; letter-spacing: -0.02em; color: var(--navy); }
+.preai__manifesto blockquote p + p { margin-top: 0.7em; }
+.preai__hail { color: var(--red); }
+:root[lang="ar"] .preai__manifesto blockquote p { letter-spacing: 0; line-height: 1.6; }
+:root[lang="ar"] .preai__manifesto-k, :root[lang="ar"] .preai__k { font-family: inherit; letter-spacing: 0; }
+
+.preai__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(20px, 2.2vw, 40px);
+  margin-top: clamp(48px, 5.4vw, 104px);
+  list-style: none;
+}
+.preai__card[data-reveal] { transition-delay: calc(var(--i, 0) * 110ms); }
+.preai__card a { display: flex; flex-direction: column; height: 100%; color: var(--navy); }
+
+/* the poster, and over it the film, shown only once it is actually playing */
+.preai__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: clamp(14px, 1.4vw, 22px);
+  background: var(--card);
+}
+.preai__media img, .preai__media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s var(--expo-out), scale 1.2s var(--expo-out); }
+.preai__media video { opacity: 0; }
+.preai__card.is-playing .preai__media video { opacity: 1; }
+.preai__card a:hover .preai__media > * { scale: 1.04; }
+
+.preai__k { display: flex; gap: 0.9em; margin-top: clamp(18px, 1.8vw, 28px); font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--body); }
+.preai__k b { font-weight: 400; color: var(--red); }
+.preai__name { margin-top: 12px; font-size: clamp(26px, 2.2vw, 42px); font-weight: 300; line-height: 1.05; letter-spacing: -0.03em; }
+.preai__t { margin-top: 10px; font-size: clamp(14px, 1vw, 17px); line-height: 1.55; color: var(--body); }
+.preai__more { display: inline-flex; align-items: center; gap: 10px; margin-top: auto; padding-top: 20px; font-size: 14px; }
+.preai__more svg { width: 12px; height: 12px; fill: none; stroke: var(--red); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.6s var(--expo-out); }
+.preai__card a:hover .preai__more svg { transform: translate(3px, -3px); }
+[dir="rtl"] .preai__more svg { scale: -1 1; }
+[dir="rtl"] .preai__k, [dir="rtl"] .preai__name, [dir="rtl"] .preai__t { text-align: right; }
+
+.preai__foot { display: flex; justify-content: flex-end; margin-top: clamp(28px, 3vw, 56px); }
+
+@media (max-width: 1100px) { .preai__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 768px) {
+  .preai__manifesto { grid-template-columns: 1fr; row-gap: 16px; }
+  .preai__grid { grid-template-columns: 1fr; }
+  .preai__foot { justify-content: flex-start; }
+}
+@media (prefers-reduced-motion: reduce) { .preai__media > * { transition: none; } }
+
 /* ---------- Research: a grey card, like About ---------- */
 
 .research > * { padding-inline: var(--inner); }
