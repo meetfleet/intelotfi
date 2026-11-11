@@ -1447,13 +1447,14 @@ class FluidGlass {
 window.FluidGlass = FluidGlass;
 
 /* ---------- Home hero: the glass over "Look closer." ----------
-   The headline follows the menu language, and on a tall screen it breaks after its
-   first word so it stays large. Set in the site's own face, at its regular weight. */
+   It starts as the triangular prism. The headline follows the menu language, and on
+   a tall screen it breaks after its first word so it stays large. Set in the site's
+   own face, at its regular weight. */
 const hero = document.querySelector('.hero__glass');
 if (hero) {
   const words = () => (typeof i18n !== 'undefined' ? i18n.t('hero.glass') : 'Look closer.');
   const fit = text => (hero.clientHeight > hero.clientWidth * 1.05 ? text.replace(' ', '\n') : text);
-  const glass = new FluidGlass(hero, { text: fit(words()), fontWeight: 400 });
+  const glass = new FluidGlass(hero, { text: fit(words()), fontWeight: 400, shape: 'prism' });
   new ResizeObserver(() => glass.set({ text: fit(words()) })).observe(hero);
   if (typeof i18n !== 'undefined') i18n.onChange(() => glass.set({ text: fit(words()) }));
 }
