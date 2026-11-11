@@ -560,6 +560,8 @@ const DEFAULTS = {
   fontFamily: undefined,
   fontWeight: 600,
   fontSize: undefined,
+  // without a fontSize, the widest line is fitted to this share of the width
+  textFill: 0.84,
   src: undefined,
   fit: 'cover',
   background: 'transparent',
@@ -595,6 +597,7 @@ const normalize = o => {
     fontFamily: o.fontFamily,
     fontWeight: o.fontWeight,
     fontSize: o.fontSize,
+    textFill: clamp(o.textFill ?? 0.84, 0.1, 1),
     src: o.src,
     fit: o.fit,
     background: parseColor(o.background) || [0, 0, 0, 0],
@@ -793,7 +796,7 @@ class FluidGlass {
       const fill = s.textColor || computed.color || '#ffffff';
       const width = canvas.width;
       const height = canvas.height;
-      const key = [s.text, family, fill, s.fontWeight, s.fontSize, width, height].join('|');
+      const key = [s.text, family, fill, s.fontWeight, s.fontSize, s.textFill, width, height].join('|');
       if (key === textState.key) return;
       textState.key = key;
       textCanvas.width = width;
@@ -808,7 +811,7 @@ class FluidGlass {
         if (!s.fontSize) {
           ctx.font = font(100);
           const widest = Math.max(...lines.map(line => ctx.measureText(line).width), 1);
-          px = Math.min((width * 0.84 * 100) / widest, (height * 0.64) / (lines.length * 1.02));
+          px = Math.min((width * s.textFill * 100) / widest, (height * 0.64) / (lines.length * 1.02));
         }
         ctx.font = font(px);
         ctx.fillStyle = fill;
@@ -1447,15 +1450,22 @@ class FluidGlass {
 window.FluidGlass = FluidGlass;
 
 /* ---------- Home hero: the glass over "Look closer." ----------
-   It starts as the triangular prism. The headline follows the menu language, and on
-   a tall screen it breaks after its first word so it stays large. Set in the site's
-   own face, at its regular weight. */
+   It starts as the triangular prism. The headline follows the menu language and is
+   set in the site's own face, at its regular weight. On a phone both the headline
+   and the prism are kept small: one line across about two thirds of the width, and
+   a prism half its desktop size, so the name card below has the room. */
 const hero = document.querySelector('.hero__glass');
 if (hero) {
   const words = () => (typeof i18n !== 'undefined' ? i18n.t('hero.glass') : 'Look closer.');
-  const fit = text => (hero.clientHeight > hero.clientWidth * 1.05 ? text.replace(' ', '\n') : text);
-  const glass = new FluidGlass(hero, { text: fit(words()), fontWeight: 400, shape: 'prism' });
-  new ResizeObserver(() => glass.set({ text: fit(words()) })).observe(hero);
-  if (typeof i18n !== 'undefined') i18n.onChange(() => glass.set({ text: fit(words()) }));
+  // a tall screen that is not a phone (a tablet upright) still breaks after the first word
+  const tall = () => hero.clientHeight > hero.clientWidth * 1.05;
+  const props = () => {
+    const phone = hero.clientWidth <= 768;
+    const text = !phone && tall() ? words().replace(' ', '\n') : words();
+    return { text, textFill: phone ? 0.66 : 0.84, size: phone ? 130 : 260 };
+  };
+  const glass = new FluidGlass(hero, { ...props(), fontWeight: 400, shape: 'prism' });
+  new ResizeObserver(() => glass.set(props())).observe(hero);
+  if (typeof i18n !== 'undefined') i18n.onChange(() => glass.set(props()));
 }
 })();
