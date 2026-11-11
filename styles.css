@@ -1194,7 +1194,10 @@ ul { list-style: none; }
   .essays { grid-template-columns: 1fr; }
 }
 
-/* ---------- Portfolio: client work from before AI vibe coding, under the manifesto ---------- */
+/* ---------- Portfolio: my client work from before AI vibe coding, right under About ---------- */
+
+/* it now sits between About and the dark Projects band, so it keeps a gap below */
+.preai { padding-bottom: clamp(32px, 6vw, 120px); }
 
 .preai__manifesto {
   display: grid;
@@ -1213,7 +1216,7 @@ ul { list-style: none; }
 
 .preai__grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(20px, 2.2vw, 40px);
   margin-top: clamp(48px, 5.4vw, 104px);
   list-style: none;
@@ -1221,11 +1224,12 @@ ul { list-style: none; }
 .preai__card[data-reveal] { transition-delay: calc(var(--i, 0) * 110ms); }
 .preai__card a { display: flex; flex-direction: column; height: 100%; color: var(--navy); }
 
-/* the poster, and over it the film, shown only once it is actually playing */
+/* the poster, and over it the film, shown once it is actually playing.
+   Every film is 16:9, so the frame is too and nothing gets cropped. */
 .preai__media {
   position: relative;
   display: block;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: clamp(14px, 1.4vw, 22px);
   background: var(--card);
@@ -1247,7 +1251,6 @@ ul { list-style: none; }
 
 .preai__foot { display: flex; justify-content: flex-end; margin-top: clamp(28px, 3vw, 56px); }
 
-@media (max-width: 1100px) { .preai__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 768px) {
   .preai__manifesto { grid-template-columns: 1fr; row-gap: 16px; }
   .preai__grid { grid-template-columns: 1fr; }

@@ -1180,20 +1180,25 @@ if (!("onpagereveal" in window)) {
   addEventListener("resize", queue);
 })();
 
-/* ---------- Portfolio tiles: a tile's film plays while the pointer rests on it ----------
-   The films carry preload="none", so nothing downloads until a tile is hovered. */
+/* ---------- Portfolio tiles: each film loops on its own while it is on screen ----------
+   The films carry preload="none", so nothing downloads until a tile scrolls into
+   view, and each one pauses again once it leaves. With reduced motion the poster stays. */
 
-if (finePointer && !reduceMotion) {
+if (!reduceMotion) {
+  const tiles = new Map();
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      const video = tiles.get(e.target);
+      if (e.isIntersecting) video.play().catch(() => {});
+      else video.pause();
+    }
+  }, { threshold: 0.15 });
   document.querySelectorAll(".preai__card").forEach((card) => {
     const video = card.querySelector("video");
     if (!video) return;
-    card.addEventListener("pointerenter", () => {
-      video.play().then(() => { if (card.matches(":hover")) card.classList.add("is-playing"); }).catch(() => {});
-    });
-    card.addEventListener("pointerleave", () => {
-      card.classList.remove("is-playing");
-      video.pause();
-    });
+    video.addEventListener("playing", () => card.classList.add("is-playing"), { once: true });
+    tiles.set(card, video);
+    io.observe(card);
   });
 }
 
