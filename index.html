@@ -44,7 +44,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400&display=swap" media="print" onload="this.media='all'" />
-  <link rel="stylesheet" href="styles.css?v=20261026orbit2" />
+  <link rel="stylesheet" href="styles.css?v=20261111glass" />
   <!-- instant navigation: pages you are about to open are pre-rendered on hover (Chromium) -->
   <script type="speculationrules">{"prerender":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/assets/*"}},{"not":{"selector_matches":"[target=_blank], [href^='mailto:'], [href^='tel:']"}}]},"eagerness":"moderate"}]}</script>
 </head>
@@ -52,10 +52,14 @@
   <main class="page" id="top">
     <h1 class="sr-only" data-i18n="meta.h1">Hamza Lotfi, Independent AI Researcher and Product Engineer</h1>
     <section class="hero">
-      <!-- the photo is switched off (assets/hero*.webp are kept); the background is the tokamak animation (tokamak.js) -->
+      <!-- the background is React Bits' FluidGlass (fluidglass.js): a glass torus that follows the cursor over "Look closer."
+           (the photo and the tokamak animation are switched off; assets/hero*.webp and tokamak.js are kept) -->
       <div class="hero__bg" aria-hidden="true">
-        <canvas class="hero__gl"></canvas>
-        <canvas class="hero__tokamak"></canvas>
+        <div class="fluid-glass hero__glass">
+          <canvas class="fluid-glass__canvas"></canvas>
+          <div class="fluid-glass__handle"></div>
+          <p class="fluid-glass__label" data-i18n="hero.glass">Look closer.</p>
+        </div>
       </div>
       <div class="hero__vignette" aria-hidden="true"></div>
 
@@ -567,10 +571,9 @@
     <div class="cursor__dot"></div>
   </div>
 
-  <script src="i18n.js?v=20261016statement"></script>
+  <script src="i18n.js?v=20261111glass"></script>
   <script src="main.js?v=20261026orbit2"></script>
-  <script type="importmap">{"imports":{"three":"./assets/vendor/three-0.160.0/three.module.min.js","three/addons/":"./assets/vendor/three-0.160.0/addons/"}}</script>
-  <script type="module" src="tokamak.js?v=20261016d"></script>
+  <script src="fluidglass.js?v=20261111a"></script>
     <script defer src="assets/backtotop.js?v=20261023"></script>
   </body>
 </html>
