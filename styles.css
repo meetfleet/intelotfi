@@ -369,6 +369,69 @@ ul { list-style: none; }
 
 [dir="rtl"] .role::after { transform-origin: left; }
 
+/* ---------- Hero name card: frosted glass over the prism ----------
+   Whose portfolio this is, and the line it stands on. It sits at the foot of the
+   hero, clear of "Look closer." in the middle, and rises in once the page loads. */
+
+.hero-card {
+  position: absolute;
+  inset-inline-start: var(--gutter);
+  bottom: clamp(16px, 3.6vw, 64px);
+  z-index: 10;
+  width: min(430px, calc(100% - var(--gutter) * 2));
+  padding: clamp(20px, 1.8vw, 28px);
+  border-radius: clamp(18px, 1.6vw, 26px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.03) 55%),
+    rgba(18, 18, 20, 0.32);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(18px) saturate(1.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 24px 60px -24px rgba(0, 0, 0, 0.6);
+  color: var(--white);
+  transition: opacity 0.9s var(--expo-out) 0.45s, translate 1.4s var(--spring-soft) 0.45s;
+}
+.is-loading .hero-card { opacity: 0; translate: 0 28px; transition: none; }
+
+.hero-card__k {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245, 245, 243, 0.62);
+}
+.hero-card__k::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--red); }
+.hero-card__name { margin-top: 10px; font-size: clamp(30px, 2.5vw, 44px); font-weight: 400; line-height: 1.04; letter-spacing: -0.03em; }
+.hero-card__line { margin-top: 10px; max-width: 22em; font-size: clamp(16px, 1.15vw, 20px); line-height: 1.35; letter-spacing: -0.01em; color: rgba(245, 245, 243, 0.78); }
+.hero-card__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px 20px;
+  margin-top: clamp(16px, 1.5vw, 22px);
+  padding-top: clamp(14px, 1.2vw, 18px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 13px;
+}
+.hero-card__role { color: rgba(245, 245, 243, 0.55); }
+.hero-card__cta { display: inline-flex; align-items: center; gap: 8px; color: var(--white); }
+.hero-card__cta svg { width: 12px; height: 12px; fill: none; stroke: var(--red); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.6s var(--expo-out); }
+.hero-card__cta:hover svg { transform: translateY(3px); }
+
+:root[lang="ar"] .hero-card__k { font-family: inherit; letter-spacing: 0; }
+:root[lang="ar"] .hero-card__line { letter-spacing: 0; line-height: 1.6; }
+
+/* no backdrop blur: a darker, solid card so the text still reads */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .hero-card { background: rgba(24, 24, 27, 0.92); }
+}
+
 /* ---------- Manifesto ---------- */
 
 .manifesto {
@@ -1892,6 +1955,14 @@ ul { list-style: none; }
     top: auto;
     bottom: 42vh;
     font-size: 22px;
+  }
+
+  /* on a phone the card spans the foot of the hero, under the headline */
+  .hero-card {
+    inset-inline: 12px;
+    bottom: 12px;
+    width: auto;
+    padding: 20px;
   }
 
   .manifesto {

@@ -44,6 +44,7 @@ const hero = document.querySelector(".hero");
 const heroImg = hero?.querySelector(".hero__bg img");
 const canvas = hero?.querySelector(".hero__gl");
 const rolesEl = document.querySelector(".roles");
+const heroCard = document.querySelector(".hero-card");
 const manifesto = document.querySelector(".manifesto");
 const burger = document.querySelector(".burger");
 const burgerLines = burger?.querySelector(".burger__lines");
@@ -425,6 +426,7 @@ function frame(now) {
   // apply
   const px = par.x.x * AMP, py = par.y.x * AMP;
   if (rolesEl) rolesEl.style.transform = `translate3d(${px * 8}px, ${py * 5}px, 0)`;
+  if (heroCard) heroCard.style.transform = `translate3d(${px * 6}px, ${py * 4}px, 0)`;
   if (manifesto) manifesto.style.transform = `translate3d(${px * 5}px, ${py * 3}px, 0)`;
 
   for (const r of roles) {
