@@ -333,17 +333,16 @@ a.pf-card__media:hover video { scale: 1.03; }
 .cs-list li + li { margin-top: 0.8em; }
 .cs-list li::before { content: ""; position: absolute; inset-inline-start: 0.2em; top: 0.68em; width: 7px; height: 7px; border-radius: 50%; background: var(--cs-accent); }
 
-/* the facts beside the story: two headline figures, then services, stack and site */
-.cs-facts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: clamp(24px, 3vw, 56px); margin-top: clamp(36px, 4vw, 64px); padding-top: clamp(24px, 2.4vw, 40px); border-top: 1px solid var(--cs-rule); }
-.cs-outcome { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-content: start; }
+/* the facts under the story: the headline figures get a full row of their own,
+   then services, stack and site share the row below. Stacked, never side by side,
+   so a big figure can't spill into the details. */
+.cs-facts { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(32px, 3.4vw, 56px); margin-top: clamp(36px, 4vw, 64px); padding-top: clamp(24px, 2.4vw, 40px); border-top: 1px solid var(--cs-rule); }
+.cs-outcome { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 28px clamp(20px, 2.4vw, 40px); align-content: start; }
+.cs-outcome > div, .cs-info > div { min-width: 0; }
 .cs-facts h4 { font-family: var(--mono); font-size: 11px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cs-muted); }
-/* three headline figures take a full row of their own, above the details */
-.cs-facts--wide { grid-template-columns: 1fr; }
-.cs-facts--wide .cs-outcome { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
-.cs-facts--wide .cs-info { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 .cs-outcome p { margin-top: 8px; font-size: 14px; color: var(--cs-muted); }
-.cs-outcome strong { display: block; margin-top: 10px; font-size: clamp(40px, 4.2vw, 80px); font-weight: 300; line-height: 1; letter-spacing: -0.04em; color: var(--cs-ink); }
-.cs-info { display: grid; gap: 22px; }
+.cs-outcome strong { display: block; margin-top: 10px; font-size: clamp(40px, 4.2vw, 80px); font-weight: 300; line-height: 1; letter-spacing: -0.04em; color: var(--cs-ink); overflow-wrap: break-word; }
+.cs-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 22px clamp(20px, 2.4vw, 40px); }
 .cs-info p, .cs-info li { margin-top: 6px; font-size: 15px; line-height: 1.5; color: var(--cs-ink); }
 .cs-info ul { display: flex; flex-wrap: wrap; gap: 4px 18px; }
 .cs-info a { color: var(--cs-deep); background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; }
@@ -484,6 +483,5 @@ body.page--dark { background: #060707; }
   .cs__tags { justify-content: flex-start; }
   .cs-sec { grid-template-columns: 1fr; }
   .cs-sec__h { position: static; }
-  .cs-facts { grid-template-columns: 1fr; }
   .cs-next { grid-template-columns: 1fr; align-items: start; }
 }
