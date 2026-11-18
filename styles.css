@@ -1293,6 +1293,22 @@ ul { list-style: none; }
 [dir="rtl"] .preai__more svg { scale: -1 1; }
 [dir="rtl"] .preai__k, [dir="rtl"] .preai__name, [dir="rtl"] .preai__t { text-align: right; }
 
+/* an odd card out closes the grid on a row of its own: its film keeps the
+   size of the others, and its words sit beside it in the second column */
+@media (min-width: 769px) {
+  .preai__card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .preai__card:last-child:nth-child(odd) a {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto auto auto 1fr;
+    column-gap: clamp(20px, 2.2vw, 40px);
+  }
+  .preai__card:last-child:nth-child(odd) .preai__media { grid-column: 1; grid-row: 1 / -1; align-self: start; }
+  .preai__card:last-child:nth-child(odd) a > :not(.preai__media) { grid-column: 2; }
+  .preai__card:last-child:nth-child(odd) .preai__k { margin-top: 0; }
+  .preai__card:last-child:nth-child(odd) .preai__more { align-self: end; }
+}
+
 .preai__foot { display: flex; justify-content: flex-end; margin-top: clamp(28px, 3vw, 56px); }
 
 @media (max-width: 768px) {
