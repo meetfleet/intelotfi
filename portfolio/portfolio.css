@@ -270,6 +270,16 @@ a.pf-card__media:hover video { scale: 1.03; }
   --cs-glow-b: rgba(254, 177, 151, 0.08);
 }
 
+/* Marqeta: the brand's deep indigo and violet cards, with its green */
+.cs--marqeta {
+  --cs-accent: #1cc284;
+  --cs-deep: #42d59e;
+  --cs-sheet: #0e0c22;
+  --cs-media: #1a1640;
+  --cs-glow-a: rgba(77, 68, 175, 0.4);
+  --cs-glow-b: rgba(28, 194, 132, 0.08);
+}
+
 /* the band's light takes the client's colour */
 .cs .work__band::before {
   background:
@@ -443,6 +453,8 @@ a.pf-card__media:hover video { scale: 1.03; }
 /* screens of different shapes on one row: each column is as wide as its aspect ratio
    (set in --cols), so the row lines up at a single height */
 .cs-row { display: grid; grid-template-columns: var(--cols, repeat(2, minmax(0, 1fr))); align-items: start; gap: clamp(8px, 1vw, 16px); }
+/* a row straight after About, before the first chapter */
+.cs-row--lead { padding-bottom: clamp(32px, 4vw, 72px); }
 /* a phone screen, shown at phone width */
 .cs-media--phone { justify-self: center; width: min(100%, 380px); }
 
