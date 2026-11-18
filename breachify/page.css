@@ -443,6 +443,12 @@ a:focus-visible {
   font-size: 11px;
   color: #79777b;
 }
+.bf-owner {
+  display: block;
+  margin-top: 6px;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+}
 .console__fallback {
   padding: 40px;
   line-height: 1.7;
