@@ -409,8 +409,6 @@ ul { list-style: none; }
 }
 .hero-card__role { color: rgba(245, 245, 243, 0.55); }
 .hero-card__cta { display: inline-flex; align-items: center; gap: 8px; color: var(--white); }
-.hero-card__cta svg { width: 12px; height: 12px; fill: none; stroke: var(--red); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.6s var(--expo-out); }
-.hero-card__cta:hover svg { transform: translateY(3px); }
 
 :root[lang="ar"] .hero-card__k { font-family: inherit; letter-spacing: 0; }
 :root[lang="ar"] .hero-card__line { letter-spacing: 0; line-height: 1.6; }
