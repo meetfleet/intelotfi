@@ -260,6 +260,16 @@ a.pf-card__media:hover video { scale: 1.03; }
   --cs-glow-b: rgba(196, 160, 96, 0.09);
 }
 
+/* Grayscale: the brand's deep purple, with the peach of its wordmark and a lavender light */
+.cs--grayscale {
+  --cs-accent: #feb197;
+  --cs-deep: #c5bfe5;
+  --cs-sheet: #120e1f;
+  --cs-media: #1d1731;
+  --cs-glow-a: rgba(122, 102, 196, 0.34);
+  --cs-glow-b: rgba(254, 177, 151, 0.08);
+}
+
 /* the band's light takes the client's colour */
 .cs .work__band::before {
   background:
@@ -430,6 +440,12 @@ a.pf-card__media:hover video { scale: 1.03; }
 /* a chapter that is all words: its title on the left, its text on the right */
 .cs-chapter--plain .cs-chapter__body { max-width: 40em; }
 
+/* screens of different shapes on one row: each column is as wide as its aspect ratio
+   (set in --cols), so the row lines up at a single height */
+.cs-row { display: grid; grid-template-columns: var(--cols, repeat(2, minmax(0, 1fr))); align-items: start; gap: clamp(8px, 1vw, 16px); }
+/* a phone screen, shown at phone width */
+.cs-media--phone { justify-self: center; width: min(100%, 380px); }
+
 /* two tiles of the same height: the brand on its own plate, and the film */
 .cs-duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(8px, 1vw, 16px); padding-bottom: clamp(32px, 4vw, 72px); }
 .cs-duo .cs-media { position: relative; aspect-ratio: 16 / 9; }
@@ -459,6 +475,9 @@ a.pf-card__media:hover video { scale: 1.03; }
   .cs-chapter--flip .cs-chapter__text { order: 0; }
   .cs-chapter__text { position: static; }
   .cs-duo { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .cs-row { grid-template-columns: 1fr; }
 }
 
 :root[lang="ar"] .cs__back, :root[lang="ar"] .cs-next__k, :root[lang="ar"] .cs-facts h4 { font-family: inherit; letter-spacing: 0; }
