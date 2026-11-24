@@ -184,7 +184,7 @@ try {
   check(requests.every(url=>url.startsWith(base)||url.startsWith('blob:')), 'guided interaction makes no external requests');
   page.off('request',trackRequest);
   console.log('Guided overview: sample choices, explanations, evidence, plan selection, exports, reset, empty state and keyboard passed.');
-  await visit("blog/outside-in.html");
+  await visit("blog/breachify-outside-in.html");
   let d = await demo("two-clocks");
   await d.locator(".dm-clock-row").first().click();
   check(
@@ -218,7 +218,7 @@ try {
     "chapter flow keyboard",
   );
   check(
-    page.url().endsWith("outside-in.html"),
+    page.url().endsWith("breachify-outside-in.html"),
     "arrow key does not navigate chapter",
   );
   check(await page.locator('.spots, .spot, .ref[data-for]').count() === 0, 'screenshot annotations removed');
@@ -227,7 +227,7 @@ try {
     (await page.locator("[data-scrolly].is-on").count()) === 0,
     "reduced motion disables pinned scroll",
   );
-  await visit("blog/beyond-the-password.html");
+  await visit("blog/breachify-beyond-password.html");
   d = await demo("cookie-life");
   await range(d.locator("input"), 18);
   check((await text(d.locator("[data-state]"))) === "EXPIRED", "cookie expiry");
@@ -332,7 +332,7 @@ try {
     "organisation scope filters all metrics",
   );
   await reset(d);
-  await visit("blog/outside-in.html");
+  await visit("blog/breachify-outside-in.html");
   d = await demo("risk-assessment");
   check(
     (await text(d.locator(".dm-ai-score"))).startsWith("82"),
@@ -388,7 +388,7 @@ try {
     "old evidence retains a nonzero priority floor",
   );
   await reset(d);
-  await visit("blog/machinery.html");
+  await visit("blog/breachify-machinery.html");
   d = await demo("export");
   await d.getByRole("button", { name: "All time", exact: true }).click();
   check(
@@ -501,9 +501,9 @@ try {
     await page.setViewportSize({ width, height: 900 });
     for (const path of [
       "breachify/",
-      "blog/outside-in.html",
-      "blog/beyond-the-password.html",
-      "blog/machinery.html",
+      "blog/breachify-outside-in.html",
+      "blog/breachify-beyond-password.html",
+      "blog/breachify-machinery.html",
     ]) {
       await visit(path);
       for (const el of await page.locator("[data-demo]").all()) {
@@ -555,9 +555,9 @@ try {
   // All chapter links must resolve, including generated dock/continue navigation.
   for (const path of [
     "breachify/",
-    "blog/outside-in.html",
-    "blog/beyond-the-password.html",
-    "blog/machinery.html",
+    "blog/breachify-outside-in.html",
+    "blog/breachify-beyond-password.html",
+    "blog/breachify-machinery.html",
   ]) {
     await visit(path);
     for (const href of await page

@@ -5,9 +5,9 @@ Recovered from Claude’s saved SPEC, chapter briefs and console brief on 14 Oct
 ## Pages
 
 - `/breachify/`: project overview, chapter cards, interactive console and design scope.
-- `/blog/outside-in.html`: domain investigations and device evidence; three demos, including explainable risk assessment.
-- `/blog/beyond-the-password.html`: sessions, Android identifiers and HTTP logs; four demos, including the evidence pipeline.
-- `/blog/machinery.html`: companies, exports, administration and file access; four demos.
+- `/blog/breachify-outside-in.html`: domain investigations and device evidence; three demos, including explainable risk assessment.
+- `/blog/breachify-beyond-password.html`: sessions, Android identifiers and HTTP logs; four demos, including the evidence pipeline.
+- `/blog/breachify-machinery.html`: companies, exports, administration and file access; four demos.
 
 The homepage links to the product overview. Its Breachify description and link labels are updated in English, French and Arabic. The product overview itself is English, consistent with the chapter brief and existing long-form chapters.
 

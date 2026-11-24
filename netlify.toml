@@ -30,3 +30,40 @@
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"
+
+# Breachify chapters moved to keyword URLs; old links pass their ranking on (301).
+[[redirects]]
+  from = "/blog/outside-in.html"
+  to = "/blog/breachify-outside-in.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/outside-in"
+  to = "/blog/breachify-outside-in.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/beyond-the-password.html"
+  to = "/blog/breachify-beyond-password.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/beyond-the-password"
+  to = "/blog/breachify-beyond-password.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/machinery.html"
+  to = "/blog/breachify-machinery.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/machinery"
+  to = "/blog/breachify-machinery.html"
+  status = 301
+  force = true

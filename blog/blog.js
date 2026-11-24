@@ -520,9 +520,9 @@ const zoom = (() => {
       name: "Breachify",
       home: "../breachify/",
       chapters: [
-        { n: 1, roman: "I",   href: "outside-in.html",         title: "Breachify: reading a breach from the outside in",                  kicker: "The investigation",     cover: "../assets/breachify/cover-1-tile.webp", min: 26 },
-        { n: 2, roman: "II",  href: "beyond-the-password.html", title: "Beyond the Password: Sessions, Applications and the Raw Evidence", kicker: "Evidence beyond logins", cover: "../assets/breachify/cover-2-tile.webp", min: 25 },
-        { n: 3, roman: "III", href: "machinery.html",          title: "The Machinery Behind the Intelligence: Companies, Exports and Access", kicker: "Running the service",  cover: "../assets/breachify/cover-3-tile.webp", min: 27 },
+        { n: 1, roman: "I",   href: "breachify-outside-in.html",         title: "Breachify: reading a breach from the outside in",                  kicker: "The investigation",     cover: "../assets/breachify/cover-1-tile.webp", min: 26 },
+        { n: 2, roman: "II",  href: "breachify-beyond-password.html", title: "Beyond the Password: Sessions, Applications and the Raw Evidence", kicker: "Evidence beyond logins", cover: "../assets/breachify/cover-2-tile.webp", min: 25 },
+        { n: 3, roman: "III", href: "breachify-machinery.html",          title: "The Machinery Behind the Intelligence: Companies, Exports and Access", kicker: "Running the service",  cover: "../assets/breachify/cover-3-tile.webp", min: 27 },
       ],
     },
     antercept: {
