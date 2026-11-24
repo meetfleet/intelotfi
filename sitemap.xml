@@ -50,10 +50,10 @@
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
-  <url><loc>https://intelotfi.com/breachify/</loc><lastmod>2026-10-14</lastmod></url>
-  <url><loc>https://intelotfi.com/blog/breachify-outside-in.html</loc><lastmod>2026-10-14</lastmod></url>
-  <url><loc>https://intelotfi.com/blog/breachify-beyond-password.html</loc><lastmod>2026-10-14</lastmod></url>
-  <url><loc>https://intelotfi.com/blog/breachify-machinery.html</loc><lastmod>2026-10-14</lastmod></url>
+  <url><loc>https://intelotfi.com/breachify/</loc><lastmod>2026-11-24</lastmod><image:image><image:loc>https://intelotfi.com/assets/og-breachify-1.jpg</image:loc></image:image></url>
+  <url><loc>https://intelotfi.com/blog/breachify-outside-in.html</loc><lastmod>2026-11-24</lastmod><image:image><image:loc>https://intelotfi.com/assets/og-breachify-1.jpg</image:loc></image:image></url>
+  <url><loc>https://intelotfi.com/blog/breachify-beyond-password.html</loc><lastmod>2026-11-24</lastmod><image:image><image:loc>https://intelotfi.com/assets/og-breachify-2.jpg</image:loc></image:image></url>
+  <url><loc>https://intelotfi.com/blog/breachify-machinery.html</loc><lastmod>2026-11-24</lastmod><image:image><image:loc>https://intelotfi.com/assets/og-breachify-3.jpg</image:loc></image:image></url>
   <url><loc>https://intelotfi.com/antercept/</loc><lastmod>2026-10-14</lastmod></url>
   <url><loc>https://intelotfi.com/blog/the-lure.html</loc><lastmod>2026-10-14</lastmod></url>
   <url><loc>https://intelotfi.com/blog/the-catch.html</loc><lastmod>2026-10-14</lastmod></url>
