@@ -1,5 +1,5 @@
 /* ---------- Breachify UI kit: helpers ----------
-   Shared by the console on /breachify/ and the demos in the chapters.
+   Shared by the console on /breach-intelligence/ and the demos in the chapters.
    Everything here is presentation: the data in the demos is made up, on
    reserved example domains (RFC 2606) and documentation IP ranges (RFC 5737). */
 

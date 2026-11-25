@@ -1,5 +1,5 @@
 /* ---------- Breachify chapters: screens, flows, the scroller, live demos ----------
-   Loaded after blog.js on the three Breachify chapters, with ../breachify/ui.js
+   Loaded after blog.js on the three Breachify chapters, with ../breach-intelligence/ui.js
    before it. Demos register with BF.demo(name, init) anywhere in this file or
    in later scripts; they boot once the page has parsed, each the first time it
    comes near the screen. */

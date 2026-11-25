@@ -31,39 +31,120 @@
   [headers.values]
     Cache-Control = "public, max-age=604800"
 
-# Breachify chapters moved to keyword URLs; old links pass their ranking on (301).
+# Breachify moved to /breach-intelligence/ as a brand-new section (2026-11-25).
+# Every old address answers 410 Gone, so search engines drop it for good
+# instead of carrying its history over. Visitors see the normal 404 page.
+
+[[redirects]]
+  from = "/breachify"
+  to = "/404.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/breachify/"
+  to = "/404.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/breachify/*"
+  to = "/404.html"
+  status = 410
+  force = true
+
 [[redirects]]
   from = "/blog/outside-in.html"
-  to = "/blog/breachify-outside-in.html"
-  status = 301
+  to = "/404.html"
+  status = 410
   force = true
 
 [[redirects]]
   from = "/blog/outside-in"
-  to = "/blog/breachify-outside-in.html"
-  status = 301
+  to = "/404.html"
+  status = 410
   force = true
 
 [[redirects]]
   from = "/blog/beyond-the-password.html"
-  to = "/blog/breachify-beyond-password.html"
-  status = 301
+  to = "/404.html"
+  status = 410
   force = true
 
 [[redirects]]
   from = "/blog/beyond-the-password"
-  to = "/blog/breachify-beyond-password.html"
-  status = 301
+  to = "/404.html"
+  status = 410
   force = true
 
 [[redirects]]
   from = "/blog/machinery.html"
-  to = "/blog/breachify-machinery.html"
-  status = 301
+  to = "/404.html"
+  status = 410
   force = true
 
 [[redirects]]
   from = "/blog/machinery"
-  to = "/blog/breachify-machinery.html"
-  status = 301
+  to = "/404.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/blog/breachify-outside-in.html"
+  to = "/404.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/blog/breachify-outside-in"
+  to = "/404.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/blog/breachify-beyond-password.html"
+  to = "/404.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/blog/breachify-beyond-password"
+  to = "/404.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/blog/breachify-machinery.html"
+  to = "/404.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/blog/breachify-machinery"
+  to = "/404.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/assets/breachify/*"
+  to = "/404.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/assets/og-breachify-1.jpg"
+  to = "/404.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/assets/og-breachify-2.jpg"
+  to = "/404.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/assets/og-breachify-3.jpg"
+  to = "/404.html"
+  status = 410
   force = true

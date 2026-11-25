@@ -4,16 +4,16 @@ Recovered from Claude’s saved SPEC, chapter briefs and console brief on 14 Oct
 
 ## Pages
 
-- `/breachify/`: project overview, chapter cards, interactive console and design scope.
-- `/blog/breachify-outside-in.html`: domain investigations and device evidence; three demos, including explainable risk assessment.
-- `/blog/breachify-beyond-password.html`: sessions, Android identifiers and HTTP logs; four demos, including the evidence pipeline.
-- `/blog/breachify-machinery.html`: companies, exports, administration and file access; four demos.
+- `/breach-intelligence/`: project overview, chapter cards, interactive console and design scope.
+- `/breach-intelligence/investigation.html`: domain investigations and device evidence; three demos, including explainable risk assessment.
+- `/breach-intelligence/session-evidence.html`: sessions, Android identifiers and HTTP logs; four demos, including the evidence pipeline.
+- `/breach-intelligence/operations.html`: companies, exports, administration and file access; four demos.
 
 The homepage links to the product overview. Its Breachify description and link labels are updated in English, French and Arabic. The product overview itself is English, consistent with the chapter brief and existing long-form chapters.
 
 ## Code
 
-`breachify/ui.*` contains the existing product UI kit. `records.js` supplies shared fictional device data and the evidence viewer. `console.*` implements the project-page miniature. `demos.*` implements nine product demonstrations; `ai.*` adds the risk assessment and evidence pipeline demonstrations. `page.css` styles the project overview; `blog/bf.*` supplies annotations, screen flows, the dashboard scroller and demo mounting.
+`breach-intelligence/ui.*` contains the existing product UI kit. `records.js` supplies shared fictional device data and the evidence viewer. `console.*` implements the project-page miniature. `demos.*` implements nine product demonstrations; `ai.*` adds the risk assessment and evidence pipeline demonstrations. `page.css` styles the project overview; `blog/bf.*` supplies annotations, screen flows, the dashboard scroller and demo mounting.
 
 There is no production build step or runtime dependency. All demonstrations run locally without fetching data or storing it. Searches accept reserved `.example` / `.test` domains and three explicitly fictional Android packages. Exports contain fictional sample records; notifications and file keys are simulations.
 
@@ -27,6 +27,6 @@ Run `npm ci`, then `npm test`. Tests use Playwright and start/stop their own loc
 
 Coverage includes sample-search boundaries, all console tabs, nested evidence, resolution and Undo, pagination persistence, CSV contents, all eleven demos, timer cancellation, one-time reveal masking, clipboard actions, keyboard navigation, reduced motion, internal links, resource failures, and viewport widths of 320, 390, 768 and 1440 pixels. Screenshots are written to ignored `test-results/`.
 
-For manual preview: `python3 -m http.server 8765 --bind 127.0.0.1`, then open `http://127.0.0.1:8765/breachify/`.
+For manual preview: `python3 -m http.server 8765 --bind 127.0.0.1`, then open `http://127.0.0.1:8765/breach-intelligence/`.
 
 The site is still deployed as static files from the repository root. Netlify publishes the repository root from `main`; push once after verification, following the established project workflow.

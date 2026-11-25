@@ -300,7 +300,7 @@ body[data-series="antercept"] {
   .demo__body { padding: 12px; }
 }
 
-/* view transitions: the chapter covers morph with the tiles on /breachify/ */
+/* view transitions: the chapter covers morph with the tiles on /breach-intelligence/ */
 [data-series="breachify"] .cover img { background: #060912; }
 
 @media (prefers-reduced-motion: reduce) {

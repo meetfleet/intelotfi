@@ -31,15 +31,15 @@
       "fileSearch",
     ];
     const destinations = [
-      ["Analytics", "grid", "breachify-outside-in.html#analytics"],
+      ["Analytics", "grid", "investigation.html#analytics"],
       ["Domains", "globe", ""],
-      ["APK", "smartphone", "breachify-beyond-password.html#android"],
-      ["Cookies", "cookie", "breachify-beyond-password.html#sessions"],
-      ["Companies", "building", "breachify-machinery.html#companies"],
-      ["Sensitive Applications", "app", "breachify-beyond-password.html#apps"],
-      ["Admin", "admin", "breachify-machinery.html#admin"],
+      ["APK", "smartphone", "session-evidence.html#android"],
+      ["Cookies", "cookie", "session-evidence.html#sessions"],
+      ["Companies", "building", "operations.html#companies"],
+      ["Sensitive Applications", "app", "session-evidence.html#apps"],
+      ["Admin", "admin", "operations.html#admin"],
       ["Documents", "file", null],
-      ["Settings", "settings", "breachify-machinery.html#settings"],
+      ["Settings", "settings", "operations.html#settings"],
     ];
     app.innerHTML = `<div class="con-top"><span class="con-brand">${U.logo()}breachify</span><span class="bf-badge bf-badge--orange">Sample data</span><span class="con-avatar" aria-label="Fictional analyst">JM</span></div><div class="con-layout"><nav class="con-sidebar" aria-label="Product destinations">${destinations.map(([name, ico], i) => `<button type="button" data-nav="${i}" aria-label="${name}" ${i === 1 ? 'aria-current="page"' : ""}>${U.icon(ico)}<span>${name}</span></button>`).join("")}</nav><div class="con-main" tabindex="-1"></div></div><div class="bf-toasts con-toasts"></div>`;
     const main = app.querySelector(".con-main"),
