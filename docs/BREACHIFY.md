@@ -11,7 +11,7 @@ Recovered from Claude’s saved SPEC, chapter briefs and console brief on 14 Oct
 
 ### Original pages (kept, unlinked)
 
-The pre-move pages stay live at `/breachify/` and `/blog/breachify-outside-in.html`, `/blog/breachify-beyond-password.html`, `/blog/breachify-machinery.html` so old links and search results still work. Nothing on the site links to them; they link only among themselves. They load CSS, JS and images from `/breach-intelligence/` and `assets/breach-intelligence/`, so there is one copy of the code. The old chapters keep `data-series="breachify"` for the look and add `data-nav="breachify-blog"`, which `blog.js` uses to point their chapter navigation at the old URLs. `netlify.toml` forwards the oldest slugs (`/blog/outside-in.html`, `/blog/beyond-the-password.html`, `/blog/machinery.html`) and old image paths with 301s. Content edits to a chapter need making in both copies.
+The pre-move pages stay live at `/breachify/` and `/blog/breachify-outside-in.html`, `/blog/breachify-beyond-password.html`, `/blog/breachify-machinery.html` so old links and search results still work. Nothing on the site links to them; they link only among themselves. They load CSS, JS and images from `/breach-intelligence/` and `assets/breach-intelligence/`, so there is one copy of the code. The old chapters keep `data-series="breachify"` for the look and add `data-nav="breachify-blog"`, which `blog.js` uses to point their chapter navigation at the old URLs. The oldest slugs (`/blog/outside-in.html`, `/blog/beyond-the-password.html`, `/blog/machinery.html`) are small HTML redirect pages (canonical + instant refresh, keeping `#anchors`) pointing at the old chapters, because GitHub Pages cannot send server redirects. Content edits to a chapter need making in both copies.
 
 The homepage links to the product overview. Its Breachify description and link labels are updated in English, French and Arabic. The product overview itself is English, consistent with the chapter brief and existing long-form chapters.
 
@@ -33,4 +33,4 @@ Coverage includes sample-search boundaries, all console tabs, nested evidence, r
 
 For manual preview: `python3 -m http.server 8765 --bind 127.0.0.1`, then open `http://127.0.0.1:8765/breach-intelligence/`.
 
-The site is still deployed as static files from the repository root. Netlify publishes the repository root from `main`; push once after verification, following the established project workflow.
+intelotfi.com is served by GitHub Pages from the repository root on `main` (CNAME, `.nojekyll`); `netlify.toml` redirects and headers are not applied there. Push once after verification, following the established project workflow.

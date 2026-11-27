@@ -31,11 +31,14 @@
   [headers.values]
     Cache-Control = "public, max-age=604800"
 
+# NOTE: intelotfi.com is served by GitHub Pages (CNAME + .nojekyll), which ignores
+# this file. These rules only apply if the repo is deployed on Netlify. On the
+# live site the same forwarding is done by small HTML redirect pages in blog/
+# (outside-in.html, beyond-the-password.html, machinery.html).
+#
 # Breachify lives at /breach-intelligence/ (linked from the site). The original
 # pages also stay at /breachify/ and /blog/breachify-*.html for old links and
-# search, unlinked from the site. Older addresses forward to them (301), and
-# old image URLs forward to the images' new home.
-
+# search, unlinked from the site.
 [[redirects]]
   from = "/blog/outside-in.html"
   to = "/blog/breachify-outside-in.html"
