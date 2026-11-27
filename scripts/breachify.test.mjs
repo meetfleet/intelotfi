@@ -552,12 +552,17 @@ try {
   check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'expanded finding fits 320px');
   await page.locator('[data-guide-action="plan"]').click();
   check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'response plan fits 320px');
-  // All chapter links must resolve, including generated dock/continue navigation.
+  // All chapter links must resolve, including generated dock/continue navigation,
+  // on the new section and on the original pages kept at their old addresses.
   for (const path of [
     "breach-intelligence/",
     "breach-intelligence/investigation.html",
     "breach-intelligence/session-evidence.html",
     "breach-intelligence/operations.html",
+    "breachify/",
+    "blog/breachify-outside-in.html",
+    "blog/breachify-beyond-password.html",
+    "blog/breachify-machinery.html",
   ]) {
     await visit(path);
     for (const href of await page

@@ -535,7 +535,18 @@ const zoom = (() => {
       ],
     },
   };
-  const series = SERIES[document.body.dataset.series] || SERIES.meetfleet;
+  // The original Breachify chapters still live in /blog/ (kept for old links and
+  // search, not linked from the site). They share the Breachify look through
+  // data-series but navigate among themselves through data-nav.
+  SERIES["breachify-blog"] = {
+    ...SERIES.breachify,
+    home: "../breachify/",
+    chapters: SERIES.breachify.chapters.map((c, i) => ({
+      ...c,
+      href: ["breachify-outside-in.html", "breachify-beyond-password.html", "breachify-machinery.html"][i],
+    })),
+  };
+  const series = SERIES[document.body.dataset.nav] || SERIES[document.body.dataset.series] || SERIES.meetfleet;
   const CHAPTERS = series.chapters;
   const cur = Number(document.body.dataset.chapter);
   if (!cur) return;

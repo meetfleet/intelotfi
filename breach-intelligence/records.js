@@ -173,7 +173,7 @@ window.BFRecords = (() => {
           records.filter((r) => r.resolved === filter),
         );
       if (b.hasAttribute("data-ai"))
-        U.toast(toasts, { title: "Explore the proposed AI assessment", body: "Inspect the risk calculation, possible attack path and cited analyst brief.", action: "Open assessment", timeout: 0, onAction: () => { location.href = "investigation.html#risk-model"; } });
+        U.toast(toasts, { title: "Explore the proposed AI assessment", body: "Inspect the risk calculation, possible attack path and cited analyst brief.", action: "Open assessment", timeout: 0, onAction: () => { const first = document.querySelector(".chapnav__ch"); location.href = (first ? first.getAttribute("href") : "investigation.html") + "#risk-model"; } });
       if (b.hasAttribute("data-trail")) {
         const level = Number(b.dataset.trail);
         if (level === 0) open = null;

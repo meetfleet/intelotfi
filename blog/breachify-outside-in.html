@@ -1,0 +1,979 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="light" />
+    <!-- first paint: the page colour only, never unstyled content; the stylesheet reveals the body -->
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+      html {
+        background: #ffffff;
+      }
+      body {
+        visibility: hidden;
+      }
+    </style>
+    <script>
+      setTimeout(function () {
+        document.body && (document.body.style.visibility = "visible");
+      }, 2500);
+    </script>
+    <!-- page transitions: tell the incoming page which way the visitor travelled, and whether they came from inside the site -->
+    <script>
+      addEventListener("pagereveal", function (e) {
+        var a = window.navigation && navigation.activation,
+          f = a && a.from;
+        try {
+          if (f && new URL(f.url).origin === location.origin)
+            document.documentElement.classList.add("vt-internal");
+        } catch (_) {}
+        if (e.viewTransition && e.viewTransition.types) {
+          var back =
+            a &&
+            a.navigationType === "traverse" &&
+            f &&
+            a.entry &&
+            f.index > a.entry.index;
+          e.viewTransition.types.add(back ? "back" : "forward");
+        }
+      });
+    </script>
+    <title>Breachify: reading a breach from the outside in | intelotfi</title>
+    <meta
+      name="description"
+      content="Breachify chapter 1: how a data breach investigation runs from the outside in, from a company domain and breach analytics to the device and cookie that leaked."
+    />
+    <meta
+      name="keywords"
+      content="Breachify, breachify.com, POLYMORPHO, POLYMORPHO FZCO, Polymorpho, Cheraqoui Reda, Reda Cheraqoui, breach hack, breach and hack check, data breach, data leak, leaked data, dark web monitoring, breach investigation, domain breach search, infostealer logs, compromised devices, breach analytics, cyber risk assessment"
+    />
+    <meta name="author" content="intelotfi" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://intelotfi.com/blog/breachify-outside-in.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="intelotfi" />
+    <meta
+      property="og:title"
+      content="Breachify: reading a breach from the outside in | intelotfi"
+    />
+    <meta
+      property="og:description"
+      content="Breachify chapter 1: how a data breach investigation runs from the outside in, from a company domain and breach analytics to the device and cookie that leaked."
+    />
+    <meta
+      property="og:url"
+      content="https://intelotfi.com/blog/breachify-outside-in.html"
+    />
+    <meta
+      property="og:image"
+      content="https://intelotfi.com/assets/og-breach-intelligence-1.jpg"
+    />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Breachify chapter 1: interface design and investigation evidence"
+    />
+    <meta property="og:locale" content="en_US" />
+    <meta property="article:author" content="intelotfi" />
+    <meta property="article:published_time" content="2026-10-14" />
+    <meta property="article:section" content="Cyber Risk" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Breachify: reading a breach from the outside in | intelotfi"
+    />
+    <meta
+      name="twitter:description"
+      content="Breachify chapter 1: how a data breach investigation runs from the outside in, from a company domain and breach analytics to the device and cookie that leaked."
+    />
+    <meta
+      name="twitter:image"
+      content="https://intelotfi.com/assets/og-breach-intelligence-1.jpg"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Breachify chapter 1: interface design and investigation evidence"
+    />
+    <link rel="me" href="https://www.linkedin.com/in/intelpoly/" />
+    <link
+      rel="me"
+      href="https://independent.academia.edu/MeetfleetResearchDivision"
+    />
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+    <link rel="manifest" href="../site.webmanifest" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "BlogPosting",
+            "@id": "https://intelotfi.com/blog/breachify-outside-in.html#article",
+            "headline": "Breachify: reading a breach from the outside in",
+            "alternativeHeadline": "Breachify: reading a breach from the outside in",
+            "description": "Breachify chapter 1: how a data breach investigation runs from the outside in, from a company domain and breach analytics to the device and cookie that leaked.",
+            "url": "https://intelotfi.com/blog/breachify-outside-in.html",
+            "mainEntityOfPage": "https://intelotfi.com/blog/breachify-outside-in.html",
+            "datePublished": "2026-10-14",
+            "dateModified": "2026-11-24",
+            "articleSection": "Cyber Risk",
+            "inLanguage": "en",
+            "image": "https://intelotfi.com/assets/og-breach-intelligence-1.jpg",
+            "author": {
+              "@type": "Person",
+              "name": "intelotfi",
+              "url": "https://intelotfi.com/"
+            },
+            "publisher": {
+              "@type": "Person",
+              "name": "intelotfi",
+              "url": "https://intelotfi.com/"
+            },
+            "isPartOf": {
+              "@type": "CreativeWorkSeries",
+              "name": "Breachify",
+              "url": "https://intelotfi.com/breachify/"
+            },
+            "position": 1,
+            "about": {
+              "@type": "Service",
+              "@id": "https://intelotfi.com/#breachify",
+              "name": "Breachify",
+              "url": "https://www.breachify.com/",
+              "serviceType": "Data breach and hack exposure monitoring",
+              "description": "Breachify checks whether a data breach or hack exposed personal or company accounts, including in dark-web sources, and explains what to do next.",
+              "provider": {
+                "@type": "Organization",
+                "@id": "https://intelotfi.com/#polymorpho",
+                "name": "POLYMORPHO FZCO",
+                "alternateName": [
+                  "Polymorpho",
+                  "POLYMORPHO"
+                ],
+                "keywords": "POLYMORPHO, Polymorpho, POLYMORPHO FZCO, Cheraqoui Reda, Reda Cheraqoui, Breachify"
+              },
+              "areaServed": "Worldwide"
+            },
+            "keywords": "Breachify, breachify.com, POLYMORPHO, POLYMORPHO FZCO, Polymorpho, Cheraqoui Reda, Reda Cheraqoui, breach hack, breach and hack check, data breach, data leak, leaked data, dark web monitoring, breach investigation, domain breach search, infostealer logs, compromised devices, breach analytics, cyber risk assessment"
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://intelotfi.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Breachify",
+                "item": "https://intelotfi.com/breachify/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Chapter 1",
+                "item": "https://intelotfi.com/blog/breachify-outside-in.html"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href="../assets/icon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="../fonts/AllianceNo2-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="../assets/breach-intelligence/cover-1.webp"
+      as="image"
+      fetchpriority="high"
+    />
+    <link rel="stylesheet" href="blog.css?v=20261016" />
+    <link rel="stylesheet" href="../breach-intelligence/ui.css?v=20261014d" />
+    <link rel="stylesheet" href="bf.css?v=20261016clean" />
+    <link rel="stylesheet" href="../breach-intelligence/demos.css?v=20261014d" />
+    <!-- instant navigation: pages you are about to open are pre-rendered on hover (Chromium) -->
+    <script type="speculationrules">
+      {
+        "prerender": [
+          {
+            "source": "document",
+            "where": {
+              "and": [
+                { "href_matches": "/*" },
+                { "not": { "href_matches": "/assets/*" } },
+                {
+                  "not": {
+                    "selector_matches": "[target=_blank], [href^='mailto:'], [href^='tel:']"
+                  }
+                }
+              ]
+            },
+            "eagerness": "moderate"
+          }
+        ]
+      }
+    </script>
+    <noscript
+      ><style>
+        body [data-reveal],
+        body.is-loading .intro [data-reveal] {
+          opacity: 1 !important;
+          transform: none !important;
+          filter: none !important;
+        }
+        .flow__panel[hidden] {
+          display: block;
+        }
+        .flow__tabs {
+          display: none;
+        }
+        .zoomable {
+          cursor: default;
+        }
+      </style></noscript
+    >
+    <link rel="stylesheet" href="../breach-intelligence/ai.css?v=20261014d" />
+  </head>
+  <body class="is-loading" data-chapter="1" data-series="breachify" data-nav="breachify-blog">
+    <div class="progress" aria-hidden="true"><span></span></div>
+    <div class="ambient" aria-hidden="true"></div>
+
+    <div class="page">
+      <header class="top">
+        <a
+          href="../index.html"
+          class="logo"
+          aria-label="intelotfi, home"
+        >
+          <span class="logo__text">intelotfi</span
+          ><span class="logo__cursor" aria-hidden="true"></span>
+        </a>
+
+        <nav class="chapnav" data-chapnav aria-label="Chapters">
+          <a href="../breachify/" class="chapnav__fallback">All chapters</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="intro">
+          <p class="eyebrow" data-reveal>Featured deep dive · Breachify 01</p>
+          <h1 class="title" data-reveal data-split>
+            Breachify: reading a breach from the outside in
+          </h1>
+          <p class="chapter" data-reveal>
+            <span class="chapter__num">Chapter I</span>The investigation: from
+            the whole picture to the device that leaked it
+          </p>
+          <dl class="meta" data-reveal>
+            <div class="meta__cell">
+              <dt>Published</dt>
+              <dd><time datetime="2026-10-14">Wed 14 Oct 2026</time></dd>
+            </div>
+            <div class="meta__cell meta__cell--time">
+              <dt>Reading time</dt>
+              <dd><span id="reading-time">26</span><small>min</small></dd>
+              <p class="meta__note" id="reading-note"></p>
+            </div>
+            <div class="meta__cell">
+              <dt>Figures</dt>
+              <dd id="figure-count">10</dd>
+              <p class="meta__note" id="figure-note"></p>
+            </div>
+            <div class="meta__cell">
+              <dt>Topic</dt>
+              <dd>Threat intelligence</dd>
+            </div>
+          </dl>
+        </section>
+        <figure class="cover" data-reveal>
+          <img
+            src="../assets/breach-intelligence/cover-1.webp"
+            width="2400"
+            height="1500"
+            alt="Breachify chapter 1: dark interface screens arranged over a technical grid"
+          />
+          <figcaption class="cover__card">
+            <span class="cover__k">In one line</span
+            ><span class="cover__v"
+              >Start with everything, end with one cookie, and never lose the
+              thread.</span
+            >
+          </figcaption>
+        </figure>
+        <div class="layout">
+          <aside class="toc" aria-label="On this page">
+            <p class="toc__title">On this page</p>
+            <ol class="toc__list">
+              <li><a href="#breachify">Breachify</a></li>
+              <li><a href="#analytics">The analytics dashboard</a></li>
+              <li><a href="#search">One search box</a></li>
+              <li><a href="#overview">The overview, top to bottom</a></li>
+              <li><a href="#tabs">Six tabs, one spine</a></li>
+              <li><a href="#people">Employees and users</a></li>
+              <li><a href="#record">The device record</a></li>
+              <li><a href="#resolve">Resolved is a state</a></li>
+              <li><a href="#risk-model">Risk assessment · the model</a></li>
+              <li>
+                <a href="#ai-analysis">The evidence-grounded AI analyst</a>
+              </li>
+              <li><a href="#assets">Assets discovery</a></li>
+              <li><a href="#conclusion">What the analyst gets</a></li>
+            </ol>
+          </aside>
+          <article class="article" id="article">
+            <section id="breachify" class="sec">
+              <p class="kicker">Threat intelligence</p>
+              <h2>Breachify</h2>
+              <p class="lead">
+                Infostealer malware copies what a browser remembers: saved
+                logins, session cookies and details about the computer around
+                them. The resulting bundle is called a stealer log. Breachify is
+                a desktop intelligence platform designed to help an organisation
+                find its share of that exposure, understand the evidence and
+                decide what needs attention. Its investigation tools sit
+                alongside company monitoring and the administration needed to
+                run the platform as a service. The organising idea is
+                progressive detail: start with the whole picture, then open only
+                the evidence needed to answer the next question.
+              </p>
+              <aside class="note" aria-label="About the data">
+                <span class="note__icon" aria-hidden="true">ⓘ</span>
+                <div>
+                  <span class="note__k">About the data</span>
+                  <p>
+                    Every company, person, credential and number in these
+                    screens is placeholder design data, not a security finding.
+                    The live demos use made-up companies on reserved example
+                    domains.
+                  </p>
+                </div>
+              </aside>
+              <figure class="shot" id="shot-shell" data-reveal>
+                <div class="shot__frame">
+                  <button
+                    type="button"
+                    class="zoomable"
+                    data-zoom
+                    aria-label="Zoom: domain search"
+                  >
+                    <img
+                      src="../assets/breach-intelligence/domain-search.webp"
+                      width="1920"
+                      height="1080"
+                      loading="lazy"
+                      alt="Breachify design: domain search, with placeholder data"
+                    />
+                  </button>
+
+                </div>
+              </figure>
+              <p>
+                The shared shell does a quiet but necessary job: it keeps place
+                and action distinct from evidence. Near-black surfaces recede;
+                charcoal cards group related facts. The sidebar
+
+                stays available while the main panel changes, and orange marks
+                the active destination
+
+                as well as the next primary action. Blue is reserved for
+                secondary controls and charts. Red, yellow and green describe
+                risk or state. That restraint matters in a workspace where a
+                crowded table may be more useful than an illustration.
+              </p>
+            </section>
+            <section id="analytics" class="sec">
+              <h2>The analytics dashboard</h2>
+              <p>
+                Before a domain is chosen, the global dashboard offers a view
+                across the collection. Country and industry filters sit above
+                the compromised-computers timeline, and the same pattern returns
+                above password strength. Reusing that arrangement reduces the
+                amount an analyst has to relearn when moving between questions.
+                The organisation strip below the timeline offers a potential
+                route into a narrower investigation; its names and logos are
+                blurred here because they were placeholders. Stealer-family
+                statistics add another dimension: the malware associated with
+                the collected records, rather than simply the number of
+                accounts.
+              </p>
+              <figure class="shot" id="shot-analytics" data-reveal>
+                <div class="shot__frame">
+                  <button
+                    type="button"
+                    class="zoomable"
+                    data-zoom
+                    aria-label="Zoom: analytics"
+                  >
+                    <img
+                      src="../assets/breach-intelligence/analytics.webp"
+                      width="1920"
+                      height="1156"
+                      loading="lazy"
+                      alt="Breachify design: analytics, with placeholder data"
+                    />
+                  </button>
+
+                </div>
+              </figure>
+              <p>
+                The repeated filters
+
+                make comparison possible in the proposed workflow, but the
+                values in this frame are illustrative. The strength bars do not
+                form a coherent distribution totalling 100%, and some malware
+                legend entries repeat. Those are unfinished sample values, not
+                claims about exposure in the world. The design question is
+                whether a reader can distinguish time, credential quality and
+                malware family without treating them as interchangeable measures
+                of risk.
+              </p>
+            </section>
+            <section id="search" class="sec">
+              <h2>One search box</h2>
+              <p>
+                The domain search screen concentrates on one decision: what to
+                investigate. The input and orange button
+
+                sit above a large quiet area, rather than competing with an
+                empty results table. “Compromised Domain Users” supplies a scale
+                cue; the screen’s 1,898,596 is a sample count. Search-history
+                chips
+
+                mix domains with Android package names. That suggests a common
+                entry pattern for identifiers an organisation owns, although the
+                design still needs to make the accepted input types explicit.
+                The same search vocabulary returns in cookies and sensitive
+                applications.
+              </p>
+            </section>
+            <section id="overview" class="sec">
+              <h2>The overview, top to bottom</h2>
+              <p>
+                The overview is deliberately long. Geography comes first,
+                followed by change over time, exposed URLs, password strength,
+                endpoint protection, malware and sessions. That sequence gives a
+                reader several ways to choose the next step without opening a
+                record prematurely. The employee and user distinction runs
+                through the page: separate URL charts, separate
+                password-strength cards, and different implications for who
+                needs to respond. Scroll through the dashboard to follow its
+                hierarchy; the original screen remains intact rather than being
+                reconstructed from selected numbers.
+              </p>
+              <div class="scrolly" data-scrolly>
+                <div class="scrolly__pin">
+                  <div class="scrolly__window">
+                    <img
+                      class="scrolly__img"
+                      src="../assets/breach-intelligence/domain-overview.webp"
+                      width="1920"
+                      height="3205"
+                      loading="lazy"
+                      alt="The complete domain overview, from map and timeline to password strength, antivirus, malware and cookies"
+                    /><span class="scrolly__rail" aria-hidden="true"
+                      ><span class="scrolly__thumb"></span
+                    ></span>
+                  </div>
+                  <div class="scrolly__text">
+                    <span class="scrolly__count" aria-hidden="true"></span>
+                    <ol class="scrolly__steps">
+                      <li class="scrolly__step" data-at="0">
+                        <span class="scrolly__n">01 · Orient</span
+                        ><span class="scrolly__t">Six views, one domain</span
+                        ><span class="scrolly__d"
+                          >Counts establish the available paths. These
+                          overlapping categories are not a total.</span
+                        >
+                      </li>
+                      <li class="scrolly__step" data-at="0.07">
+                        <span class="scrolly__n">02 · Locate</span
+                        ><span class="scrolly__t">Where the evidence sits</span
+                        ><span class="scrolly__d"
+                          >A map places the investigation geographically.
+                          Markers need a defined measure before
+                          production.</span
+                        >
+                      </li>
+                      <li class="scrolly__step" data-at="0.30">
+                        <span class="scrolly__n">03 · Follow</span
+                        ><span class="scrolly__t">The change over time</span
+                        ><span class="scrolly__d"
+                          >The timeline keeps the searched domain visible. Time
+                          adds context to a count.</span
+                        >
+                      </li>
+                      <li class="scrolly__step" data-at="0.46">
+                        <span class="scrolly__n">04 · Separate</span
+                        ><span class="scrolly__t">Employees and users</span
+                        ><span class="scrolly__d"
+                          >The two URL summaries distinguish workforce exposure
+                          from customer accounts.</span
+                        >
+                      </li>
+                      <li class="scrolly__step" data-at="0.61">
+                        <span class="scrolly__n">05 · Compare</span
+                        ><span class="scrolly__t">Credentials and devices</span
+                        ><span class="scrolly__d"
+                          >Password-strength cards lead into antivirus coverage
+                          and the products observed.</span
+                        >
+                      </li>
+                      <li class="scrolly__step" data-at="0.80">
+                        <span class="scrolly__n">06 · Inspect</span
+                        ><span class="scrolly__t">Malware and sessions</span
+                        ><span class="scrolly__d"
+                          >Stealer families and session cookies point toward the
+                          evidence inside a device record.</span
+                        >
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section id="tabs" class="sec">
+              <h2>Six tabs, one spine</h2>
+              <p>
+                Overview, Compromised Employees, Third Party Credentials,
+                Compromised Users, External Domains and Assets Discovery divide
+                the investigation into six views. Their sample counts overlap
+                and must not be summed. List views keep a familiar toolbar:
+                refresh, period, sorting, export and a keyword, username or
+                computer-name filter. This is the spine of the workflow: the
+                question changes, but the tools for narrowing and taking away
+                evidence stay in the same place. The second frame below contains
+                an Overview highlight despite showing the credentials view, a
+                frame-state inconsistency that needs correcting in the product
+                design.
+              </p>
+              <figure class="flow" data-flow data-reveal>
+                <div
+                  class="flow__tabs"
+                  role="tablist"
+                  aria-label="domain lists"
+                >
+                  <button
+                    type="button"
+                    class="flow__tab"
+                    role="tab"
+                    id="domain-lists-t1"
+                    aria-controls="domain-lists-p1"
+                    aria-selected="true"
+                  >
+                    <span class="flow__n">01</span>Compromised users</button
+                  ><button
+                    type="button"
+                    class="flow__tab"
+                    role="tab"
+                    id="domain-lists-t2"
+                    aria-controls="domain-lists-p2"
+                    aria-selected="false"
+                  >
+                    <span class="flow__n">02</span>External-domain credentials
+                  </button>
+                </div>
+                <div class="flow__stage">
+                  <div
+                    class="flow__panel"
+                    role="tabpanel"
+                    id="domain-lists-p1"
+                    aria-labelledby="domain-lists-t1"
+                  >
+                    <button
+                      type="button"
+                      class="zoomable"
+                      data-zoom
+                      aria-label="Zoom: domain users"
+                    >
+                      <img
+                        src="../assets/breach-intelligence/domain-users.webp"
+                        width="1920"
+                        height="1080"
+                        loading="lazy"
+                        alt="Breachify design: domain users, with placeholder data"
+                      />
+                    </button>
+                  </div>
+                  <div
+                    class="flow__panel"
+                    role="tabpanel"
+                    id="domain-lists-p2"
+                    aria-labelledby="domain-lists-t2"
+                    hidden
+                  >
+                    <button
+                      type="button"
+                      class="zoomable"
+                      data-zoom
+                      aria-label="Zoom: domain credentials"
+                    >
+                      <img
+                        src="../assets/breach-intelligence/domain-credentials.webp"
+                        width="1920"
+                        height="1082"
+                        loading="lazy"
+                        alt="Breachify design: domain credentials, with placeholder data"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </figure>
+            </section>
+            <section id="people" class="sec">
+              <h2>Employees and users</h2>
+              <p>
+                An employee record and a customer account can involve the same
+                organisation while requiring very different responses. The first
+                may call for an endpoint investigation and a review of corporate
+                access. The second may belong to a customer-support or
+                account-security team. Breachify keeps those populations
+                separate, then gives each record two clocks: Date Compromised
+                and Last Time Added. One describes the underlying event; the
+                other describes when the platform recorded the evidence. Their
+                gap is a delay in this collection’s visibility, not proof that
+                nobody elsewhere had already detected or handled the incident.
+              </p>
+              <figure
+                class="demo"
+                data-demo="two-clocks"
+                data-reveal
+                aria-label="Live demo: Two dates on every record"
+              >
+                <div class="demo__bar">
+                  <span class="demo__k">Try it</span
+                  ><span class="demo__t">Two dates on every record</span
+                  ><span class="demo__tag">Sample data</span
+                  ><button type="button" class="demo__reset">↻ Reset</button>
+                </div>
+                <div class="demo__body bfui">
+                  <p class="demo__fallback">This live demo needs JavaScript.</p>
+                </div>
+              </figure>
+            </section>
+            <section id="record" class="sec">
+              <h2>The device record</h2>
+              <p>
+                A device row brings the evidence back to a particular machine:
+                stealer identifier, malware family, IP address, path and dates.
+                Expanding the row
+
+                opens the next level in place. Evidence pills
+
+                separate profile facts, corporate credentials and domains with
+                sensitive cookies. A domain then opens into individual cookie
+                records. The reader can go deeper without abandoning the
+                surrounding list. This frame mixes a “Corporate Credentials
+                found” heading with cookie columns; the hierarchy is clear, but
+                that heading still needs to match the selected evidence
+                category.
+              </p>
+              <figure class="shot" id="shot-record" data-reveal>
+                <div class="shot__frame">
+                  <button
+                    type="button"
+                    class="zoomable"
+                    data-zoom
+                    aria-label="Zoom: domain thirdparty"
+                  >
+                    <img
+                      src="../assets/breach-intelligence/domain-thirdparty.webp"
+                      width="1920"
+                      height="1333"
+                      loading="lazy"
+                      alt="Breachify design: domain thirdparty, with placeholder data"
+                    />
+                  </button>
+
+                </div>
+              </figure>
+              <figure
+                class="demo"
+                data-demo="drilldown"
+                data-reveal
+                aria-label="Live demo: Follow one device down to a single cookie"
+              >
+                <div class="demo__bar">
+                  <span class="demo__k">Try it</span
+                  ><span class="demo__t"
+                    >Follow one device down to a single cookie</span
+                  ><span class="demo__tag">Sample data</span
+                  ><button type="button" class="demo__reset">↻ Reset</button>
+                </div>
+                <div class="demo__body bfui">
+                  <p class="demo__fallback">This live demo needs JavaScript.</p>
+                </div>
+              </figure>
+              <blockquote>
+                Every level answers one question, and the level above it is
+                always one click away.
+              </blockquote>
+            </section>
+            <section id="resolve" class="sec">
+              <h2>Resolved is a state</h2>
+              <p>
+                Reviewing a record is different from handling its exposure. The
+                design proposes a switch on each device
+                , an Unresolved or Resolved filter, and a Resolve All action in
+                the toolbar
+                . Together they create a working queue rather than an endless
+                archive. A resolution marker records the team’s judgement;
+                flipping it does not disinfect a computer or revoke a session.
+                The miniature makes that distinction visible through an undoable
+                state change. Cookie and credential exports remain separate
+                actions because the downstream work and the evidence format
+                differ.
+              </p>
+            </section>
+            <section id="risk-model" class="sec">
+              <p class="kicker">The intelligence layer</p>
+              <h2>From exposure to an explainable risk assessment</h2>
+              <p class="lead">
+                Finding exposure is the beginning. An intelligence product also
+                needs to explain which record deserves attention first, what
+                evidence supports that judgement, and what could change it. For
+                Breachify, the proposed AI architecture separates three jobs:
+                deterministic processing establishes the facts, a risk model
+                orders review, and an AI analyst translates the evidence into a
+                cited assessment. Keeping those responsibilities explicit makes
+                the system inspectable. A fluent explanation should never be
+                allowed to manufacture a device, a successful sign-in or a
+                confidence value that the underlying data does not support.
+              </p>
+              <div class="ai-method">
+                <span class="ai-method__label"
+                  >Proposed product architecture</span
+                >
+                <p>
+                  The source design includes an “Analyze with AI” action. The
+                  architecture, formula and analyst output below develop that
+                  idea into a concrete technical design. They are not claims
+                  about a trained or deployed Breachify model.
+                </p>
+                <div class="ai-method__flow">
+                  <div>
+                    <b>01 · Establish</b
+                    ><span>Parse, normalise and retain source references.</span>
+                  </div>
+                  <div>
+                    <b>02 · Correlate</b
+                    ><span
+                      >Connect devices, accounts, sessions and assets.</span
+                    >
+                  </div>
+                  <div>
+                    <b>03 · Prioritise</b
+                    ><span>Score explicit signals and show uncertainty.</span>
+                  </div>
+                  <div>
+                    <b>04 · Explain</b
+                    ><span>Draft a cited assessment for analyst review.</span>
+                  </div>
+                </div>
+              </div>
+              <p>
+                The sandbox uses four inputs: credential exposure, session
+                evidence, account impact and evidence age. A weighted sum
+                provides an interpretable baseline. Recency uses exponential
+                decay, F = 2<sup>−age/30</sup>, so a 30-day-old observation has
+                half the recency contribution of a new one. A floor preserves
+                priority for older evidence: time passing does not resolve an
+                exposed account. Credential and session weights describe
+                available evidence, while account impact describes the
+                consequence in its business context. The coefficients are
+                illustrative design choices. They would need outcome data,
+                review and calibration before becoming an operational policy.
+              </p>
+              <figure
+                class="demo"
+                data-demo="risk-assessment"
+                data-reveal
+                aria-label="Live demo: Change the evidence. Inspect the assessment."
+              >
+                <div class="demo__bar">
+                  <span class="demo__k">Try it</span
+                  ><span class="demo__t"
+                    >Change the evidence. Inspect the assessment.</span
+                  ><span class="demo__tag">Sample data</span
+                  ><button type="button" class="demo__reset">↻ Reset</button>
+                </div>
+                <div class="demo__body bfui">
+                  <p class="demo__fallback">This live demo needs JavaScript.</p>
+                </div>
+              </figure>
+              <p>
+                Missing evidence is handled as an interval. If session evidence
+                is unknown, the calculation evaluates that term from zero to one
+                instead of silently replacing it with zero. The resulting
+                priority range makes the uncertainty visible; the analyst brief
+                abstains from a precise rank. “Four inputs known” is evidence
+                coverage, not model confidence. Nor is 81 out of 100 an 81%
+                probability of a breach. The useful question is whether the
+                ordering helps a team find consequential exposure within its
+                review budget, and whether the explanation faithfully reflects
+                the signals that produced it.
+              </p>
+              <p>
+                A trained ranking model could later replace this baseline while
+                preserving the same interface contract. A gradient-boosted tree
+                model is a candidate for structured signals such as privileged
+                access, exposed credential categories, repeated independent
+                sightings and timing. Its feature contributions would explain
+                how the model arrived at an ordering, without being presented as
+                causal proof. Training would require clearly defined outcomes
+                and time-separated evaluation. Anomaly detection could add a
+                separate novelty signal against an organisation’s own baseline,
+                but a rare record should remain a lead to inspect, not an
+                automatically confirmed incident.
+              </p>
+            </section>
+            <section id="ai-analysis" class="sec">
+              <p class="kicker">The intelligence layer</p>
+              <h2>An AI analyst that shows its evidence</h2>
+              <p>
+                The proposed analyst starts from a bounded evidence package: the
+                selected device record, its associated artefacts, authorised
+                asset context and relevant detection metadata. Retrieval
+                respects the organisation and account permissions before any
+                material reaches the model. Passwords and cookie values are
+                redacted; the model receives the existence, category, timing and
+                source of an artefact when that is enough to answer the
+                question. Source text is treated as evidence to analyse, not as
+                instructions to execute. This keeps the model’s role narrow:
+                explain the supplied record and identify what the analyst should
+                verify next.
+              </p>
+              <p>
+                The output has four parts: observations with record citations, a
+                risk interpretation tied to the scoring inputs, possible attack
+                paths labelled as hypotheses, and verification or response steps
+                for a person to review. A device, a browser artefact and a
+                corporate application can form a candidate path through an
+                entity graph. They do not prove that every edge was traversed.
+                Session revocation changes one branch; credential exposure may
+                leave another branch unresolved. The live assessment makes that
+                distinction visible so the reader can see the difference between
+                a recorded fact, an inference and an action still requiring
+                approval.
+              </p>
+              <p>
+                A production response would be constrained to a structured
+                schema and checked before display. Every claimed observation
+                must resolve to an authorised source record. Unsupported
+                citations, missing inputs or contradictory dates should produce
+                a narrowed answer or an explicit request for evidence. Analysts
+                can inspect the original record, correct the interpretation and
+                record their decision. That feedback can become labelled
+                evaluation material after review; it should not silently retrain
+                a model from every click. The goal is an assistant whose
+                reasoning can be challenged at the same level of detail as the
+                evidence itself.
+              </p>
+            </section>
+            <section id="assets" class="sec">
+              <h2>Assets discovery</h2>
+              <p>
+                Where the overview summarises exposure, Assets Discovery lists
+                the resources behind it. Employee and compromised-user pills
+
+                preserve the same population split as the charts. A total-URLs
+                banner offers a bulk export, while each domain group offers its
+                own export and View All action
+                . Occurrence counts help distinguish repeated resources from
+                isolated ones without turning frequency into a severity score.
+                Pagination keeps the inventory bounded. Android-style resource
+                identifiers appear alongside the domain grouping, carrying the
+                investigation beyond the website alone.
+              </p>
+              <figure class="shot" id="shot-assets" data-reveal>
+                <div class="shot__frame">
+                  <button
+                    type="button"
+                    class="zoomable"
+                    data-zoom
+                    aria-label="Zoom: domain assets"
+                  >
+                    <img
+                      src="../assets/breach-intelligence/domain-assets.webp"
+                      width="1920"
+                      height="1260"
+                      loading="lazy"
+                      alt="Breachify design: domain assets, with placeholder data"
+                    />
+                  </button>
+
+                </div>
+              </figure>
+            </section>
+            <section id="conclusion" class="sec sec--conclusion">
+              <h2>What the analyst gets</h2>
+              <p>
+                The useful outcome is a chain of questions that stays connected:
+                which organisation, which population, which device, which
+                evidence, which session? Breachify’s design keeps the level
+                above available while the next one opens. The design file also
+                includes initial detection, installed software, antivirus
+                information and an “Analyze with AI (NEW)” control. Its proposed
+                role is to help interpret a device and draft a likely attack
+                path, but the original file has no AI result screen. The
+                proposed architecture and interactive assessment above extend
+                that direction in this chapter. The next chapter follows the
+                evidence beyond logins: sessions, application identifiers and
+                the raw records underneath.
+              </p>
+            </section>
+            <div class="continue" data-continue></div>
+          </article>
+        </div>
+      </main>
+      <footer class="foot">
+        <nav class="foot__nav">
+          <a href="../index.html">Home</a>
+          <a href="../breachify/">Breachify</a>
+          <a href="../index.html#about">About</a>
+        </nav>
+        <p class="foot__copy">© 2026 intelotfi</p>
+      </footer>
+    </div>
+
+    <div class="zoom" id="zoom" aria-hidden="true" inert>
+      <canvas class="zoom__gl"></canvas>
+      <img class="zoom__fallback" alt="" />
+      <button type="button" class="zoom__close" aria-label="Close">
+        <span></span><span></span>
+      </button>
+      <p class="zoom__caption">
+        <span class="zoom__index"></span><span class="zoom__name"></span
+        ><span class="zoom__hint"
+          >scroll to zoom · drag to pan · double-click to toggle</span
+        >
+      </p>
+    </div>
+
+    <nav class="dock" data-dock aria-label="Chapter navigation"></nav>
+
+    <script src="../breach-intelligence/ui.js?v=20261014d"></script>
+    <script src="blog.js?v=20261127"></script>
+    <script src="bf.js?v=20261016clean"></script>
+    <script src="../breach-intelligence/records.js?v=20261127"></script>
+    <script src="../breach-intelligence/demos.js?v=20261014d"></script>
+    <script src="../breach-intelligence/ai.js?v=20261014d"></script>
+      <script defer src="../assets/backtotop.js?v=20261023"></script>
+  </body>
+</html>

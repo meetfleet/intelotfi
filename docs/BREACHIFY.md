@@ -9,6 +9,10 @@ Recovered from Claude’s saved SPEC, chapter briefs and console brief on 14 Oct
 - `/breach-intelligence/session-evidence.html`: sessions, Android identifiers and HTTP logs; four demos, including the evidence pipeline.
 - `/breach-intelligence/operations.html`: companies, exports, administration and file access; four demos.
 
+### Original pages (kept, unlinked)
+
+The pre-move pages stay live at `/breachify/` and `/blog/breachify-outside-in.html`, `/blog/breachify-beyond-password.html`, `/blog/breachify-machinery.html` so old links and search results still work. Nothing on the site links to them; they link only among themselves. They load CSS, JS and images from `/breach-intelligence/` and `assets/breach-intelligence/`, so there is one copy of the code. The old chapters keep `data-series="breachify"` for the look and add `data-nav="breachify-blog"`, which `blog.js` uses to point their chapter navigation at the old URLs. `netlify.toml` forwards the oldest slugs (`/blog/outside-in.html`, `/blog/beyond-the-password.html`, `/blog/machinery.html`) and old image paths with 301s. Content edits to a chapter need making in both copies.
+
 The homepage links to the product overview. Its Breachify description and link labels are updated in English, French and Arabic. The product overview itself is English, consistent with the chapter brief and existing long-form chapters.
 
 ## Code
